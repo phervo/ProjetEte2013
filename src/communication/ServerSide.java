@@ -13,18 +13,22 @@ public class ServerSide {
 	private ServerSocket socketserver  ;
     private Socket socketduserveur ;
     private GeneticAlgorithmCall ga;
+    private final String finChaine= new String("FIN");
     
     public ServerSide(GeneticAlgorithmCall ga){
     	super();
     	this.ga=ga;
     	try {
 			this.socketserver=new ServerSocket(2009);
-			socketduserveur = socketserver.accept();
-			System.out.println("J'ai recu quelque chose !");
-			 BufferedReader in = new BufferedReader (new InputStreamReader (socketduserveur.getInputStream()));
-			 String message_distant = in.readLine();
-			 storeMessageReceivedFromPraat(message_distant);
-             //System.out.println("Message recu :"+ message_distant);
+			
+			String message_distant="";
+			while(message_distant.compareTo(finChaine)!=0){
+				socketduserveur = socketserver.accept();
+				//System.out.println("J'ai recu quelque chose !");
+				BufferedReader in = new BufferedReader (new InputStreamReader (socketduserveur.getInputStream()));
+				message_distant = in.readLine().trim();
+				storeMessageReceivedFromPraat(message_distant);
+			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -23,7 +23,6 @@ public class MainClass {
 		// TODO Auto-generated method stub
 		GeneticAlgorithmCall ga= new GeneticAlgorithmCall(4);
 		ServerSide serverJavaGa = new ServerSide(ga);
-		System.out.println(ga.getMessageFromPraat());
 		//ServerSide.LaunchPraat();
 		
 		//ga.startAlgorithm();

@@ -1,18 +1,34 @@
 package communication;
 
+import geneticAlogrithm.GeneticAlgorithmCall;
+
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
 public class ServerSide {
 	private ServerSocket socketserver  ;
     private Socket socketduserveur ;
-
+    private GeneticAlgorithmCall ga;
     
-    public ServerSide(){
+    public ServerSide(GeneticAlgorithmCall ga){
     	super();
-    	this.socketserver=null;
-    	this.socketduserveur=null;
+    	this.ga=ga;
+    	try {
+			this.socketserver=new ServerSocket(2009);
+			socketduserveur = socketserver.accept();
+			System.out.println("J'ai recu quelque chose !");
+			 BufferedReader in = new BufferedReader (new InputStreamReader (socketduserveur.getInputStream()));
+			 String message_distant = in.readLine();
+			 storeMessageReceivedFromPraat(message_distant);
+             //System.out.println("Message recu :"+ message_distant);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
     
 	public ServerSide(ServerSocket socketserver, Socket socketduserveur) {
@@ -21,19 +37,17 @@ public class ServerSide {
 		this.socketduserveur = socketduserveur;
 	}
 	
-	public static void sendMessageToPrat(String fileName){
-		String[] sendpraatCom ={"praatcon", fileName}; //chemin locaux
+	public static void LaunchPraat(){
 		Runtime run = Runtime.getRuntime();
 		try {
-			run.exec(sendpraatCom);
+			run.exec("praat");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
-	public static void sendMessageToPratV2(String fileName){
-		//String[] sendpraatCom ={"sendpraat", "praat","Read from file... C:/Users/Py/workspace/ProjetSpeechSynthesis/testsonpoumpoum","Play"}; //chemin locaux
+	public static void sendMessageToPrat(String fileName){
 		String[] sendpraatCom ={"sendpraat", "praat",fileName};
 		Runtime run = Runtime.getRuntime();
 		try {
@@ -44,6 +58,9 @@ public class ServerSide {
 		}
 	}
 	
+	public void storeMessageReceivedFromPraat(String chaine){
+		ga.setMessageFromPraat(chaine);
+	}
 	
 	public ServerSocket getSocketserver() {
 		return socketserver;

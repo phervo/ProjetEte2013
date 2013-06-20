@@ -1,5 +1,6 @@
 package files;
 
+import geneticAlogrithm.GeneticAlgorithmCall;
 import geneticAlogrithm.Sequence;
 
 import java.io.BufferedReader;

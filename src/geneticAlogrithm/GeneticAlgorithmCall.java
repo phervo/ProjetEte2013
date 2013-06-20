@@ -39,6 +39,8 @@ public class GeneticAlgorithmCall {
 	private SelectionStrategy<Object> selection;
 	private Random rng;
 	private EvolutionEngine<Sequence> engine;
+	private String praatScript;
+	private String messageFromPraat; //utiliser pr fonction fitness
 	
 	public GeneticAlgorithmCall(int length) { //fonctionne
 		/*
@@ -52,7 +54,9 @@ public class GeneticAlgorithmCall {
 		this.mySeqEval=null;
 		this.selection=null;
 		this.rng=null;
-		this.engine=null;	
+		this.engine=null;
+		this.praatScript=null;
+		this.messageFromPraat=null;
 	}
 	
 	public void buildTarget(){
@@ -137,9 +141,7 @@ public class GeneticAlgorithmCall {
 				    	System.out.printf("Generation %d: %s\n",
 				                          data.getGenerationNumber(),
 				                          data.getBestCandidate().getValuesInString());
-				    	ServerSide.sendMessageToPratV2(FileGestion.writePraatScriptAsCandidatesSansFichier(data.getBestCandidate()));
-				    	System.out.println("y a eu un update");
-				    	System.out.println("ligne qui ne sert a rien");
+				    	ServerSide.sendMessageToPrat(FileGestion.writePraatScriptAsCandidatesSansFichier(data.getBestCandidate()));
 				    }
 				});
 		engine.evolve(10, 0, new GenerationCount(2));
@@ -197,7 +199,21 @@ public class GeneticAlgorithmCall {
 	public void setMySeqEval(SequenceEvaluator mySeqEval) {
 		this.mySeqEval = mySeqEval;
 	}
-	
-	
-	
+
+	public String getPraatScript() {
+		return this.praatScript;
+	}
+
+	public void setPraatScript(String praatScript) {
+		this.praatScript = praatScript;
+	}
+
+	public String getMessageFromPraat() {
+		return messageFromPraat;
+	}
+
+	public void setMessageFromPraat(String messageFromPraat) {
+		this.messageFromPraat = messageFromPraat;
+	}
+
 }

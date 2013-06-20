@@ -139,6 +139,7 @@ public class GeneticAlgorithmCall {
 				                          data.getBestCandidate().getValuesInString());
 				    	ServerSide.sendMessageToPratV2(FileGestion.writePraatScriptAsCandidatesSansFichier(data.getBestCandidate()));
 				    	System.out.println("y a eu un update");
+				    	System.out.println("ligne qui ne sert a rien");
 				    }
 				});
 		engine.evolve(10, 0, new GenerationCount(2));

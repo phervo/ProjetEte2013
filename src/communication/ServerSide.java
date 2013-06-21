@@ -9,7 +9,7 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class ServerSide {
+public class ServerSide implements Runnable{
 	private ServerSocket socketserver  ;
     private Socket socketduserveur ;
     private GeneticAlgorithmCall ga;
@@ -28,24 +28,6 @@ public class ServerSide {
 		}
     }
     
-    public void LanchServeur(){
-    	this.serverAlreadyLaunch=true;
-    	try {
-			String message_distant="";
-    		while(message_distant.compareTo(finChaine)!=0){
-				socketduserveur = socketserver.accept();
-				//System.out.println("J'ai recu quelque chose !");
-				BufferedReader in = new BufferedReader (new InputStreamReader (socketduserveur.getInputStream()));
-				message_distant = in.readLine().trim();
-				storeMessageReceivedFromPraat(message_distant);
-				socketduserveur.close();
-			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    }
-    
     public void closeServer(){
     	this.serverAlreadyLaunch=false;
     	try {
@@ -54,6 +36,7 @@ public class ServerSide {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+    	System.out.println("server ferme");
     }
     
     public boolean isServerLanch(){
@@ -105,6 +88,27 @@ public class ServerSide {
 
 	public void setSocketduserveur(Socket socketduserveur) {
 		this.socketduserveur = socketduserveur;
+	}
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		this.serverAlreadyLaunch=true;
+    	try {
+			String message_distant="";
+    		while(message_distant.compareTo(finChaine)!=0){
+				socketduserveur = socketserver.accept();
+				//System.out.println("J'ai recu quelque chose !");
+				BufferedReader in = new BufferedReader (new InputStreamReader (socketduserveur.getInputStream()));
+				message_distant = in.readLine().trim();
+				storeMessageReceivedFromPraat(message_distant);
+				socketduserveur.close();
+			}
+    		this.closeServer();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 }

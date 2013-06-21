@@ -24,7 +24,7 @@ import communication.ServerSide;
 
 import files.FileGestion;
 
-public class GeneticAlgorithmCall {
+public class GeneticAlgorithmCall implements Runnable{
 	/*in order to get a clean code, i have divided the big operation in small fonctions
 	 * All this methods are called in the function startAlgorithm at the end
 	 * need to use the constructor
@@ -41,7 +41,8 @@ public class GeneticAlgorithmCall {
 	private EvolutionEngine<Sequence> engine;
 	private String praatScript;
 	private String messageFromPraat; //utiliser pr fonction fitness
-	private ServerSide serverJavaGa; 
+	private ServerSide serverJavaGa;
+	private Thread threadServer;
 	
 	public GeneticAlgorithmCall(int length) { //fonctionne
 		/*
@@ -58,7 +59,8 @@ public class GeneticAlgorithmCall {
 		this.engine=null;
 		this.praatScript=null;
 		this.messageFromPraat=null;
-		this.serverJavaGa = new ServerSide(this);
+		this.serverJavaGa=new ServerSide(this);
+		threadServer= new Thread(serverJavaGa);
 	}
 	
 	public void buildTarget(){
@@ -147,13 +149,13 @@ public class GeneticAlgorithmCall {
 				    	ServerSide.sendMessageToPrat(FileGestion.writePraatScriptAsCandidatesSansFichier(data.getBestCandidate()));
 				    	System.out.println("avant server");
 				    	if(!serverJavaGa.serverAlreadyLaunch){
-				    		serverJavaGa.LanchServeur();
+				    		threadServer.start();
 				    		System.out.println("lancement server");
 				    	}
 				    	System.out.println("apres server");
 				    }
 				});
-		engine.evolve(10, 0, new GenerationCount(2));
+		engine.evolve(10, 0, new GenerationCount(1));
 	}
 
 	
@@ -223,6 +225,12 @@ public class GeneticAlgorithmCall {
 
 	public void setMessageFromPraat(String messageFromPraat) {
 		this.messageFromPraat = messageFromPraat;
+	}
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

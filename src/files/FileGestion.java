@@ -116,25 +116,10 @@ public class FileGestion {
 			stb.append("plus Speaker Robovox\n");
 			stb.append("To Sound... 22050 25   0 0 0    0 0 0    0 0 0\n");
 			stb.append("#-----------------------------------------------\n");
-			stb.append("sendsocket localhost:2009 DEBUT\n");;
+			stb.append("sendsocket localhost:2009 FIN\n");;
 			/*stb.append("Read from file... C:/Users/Py/workspace/ProjetSpeechSynthesis/testsonpoumpoum \n");
 			stb.append("Play\n");*/
-			
-			
-			//partie de generation de fichier a voir pa la suite si je la met a part ou pas
-			/*output.write("do(\"Play\")\n");
-			output.write("deleteFile (\"reductedCandidateValues.txt\")\n");
-			output.write("stop=0\n");
-			output.write("while stop < 0.1\n");
-			output.write("val = do (\"Get value at time...\", 0,stop, \"Sinc70\")\n");
-			//output.write("appendFileLine(\"reductedCandidateValues.txt\",\"a temp: \",stop,\" valeur: \",val)\n");
-			output.write("appendFileLine(\"reductedCandidateValues.txt\",val)\n");
-			//output.write("appendFileLine(\"reductedTargetValues.txt\",\"a temp: \",stop,\" valeur: \",val)\n");
-			output.write("stop=stop+0.01\n");
-			output.write("endwhile\n");
-			output.flush();
-			output.close();
-			f.close();*/
+			System.out.println(stb);
 		return stb.toString();
 	}
 	

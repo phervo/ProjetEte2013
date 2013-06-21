@@ -14,25 +14,50 @@ public class ServerSide {
     private Socket socketduserveur ;
     private GeneticAlgorithmCall ga;
     private final String finChaine= new String("FIN");
+    public boolean serverAlreadyLaunch;
     
     public ServerSide(GeneticAlgorithmCall ga){
     	super();
     	this.ga=ga;
+    	this.serverAlreadyLaunch=false;
     	try {
 			this.socketserver=new ServerSocket(2009);
-			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+    
+    public void LanchServeur(){
+    	this.serverAlreadyLaunch=true;
+    	try {
 			String message_distant="";
-			while(message_distant.compareTo(finChaine)!=0){
+    		while(message_distant.compareTo(finChaine)!=0){
 				socketduserveur = socketserver.accept();
 				//System.out.println("J'ai recu quelque chose !");
 				BufferedReader in = new BufferedReader (new InputStreamReader (socketduserveur.getInputStream()));
 				message_distant = in.readLine().trim();
 				storeMessageReceivedFromPraat(message_distant);
+				socketduserveur.close();
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+    }
+    
+    public void closeServer(){
+    	this.serverAlreadyLaunch=false;
+    	try {
+			this.socketserver.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+    
+    public boolean isServerLanch(){
+    	return this.serverAlreadyLaunch;
     }
     
 	public ServerSide(ServerSocket socketserver, Socket socketduserveur) {

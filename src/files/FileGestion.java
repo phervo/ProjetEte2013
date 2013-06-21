@@ -108,15 +108,15 @@ public class FileGestion {
 			stb.append("#-----------------------------------------------\n");
 			stb.append("#Glottal closure\n");
 			stb.append("Set target... 0.0   "+candidat.getValuesAt(1)+"   Interarytenoid\n");
-			stb.append("Set target... 0.03     0.0 Lungs\n");
-			stb.append("Set target... 0.5     0.0 Lungs\n");
+			stb.append("Set target... 0.0   "+candidat.getValuesAt(2)+" Cricothyroid\n");
+			stb.append("Set target... 0.0   "+candidat.getValuesAt(3)+" LevatorPalatini\n");
 			stb.append("# Synthesise the sound\n");
 			stb.append("#-----------------------------------------------\n");
 			stb.append("select Artword phon\n");
 			stb.append("plus Speaker Robovox\n");
 			stb.append("To Sound... 22050 25   0 0 0    0 0 0    0 0 0\n");
 			stb.append("#-----------------------------------------------\n");
-			
+			stb.append("sendsocket localhost:2009 DEBUT\n");;
 			/*stb.append("Read from file... C:/Users/Py/workspace/ProjetSpeechSynthesis/testsonpoumpoum \n");
 			stb.append("Play\n");*/
 			

@@ -21,11 +21,8 @@ import geneticAlogrithm.SequenceMutation;
 public class MainClass {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		GeneticAlgorithmCall ga= new GeneticAlgorithmCall(4);
-		ServerSide serverJavaGa = new ServerSide(ga);
-		//ServerSide.LaunchPraat();
-		
-		//ga.startAlgorithm();
+		GeneticAlgorithmCall ga= new GeneticAlgorithmCall(4); //init
+		ga.startAlgorithm();
 		/*String s=FileGestion.writePraatScriptAsCandidatesSansFichier(null);
 		System.out.println(s);
 		ServerSide.sendMessageToPratV2(s);*/

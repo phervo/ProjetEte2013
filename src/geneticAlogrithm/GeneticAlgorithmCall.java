@@ -41,6 +41,7 @@ public class GeneticAlgorithmCall {
 	private EvolutionEngine<Sequence> engine;
 	private String praatScript;
 	private String messageFromPraat; //utiliser pr fonction fitness
+	private ServerSide serverJavaGa; 
 	
 	public GeneticAlgorithmCall(int length) { //fonctionne
 		/*
@@ -57,6 +58,7 @@ public class GeneticAlgorithmCall {
 		this.engine=null;
 		this.praatScript=null;
 		this.messageFromPraat=null;
+		this.serverJavaGa = new ServerSide(this);
 	}
 	
 	public void buildTarget(){
@@ -141,7 +143,14 @@ public class GeneticAlgorithmCall {
 				    	System.out.printf("Generation %d: %s\n",
 				                          data.getGenerationNumber(),
 				                          data.getBestCandidate().getValuesInString());
+				    	/*write value in the script send to praat and send it*/
 				    	ServerSide.sendMessageToPrat(FileGestion.writePraatScriptAsCandidatesSansFichier(data.getBestCandidate()));
+				    	System.out.println("avant server");
+				    	if(!serverJavaGa.serverAlreadyLaunch){
+				    		serverJavaGa.LanchServeur();
+				    		System.out.println("lancement server");
+				    	}
+				    	System.out.println("apres server");
 				    }
 				});
 		engine.evolve(10, 0, new GenerationCount(2));

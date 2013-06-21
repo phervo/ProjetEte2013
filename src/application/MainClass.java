@@ -8,6 +8,7 @@ import org.uncommons.maths.random.Probability;
 import org.uncommons.watchmaker.framework.SelectionStrategy;
 import org.uncommons.watchmaker.framework.selection.RouletteWheelSelection;
 
+import communication.ClientSide;
 import communication.ServerSide;
 
 import files.FileGestion;
@@ -21,10 +22,10 @@ import geneticAlogrithm.SequenceMutation;
 public class MainClass {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		ServerSide.launchPraat();
 		GeneticAlgorithmCall ga= new GeneticAlgorithmCall(4); //init
 		ga.startAlgorithm();
-		/*String s=FileGestion.writePraatScriptAsCandidatesSansFichier(null);
-		System.out.println(s);
-		ServerSide.sendMessageToPratV2(s);*/
+		ClientSide cs= new ClientSide();
+		ServerSide.closePraat();
 	}
 }

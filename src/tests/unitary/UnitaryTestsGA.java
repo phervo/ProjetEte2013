@@ -77,4 +77,8 @@ public class UnitaryTestsGA {
 		System.out.println(res);
 	}
 	
+	/*String s=FileGestion.writePraatScriptAsCandidatesSansFichier(null);
+	System.out.println(s);
+	ServerSide.sendMessageToPrat(s);*/
+	
 }

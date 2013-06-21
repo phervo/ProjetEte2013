@@ -49,10 +49,21 @@ public class ServerSide implements Runnable{
 		this.socketduserveur = socketduserveur;
 	}
 	
-	public static void LaunchPraat(){
+	public static void launchPraat(){
 		Runtime run = Runtime.getRuntime();
 		try {
 			run.exec("praat");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public static void closePraat(){
+		String[] sendpraatCom ={"sendpraat", "praat","Quit"};
+		Runtime run = Runtime.getRuntime();
+		try {
+			run.exec(sendpraatCom);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

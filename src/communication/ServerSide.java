@@ -50,21 +50,25 @@ public class ServerSide implements Runnable{
 	}
 	
 	public static void launchPraat(){
+		/*launch praat and */
 		Runtime run = Runtime.getRuntime();
+		String[] sendpraatCom ={"praat"};
 		try {
-			run.exec("praat");
+			run.exec(sendpraatCom);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
-	public static void closePraat(){
-		String[] sendpraatCom ={"sendpraat", "praat","Quit"};
+	public static void initPraat(String fileName){
+		/*execute the script to generate the robovox and the speaker*/
+		String[] sendpraatCom ={"sendpraat", "praat",fileName};
 		Runtime run = Runtime.getRuntime();
 		try {
-			run.exec(sendpraatCom);
-		} catch (IOException e) {
+			Process runProcess=run.exec(sendpraatCom);
+			runProcess.waitFor(); //le thread qui l'a lance attend la fin de l'execution
+		} catch (IOException | InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -81,6 +85,18 @@ public class ServerSide implements Runnable{
 			e.printStackTrace();
 		}
 	}
+	
+	public static void closePraat(){
+		String[] sendpraatCom ={"sendpraat", "praat","Quit"};
+		Runtime run = Runtime.getRuntime();
+		try {
+			run.exec(sendpraatCom);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	
 	public void storeMessageReceivedFromPraat(String chaine){
 		ga.setMessageFromPraat(chaine);
@@ -110,10 +126,11 @@ public class ServerSide implements Runnable{
 			String message_distant="";
     		while(message_distant.compareTo(finChaine)!=0){
 				socketduserveur = socketserver.accept();
-				System.out.println("J'ai recu un message !");
+				
 				BufferedReader in = new BufferedReader (new InputStreamReader (socketduserveur.getInputStream()));
 				message_distant = in.readLine().trim();
 				storeMessageReceivedFromPraat(message_distant);
+				System.out.println("J'ai recu le message suivant : "+message_distant);
 				socketduserveur.close();
 			}
     		this.closeServer(); //important

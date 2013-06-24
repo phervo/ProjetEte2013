@@ -3,6 +3,7 @@ package geneticAlogrithm;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.locks.ReentrantLock;
 
 import org.uncommons.maths.random.MersenneTwisterRNG;
 import org.uncommons.maths.random.Probability;
@@ -42,6 +43,7 @@ public class GeneticAlgorithmCall{
 	private String praatScript;
 	private String messageFromPraat; //utiliser pr fonction fitness
 	private Thread ThreadserverJavaGa;
+	private ReentrantLock mutex;
 	
 	
 	public GeneticAlgorithmCall(int length) { //fonctionne
@@ -60,6 +62,7 @@ public class GeneticAlgorithmCall{
 		this.praatScript=null;
 		this.messageFromPraat=null;
 		this.creerServerGa();
+		this.mutex= new ReentrantLock(true);
 	}
 	
 	public void creerServerGa(){ //faut mettre ServerSide en singleton pour que ca ait du sens
@@ -158,7 +161,7 @@ public class GeneticAlgorithmCall{
 				    	ServerSide.sendMessageToPrat(FileGestion.writePraatScriptAsCandidatesSansFichier(data.getBestCandidate()));
 				    }
 				});
-		engine.evolve(10, 0, new GenerationCount(1));
+		engine.evolve(10, 0, new GenerationCount(4));
 	}
 
 	
@@ -222,12 +225,20 @@ public class GeneticAlgorithmCall{
 		this.praatScript = praatScript;
 	}
 
-	public String getMessageFromPraat() {
-		return messageFromPraat;
+	public synchronized String getMessageFromPraat() { //with mutex
+		mutex.lock();
+		String temp=messageFromPraat;
+		mutex.unlock();
+		return temp;
 	}
 
-	public void setMessageFromPraat(String messageFromPraat) {
-		this.messageFromPraat = messageFromPraat;
+	public synchronized void setMessageFromPraat(String messageFromPraat) { //with mutex
+		mutex.lock();
+		try
+		{
+			this.messageFromPraat = messageFromPraat;
+		}
+		finally { mutex.unlock(); }
 	}
 
 }

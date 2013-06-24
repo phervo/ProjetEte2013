@@ -88,8 +88,8 @@ public class FileGestion {
 		}
 	}
 	
-	public static String writePraatScriptAsCandidatesSansFichier(Sequence candidat){
-			StringBuilder stb= new StringBuilder(); //utilisation de stringBuilder car je suppose que pas synchroniser
+	public static String writePraatScriptHeader(){
+			StringBuilder stb= new StringBuilder(); 
 			stb.append("#-----------------------------------------------\n");
 			stb.append("# Project : Software synthesis using GA\n");
 			stb.append("# Hervo Pierre-Yves, automatic Script generated in java\n");
@@ -99,7 +99,17 @@ public class FileGestion {
 			stb.append("Create Speaker... Robovox Female 2\n"); //nom genre typeDeGlottis
 			stb.append("Create Artword... phon 0.5\n");//creation of actions list(init)
 			stb.append("#-----------------------------------------------\n");
+			return stb.toString();
+	}
+	
+	public static String writePraatScriptAsCandidatesSansFichier(Sequence candidat){
+			StringBuilder stb= new StringBuilder(); //utilisation de stringBuilder car je suppose que pas synchroniser
+			stb.append("#-----------------------------------------------\n");
+			stb.append("# Project : Software synthesis using GA\n");
+			stb.append("# Hervo Pierre-Yves, automatic Script generated in java\n");
+			stb.append("#-----------------------------------------------\n");
 			//we complete artword with the set tqrget methods below
+			stb.append("select Artword phon\n");
 			stb.append("# Supply lung energy\n");
 			stb.append("#-----------------------------------------------\n");
 			stb.append("Set target... 0.00       "+candidat.getValuesAt(0)+" Lungs\n");
@@ -116,10 +126,8 @@ public class FileGestion {
 			stb.append("plus Speaker Robovox\n");
 			stb.append("To Sound... 22050 25   0 0 0    0 0 0    0 0 0\n");
 			stb.append("#-----------------------------------------------\n");
-			stb.append("sendsocket localhost:2009 FIN\n");;
-			/*stb.append("Read from file... C:/Users/Py/workspace/ProjetSpeechSynthesis/testsonpoumpoum \n");
-			stb.append("Play\n");*/
-			System.out.println(stb);
+			stb.append("sendsocket localhost:2009 "+candidat.getValuesAt(0)+"\n");
+			//System.out.println(stb);
 		return stb.toString();
 	}
 	

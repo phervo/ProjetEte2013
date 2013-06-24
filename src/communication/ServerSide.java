@@ -9,7 +9,7 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class ServerSide implements Runnable{
+public class ServerSide{
 	private ServerSocket socketserver  ;
     private Socket socketduserveur ;
     private GeneticAlgorithmCall ga;
@@ -101,8 +101,7 @@ public class ServerSide implements Runnable{
 		this.socketduserveur = socketduserveur;
 	}
 
-	@Override
-	public void run() {
+	public void launchServer() {
 		// TODO Auto-generated method stub
 		this.serverAlreadyLaunch=true;
     	try {

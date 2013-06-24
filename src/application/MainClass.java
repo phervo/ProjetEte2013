@@ -22,10 +22,11 @@ import geneticAlogrithm.SequenceMutation;
 public class MainClass {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		ServerSide.launchPraat();
+		ServerSide.launchPraat(); //pas un thread
 		GeneticAlgorithmCall ga= new GeneticAlgorithmCall(4); //init
 		ga.startAlgorithm();
 		ClientSide cs= new ClientSide();
-		ServerSide.closePraat();
+		cs.envoyerMessageFermeture();
+		ServerSide.closePraat();//non plus
 	}
 }

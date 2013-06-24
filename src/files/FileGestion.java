@@ -116,7 +116,7 @@ public class FileGestion {
 			stb.append("plus Speaker Robovox\n");
 			stb.append("To Sound... 22050 25   0 0 0    0 0 0    0 0 0\n");
 			stb.append("#-----------------------------------------------\n");
-			stb.append("sendsocket localhost:2009 1\n");;
+			stb.append("sendsocket localhost:2009 FIN\n");;
 			/*stb.append("Read from file... C:/Users/Py/workspace/ProjetSpeechSynthesis/testsonpoumpoum \n");
 			stb.append("Play\n");*/
 			System.out.println(stb);

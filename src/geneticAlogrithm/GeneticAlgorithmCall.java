@@ -41,7 +41,8 @@ public class GeneticAlgorithmCall{
 	private EvolutionEngine<Sequence> engine;
 	private String praatScript;
 	private String messageFromPraat; //utiliser pr fonction fitness
-	private ServerSide serverJavaGa;
+	private Thread ThreadserverJavaGa;
+	
 	
 	public GeneticAlgorithmCall(int length) { //fonctionne
 		/*
@@ -58,7 +59,17 @@ public class GeneticAlgorithmCall{
 		this.engine=null;
 		this.praatScript=null;
 		this.messageFromPraat=null;
-		this.serverJavaGa=new ServerSide(this);
+		this.creerServerGa();
+	}
+	
+	public void creerServerGa(){ //faut mettre ServerSide en singleton pour que ca ait du sens
+		ServerSide serverJavaGa= new ServerSide(this);
+		if(!serverJavaGa.serverAlreadyLaunch){
+			Thread t = new Thread(serverJavaGa,"ThreadServer");
+			this.ThreadserverJavaGa=t;
+			t.start();
+			System.out.println("lancement server");
+		}
 	}
 	
 	public void buildTarget(){
@@ -145,15 +156,9 @@ public class GeneticAlgorithmCall{
 				                          data.getBestCandidate().getValuesInString());
 				    	/*write value in the script send to praat and send it*/
 				    	ServerSide.sendMessageToPrat(FileGestion.writePraatScriptAsCandidatesSansFichier(data.getBestCandidate()));
-				    	System.out.println("avant server");
-				    	if(!serverJavaGa.serverAlreadyLaunch){
-				    		serverJavaGa.launchServer();
-				    		System.out.println("lancement server");
-				    	}
-				    	System.out.println("apres server");
 				    }
 				});
-		engine.evolve(10, 0, new GenerationCount(2));
+		engine.evolve(10, 0, new GenerationCount(1));
 	}
 
 	

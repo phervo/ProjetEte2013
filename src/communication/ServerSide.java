@@ -9,7 +9,7 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class ServerSide{
+public class ServerSide implements Runnable{
 	private ServerSocket socketserver  ;
     private Socket socketduserveur ;
     private GeneticAlgorithmCall ga;
@@ -74,8 +74,9 @@ public class ServerSide{
 		String[] sendpraatCom ={"sendpraat", "praat",fileName};
 		Runtime run = Runtime.getRuntime();
 		try {
-			run.exec(sendpraatCom);
-		} catch (IOException e) {
+			Process runProcess=run.exec(sendpraatCom);
+			runProcess.waitFor(); //le thread qui l'a lance attend la fin de l'execution
+		} catch (IOException | InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -101,20 +102,21 @@ public class ServerSide{
 		this.socketduserveur = socketduserveur;
 	}
 
-	public void launchServer() {
-		// TODO Auto-generated method stub
+	@Override
+	public void run() {
+	// TODO Auto-generated method stub
 		this.serverAlreadyLaunch=true;
     	try {
 			String message_distant="";
     		while(message_distant.compareTo(finChaine)!=0){
 				socketduserveur = socketserver.accept();
-				//System.out.println("J'ai recu quelque chose !");
+				System.out.println("J'ai recu un message !");
 				BufferedReader in = new BufferedReader (new InputStreamReader (socketduserveur.getInputStream()));
 				message_distant = in.readLine().trim();
 				storeMessageReceivedFromPraat(message_distant);
 				socketduserveur.close();
 			}
-    		this.closeServer();
+    		this.closeServer(); //important
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -33,7 +33,6 @@ public class GeneticAlgorithmCall{
 	int length;
 	private double[] candidatList;
 	private Sequence target;
-	//private CandidateFactory<Sequence> mySequenceFactory;
 	private SequenceFactory mySequenceFactory;
 	private EvolutionaryOperator<Sequence> pipeline;
 	private SequenceEvaluator mySeqEval;
@@ -42,7 +41,6 @@ public class GeneticAlgorithmCall{
 	private EvolutionEngine<Sequence> engine;
 	private String praatScript;
 	private String messageFromPraat; //utiliser pr fonction fitness
-	private Thread ThreadserverJavaGa;
 	private ReentrantLock mutex;
 	
 	
@@ -69,7 +67,6 @@ public class GeneticAlgorithmCall{
 		ServerSide serverJavaGa= new ServerSide(this);
 		if(!serverJavaGa.serverAlreadyLaunch){
 			Thread t = new Thread(serverJavaGa,"ThreadServer");
-			this.ThreadserverJavaGa=t;
 			t.start();
 			System.out.println("lancement server");
 		}
@@ -158,10 +155,10 @@ public class GeneticAlgorithmCall{
 				                          data.getGenerationNumber(),
 				                          data.getBestCandidate().getValuesInString());
 				    	/*write value in the script send to praat and send it*/
-				    	ServerSide.sendMessageToPrat(FileGestion.writePraatScriptAsCandidatesSansFichier(data.getBestCandidate()));
+				    	ServerSide.sendMessageToPrat(FileGestion.writePraatScriptAsCandidates(data.getBestCandidate()));
 				    }
 				});
-		engine.evolve(10, 0, new GenerationCount(4));
+		engine.evolve(10, 0, new GenerationCount(1));
 	}
 
 	

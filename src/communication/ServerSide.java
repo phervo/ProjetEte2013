@@ -50,7 +50,7 @@ public class ServerSide implements Runnable{
 	}
 	
 	public static void launchPraat(){
-		/*launch praat and */
+		/*launch praat */
 		Runtime run = Runtime.getRuntime();
 		String[] sendpraatCom ={"praat"};
 		try {

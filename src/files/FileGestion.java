@@ -125,6 +125,7 @@ public class FileGestion {
 			fms.getList().add(f1);
 			fms.getList().add(f2);
 			fms.getList().add(f3);
+			fms.displayFormantSequence();
 		}//else its "FIN" so dont do anything
 		return fms;
 	}

@@ -6,7 +6,10 @@ import java.util.Random;
 import org.uncommons.maths.random.MersenneTwisterRNG;
 import org.uncommons.maths.random.Probability;
 
+import communication.ServerSide;
+
 import files.FileGestion;
+import geneticAlogrithm.FormantSequence;
 import geneticAlogrithm.GeneticAlgorithmCall;
 import geneticAlogrithm.Sequence;
 import geneticAlogrithm.SequenceCrossOver;
@@ -20,8 +23,8 @@ public class UnitaryTestsGA {
 		GeneticAlgorithmCall ga= new GeneticAlgorithmCall(10);
 		//////////////
 		ga.buildTarget();
-		Sequence target= ga.getTarget();
-		target.displaySeq();
+		//Sequence target= ga.getTarget();
+		//target.displaySeq();
 		/////////////
 		////////////////////test1///////////////////
 		ga.generateAlphabet();
@@ -75,10 +78,23 @@ public class UnitaryTestsGA {
 		Sequence candidate= new Sequence(2,tab);
 		double res=ga.getMySeqEval().getFitness(candidate, null);
 		System.out.println(res);
+		
+		
+
+		////tests pour le nouveau script d'extraction//////
+		/*GeneticAlgorithmCall ga= new GeneticAlgorithmCall(4); //init
+		ServerSide.launchPraat();
+		ServerSide.initPraat(FileGestion.writePraatScriptHeader());
+		ServerSide.sendMessageToPrat(FileGestion.writePraatScriptAsCandidates(null));
+	*/
+		
+		FormantSequence f= new FormantSequence();
+		f.displayFormantSequence();
 	}
 	
 	/*String s=FileGestion.writePraatScriptAsCandidatesSansFichier(null);
 	System.out.println(s);
 	ServerSide.sendMessageToPrat(s);*/
+	
 	
 }

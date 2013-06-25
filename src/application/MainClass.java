@@ -12,6 +12,7 @@ import communication.ClientSide;
 import communication.ServerSide;
 
 import files.FileGestion;
+import geneticAlogrithm.FormantSequence;
 import geneticAlogrithm.GeneticAlgorithmCall;
 import geneticAlogrithm.Sequence;
 import geneticAlogrithm.SequenceCrossOver;
@@ -28,13 +29,7 @@ public class MainClass {
 		ga.startAlgorithm();
 		ClientSide cs= new ClientSide();
 		cs.envoyerMessageFermeture();
-		ServerSide.closePraat();//non plus*/
-		
-		////tests pour le nouveau script d'extraction//////
-		GeneticAlgorithmCall ga= new GeneticAlgorithmCall(4); //init
-		ServerSide.launchPraat();
-		ServerSide.initPraat(FileGestion.writePraatScriptHeader());
-		ServerSide.sendMessageToPrat(FileGestion.writePraatScriptAsCandidates(null));
-		
+		ServerSide.closePraat();//non plus
+		*/
 	}
 }

@@ -71,7 +71,6 @@ public class FileGestion {
 			stb.append("plus Speaker Robovox\n");
 			stb.append("To Sound... 22050 25   0 0 0    0 0 0    0 0 0\n");
 			stb.append("#-----------------------------------------------\n");
-			
 			stb.append("#-----------------------------------------------\n");
 			stb.append("# Automatic data extraction part\n");
 			stb.append("To Formant (burg)... 0 3 5500 0.025 50\n");
@@ -82,7 +81,9 @@ public class FileGestion {
 			stb.append("meanFreq = Get mean... intervalNumber 0 0 \"Hertz\"\n");
 			stb.append("bandWith = Get bandwidth at time... intervalNumber midTime \"Hertz\" \"Linear\"\n");
 			stb.append("endfor\n");
-			stb.append("sendsocket localhost:2009 midTime$\n");
+			stb.append("writeInfoLine(midTime)\n");
+			//stb.append("execute C:/Users/Py/workspace/ProjetSpeechSynthesis/script2\n");
+			stb.append("sendsocket localhost:2009 writeInfoLine(midTime)\n");
 			//System.out.println(stb);
 		return stb.toString();
 	}

@@ -32,7 +32,7 @@ public class GeneticAlgorithmCall{
 	 * */
 	int length;
 	private double[] candidatList;
-	private Sequence target;
+	private FormantSequence target;
 	private SequenceFactory mySequenceFactory;
 	private EvolutionaryOperator<Sequence> pipeline;
 	private SequenceEvaluator mySeqEval;
@@ -40,7 +40,7 @@ public class GeneticAlgorithmCall{
 	private Random rng;
 	private EvolutionEngine<Sequence> engine;
 	private String praatScript;
-	private String messageFromPraat; //utiliser pr fonction fitness
+	private FormantSequence messageFromPraat; //utiliser pr fonction fitness
 	private ReentrantLock mutex;
 	
 	
@@ -64,7 +64,7 @@ public class GeneticAlgorithmCall{
 	}
 	
 	public void creerServerGa(){ //faut mettre ServerSide en singleton pour que ca ait du sens
-		ServerSide serverJavaGa= new ServerSide(this);
+		ServerSide serverJavaGa= new ServerSide(this); //rajouter le type
 		if(!serverJavaGa.serverAlreadyLaunch){
 			Thread t = new Thread(serverJavaGa,"ThreadServer");
 			t.start();
@@ -74,9 +74,7 @@ public class GeneticAlgorithmCall{
 	
 	public void buildTarget(){
 		/*its here that we define the target*/
-		double[] doubleSequence={0.1,0.5,0.7,0.4};
-		int longueur=doubleSequence.length;
-		this.target=new Sequence(longueur,doubleSequence);
+		this.target=new FormantSequence(); //i by default
 	}
 
 	public void generateAlphabet(){ //fonctionne
@@ -124,7 +122,7 @@ public class GeneticAlgorithmCall{
 	}
 	
 	public void createFitnessEvalutator(){
-		mySeqEval=new SequenceEvaluator(this.target);
+		mySeqEval=new SequenceEvaluator(this.target,this);
 	}
 	
 	public void createSelection(){
@@ -165,11 +163,11 @@ public class GeneticAlgorithmCall{
 	
 	///////////////getters and setters///////////////////
 	
-	public Sequence getTarget() {
+	public FormantSequence getTarget() {
 		return target;
 	}
 
-	public void setTarget(Sequence target) {
+	public void setTarget(FormantSequence target) {
 		this.target = target;
 	}
 	
@@ -222,14 +220,14 @@ public class GeneticAlgorithmCall{
 		this.praatScript = praatScript;
 	}
 
-	public synchronized String getMessageFromPraat() { //with mutex
+	public synchronized FormantSequence getMessageFromPraat() { //with mutex
 		mutex.lock();
-		String temp=messageFromPraat;
+		FormantSequence temp=this.messageFromPraat;
 		mutex.unlock();
 		return temp;
 	}
 
-	public synchronized void setMessageFromPraat(String messageFromPraat) { //with mutex
+	public synchronized void setMessageFromPraat(FormantSequence messageFromPraat) { //with mutex
 		mutex.lock();
 		try
 		{
@@ -237,5 +235,4 @@ public class GeneticAlgorithmCall{
 		}
 		finally { mutex.unlock(); }
 	}
-
 }

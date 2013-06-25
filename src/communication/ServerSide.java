@@ -99,7 +99,8 @@ public class ServerSide implements Runnable{
 	
 	
 	public void storeMessageReceivedFromPraat(String chaine){
-		ga.setMessageFromPraat(chaine);
+		//cast a faire ici vers FormantSequence
+		ga.setMessageFromPraat(null);
 	}
 	
 	public ServerSocket getSocketserver() {

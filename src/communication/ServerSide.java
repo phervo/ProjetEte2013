@@ -1,5 +1,6 @@
 package communication;
 
+import files.FileGestion;
 import geneticAlogrithm.GeneticAlgorithmCall;
 
 import java.io.BufferedReader;
@@ -99,8 +100,8 @@ public class ServerSide implements Runnable{
 	
 	
 	public void storeMessageReceivedFromPraat(String chaine){
-		//cast a faire ici vers FormantSequence
-		ga.setMessageFromPraat(null);
+		ga.setMessageFromPraat(FileGestion.splitChaineToFormantSequence(chaine));
+		ga.getMessageFromPraat().displayFormantSequence();
 	}
 	
 	public ServerSocket getSocketserver() {

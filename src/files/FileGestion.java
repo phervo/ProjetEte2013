@@ -1,5 +1,7 @@
 package files;
 
+import geneticAlogrithm.Formant;
+import geneticAlogrithm.FormantSequence;
 import geneticAlogrithm.GeneticAlgorithmCall;
 import geneticAlogrithm.Sequence;
 
@@ -9,6 +11,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class FileGestion {
 	private static FileWriter f;
@@ -83,7 +86,7 @@ public class FileGestion {
 			stb.append("endfor\n");
 			stb.append("writeInfoLine(midTime)\n");
 			//stb.append("execute C:/Users/Py/workspace/ProjetSpeechSynthesis/script2\n");
-			stb.append("sendsocket localhost:2009 writeInfoLine(midTime)\n");
+			stb.append("sendsocket localhost:2009 0 1 2 3 4 5\n");
 			//System.out.println(stb);
 		return stb.toString();
 	}
@@ -102,5 +105,27 @@ public class FileGestion {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
+	}
+	
+	public static FormantSequence splitChaineToFormantSequence(String chaine){
+		/*function to parse the string i get with praat to a formantSequence*/
+		/*y a peu etre des souccis ici a voir lors des tests*/
+		String[] tab= chaine.split(" ");
+		FormantSequence fms= new FormantSequence("candidat", 3, new ArrayList<Formant>());
+		if(tab.length>1){
+			Formant f1= new Formant();
+			Formant f2= new Formant();
+			Formant f3= new Formant();
+			f1.setFrequency(Integer.parseInt(tab[0]));
+			f2.setFrequency(Integer.parseInt(tab[1]));
+			f3.setFrequency(Integer.parseInt(tab[2]));
+			f1.setBandwith(Integer.parseInt(tab[3]));
+			f2.setBandwith(Integer.parseInt(tab[4]));
+			f3.setBandwith(Integer.parseInt(tab[5]));
+			fms.getList().add(f1);
+			fms.getList().add(f2);
+			fms.getList().add(f3);
+		}//else its "FIN" so dont do anything
+		return fms;
 	}
 }

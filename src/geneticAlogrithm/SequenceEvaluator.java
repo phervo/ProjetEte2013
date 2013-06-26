@@ -4,9 +4,6 @@ import java.util.List;
 
 import org.uncommons.watchmaker.framework.FitnessEvaluator;
 
-import files.FileGestion;
-
-
 public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 	private FormantSequence targetSequence = null;
 	private GeneticAlgorithmCall ga=null; 

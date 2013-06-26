@@ -23,7 +23,7 @@ import org.uncommons.watchmaker.framework.termination.TargetFitness;
 
 import communication.ServerSide;
 
-import files.FileGestion;
+import messages.MessageGestion;
 
 public class GeneticAlgorithmCall{
 	/*in order to get a clean code, i have divided the big operation in small fonctions
@@ -155,7 +155,7 @@ public class GeneticAlgorithmCall{
 				                          data.getGenerationNumber(),
 				                          data.getBestCandidate().getValuesInString());
 				    	/*write value in the script send to praat and send it*/
-				    	ServerSide.sendMessageToPrat(FileGestion.writePraatScriptAsCandidates(data.getBestCandidate()));
+				    	ServerSide.sendMessageToPrat(MessageGestion.writePraatScriptAsCandidates(data.getBestCandidate()));
 				    }
 				});
 		engine.evolve(10, 0, new GenerationCount(1));

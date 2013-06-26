@@ -1,12 +1,11 @@
 package communication;
 
-import files.FileGestion;
+import messages.MessageGestion;
 import geneticAlogrithm.GeneticAlgorithmCall;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -100,7 +99,7 @@ public class ServerSide implements Runnable{
 	
 	
 	public void storeMessageReceivedFromPraat(String chaine){
-		ga.setMessageFromPraat(FileGestion.splitChaineToFormantSequence(chaine));
+		ga.setMessageFromPraat(MessageGestion.splitChaineToFormantSequence(chaine));
 	}
 	
 	public ServerSocket getSocketserver() {

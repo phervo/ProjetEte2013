@@ -11,7 +11,7 @@ import org.uncommons.watchmaker.framework.selection.RouletteWheelSelection;
 import communication.ClientSide;
 import communication.ServerSide;
 
-import files.FileGestion;
+import messages.MessageGestion;
 import geneticAlogrithm.FormantSequence;
 import geneticAlogrithm.GeneticAlgorithmCall;
 import geneticAlogrithm.Sequence;
@@ -25,13 +25,12 @@ public class MainClass {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		ServerSide.launchPraat(); //pas un thread
-		ServerSide.initPraat(FileGestion.writePraatScriptHeader());
+		ServerSide.initPraat(MessageGestion.writePraatScriptHeader());
 		GeneticAlgorithmCall ga= new GeneticAlgorithmCall(4); //init
 		ga.startAlgorithm();
 		ClientSide cs= new ClientSide();
 		cs.envoyerMessageFermeture();
 		ServerSide.closePraat();//non plus
-		System.out.println("blabla");
 		///////test de la fonction fitness///////////////
 		//FileGestion.splitChaineToFormantSequence("0 1 2 3 4 5");
 		/*GeneticAlgorithmCall ga= new GeneticAlgorithmCall(4); //init

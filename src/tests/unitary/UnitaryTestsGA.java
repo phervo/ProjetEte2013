@@ -3,12 +3,13 @@ package tests.unitary;
 import java.util.List;
 import java.util.Random;
 
+import messages.MessageGestion;
+
 import org.uncommons.maths.random.MersenneTwisterRNG;
 import org.uncommons.maths.random.Probability;
 
 import communication.ServerSide;
 
-import files.FileGestion;
 import geneticAlogrithm.FormantSequence;
 import geneticAlogrithm.GeneticAlgorithmCall;
 import geneticAlogrithm.Sequence;
@@ -51,8 +52,8 @@ public class UnitaryTestsGA {
 		Sequence newSec1 = c.generateRandomCandidate(rng);
 		Sequence newSec2 = c.generateRandomCandidate(rng);
 		
-		FileGestion.writeInTheLogs(newSec1.getValuesInString());
-		FileGestion.writeInTheLogs(newSec2.getValuesInString());
+		MessageGestion.writeInTheLogs(newSec1.getValuesInString());
+		MessageGestion.writeInTheLogs(newSec2.getValuesInString());
 		System.out.println("///////////////////////////////////////");
 		System.out.println("///////////////////                 ////////////////////");
 		//tester la mutation et le cross over

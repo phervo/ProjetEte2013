@@ -101,7 +101,6 @@ public class ServerSide implements Runnable{
 	
 	public void storeMessageReceivedFromPraat(String chaine){
 		ga.setMessageFromPraat(FileGestion.splitChaineToFormantSequence(chaine));
-		ga.getMessageFromPraat().displayFormantSequence();
 	}
 	
 	public ServerSocket getSocketserver() {

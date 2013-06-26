@@ -58,7 +58,8 @@ public class GeneticAlgorithmCall{
 		this.rng=null;
 		this.engine=null;
 		this.praatScript=null;
-		this.messageFromPraat=null;
+		//this.messageFromPraat=null;
+		this.messageFromPraat=new FormantSequence();
 		this.creerServerGa();
 		this.mutex= new ReentrantLock(true);
 	}
@@ -75,6 +76,7 @@ public class GeneticAlgorithmCall{
 	public void buildTarget(){
 		/*its here that we define the target*/
 		this.target=new FormantSequence(); //i by default
+		//this.target.displayFormantSequence();
 	}
 
 	public void generateAlphabet(){ //fonctionne
@@ -221,13 +223,16 @@ public class GeneticAlgorithmCall{
 	}
 
 	public synchronized FormantSequence getMessageFromPraat() { //with mutex
+		System.out.println("recup val");
+		FormantSequence temp=null;
 		mutex.lock();
-		FormantSequence temp=this.messageFromPraat;
+		temp=this.messageFromPraat;
 		mutex.unlock();
 		return temp;
 	}
 
 	public synchronized void setMessageFromPraat(FormantSequence messageFromPraat) { //with mutex
+		System.out.println("mise a jour val");
 		mutex.lock();
 		try
 		{

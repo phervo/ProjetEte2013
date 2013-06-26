@@ -86,7 +86,7 @@ public class FileGestion {
 			stb.append("endfor\n");
 			stb.append("writeInfoLine(midTime)\n");
 			//stb.append("execute C:/Users/Py/workspace/ProjetSpeechSynthesis/script2\n");
-			stb.append("sendsocket localhost:2009 0 1 2 3 4 5\n");
+			stb.append("sendsocket localhost:2009 'midTime'\n");
 			//System.out.println(stb);
 		return stb.toString();
 	}

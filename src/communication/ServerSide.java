@@ -128,7 +128,7 @@ public class ServerSide implements Runnable{
 				socketduserveur = socketserver.accept();
 				BufferedReader in = new BufferedReader (new InputStreamReader (socketduserveur.getInputStream()));
 				message_distant = in.readLine().trim();
-				//storeMessageReceivedFromPraat(message_distant);
+				storeMessageReceivedFromPraat(message_distant);
 				System.out.println("J'ai recu le message suivant : "+message_distant);
 				socketduserveur.close();
 			}

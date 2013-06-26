@@ -54,7 +54,7 @@ public class GeneticAlgorithmCall{
 		this.rng=null;
 		this.engine=null;
 		this.praatScript=null;
-		//this.messageFromPraat=null;
+		//creation of an empty FormantSequenc
 		this.messageFromPraat=new FormantSequence();
 		this.creerServerGa();
 		this.mutex= new ReentrantLock(true);
@@ -71,7 +71,7 @@ public class GeneticAlgorithmCall{
 	
 	public void buildTarget(){
 		/*its here that we define the target*/
-		this.target=new FormantSequence(); //i by default
+		this.target=new FormantSequence("i"); //i by default
 		//this.target.displayFormantSequence();
 	}
 

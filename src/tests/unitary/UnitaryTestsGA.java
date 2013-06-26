@@ -89,8 +89,8 @@ public class UnitaryTestsGA {
 		ServerSide.sendMessageToPrat(FileGestion.writePraatScriptAsCandidates(null));
 	*/
 		
-		FormantSequence f= new FormantSequence();
-		f.displayFormantSequence();
+		//FormantSequence f= new FormantSequence();
+		//f.displayFormantSequence();
 	}
 	
 	/*String s=FileGestion.writePraatScriptAsCandidatesSansFichier(null);

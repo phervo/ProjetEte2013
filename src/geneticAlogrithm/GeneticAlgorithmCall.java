@@ -7,19 +7,15 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import org.uncommons.maths.random.MersenneTwisterRNG;
 import org.uncommons.maths.random.Probability;
-import org.uncommons.watchmaker.framework.CandidateFactory;
 import org.uncommons.watchmaker.framework.EvolutionEngine;
 import org.uncommons.watchmaker.framework.EvolutionObserver;
 import org.uncommons.watchmaker.framework.EvolutionaryOperator;
 import org.uncommons.watchmaker.framework.GenerationalEvolutionEngine;
 import org.uncommons.watchmaker.framework.PopulationData;
 import org.uncommons.watchmaker.framework.SelectionStrategy;
-import org.uncommons.watchmaker.framework.TerminationCondition;
 import org.uncommons.watchmaker.framework.operators.EvolutionPipeline;
 import org.uncommons.watchmaker.framework.selection.RouletteWheelSelection;
-import org.uncommons.watchmaker.framework.termination.ElapsedTime;
 import org.uncommons.watchmaker.framework.termination.GenerationCount;
-import org.uncommons.watchmaker.framework.termination.TargetFitness;
 
 import communication.ServerSide;
 
@@ -223,7 +219,6 @@ public class GeneticAlgorithmCall{
 	}
 
 	public synchronized FormantSequence getMessageFromPraat() { //with mutex
-		System.out.println("recup val");
 		FormantSequence temp=null;
 		mutex.lock();
 		temp=this.messageFromPraat;

@@ -126,7 +126,6 @@ public class ServerSide implements Runnable{
 			String message_distant="";
     		while(message_distant.compareTo(finChaine)!=0){
 				socketduserveur = socketserver.accept();
-				
 				BufferedReader in = new BufferedReader (new InputStreamReader (socketduserveur.getInputStream()));
 				message_distant = in.readLine().trim();
 				storeMessageReceivedFromPraat(message_distant);

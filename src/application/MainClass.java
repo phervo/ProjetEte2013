@@ -1,24 +1,9 @@
 package application;
 
-import java.util.List;
-import java.util.Random;
-
-import org.uncommons.maths.random.MersenneTwisterRNG;
-import org.uncommons.maths.random.Probability;
-import org.uncommons.watchmaker.framework.SelectionStrategy;
-import org.uncommons.watchmaker.framework.selection.RouletteWheelSelection;
-
 import communication.ClientSide;
 import communication.ServerSide;
-
 import messages.MessageGestion;
-import geneticAlogrithm.FormantSequence;
 import geneticAlogrithm.GeneticAlgorithmCall;
-import geneticAlogrithm.Sequence;
-import geneticAlogrithm.SequenceCrossOver;
-import geneticAlogrithm.SequenceEvaluator;
-import geneticAlogrithm.SequenceFactory;
-import geneticAlogrithm.SequenceMutation;
 
 public class MainClass {
 	

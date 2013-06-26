@@ -150,8 +150,6 @@ public class GeneticAlgorithmCall{
 				    	System.out.printf("Generation %d: %s\n",
 				                          data.getGenerationNumber(),
 				                          data.getBestCandidate().getValuesInString());
-				    	/*write value in the script send to praat and send it*/
-				    	ServerSide.sendMessageToPrat(MessageGestion.writePraatScriptAsCandidates(data.getBestCandidate()));
 				    }
 				});
 		engine.evolve(10, 0, new GenerationCount(1));

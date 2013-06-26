@@ -16,6 +16,7 @@ public class MainClass {
 		ClientSide cs= new ClientSide();
 		cs.envoyerMessageFermeture();
 		ServerSide.closePraat();//non plus
+		
 		///////test de la fonction fitness///////////////
 		//FileGestion.splitChaineToFormantSequence("0 1 2 3 4 5");
 		/*GeneticAlgorithmCall ga= new GeneticAlgorithmCall(4); //init

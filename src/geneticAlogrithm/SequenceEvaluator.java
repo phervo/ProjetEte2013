@@ -2,7 +2,11 @@ package geneticAlogrithm;
 
 import java.util.List;
 
+import messages.MessageGestion;
+
 import org.uncommons.watchmaker.framework.FitnessEvaluator;
+
+import communication.ServerSide;
 
 public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 	private FormantSequence targetSequence = null;
@@ -19,7 +23,10 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 		// TODO Auto-generated method stub
 		//max 9 in fitness
 		int matches=0;
-		for(int i=0;i<this.targetSequence.getNbFormant();i++){
+		//1 j'envoie le candidat courant (var candidate au script)
+		/*write value in the script send to praat and send it*/
+    	ServerSide.sendMessageToPrat(MessageGestion.writePraatScriptAsCandidates(candidate));
+		/*for(int i=0;i<this.targetSequence.getNbFormant();i++){
 			if(ga.getMessageFromPraat().getFormantAt(i).getFrequency()==this.targetSequence.getFormantAt(i).getFrequency()){
 				matches++;
 			}
@@ -29,7 +36,7 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 			if(ga.getMessageFromPraat().getFormantAt(i).getAmplitude()==this.targetSequence.getFormantAt(i).getAmplitude()){
 				matches++;
 			}
-		}
+		}*/
 		return matches;
 	}
 

@@ -23,6 +23,10 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 		// TODO Auto-generated method stub
 		//max 9 in fitness
 		int matches=0;
+		//0) mettre un mutex
+		try {
+			ga.getMutexFitnessFunction().acquire();
+		
 		//1) j'envoie le candidat courant (var candidate au script)
 		/*write value in the script send to praat and send it*/
 		//System.out.println(candidate.getValuesInString());
@@ -40,6 +44,10 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 			}
 		}
     	System.out.println(candidate.getValuesInString()+" matchScore : "+matches);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return matches;
 	}
 

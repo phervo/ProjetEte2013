@@ -3,9 +3,8 @@ package application;
 import communication.ClientSide;
 import communication.ServerSide;
 import messages.MessageGestion;
-import geneticAlogrithm.FormantSequence;
 import geneticAlogrithm.GeneticAlgorithmCall;
-import geneticAlogrithm.Sequence;
+
 
 public class MainClass {
 	
@@ -13,7 +12,7 @@ public class MainClass {
 		// TODO Auto-generated method stub
 		ServerSide.launchPraat(); //pas un thread
 		ServerSide.initPraat(MessageGestion.writePraatScriptHeader());
-		GeneticAlgorithmCall ga= new GeneticAlgorithmCall(6); //init
+		GeneticAlgorithmCall ga= new GeneticAlgorithmCall(13); //init
 		ga.startAlgorithm();
 		ClientSide cs= new ClientSide();
 		cs.envoyerMessageFermeture();
@@ -36,3 +35,4 @@ public class MainClass {
 		cs.envoyerMessageFermeture();*/
 	}
 }
+

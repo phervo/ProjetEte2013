@@ -3,6 +3,7 @@ package geneticAlogrithm;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.Semaphore;
 import java.util.concurrent.locks.ReentrantLock;
 
 import org.uncommons.maths.random.MersenneTwisterRNG;
@@ -16,10 +17,9 @@ import org.uncommons.watchmaker.framework.SelectionStrategy;
 import org.uncommons.watchmaker.framework.operators.EvolutionPipeline;
 import org.uncommons.watchmaker.framework.selection.RouletteWheelSelection;
 import org.uncommons.watchmaker.framework.termination.GenerationCount;
+import org.uncommons.watchmaker.framework.termination.TargetFitness;
 
 import communication.ServerSide;
-
-import messages.MessageGestion;
 
 public class GeneticAlgorithmCall{
 	/*in order to get a clean code, i have divided the big operation in small fonctions
@@ -37,8 +37,8 @@ public class GeneticAlgorithmCall{
 	private EvolutionEngine<Sequence> engine;
 	private String praatScript;
 	private FormantSequence messageFromPraat; //utiliser pr fonction fitness
-	private ReentrantLock mutex;
-	
+	private final Semaphore availablevalue = new Semaphore(1, true);
+	private final Semaphore availableFitnessfunction = new Semaphore(1, true); 
 	
 	public GeneticAlgorithmCall(int length) { //fonctionne
 		/*
@@ -57,7 +57,6 @@ public class GeneticAlgorithmCall{
 		//creation of an empty FormantSequenc
 		this.messageFromPraat=new FormantSequence();
 		this.creerServerGa();
-		this.mutex= new ReentrantLock(true);
 	}
 	
 	public void creerServerGa(){ //faut mettre ServerSide en singleton pour que ca ait du sens
@@ -152,7 +151,7 @@ public class GeneticAlgorithmCall{
 				                          data.getBestCandidate().getValuesInString());
 				    }
 				});
-		engine.evolve(10, 0, new GenerationCount(1));
+		engine.evolve(10, 0, new GenerationCount(10));
 	}
 
 	
@@ -218,19 +217,33 @@ public class GeneticAlgorithmCall{
 
 	public synchronized FormantSequence getMessageFromPraat() { //with mutex
 		FormantSequence temp=null;
-		mutex.lock();
-		temp=this.messageFromPraat;
-		mutex.unlock();
+		try {
+			availablevalue.acquire();
+			temp=this.messageFromPraat;
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		availablevalue.release();
 		return temp;
 	}
 
 	public synchronized void setMessageFromPraat(FormantSequence messageFromPraat) { //with mutex
-		System.out.println("mise a jour val");
-		mutex.lock();
+		//System.out.println("mise a jour val");
+		
 		try
 		{
+			availablevalue.acquire();
 			this.messageFromPraat = messageFromPraat;
+			this.availableFitnessfunction.release();
+		}catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		finally { mutex.unlock(); }
+		availablevalue.release();
+	}
+
+	public Semaphore getMutexFitnessFunction() {
+		return availableFitnessfunction;
 	}
 }

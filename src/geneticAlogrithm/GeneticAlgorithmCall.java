@@ -4,8 +4,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Semaphore;
-import java.util.concurrent.locks.ReentrantLock;
-
 import org.uncommons.maths.random.MersenneTwisterRNG;
 import org.uncommons.maths.random.Probability;
 import org.uncommons.watchmaker.framework.EvolutionEngine;
@@ -59,13 +57,11 @@ public class GeneticAlgorithmCall{
 		this.creerServerGa();
 	}
 	
-	public void creerServerGa(){ //faut mettre ServerSide en singleton pour que ca ait du sens
-		ServerSide serverJavaGa= new ServerSide(this); //rajouter le type
-		if(!serverJavaGa.serverAlreadyLaunch){
-			Thread t = new Thread(serverJavaGa,"ThreadServer");
-			t.start();
-			System.out.println("lancement server");
-		}
+	public void creerServerGa(){//prob de deja creer resolu par singleton
+		ServerSide serverJavaGa= ServerSide.getInstance(this); //rajouter le type
+		Thread t = new Thread(serverJavaGa,"ThreadServer");
+		t.start();
+		System.out.println("lancement server");
 	}
 	
 	public void buildTarget(){
@@ -90,7 +86,7 @@ public class GeneticAlgorithmCall{
 		this.candidatList[7]=-0.3;
 		this.candidatList[8]=-0.2;
 		this.candidatList[9]=-0.1;
-		this.candidatList[10]=-0.0;
+		this.candidatList[10]=0.0;
 		this.candidatList[11]=0.1;
 		this.candidatList[12]=0.2;
 		this.candidatList[13]=0.3;

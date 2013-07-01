@@ -9,17 +9,19 @@ import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class ServerSide implements Runnable{
+public final class ServerSide implements Runnable{
+	//def instance
+	private static volatile ServerSide instance=null;
+	//autres attributs
 	private ServerSocket socketserver  ;
     private Socket socketduserveur ;
     private GeneticAlgorithmCall ga;
     private final String finChaine= new String("FIN");
-    public boolean serverAlreadyLaunch;
     
-    public ServerSide(GeneticAlgorithmCall ga){
+    //constructeur
+    private ServerSide(GeneticAlgorithmCall ga){
     	super();
     	this.ga=ga;
-    	this.serverAlreadyLaunch=false;
     	try {
 			this.socketserver=new ServerSocket(2009);
 		} catch (IOException e) {
@@ -28,8 +30,19 @@ public class ServerSide implements Runnable{
 		}
     }
     
+    //methode principqle getInstance
+    public final static ServerSide getInstance(GeneticAlgorithmCall ga){
+    	if(ServerSide.instance==null){
+    		synchronized(ServerSide.class){
+    			if(ServerSide.instance ==null){
+    				ServerSide.instance = new ServerSide(ga);
+    			}
+    		}
+    	}
+    	return ServerSide.instance;
+    }
+    
     public void closeServer(){
-    	this.serverAlreadyLaunch=false;
     	try {
 			this.socketserver.close();
 		} catch (IOException e) {
@@ -37,10 +50,6 @@ public class ServerSide implements Runnable{
 			e.printStackTrace();
 		}
     	System.out.println("server ferme");
-    }
-    
-    public boolean isServerLanch(){
-    	return this.serverAlreadyLaunch;
     }
     
 	public ServerSide(ServerSocket socketserver, Socket socketduserveur) {
@@ -121,7 +130,6 @@ public class ServerSide implements Runnable{
 	@Override
 	public void run() {
 	// TODO Auto-generated method stub
-		this.serverAlreadyLaunch=true;
     	try {
 			String message_distant="";
     		while(message_distant.compareTo(finChaine)!=0){
@@ -138,5 +146,4 @@ public class ServerSide implements Runnable{
 			e.printStackTrace();
 		}
 	}
-	
 }

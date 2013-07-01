@@ -2,21 +2,16 @@ package messages;
 
 import geneticAlogrithm.Formant;
 import geneticAlogrithm.FormantSequence;
-import geneticAlogrithm.GeneticAlgorithmCall;
 import geneticAlogrithm.Sequence;
-
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 public class MessageGestion {
 	private static FileWriter f;
 	private static BufferedWriter output;
+	private static final int nbFormantMax=2; //barre superieure de recherche
 	
 	public static String writePraatScriptHeader(){
 		StringBuilder stb= new StringBuilder(); 
@@ -80,10 +75,11 @@ public class MessageGestion {
 			stb.append("# 1) get the values\n");
 			stb.append("To Formant (burg)... 0 5 5500 0.025 50\n");
 			stb.append("numberOfFormant = Get number of formants... 1\n");
-			stb.append("if numberOfFormant>3\n");
+			stb.append("writeInfoLine(numberOfFormant)\n");
+			stb.append("if numberOfFormant>="+nbFormantMax+"\n"); //if good number of formant
 			stb.append("time = Get total duration\n");
 			stb.append("midTime = time/2\n");
-			stb.append("for intervalNumber from 1 to 3 \n");//number 3 fix
+			stb.append("for intervalNumber from 1 to "+nbFormantMax+" \n");
 			stb.append("varTabFreq[intervalNumber] = Get mean... intervalNumber 0 0 \"Hertz\"\n");
 			stb.append("varTabBandWith[intervalNumber] =  Get bandwidth at time... intervalNumber midTime \"Hertz\" \"Linear\"\n");
 			stb.append("endfor\n");
@@ -92,13 +88,14 @@ public class MessageGestion {
 			//that to write like that but  it could maybe be change in the future if the praat api change
 			stb.append("temp1$=string$(varTabFreq[1])\n");
 			stb.append("temp2$=string$(varTabFreq[2])\n");
-			stb.append("temp3$=string$(varTabFreq[3])\n");
+			//stb.append("temp3$=string$(varTabFreq[3])\n");
 			stb.append("temp4$=string$(varTabBandWith[1])\n");
 			stb.append("temp5$=string$(varTabBandWith[2])\n");
-			stb.append("temp6$=string$(varTabBandWith[3])\n");
-			stb.append("sendsocket localhost:2009 'temp1$' 'temp2$' 'temp3$' 'temp4$' 'temp5$' 'temp6$'\n");
+			//stb.append("temp6$=string$(varTabBandWith[3])\n");
+			//stb.append("sendsocket localhost:2009 'temp1$' 'temp2$' 'temp3$' 'temp4$' 'temp5$' 'temp6$'\n");
+			stb.append("sendsocket localhost:2009 'temp1$' 'temp2$' 'temp4$' 'temp5$' \n");
 			//sinon on passe un message d erreur
-			stb.append("else\n");
+			stb.append("else\n"); //else send error caracter
 			stb.append("sendsocket localhost:2009 INF \n");
 			stb.append("endif\n");
 		return stb.toString();
@@ -169,32 +166,31 @@ public class MessageGestion {
 	
 	public static FormantSequence splitChaineToFormantSequence(String chaine){
 		/*function to parse the string i get with praat to a formantSequence*/
-		/*y a peu etre des souccis ici a voir lors des tests*/
 		String[] tab= chaine.split(" ");
 		FormantSequence fms= new FormantSequence("candidat", 3, new ArrayList<Formant>());
 		Formant f1= new Formant();
 		Formant f2= new Formant();
-		Formant f3= new Formant();
-		if(tab.length>1){
+		//Formant f3= new Formant();
+		if(tab.length>1 && tab[0].compareTo("--undefined--")==0 && tab[2].compareTo("--undefined--")==0  && tab[3].compareTo("--undefined--")==0){
 			f1.setFrequency(Double.parseDouble(tab[0]));
 			f2.setFrequency(Double.parseDouble(tab[1]));
-			f3.setFrequency(Double.parseDouble(tab[2]));
-			f1.setBandwith(Double.parseDouble(tab[3]));
-			f2.setBandwith(Double.parseDouble(tab[4]));
-			f3.setBandwith(Double.parseDouble(tab[5]));
+			//f3.setFrequency(Double.parseDouble(tab[2]));
+			f1.setBandwith(Double.parseDouble(tab[2]));
+			f2.setBandwith(Double.parseDouble(tab[3]));
+			//f3.setBandwith(Double.parseDouble(tab[5]));
 			fms.getList().add(f1);
 			fms.getList().add(f2);
-			fms.getList().add(f3);
+			//fms.getList().add(f3);
 		}else{//else its "FIN" and it will end but we had to create a var to return else it can freeze sometimes
 			f1.setFrequency(0.0);
 			f2.setFrequency(0.0);
-			f3.setFrequency(0.0);
+			//f3.setFrequency(0.0);
 			f1.setBandwith(0.0);
 			f2.setBandwith(0.0);
-			f3.setBandwith(0.0);
+			//f3.setBandwith(0.0);
 			fms.getList().add(f1);
 			fms.getList().add(f2);
-			fms.getList().add(f3);
+			//fms.getList().add(f3);
 		}
 		return fms;
 	}

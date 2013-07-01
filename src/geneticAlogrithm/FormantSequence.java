@@ -20,41 +20,43 @@ public class FormantSequence {
 	public FormantSequence() {
 		super();
 		this.soundName="default empty formant";
-		this.nbFormant = 3;
+		//this.nbFormant = 3;
+		this.nbFormant = 2;
 		Formant formant1;
 		Formant formant2;
-		Formant formant3;
+		//Formant formant3;
 		this.list= new ArrayList<>();
 		formant1 = new Formant(0.0,0.0, 0.0);
 		formant2 = new Formant(0.0, 0.0, 0.0);
-		formant3 = new Formant(0.0, 0.0, 0.0);
+		//formant3 = new Formant(0.0, 0.0, 0.0);
 		list.add(formant1);
 		list.add(formant2);
-		list.add(formant3);
+		//list.add(formant3);
 	}
 	
 	public FormantSequence(String soundName) { //constructor wich create the formant given the name
 		super();
-		this.nbFormant = 3;
+		//this.nbFormant = 3;
+		this.nbFormant = 2;
 		Formant formant1;
 		Formant formant2;
-		Formant formant3;
+		//Formant formant3;
 		this.list= new ArrayList<>();
 		if(soundName.compareTo("i")==0){
 			formant1 = new Formant(280.0, 28.0, 0.0);
 			formant2 = new Formant(2250.0, 450.0, 0.0);
-			formant3 = new Formant(2890.0, 867.0, 0.0);
+			//formant3 = new Formant(2890.0, 867.0, 0.0);
 			list.add(formant1);
 			list.add(formant2);
-			list.add(formant3);
+			//list.add(formant3);
 		}else{
 			//rajouter d'autres par la suite
 			formant1 = new Formant(0.0,0.0, 0.0);
 			formant2 = new Formant(0.0, 0.0, 0.0);
-			formant3 = new Formant(0.0, 0.0, 0.0);
+			//formant3 = new Formant(0.0, 0.0, 0.0);
 			list.add(formant1);
 			list.add(formant2);
-			list.add(formant3);
+			//list.add(formant3);
 		}
 	}
 

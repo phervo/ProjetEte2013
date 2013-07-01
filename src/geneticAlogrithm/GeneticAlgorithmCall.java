@@ -15,7 +15,7 @@ import org.uncommons.watchmaker.framework.SelectionStrategy;
 import org.uncommons.watchmaker.framework.operators.EvolutionPipeline;
 import org.uncommons.watchmaker.framework.selection.RouletteWheelSelection;
 import org.uncommons.watchmaker.framework.termination.GenerationCount;
-import org.uncommons.watchmaker.framework.termination.TargetFitness;
+
 
 import communication.ServerSide;
 

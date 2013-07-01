@@ -2,19 +2,12 @@ package tests.unitary;
 
 import java.util.List;
 import java.util.Random;
-
 import messages.MessageGestion;
-
 import org.uncommons.maths.random.MersenneTwisterRNG;
 import org.uncommons.maths.random.Probability;
-
-import communication.ServerSide;
-
-import geneticAlogrithm.FormantSequence;
 import geneticAlogrithm.GeneticAlgorithmCall;
 import geneticAlogrithm.Sequence;
 import geneticAlogrithm.SequenceCrossOver;
-import geneticAlogrithm.SequenceEvaluator;
 import geneticAlogrithm.SequenceFactory;
 import geneticAlogrithm.SequenceMutation;
 
@@ -91,11 +84,13 @@ public class UnitaryTestsGA {
 		
 		//FormantSequence f= new FormantSequence();
 		//f.displayFormantSequence();
+		
+		/*String s=FileGestion.writePraatScriptAsCandidatesSansFichier(null);
+		System.out.println(s);
+		ServerSide.sendMessageToPrat(s);*/
+		
 	}
 	
-	/*String s=FileGestion.writePraatScriptAsCandidatesSansFichier(null);
-	System.out.println(s);
-	ServerSide.sendMessageToPrat(s);*/
 	
 	
 }

@@ -7,6 +7,7 @@ import geneticAlogrithm.GeneticAlgorithmCall;
 import geneticAlogrithm.Sequence;
 
 
+
 public class MainClass {
 	
 	public static void main(String[] args) {
@@ -19,11 +20,14 @@ public class MainClass {
 		cs.envoyerMessageFermeture();
 		ServerSide.closePraat();//non plus
 		
-		
-		/*double[] d= {-0.4,-0.7,-0.7,-0.4,-1.0,-0.8,-0.1,-0.4,-0.5,-0.7,-0.6,0.2,0.0};
+		/*GeneticAlgorithmCall ga= new GeneticAlgorithmCall(13); //init
+		double[] d= {0.0,0.1,0.0,-0.1,-0.1,-0.7,-0.3,0.2,-0.9,0.1,-0.8,0.0,-0.1};
 		Sequence sq= new Sequence(13,d);
 		ServerSide.initPraat(MessageGestion.writePraatScriptHeader());
-		ServerSide.sendMessageToPrat(MessageGestion.writePraatScriptAsCandidatesWithoutCalculs(sq));*/
+		//ServerSide.sendMessageToPrat(MessageGestion.writePraatScriptAsCandidatesWithoutCalculs(sq));
+		ServerSide.sendMessageToPrat(MessageGestion.writePraatScriptAsCandidates(sq));*/
+		
+		
 		///////test de la fonction fitness///////////////
 		//FileGestion.splitChaineToFormantSequence("0 1 2 3 4 5");
 		/*GeneticAlgorithmCall ga= new GeneticAlgorithmCall(4); //init

@@ -9,6 +9,8 @@ import org.uncommons.maths.number.NumberGenerator;
 import org.uncommons.maths.random.Probability;
 import org.uncommons.watchmaker.framework.EvolutionaryOperator;
 
+import elements.Sequence;
+
 public class SequenceMutation implements EvolutionaryOperator<Sequence>{
 	private final double[] alphabet;
     private final NumberGenerator<Probability> mutationProbability;

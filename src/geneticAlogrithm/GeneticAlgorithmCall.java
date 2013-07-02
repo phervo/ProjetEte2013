@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Semaphore;
+
 import org.uncommons.maths.random.MersenneTwisterRNG;
 import org.uncommons.maths.random.Probability;
 import org.uncommons.watchmaker.framework.EvolutionEngine;
@@ -17,7 +18,11 @@ import org.uncommons.watchmaker.framework.selection.RouletteWheelSelection;
 import org.uncommons.watchmaker.framework.termination.GenerationCount;
 
 
+import org.uncommons.watchmaker.framework.termination.TargetFitness;
+
 import communication.ServerSide;
+import elements.FormantSequence;
+import elements.Sequence;
 
 public class GeneticAlgorithmCall{
 	/*in order to get a clean code, i have divided the big operation in small fonctions
@@ -147,7 +152,7 @@ public class GeneticAlgorithmCall{
 				                          data.getBestCandidate().getValuesInString());
 				    }
 				});
-		engine.evolve(10, 0, new GenerationCount(10));
+		engine.evolve(10, 0, new TargetFitness(3,true));
 	}
 
 	

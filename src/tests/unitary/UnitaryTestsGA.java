@@ -2,11 +2,14 @@ package tests.unitary;
 
 import java.util.List;
 import java.util.Random;
+
 import messages.MessageGestion;
+
 import org.uncommons.maths.random.MersenneTwisterRNG;
 import org.uncommons.maths.random.Probability;
+
+import elements.Sequence;
 import geneticAlogrithm.GeneticAlgorithmCall;
-import geneticAlogrithm.Sequence;
 import geneticAlogrithm.SequenceCrossOver;
 import geneticAlogrithm.SequenceFactory;
 import geneticAlogrithm.SequenceMutation;

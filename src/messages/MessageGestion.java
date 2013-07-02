@@ -1,8 +1,9 @@
 package messages;
 
-import geneticAlogrithm.Formant;
-import geneticAlogrithm.FormantSequence;
-import geneticAlogrithm.Sequence;
+import elements.Formant;
+import elements.FormantSequence;
+import elements.Sequence;
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -149,12 +150,11 @@ public class MessageGestion {
 
 	
 	public static void writeInTheLogs(String stringBuffer){ 
-		String adresseDuFichier = "/Users/py/workspace/ProjetSpeechSynthesis/log.txt";
+		String adresseDuFichier = "C:/Users/phervo/Documents/dossierProjet/log.txt";
 		try {
 			f= new FileWriter(adresseDuFichier, true); //modifier ici pr le append
 			output= new BufferedWriter(f);
-			output.write(stringBuffer);
-			output.write("\n");
+			output.write(stringBuffer+" \n");
 			output.flush();
 			output.close();
 			f.close();

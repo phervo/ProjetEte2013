@@ -4,6 +4,8 @@ import java.util.Random;
 
 import org.uncommons.watchmaker.framework.factories.AbstractCandidateFactory;
 
+import elements.Sequence;
+
 public class SequenceFactory extends AbstractCandidateFactory<Sequence>{
 	private double[] alphabet;
 	private int length;

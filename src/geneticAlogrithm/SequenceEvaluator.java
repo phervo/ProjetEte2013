@@ -7,6 +7,8 @@ import messages.MessageGestion;
 import org.uncommons.watchmaker.framework.FitnessEvaluator;
 
 import communication.ServerSide;
+import elements.FormantSequence;
+import elements.Sequence;
 
 public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 	private FormantSequence targetSequence = null;

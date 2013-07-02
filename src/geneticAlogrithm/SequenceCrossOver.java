@@ -3,8 +3,11 @@ package geneticAlogrithm;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
 import org.uncommons.maths.random.Probability;
 import org.uncommons.watchmaker.framework.operators.AbstractCrossover;
+
+import elements.Sequence;
 
 
 public class SequenceCrossOver extends AbstractCrossover<Sequence>{

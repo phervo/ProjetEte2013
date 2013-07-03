@@ -3,6 +3,8 @@ package elements;
 import java.util.ArrayList;
 import java.util.List;
 
+import exceptions.FormantNumberexception;
+
 /** <p>Class which define the structure of the sequence that will be analyze by the genetic algorithm<br/>
  * 	The class is designed in order that once the number of formant is fixed, you cannot change it.
  *  It is in order to avoid problems during the run of the GA</p>
@@ -49,7 +51,6 @@ public class FormantSequence {
 	*
 	*/
 	public FormantSequence(int nbFormant) {
-		//no test neither exception here cause its me who defined the constructor.
 		super();
 		this.soundName="default empty formantSequence";
 		this.nbFormant = nbFormant;
@@ -69,21 +70,20 @@ public class FormantSequence {
 	* 	the number of formants
 	* @param list
 	* 	the list of Formants
+	* 
+	* @throws FormantNumberexception If you use the wrong parameters.
 	*
 	* @since 0.1
 	*
 	*/
-	public FormantSequence(String soundName, int nbFormant,ArrayList<Formant> list) {
+	public FormantSequence(String soundName, int nbFormant,ArrayList<Formant> list) throws FormantNumberexception{
 		super();
-		if(nbFormant==0){
-			System.out.println("nbFormant might be != from 0");
-		}else if(list.size()==nbFormant){
+		if(list.size()==nbFormant && nbFormant!=0){
 			this.soundName = soundName;
 			this.nbFormant = nbFormant;
 			this.list=list;
 		}else{
-			System.out.println("wrong number of formants in list. There are "+list.size()+" where "+nbFormant+" needed");
-			//dois generer une exception ici
+			throw new FormantNumberexception(nbFormant,list.size());
 		}
 	}
 	
@@ -97,34 +97,25 @@ public class FormantSequence {
 	* @since 0.1
 	*
 	*/
-	public FormantSequence(String soundName) { //a modifier +exception
+	public FormantSequence(String soundName) {
 		super();
-		//this.nbFormant = 3;
+		this.soundName = soundName;
 		this.nbFormant = 2;
-		Formant formant1;
-		Formant formant2;
-		//Formant formant3;
 		this.list= new ArrayList<>();
 		if(soundName.compareTo("i")==0){
-			formant1 = new Formant(280.0, 28.0, 0.0);
-			formant2 = new Formant(2250.0, 450.0, 0.0);
-			//formant3 = new Formant(2890.0, 867.0, 0.0);
-			list.add(formant1);
-			list.add(formant2);
-			//list.add(formant3);
+			list.add(new Formant(280.0, 28.0, 0.0));
+			list.add(new Formant(2250.0, 450.0, 0.0));
+			//list.add(new Formant(2890.0, 867.0, 0.0));
 		}else{
 			//rajouter d'autres par la suite
-			formant1 = new Formant(0.0,0.0, 0.0);
-			formant2 = new Formant(0.0, 0.0, 0.0);
-			//formant3 = new Formant(0.0, 0.0, 0.0);
-			list.add(formant1);
-			list.add(formant2);
+			list.add(new Formant());
+			list.add(new Formant());
 			//list.add(formant3);
 		}
 	}
 
 	/**
-	* Return the value of the SoundName.
+	* Return the value of the SoundName attribute.
 	* 
 	* @return SoundName value of the instance
 	*
@@ -154,30 +145,56 @@ public class FormantSequence {
 	* 	The index of the list where the formant is
 	* 
 	* @return NbFormant value of the instance
+	* 
+	* @throws FormantNumberexception If trying to get a elem after nbFormant.
 	*
 	* @since 0.1
 	*
 	*/
-	public Formant getFormantAt(int index) {// gerer le debordement
-		return list.get(index);
-	}
-
-	public void setFormantAt(int i,Formant element) { //idem
-		this.list.set(i, element);
+	public Formant getFormantAt(int index) throws FormantNumberexception{
+		if(index<this.list.size()){
+			return list.get(index);
+		}else{
+			throw new FormantNumberexception(0,0);
+		}
 	}
 
 	/**
-	* Display the values of all the attributes and of the formants on screen
+	* Set the value of the formant at index.
+	* 
+	* @param bandwith 
+	* 	Bandwith you want to set 
+	* 
+	* * @throws FormantNumberexception If trying to insert a elem after nbFormant.
+	*
+	* @since 0.1
+	*
+	*/
+	public void setFormantAt(int index,Formant element) throws FormantNumberexception {
+		if(index<this.list.size()){
+			this.list.set(index, element);
+		}else{
+			throw new FormantNumberexception(index,this.list.size());
+		}
+	}
+
+	/**
+	* Display the values of all the attributes and of the formants of the instance on screen
 	*
 	*
 	* @since 0.1
 	*
 	*/
 	public void displayFormantSequence(){
-		System.out.println("Sound: "+this.soundName);
+		System.out.println("Sound: "+this.getSoundName());
 		System.out.println("compared with "+this.getNbFormant()+"formants");
 		for(int i=0;i<this.getNbFormant();i++){
-			System.out.println("Formant"+i+": "+this.getFormantAt(i).toString());
+			try {
+				System.out.println("Formant"+i+": "+this.getFormantAt(i).toString());
+			} catch (FormantNumberexception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 	

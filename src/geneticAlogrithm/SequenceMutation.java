@@ -10,6 +10,7 @@ import org.uncommons.maths.random.Probability;
 import org.uncommons.watchmaker.framework.EvolutionaryOperator;
 
 import elements.Sequence;
+import exceptions.SequenceArrayException;
 
 public class SequenceMutation implements EvolutionaryOperator<Sequence>{
 	private final double[] alphabet;
@@ -44,7 +45,12 @@ public class SequenceMutation implements EvolutionaryOperator<Sequence>{
         {
             if (mutationProbability.nextValue().nextEvent(rng))
             {
-            	retour.setValues(i, alphabet[rng.nextInt(alphabet.length)]);
+            	try {
+					retour.setValues(i, alphabet[rng.nextInt(alphabet.length)]);
+				} catch (SequenceArrayException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             }
         }
         return retour;

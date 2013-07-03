@@ -8,6 +8,7 @@ import org.uncommons.maths.random.Probability;
 import org.uncommons.watchmaker.framework.operators.AbstractCrossover;
 
 import elements.Sequence;
+import exceptions.SequenceArrayException;
 
 
 public class SequenceCrossOver extends AbstractCrossover<Sequence>{
@@ -41,9 +42,16 @@ public class SequenceCrossOver extends AbstractCrossover<Sequence>{
 			int crossoverIndex = (1 + rng.nextInt(parent1.getLength()-1)); //cf doc watchmaker
             for (int j = 0; j < crossoverIndex; j++)
             {
-                double temp= sq1.getValues()[j];
-                sq1.setValues(j, sq2.getValues()[j]);
-                sq2.setValues(j, temp);
+                double temp;
+				try {
+					temp = sq1.getValuesAt(j);
+					sq1.setValues(j, sq2.getValuesAt(j));
+		            sq2.setValues(j, temp);
+				} catch (SequenceArrayException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+               
             }
         }
 		List<Sequence> result = new ArrayList<Sequence>(2);

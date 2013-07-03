@@ -1,6 +1,7 @@
 package communication;
 
 import messages.MessageGestion;
+import exceptions.FormantNumberexception;
 import geneticAlogrithm.GeneticAlgorithmCall;
 
 import java.io.BufferedReader;
@@ -107,8 +108,13 @@ public final class ServerSide implements Runnable{
 	}
 	
 	
-	public void storeMessageReceivedFromPraat(String chaine){
-		ga.setMessageFromPraat(MessageGestion.splitChaineToFormantSequence(chaine));
+	public void storeMessageReceivedFromPraat(String chaine){ // try a dl
+		try {
+			ga.setMessageFromPraat(MessageGestion.splitChaineToFormantSequence(chaine));
+		} catch (FormantNumberexception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public ServerSocket getSocketserver() {

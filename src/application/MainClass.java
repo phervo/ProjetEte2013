@@ -17,13 +17,13 @@ public class MainClass {
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		/*ServerSide.launchPraat(); //pas un thread
+		ServerSide.launchPraat(); //pas un thread
 		ServerSide.initPraat(MessageGestion.writePraatScriptHeader());
 		GeneticAlgorithmCall ga= new GeneticAlgorithmCall(13); //init
 		ga.startAlgorithm();
 		ClientSide cs= new ClientSide();
 		cs.envoyerMessageFermeture();
-		ServerSide.closePraat();//non plus*/
+		ServerSide.closePraat();//non plus
 		
 		/*GeneticAlgorithmCall ga= new GeneticAlgorithmCall(13); //init
 		double[] d= {-0.6,0.2,-0.9,-0.2,0.2,-0.6,-0.1,-0.5,-0.2,-0.3,-0.7,0.1,-0.5};
@@ -42,7 +42,7 @@ public class MainClass {
 		
 		
 		///////////////test de la nouvelle impl de Formant et FSequence/////
-		Formant f1= new Formant();
+		/*Formant f1= new Formant();
 		System.out.println(f1.toString());
 		f1.setAmplitude(0.1);
 		f1.setBandwith(0.1);
@@ -84,7 +84,7 @@ public class MainClass {
 		} catch (FormantNumberexception e) {
 			// TODO Auto-generated catch block
 		}
-		
+	*/
 		///////test de la fonction fitness///////////////
 		//FileGestion.splitChaineToFormantSequence("0 1 2 3 4 5");
 		/*GeneticAlgorithmCall ga= new GeneticAlgorithmCall(4); //init

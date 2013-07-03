@@ -58,7 +58,7 @@ public class GeneticAlgorithmCall{
 		this.engine=null;
 		this.praatScript=null;
 		//creation of an empty FormantSequenc
-		this.messageFromPraat=new FormantSequence();
+		this.messageFromPraat=new FormantSequence(2); //init
 		this.creerServerGa();
 	}
 	

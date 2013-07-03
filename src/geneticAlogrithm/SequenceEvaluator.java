@@ -9,6 +9,7 @@ import org.uncommons.watchmaker.framework.FitnessEvaluator;
 import communication.ServerSide;
 import elements.FormantSequence;
 import elements.Sequence;
+import exceptions.FormantNumberexception;
 
 public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 	private FormantSequence targetSequence = null;
@@ -47,6 +48,9 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 		}
     	System.out.println(candidate.getValuesInString()+" matchScore : "+matches);
 		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (FormantNumberexception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

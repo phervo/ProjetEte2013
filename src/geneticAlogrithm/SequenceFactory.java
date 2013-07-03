@@ -5,6 +5,7 @@ import java.util.Random;
 import org.uncommons.watchmaker.framework.factories.AbstractCandidateFactory;
 
 import elements.Sequence;
+import exceptions.SequenceArrayException;
 
 public class SequenceFactory extends AbstractCandidateFactory<Sequence>{
 	private double[] alphabet;
@@ -20,7 +21,12 @@ public class SequenceFactory extends AbstractCandidateFactory<Sequence>{
 		// TODO Auto-generated method stub
 		Sequence mySeq = new Sequence(this.length);
 		for(int i=0;i<mySeq.getLength();i++){
-			mySeq.setValues(i, alphabet[rng.nextInt(length)]);
+			try {
+				mySeq.setValues(i, alphabet[rng.nextInt(length)]);
+			} catch (SequenceArrayException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return mySeq;
 	}

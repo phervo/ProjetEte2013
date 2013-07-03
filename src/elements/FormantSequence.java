@@ -77,7 +77,6 @@ public class FormantSequence {
 	*
 	*/
 	public FormantSequence(String soundName, int nbFormant,ArrayList<Formant> list) throws FormantNumberexception{
-		super();
 		if(list.size()==nbFormant && nbFormant!=0){
 			this.soundName = soundName;
 			this.nbFormant = nbFormant;

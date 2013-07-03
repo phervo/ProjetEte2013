@@ -31,7 +31,7 @@ public class UnitaryTestsGA {
 		}
 		System.out.println("///////////////////////////////////////");
 		////////////////////Test1.5//////////////////
-		Sequence seq = new Sequence(10,ga.getCandidatList());
+		//Sequence seq = new Sequence(10,ga.getCandidatList());
 		System.out.println("////////////////////Test1.5//////////////////");
 		/*for(int i=0;i<ga.getCandidatListLength();i++){
 			System.out.println(seq.getValues()[i]);
@@ -72,9 +72,9 @@ public class UnitaryTestsGA {
 		System.out.println("///////////////////////////////////////");
 		
 		double[] tab = {1.1,1.5};
-		Sequence candidate= new Sequence(2,tab);
-		double res=ga.getMySeqEval().getFitness(candidate, null);
-		System.out.println(res);
+		//Sequence candidate= new Sequence(2,tab);
+		//double res=ga.getMySeqEval().getFitness(candidate, null);
+		//System.out.println(res);
 		
 		
 

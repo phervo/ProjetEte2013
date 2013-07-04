@@ -36,14 +36,13 @@ public class FormantSequence {
 	 * <p>The list of all the formants used in the object FormantSequence. Is size is nbFormant.<br/>
 	 * You can change a formant after the creation but you cannot add new formants.
 	 * 
-	 * @see FormantSequence#getList()
 	 * @see FormantSequence#getFormantAt(int i)
 	 * @see FormantSequence#setFormantAt(int i,Formant element)
 	 */
 	private List<Formant> list;
 	
 	/**
-	* Default Constructor. It create a Sequence with the number of formants specified in parameters and with each attribute at 0.0
+	* Constructor without parameters. It create a Sequence with the number of formants specified in parameters and with each attribute at 0.0
 	*
 	* @param nbFormant
 	* 	the number of formants
@@ -161,10 +160,13 @@ public class FormantSequence {
 	/**
 	* Set the value of the formant at index.
 	* 
-	* @param bandwith 
-	* 	Bandwith you want to set 
+	* @param index 
+	* 	The index of the list you want to modify
 	* 
-	* * @throws FormantNumberexception If trying to insert a elem after nbFormant.
+	* @param element
+	* 	the formant you want to add
+	* 
+	* @throws FormantNumberexception If trying to insert a elem after nbFormant.
 	*
 	* @since 0.1
 	*

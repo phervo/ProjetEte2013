@@ -36,7 +36,7 @@ public class Formant {
 	private double amplitude;
 	
 	/**
-	 * Constructor by default. Set all the values to 0.0
+	 * Constructor without parameters. Set all the values to 0.0
 	 *
 	 *@since 0.1
 	 *

@@ -41,7 +41,7 @@ public class Sequence {
 	private double[] values; //primitif type so not a list to avoid the casts
 	
 	/**
-	* Default Constructor Create a array of 0 of the length put in param. 
+	* Constructor without parameters. Create a array of 0 of the length put in param. 
 	* 
 	*
 	* @param length

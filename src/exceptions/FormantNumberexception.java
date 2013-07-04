@@ -13,12 +13,13 @@ public class FormantNumberexception extends Exception{
 	/**
 	* Constructor Indicate where the problem is located
 	*
-	* @param nbFormant
+	* @param nbFormants
 	* 	the number of formants of the FormantSequence
 	* @since 0.1
 	*
 	*/
 	public FormantNumberexception(int nbFormants,int listLenght){
+		super();
 		if(nbFormants==0){
 			System.out.println("nbFormant might be != from 0");
 		}else{

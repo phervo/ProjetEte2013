@@ -1,7 +1,6 @@
 package geneticAlogrithm;
 
 import java.util.List;
-
 import messages.MessageGestion;
 
 import org.uncommons.watchmaker.framework.FitnessEvaluator;

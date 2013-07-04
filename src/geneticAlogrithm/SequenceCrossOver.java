@@ -7,26 +7,89 @@ import java.util.Random;
 import org.uncommons.maths.random.Probability;
 import org.uncommons.watchmaker.framework.operators.AbstractCrossover;
 
+import elements.FormantSequence;
 import elements.Sequence;
 import exceptions.SequenceArrayException;
 
-
+/** <p>Class which define the CrossOver operation for an object of type Sequence<br/>
+ * you had to implement it to use the watchmer's GA algorithm.<br/>
+ * For more details, look at the watchmaker API</p>
+ * 
+ * @see Sequence
+ *  
+ * @author Pierre-Yves Hervo
+ * @version 0.1
+ */
 public class SequenceCrossOver extends AbstractCrossover<Sequence>{
-
+	/**
+	* Constructor without parameters. Define a 1 point crossOver 
+	*
+	* @see AbstractCrossover
+	* 
+	* @since 0.1
+	*
+	*/
 	public SequenceCrossOver(){ // 1 point cross over
 		this(1);
 	}
 	
+	/**
+	* Constructor which allow to define the number of crossOverPoints 
+	*
+	*
+	* @param crossoverPoints
+	* 	the number of Cross Over points
+	* @see AbstractCrossover
+	* 
+	* @since 0.1
+	*
+	*/
 	protected SequenceCrossOver(int crossoverPoints) {
 		super(crossoverPoints);
 		// TODO Auto-generated constructor stub
 	}
 	
+	/**
+	* Constructor which allow to define the number of crossOverPoints and a probability
+	*
+	*
+	* @param crossoverPoints
+	* 	the number of Cross Over points
+	* @param crossoverProbability
+	* 	the probability of the Cross Over event
+	* 
+	* @see AbstractCrossover
+	* 
+	* @since 0.1
+	*
+	*/
 	public SequenceCrossOver(int crossoverPoints, Probability crossoverProbability)
     {
         super(crossoverPoints, crossoverProbability);
     }
 
+	/**
+	* Method overWrited from watchMaker's API AbstractCrossover class.
+	* It define the operation of CrossOver for a Sequence.
+	* It produce a new Sequence by using the Cross over operation on  two parents.
+	* It is used in the GACall.
+	* 
+	* 
+	* @param parent1
+	*	 the first parent
+	* 
+	* @param parent2
+	* 	the second parent
+	* @param numberOfCrossoverPoints
+	* 	the number Of Crossover Points
+	* @param rng
+	* 	a random generator
+	*
+	* @return A list with two cross overed Sequence
+	*
+	* @since 0.1
+	*
+	*/
 	@Override
 	public List<Sequence> mate(Sequence parent1, Sequence parent2, int numberOfCrossoverPoints,
 			Random rng) {

@@ -3,7 +3,7 @@ package tests.unitary;
 import java.util.List;
 import java.util.Random;
 
-import messages.MessageGestion;
+
 
 import org.uncommons.maths.random.MersenneTwisterRNG;
 import org.uncommons.maths.random.Probability;
@@ -42,14 +42,14 @@ public class UnitaryTestsGA {
 		///////////////////test2////////////////////
 		System.out.println("////////////////////test2///////////////////");
 		SequenceFactory c = ga.getMySequenceFactory();
-		System.out.println(c.getLength());
+		//System.out.println(c.getLength());
 		c.displayAlphabet();
 		Random rng=new MersenneTwisterRNG();
 		Sequence newSec1 = c.generateRandomCandidate(rng);
 		Sequence newSec2 = c.generateRandomCandidate(rng);
 		
-		MessageGestion.writeInTheLogs(newSec1.getValuesInString());
-		MessageGestion.writeInTheLogs(newSec2.getValuesInString());
+		//MessageGestion.writeInTheLogs(newSec1.getValuesInString());
+		//MessageGestion.writeInTheLogs(newSec2.getValuesInString());
 		System.out.println("///////////////////////////////////////");
 		System.out.println("///////////////////                 ////////////////////");
 		//tester la mutation et le cross over

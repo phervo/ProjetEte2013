@@ -9,6 +9,7 @@ import elements.FormantSequence;
 import elements.Sequence;
 import exceptions.FormantNumberexception;
 import messages.MessageGestion;
+import messages.MessageToPraat;
 import geneticAlogrithm.GeneticAlgorithmCall;
 
 
@@ -18,7 +19,7 @@ public class MainClass {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		ServerSide.launchPraat(); //pas un thread
-		ServerSide.initPraat(MessageGestion.writePraatScriptHeader());
+		ServerSide.initPraat(MessageToPraat.writePraatScriptHeader());
 		GeneticAlgorithmCall ga= new GeneticAlgorithmCall(13); //init
 		ga.startAlgorithm();
 		ClientSide cs= new ClientSide();

@@ -6,6 +6,7 @@ import messages.MessageToPraat;
 
 import org.uncommons.watchmaker.framework.FitnessEvaluator;
 
+import communication.OrderToPraat;
 import communication.ServerSide;
 import elements.FormantSequence;
 import elements.Sequence;
@@ -101,7 +102,7 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 		/*write value in the script send to praat and send it*/
 		//System.out.println(candidate.getValuesInString());
     	try {
-			ServerSide.sendMessageToPrat(MessageToPraat.writePraatScriptWithCandidates(candidate));
+			OrderToPraat.sendMessageToPrat(MessageToPraat.writePraatScriptWithCandidates(candidate));
 		} catch (PraatScriptException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

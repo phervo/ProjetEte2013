@@ -1,25 +1,67 @@
 package communication;
 
-import messages.MessageGestion;
+import messages.MessageFromPraat;
 import exceptions.FormantNumberexception;
 import geneticAlogrithm.GeneticAlgorithmCall;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+/** <p>Class wich define a server that will listen for praat answer in a particular port.<br/>
+ * As praat communicate with sockets, it is an obligation to have a server that is listening all the time so the server is design to be a thread.<br/>
+ * A waiting mechanism is defined to be sure that the action lanch in this class are finished before doing anything else.<br/>
+ * To be sure that there is only one instance of the server at every moment, this class is design on the singleton design pattern principle<br/>
+ * As it will be launch in a new thread and wont do anything until catching a message,we create a specific class which will send it the terminaison String
+ * It is the class CloseServer</p>
+ * 
+ * @see CloseServer
+ *  
+ * @author Pierre-Yves Hervo
+ * @version 0.1
+ */
 public final class ServerSide implements Runnable{
-	//def instance
+	/**
+	 * The instance of ServerSide.
+	 * 
+	 */
 	private static volatile ServerSide instance=null;
-	//autres attributs
+	
+	/**
+	 * a ServerSocket to listen on a particular port.
+	 * 
+	 */
 	private ServerSocket socketserver  ;
+	
+	/**
+	 * a socket to get the messages in input
+	 * 
+	 */
     private Socket socketduserveur ;
+    
+    /**
+	 * a reference to the ga to store the message it get.
+	 * 
+	 */
     private GeneticAlgorithmCall ga;
+   
+    /**
+   	 * a String to end the while loop qnd stop listening
+   	 * 
+   	 */
     private final String finChaine= new String("FIN");
     
-    //constructeur
+    /**
+    * Constructor, Private according to the singleton pattern 
+    * 
+    *
+    * @param ga
+    * 	see explanation above
+    *
+    * @since 0.1
+    *
+    */
     private ServerSide(GeneticAlgorithmCall ga){
     	super();
     	this.ga=ga;
@@ -31,7 +73,17 @@ public final class ServerSide implements Runnable{
 		}
     }
     
-    //methode principqle getInstance
+    /**
+     * Method getInstance, it either create or give the reference to the instance.
+     * For more information, see the singleton design pattern documentation
+     * 
+     *
+     * @param ga
+     * 	see explanation above
+     *
+     * @since 0.1
+     *
+     */
     public final static ServerSide getInstance(GeneticAlgorithmCall ga){
     	if(ServerSide.instance==null){
     		synchronized(ServerSide.class){
@@ -43,6 +95,17 @@ public final class ServerSide implements Runnable{
     	return ServerSide.instance;
     }
     
+    /**
+     * Method getInstance, it either create or give the reference to the instance.
+     * For more information, see the singleton design pattern documentation
+     * 
+     *
+     * @param ga
+     * 	see explanation above
+     *
+     * @since 0.1
+     *
+     */
     public void closeServer(){
     	try {
 			this.socketserver.close();
@@ -52,87 +115,35 @@ public final class ServerSide implements Runnable{
 		}
     	System.out.println("server ferme");
     }
-    
-	public ServerSide(ServerSocket socketserver, Socket socketduserveur) {
-		super();
-		this.socketserver = socketserver;
-		this.socketduserveur = socketduserveur;
-	}
 	
-	public static void launchPraat(){
-		/*launch praat */
-		Runtime run = Runtime.getRuntime();
-		String[] sendpraatCom ={"praat"};
+    /**
+     * function which store the message the server get from Praat in the ga field messageFromPraat.
+     * It will cast it with splitChaineToFormantSequence() from MessageFromPraat.
+     * 
+     *
+     * @param chaine
+     * 	the string from praat.
+     * 
+     * @see MessageFromPraat#splitChaineToFormantSequence(String)
+     *
+     * @since 0.1
+     *
+     */
+	public void storeMessageReceivedFromPraat(String chaine){ // try a dl ?
 		try {
-			run.exec(sendpraatCom);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	
-	public static void initPraat(String fileName){
-		/*execute the script to generate the robovox and the speaker*/
-		String[] sendpraatCom ={"sendpraat", "praat",fileName};
-		Runtime run = Runtime.getRuntime();
-		try {
-			Process runProcess=run.exec(sendpraatCom);
-			runProcess.waitFor(); //le thread qui l'a lance attend la fin de l'execution
-		} catch (IOException | InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	
-	public static void sendMessageToPrat(String fileName){
-		String[] sendpraatCom ={"sendpraat", "praat",fileName};
-		Runtime run = Runtime.getRuntime();
-		try {
-			Process runProcess=run.exec(sendpraatCom);
-			runProcess.waitFor(); //le thread qui l'a lance attend la fin de l'execution
-		} catch (IOException | InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	
-	public static void closePraat(){
-		String[] sendpraatCom ={"sendpraat", "praat","Quit"};
-		Runtime run = Runtime.getRuntime();
-		try {
-			run.exec(sendpraatCom);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	
-	
-	public void storeMessageReceivedFromPraat(String chaine){ // try a dl
-		try {
-			ga.setMessageFromPraat(MessageGestion.splitChaineToFormantSequence(chaine));
+			ga.setMessageFromPraat(MessageFromPraat.splitChaineToFormantSequence(chaine));
 		} catch (FormantNumberexception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
-	public ServerSocket getSocketserver() {
-		return socketserver;
-	}
 
-	public void setSocketserver(ServerSocket socketserver) {
-		this.socketserver = socketserver;
-	}
-
-	public Socket getSocketduserveur() {
-		return socketduserveur;
-	}
-
-	public void setSocketduserveur(Socket socketduserveur) {
-		this.socketduserveur = socketduserveur;
-	}
-
+	/**
+     * the run function. This class is design for the instance to be run in a thread and be run apart from the Ga part.
+     *
+     * @since 0.1
+     *
+     */
 	@Override
 	public void run() {
 	// TODO Auto-generated method stub

@@ -2,13 +2,13 @@ package application;
 
 import java.util.ArrayList;
 
-import communication.ClientSide;
+import communication.CloseServer;
+import communication.OrderToPraat;
 import communication.ServerSide;
 import elements.Formant;
 import elements.FormantSequence;
 import elements.Sequence;
 import exceptions.FormantNumberexception;
-import messages.MessageGestion;
 import messages.MessageToPraat;
 import geneticAlogrithm.GeneticAlgorithmCall;
 
@@ -18,13 +18,16 @@ public class MainClass {
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		ServerSide.launchPraat(); //pas un thread
-		ServerSide.initPraat(MessageToPraat.writePraatScriptHeader());
+		OrderToPraat.launchPraat(); //pas un thread
+		OrderToPraat.sendMessageToPrat(MessageToPraat.writePraatScriptHeader());
 		GeneticAlgorithmCall ga= new GeneticAlgorithmCall(13); //init
+		ServerSide serverJavaGa= ServerSide.getInstance(ga);
+		Thread t = new Thread(serverJavaGa,"ThreadServer");
+		t.start();
+		System.out.println("lancement server");
 		ga.startAlgorithm();
-		ClientSide cs= new ClientSide();
-		cs.envoyerMessageFermeture();
-		ServerSide.closePraat();//non plus
+		CloseServer.envoyerMessageFermeture();
+		OrderToPraat.closePraat();//non plus
 		
 		/*GeneticAlgorithmCall ga= new GeneticAlgorithmCall(13); //init
 		double[] d= {-0.6,0.2,-0.9,-0.2,0.2,-0.6,-0.1,-0.5,-0.2,-0.3,-0.7,0.1,-0.5};

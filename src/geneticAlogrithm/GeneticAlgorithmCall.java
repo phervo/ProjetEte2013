@@ -24,11 +24,22 @@ import communication.ServerSide;
 import elements.FormantSequence;
 import elements.Sequence;
 
+/** <p>This is the main Class for the GA.<br/>
+ * It use the Genetic algorithm device provide by the watchMaker's API and the class I redefined for it.
+ * In order to get a clean code, i have divided the big operation in small functions
+ * All this methods are called in the function startAlgorithm.</p>
+ * 
+ * @see Sequence
+ * @see SequenceEvaluator
+ * @see SequenceCrossOver
+ * @see SequenceFactory
+ * @see SequenceMutation
+ *  
+ * @author Pierre-Yves Hervo
+ * @version 0.1
+ */
 public class GeneticAlgorithmCall{
-	/*in order to get a clean code, i have divided the big operation in small fonctions
-	 * All this methods are called in the function startAlgorithm at the end
-	 * need to use the constructor
-	 * */
+	
 	int length;
 	private double[] candidatList;
 	private FormantSequence target;
@@ -43,9 +54,7 @@ public class GeneticAlgorithmCall{
 	private final Semaphore availablevalue = new Semaphore(1, true);
 	private final Semaphore availableFitnessfunction = new Semaphore(1, true); 
 	
-	public GeneticAlgorithmCall(int length) { //fonctionne
-		/*
-		 * intialse length to the value in parameter and the others to null*/
+	public GeneticAlgorithmCall(int length) {
 		super();
 		this.length=length;
 		this.candidatList=null;
@@ -59,14 +68,6 @@ public class GeneticAlgorithmCall{
 		this.praatScript=null;
 		//creation of an empty FormantSequenc
 		this.messageFromPraat=new FormantSequence(2); //init
-		this.creerServerGa();
-	}
-	
-	public void creerServerGa(){//prob de deja creer resolu par singleton
-		ServerSide serverJavaGa= ServerSide.getInstance(this); //rajouter le type
-		Thread t = new Thread(serverJavaGa,"ThreadServer");
-		t.start();
-		System.out.println("lancement server");
 	}
 	
 	public void buildTarget(){
@@ -104,7 +105,6 @@ public class GeneticAlgorithmCall{
 		this.candidatList[20]=1.0;
 	}
 	
-	// CandidateFactory<Sequence>
 	public void createCandidateFactory(){
 		/*
 		 * use the alphabet define previously to create a factorycandidate of type SequenceFactory*/
@@ -135,7 +135,7 @@ public class GeneticAlgorithmCall{
 		//load the different elements
 		this.generateAlphabet();
 		this.buildTarget();
-		this.createCandidateFactory(); //creation
+		this.createCandidateFactory();
 		this.createEvolutionaryOperator();
 		this.createFitnessEvalutator();
 		this.createSelection();
@@ -229,9 +229,7 @@ public class GeneticAlgorithmCall{
 		return temp;
 	}
 
-	public synchronized void setMessageFromPraat(FormantSequence messageFromPraat) { //with mutex
-		//System.out.println("mise a jour val");
-		
+	public synchronized void setMessageFromPraat(FormantSequence messageFromPraat) {
 		try
 		{
 			availablevalue.acquire();

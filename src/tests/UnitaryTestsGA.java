@@ -18,6 +18,7 @@ import java.util.Random;
 
 
 
+
 import messages.MessageFromPraat;
 import messages.MessageToPraat;
 
@@ -111,7 +112,7 @@ public class UnitaryTestsGA {
 			
 		} catch (FormantNumberexception e1) {
 			// TODO Auto-generated catch block
-			//error message in the exception
+			e1.display();
 		}
 		System.out.println();//space in the display
 		
@@ -127,7 +128,7 @@ public class UnitaryTestsGA {
 			fs1.displayFormantSequence();
 		} catch (FormantNumberexception e) {
 			// TODO Auto-generated catch block
-			//error message in the exception
+			e.display();
 		}
 		
 		System.out.println();//space in the display
@@ -155,7 +156,7 @@ public class UnitaryTestsGA {
 			
 		} catch (FormantNumberexception e) {
 			// TODO Auto-generated catch block
-			//error message in the exception
+			e.display();
 		}
 		System.out.println();//space in the display
 		try {
@@ -165,7 +166,7 @@ public class UnitaryTestsGA {
 			
 		} catch (FormantNumberexception e) {
 			// TODO Auto-generated catch block
-			//error message in the exception
+			e.display();
 		}
 		System.out.println();//space in the display
 		
@@ -179,6 +180,7 @@ public class UnitaryTestsGA {
 	
 		} catch (FormantNumberexception e) {
 			// TODO Auto-generated catch block
+			e.display();
 		}
 		System.out.println();//space in the display
 		
@@ -192,6 +194,18 @@ public class UnitaryTestsGA {
 			fs1.setFormantAt(1, new Formant());
 		} catch (FormantNumberexception e) {
 			// TODO Auto-generated catch block
+			e.display();
+		}
+		System.out.println();//space in the display
+		
+		try {
+			System.out.println("10 : must raise a exception for empty list");
+			ArrayList<Formant> list = new ArrayList<Formant>();
+			fs1 = new FormantSequence("test",1,list);
+			System.out.println();//space in the display
+		} catch (FormantNumberexception e) {
+			// TODO Auto-generated catch block
+			e.display();
 		}
 		
 	}
@@ -214,7 +228,7 @@ public class UnitaryTestsGA {
 			s1 = new Sequence(0);
 		} catch (SequenceArrayException e) {
 			// TODO Auto-generated catch block
-			//error messqge in the exception
+			e.display();
 		}
 		System.out.println();//space in the display
 		double[] d={1.0,1.0};
@@ -227,7 +241,7 @@ public class UnitaryTestsGA {
 			s1= new Sequence(1, d);
 		} catch (SequenceArrayException e) {
 			// TODO Auto-generated catch block
-			//error message in the exception
+			e.display();
 		}
 		System.out.println();//space in the display
 		
@@ -240,7 +254,7 @@ public class UnitaryTestsGA {
 			
 		} catch (SequenceArrayException e) {
 			// TODO Auto-generated catch block
-			//error message in the exception
+			e.display();
 		}
 		
 		try {
@@ -253,7 +267,7 @@ public class UnitaryTestsGA {
 			
 		} catch (SequenceArrayException e) {
 			// TODO Auto-generated catch block
-			//error message in the exception
+			e.display();
 		}
 	}
 	
@@ -410,12 +424,12 @@ public class UnitaryTestsGA {
 	 private static class ClasseInterne{ // internal class for a main
 		 public static void main(String[] args){
 			 //UnitaryTestsGA.testFormantAndFormantSequence();
-			 //UnitaryTestsGA.testSequence();
+			 UnitaryTestsGA.testSequence();
 			 //UnitaryTestsGA.testPraat();
 			 //UnitaryTestsGA.testSequenceFactory();
 			 //UnitaryTestsGA.testCrossOver();
 			 //UnitaryTestsGA.testMutation();
-			 UnitaryTestsGA.PraatSCript();
+			 //UnitaryTestsGA.PraatSCript();
 		 }
 		 
 	 }

@@ -12,26 +12,22 @@ import elements.Sequence;
  * @version 0.1
  */
 public class SequenceArrayException extends Exception{
-	
-	
+	/**
+	 * The lenght of the instance's sequence
+	 * 
+	 */
+	private int length;
 	
 	/**
-	* Constructor for incorrect number of array length Indicate where the problem is located
-	*
-	* @param length
-	* 	the length of the Sequence
-	* 
-	* @since 0.1
-	*
-	*/
-	public SequenceArrayException(int length){
-		super();
-		if(length==0){
-			System.out.println("length might be > 0 ");
-		}else{
-			System.out.println("you are trying to set a array that contain either more or less formants than declared in this instance");
-		}
-	}
+	 * The index of the sequence you try to get or set when you raise the exception
+	 * 
+	 */
+	private int index;
+	/**
+	 * The length of the array you try to pass in parameter to the sequence when you raise the exception
+	 * 
+	 */
+	private int ArrayLenght;
 	
 	/**
 	* Constructor for incorrect number of array length Indicate where the problem is located
@@ -45,12 +41,22 @@ public class SequenceArrayException extends Exception{
 	* @since 0.1
 	*
 	*/
-	public SequenceArrayException(int index,int arrayLenght){
+	public SequenceArrayException(int length,int index,int arrayLenght){
 		super();
-		if(arrayLenght==0){
-			System.out.println("the lenght or the array you give in argument musn't be empty");
-		}else{
-			System.out.println("wrong number of box in array. You try either to insert or to get a elem at index "+index+"  where the max index is "+(arrayLenght-1));//array start at 0 in java
+		this.length=length;
+		this.index=index;
+		this.ArrayLenght=arrayLenght;
+	}
+	
+	public void display(){
+		if(length<=0){
+			System.out.println("length might be > 0 ");
+		}else if (ArrayLenght==0){
+			System.out.println("you are trying to give an empty list to the function, the list must contain the same number of Formant as you specified in the field nbFormant, in this case "+length+" Formants");
+		}else if (index>(ArrayLenght-1)){ // list in java start at 0
+			System.out.println("you try to access to the "+index+" item whereas "+(ArrayLenght-1)+"items are declared");
+		}else if(length!=ArrayLenght){
+			System.out.println("the value you put for length and the length of the list in argument doesnt correspond, verifie the size of your list");
 		}
 	}
 }

@@ -61,7 +61,7 @@ public class FormantSequence {
 				list.add(new Formant());
 			}
 		}else{
-			throw new FormantNumberexception(nbFormant);
+			throw new FormantNumberexception(nbFormant,nbFormant,nbFormant); //only the 1st parameter matter,just don't put 0
 		}
 	}
 	
@@ -87,7 +87,7 @@ public class FormantSequence {
 			this.nbFormant = nbFormant;
 			this.list=list;
 		}else{
-			throw new FormantNumberexception(nbFormant);
+			throw new FormantNumberexception(nbFormant,0,list.size());
 		}
 	}
 	
@@ -160,7 +160,7 @@ public class FormantSequence {
 		if(index<this.list.size()){
 			return list.get(index);
 		}else{
-			throw new FormantNumberexception(index,this.list.size());
+			throw new FormantNumberexception(this.getNbFormant(),index,this.list.size());
 		}
 	}
 
@@ -182,7 +182,7 @@ public class FormantSequence {
 		if(index<this.list.size()){
 			this.list.set(index, element);
 		}else{
-			throw new FormantNumberexception(index,this.list.size());
+			throw new FormantNumberexception(this.getNbFormant(),index,this.list.size());
 		}
 	}
 

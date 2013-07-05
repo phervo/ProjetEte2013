@@ -63,7 +63,7 @@ public class Sequence {
 				this.values[i]=0;
 			}
 		}else{
-			throw new SequenceArrayException(length);
+			throw new SequenceArrayException(length,length,length);
 		}
 	}
 	
@@ -88,7 +88,7 @@ public class Sequence {
 			this.length = length;
 			this.values = values;
 		}else{
-			throw new SequenceArrayException(length);
+			throw new SequenceArrayException(length,0,values.length);
 		}
 	}
 
@@ -120,7 +120,7 @@ public class Sequence {
 		if(index<this.values.length){
 			return values[index];
 		}else{
-			throw new SequenceArrayException(index,this.values.length);
+			throw new SequenceArrayException(this.getLength(),index,this.values.length);
 		}
 	}
 
@@ -143,7 +143,7 @@ public class Sequence {
 		if(index<this.values.length){
 			this.values[index]=value;
 		}else{
-			throw new SequenceArrayException(index,this.values.length);
+			throw new SequenceArrayException(this.getLength(),index,this.values.length);
 		}
 	}
 	

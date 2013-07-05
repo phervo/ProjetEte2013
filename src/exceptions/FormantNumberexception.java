@@ -2,8 +2,8 @@ package exceptions;
 
 import elements.FormantSequence;
 
-/** <p>Class which is designed to prevent a user to try to overwrite the definition of the SequenceFormantList</>
- * </p>
+/** <p>Class which is designed to prevent a user to try to overwrite the definition of the SequenceFormantList<br/>
+ * the param are initialized in the constructor and the error message is diplay by the "display() function"</p>
  * 
  * @see FormantSequence
  *  
@@ -29,44 +29,37 @@ public class FormantNumberexception extends Exception{
 	private int listLenght;
 	
 	/**
-	*  Constructor for incorrect number of formant Indicate where the problem is located
+	* Constructor for incorrect setting, getting or init, Indicate where the problem is located
 	*
 	* @param nbFormants
-	* 	the number of formants of the FormantSequence
+	*   the number of formant of the instance 
 	* 
-	* @since 0.1
-	*
-	*/
-	public FormantNumberexception(int nbFormants){ // a revoir
-		super();
-		/*this.nbFormants=nbFormants;
-		this.index = 0;
-		this.listLenght = 0;*/
-		
-		if(nbFormants==0){
-			System.out.println("nbFormant might be > 0 ");
-		}else{
-			System.out.println("you are trying to set a list that contain either more or less box than declared in this instance");
-		}
-	}
-	
-	/**
-	* Constructor for incorrect setting or getting Indicate where the problem is located
-	*
 	* @param index
 	* 	the index you try to access
 	* 
 	* @param listLenght
 	* 	the length of the list of formant in parameters
+	* 
+
 	* @since 0.1
 	*
 	*/
-	public FormantNumberexception(int index,int listLenght){
+	public FormantNumberexception(int nbFormants,int index,int parameterlistLenght){
 		super();
-		if(listLenght==0){
-			System.out.println("the lenght or the list you give in argument musn't be empty");
-		}else{
-			System.out.println("wrong number of formants in list. You try either to insert or to get a elem at index "+index+"  where the max index is "+(listLenght-1));// list start at 0 in java
+		this.nbFormants=nbFormants;
+		this.index = index;
+		this.listLenght = parameterlistLenght;
+	}
+	
+	public void display(){
+		if(nbFormants<=0){
+			System.out.println("nbFormant might be > 0 ");
+		}else if (listLenght==0){
+			System.out.println("you are trying to give an empty list to the function, the list must contain the same number of Formant as you specified in the field nbFormant, in this case "+nbFormants+" Formants");
+		}else if (index>(listLenght-1)){ // list in java start at 0
+			System.out.println("you try to access to the "+index+" item whereas "+(listLenght-1)+"items are declared");
+		}else if(nbFormants!=listLenght){
+			System.out.println("the value you put for length and the length of the list in argument doesnt correspond, verifie the size of your list");
 		}
 	}
 

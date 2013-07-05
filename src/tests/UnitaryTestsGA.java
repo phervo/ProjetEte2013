@@ -421,6 +421,21 @@ public class UnitaryTestsGA {
 		
 	}
 	
+	public static void castFormantTest(){
+		String chaine = "4.0 8.0 3.0 5.0"; 
+		FormantSequence fs = MessageFromPraat.splitChaineToFormantSequence(chaine);
+		fs.displayFormantSequence();
+		chaine = "4.0 8.0 3.0 --undefined--"; 
+		fs = MessageFromPraat.splitChaineToFormantSequence(chaine);
+		fs.displayFormantSequence();
+		chaine = "FIN"; 
+		fs = MessageFromPraat.splitChaineToFormantSequence(chaine);
+		fs.displayFormantSequence();
+		chaine = "n impote quoi"; 
+		fs = MessageFromPraat.splitChaineToFormantSequence(chaine);
+		fs.displayFormantSequence();
+	}
+	
 	 private static class ClasseInterne{ // internal class for a main
 		 public static void main(String[] args){
 			 //UnitaryTestsGA.testFormantAndFormantSequence();

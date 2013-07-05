@@ -12,14 +12,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import communication.OrderToPraat;
 import communication.ServerSide;
 
 /** <p>Class which define the different messages that are send to Praat<br/>
  *  All the method from this class are static so no need to create an instance<br/>
- *  The scripts generated aren't executed, they are designed to be used with the sendMessageToPrat function of the serServerSide</p>
+ *  The scripts generated aren't executed, they are designed to be used with the sendMessageToPrat function of the OrderToPraat</p>
  * 
  * @see MessageFromPraat
- * @see ServerSide#sendMessageToPrat(String)
+ * @see OrderToPraat#sendMessageToPrat(String)
  *  
  * @author Pierre-Yves Hervo
  * @version 0.1

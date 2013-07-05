@@ -4,6 +4,11 @@ import java.util.ArrayList;
 
 import exceptions.FormantNumberexception;
 import exceptions.SequenceArrayException;
+import geneticAlogrithm.GeneticAlgorithmCall;
+import geneticAlogrithm.SequenceCrossOver;
+import geneticAlogrithm.SequenceEvaluator;
+import geneticAlogrithm.SequenceFactory;
+import geneticAlogrithm.SequenceMutation;
 
 /** <p>Class that define the structure of the basic element use in the run of the Ga.<br/>
  *  We call it Sequence in reference at the DNA sequence that is the general evoluting structure in a GA.<br/>
@@ -13,11 +18,12 @@ import exceptions.SequenceArrayException;
  *  We design this class in order that only the values can be change during the run, the structure itself and the size of the attributes is fixed while instantiated<br/>
  * 
  * @see GeneticAlgorithmCall
- * @see SequenceCrossOver
- * @see SequenceEvaluator
- * @see SequenceFactory
  * @see SequenceMutation
- *  
+ * @see SequenceCrossOver
+ * @see SequenceFactory
+ * @see SequenceEvaluator
+ *
+ *
  * @author Pierre-Yves Hervo
  * @version 0.1
  */

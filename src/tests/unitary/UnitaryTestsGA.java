@@ -26,9 +26,9 @@ public class UnitaryTestsGA {
 		////////////////////test1///////////////////
 		ga.generateAlphabet();
 		System.out.println("////////////////////test1///////////////////");
-		for(int i=0;i<ga.getCandidatListLength();i++){
+		/*for(int i=0;i<ga.getCandidatListLength();i++){
 			System.out.println(ga.getCandidatList()[i]);
-		}
+		}*/
 		System.out.println("///////////////////////////////////////");
 		////////////////////Test1.5//////////////////
 		//Sequence seq = new Sequence(10,ga.getCandidatList());
@@ -41,12 +41,12 @@ public class UnitaryTestsGA {
 		ga.createCandidateFactory();
 		///////////////////test2////////////////////
 		System.out.println("////////////////////test2///////////////////");
-		SequenceFactory c = ga.getMySequenceFactory();
+		//SequenceFactory c = ga.getMySequenceFactory();
 		//System.out.println(c.getLength());
-		c.displayAlphabet();
+		//c.displayAlphabet();
 		Random rng=new MersenneTwisterRNG();
-		Sequence newSec1 = c.generateRandomCandidate(rng);
-		Sequence newSec2 = c.generateRandomCandidate(rng);
+		//Sequence newSec1 = c.generateRandomCandidate(rng);
+		//Sequence newSec2 = c.generateRandomCandidate(rng);
 		
 		//MessageGestion.writeInTheLogs(newSec1.getValuesInString());
 		//MessageGestion.writeInTheLogs(newSec2.getValuesInString());
@@ -54,7 +54,7 @@ public class UnitaryTestsGA {
 		System.out.println("///////////////////                 ////////////////////");
 		//tester la mutation et le cross over
 		SequenceCrossOver sqco= new SequenceCrossOver(); // 1 point
-		List<Sequence> l1= sqco.mate(newSec1, newSec2, 1, rng);
+		/*List<Sequence> l1= sqco.mate(newSec1, newSec2, 1, rng);
 		for(int i=0;i<l1.size();i++){
 			System.out.println("pour cross over sequence n "+i);
 			l1.get(i).displaySeq();

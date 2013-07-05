@@ -42,8 +42,8 @@ public class SequenceMutation implements EvolutionaryOperator<Sequence>{
 	* @param mutationProbability
 	* see description above
 	* 
-	* @see NumberGenerator#alphabet
-	* @see NumberGenerator#mutationProbability
+	* @see SequenceMutation#alphabet
+	* @see SequenceMutation#mutationProbability
 	* 
 	* @since 0.1
 	*
@@ -63,8 +63,8 @@ public class SequenceMutation implements EvolutionaryOperator<Sequence>{
 	* @param mutationProbability
 	* see description above
 	* 
-	* @see NumberGenerator#alphabet
-	* @see NumberGenerator#mutationProbability
+	* @see SequenceMutation#alphabet
+	* @see SequenceMutation#mutationProbability
 	* 
 	* @since 0.1
 	*

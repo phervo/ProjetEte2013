@@ -100,8 +100,6 @@ public final class ServerSide implements Runnable{
      * For more information, see the singleton design pattern documentation
      * 
      *
-     * @param ga
-     * 	see explanation above
      *
      * @since 0.1
      *

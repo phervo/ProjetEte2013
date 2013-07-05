@@ -45,35 +45,31 @@ public class MessageFromPraat {
 	* @since 0.1
 	*
 	*/
-	public static FormantSequence splitChaineToFormantSequence(String chaine) throws FormantNumberexception{ // a corrige
+	public static FormantSequence splitChaineToFormantSequence(String chaine){
 		String[] tab= chaine.split(" ");
-		FormantSequence fms= new FormantSequence("candidat", 3, new ArrayList<Formant>());
-		Formant f1= new Formant();
-		Formant f2= new Formant();
-		if(tab.length>1 && tab[0].compareTo("--undefined--")==0 && tab[2].compareTo("--undefined--")==0  && tab[3].compareTo("--undefined--")==0){
-			f1.setFrequency(Double.parseDouble(tab[0]));
-			f2.setFrequency(Double.parseDouble(tab[1]));
-			f1.setBandwith(Double.parseDouble(tab[2]));
-			f2.setBandwith(Double.parseDouble(tab[3]));
+		ArrayList<Formant> list= new ArrayList<Formant>();
+		FormantSequence fms=null; 
+		
+		if(tab.length>1 && tab[0].compareTo("--undefined--")!=0 && tab[1].compareTo("--undefined--")!=0 && tab[2].compareTo("--undefined--")!=0  && tab[3].compareTo("--undefined--")!=0){
+			list.add(new Formant(Double.parseDouble(tab[0]),Double.parseDouble(tab[2]),0.0));
+			list.add(new Formant(Double.parseDouble(tab[1]),Double.parseDouble(tab[3]),0.0));
 			try {
-				fms.setFormantAt(0, f1);
-				fms.setFormantAt(1, f2);
+				fms=new FormantSequence("candidat", 2,list);
 			} catch (FormantNumberexception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				e.display();
 			}
 			
-		}else{//else its "FIN" and it will end but we had to create a var to return else it can freeze sometimes
-			f1.setFrequency(0.0);
-			f2.setFrequency(0.0);
-			f1.setBandwith(0.0);
-			f2.setBandwith(0.0);
+		}else{//else its "FIN" or one of the formant values is undefined by praat so we create a empty formant and switch to the next
 			try {
-			fms.setFormantAt(0, f1);
-			fms.setFormantAt(1, f2);
+				list.add(new Formant());
+				list.add(new Formant());
+				fms = new FormantSequence("candidat", 2,list);
 			} catch (FormantNumberexception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				e.display();
 			}
 		}
 		return fms;

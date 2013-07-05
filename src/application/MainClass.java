@@ -16,9 +16,9 @@ import geneticAlogrithm.GeneticAlgorithmCall;
 
 public class MainClass {
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws FormantNumberexception {
 		// TODO Auto-generated method stub
-		/*OrderToPraat.launchPraat(); //pas un thread
+		OrderToPraat.launchPraat(); 
 		OrderToPraat.sendMessageToPrat(MessageToPraat.writePraatScriptHeader());
 		GeneticAlgorithmCall ga= new GeneticAlgorithmCall(13); //init
 		ServerSide serverJavaGa= ServerSide.getInstance(ga);
@@ -26,7 +26,7 @@ public class MainClass {
 		t.start();
 		ga.startAlgorithm();
 		CloseServer.envoyerMessageFermeture();
-		OrderToPraat.closePraat();//non plus*/
+		OrderToPraat.closePraat();
 		
 		/*GeneticAlgorithmCall ga= new GeneticAlgorithmCall(13); //init
 		double[] d= {-0.6,0.2,-0.9,-0.2,0.2,-0.6,-0.1,-0.5,-0.2,-0.3,-0.7,0.1,-0.5};

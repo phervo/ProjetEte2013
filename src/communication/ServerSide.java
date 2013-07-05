@@ -128,13 +128,8 @@ public final class ServerSide implements Runnable{
      * @since 0.1
      *
      */
-	public void storeMessageReceivedFromPraat(String chaine){ // try a dl ?
-		try {
-			ga.setMessageFromPraat(MessageFromPraat.splitChaineToFormantSequence(chaine));
-		} catch (FormantNumberexception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public void storeMessageReceivedFromPraat(String chaine){
+		ga.setMessageFromPraat(MessageFromPraat.splitChaineToFormantSequence(chaine));
 	}
 
 	/**

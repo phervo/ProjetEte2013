@@ -99,29 +99,27 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 		//1) j'envoie le candidat courant (var candidate au script)
 		/*write value in the script send to praat and send it*/
 		//System.out.println(candidate.getValuesInString());
-    	try {
 			OrderToPraat.sendMessageToPrat(MessageToPraat.writePraatScriptWithCandidates(candidate));
-		} catch (PraatScriptException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		//2) recuperer le resultat dans messageFromPraat (attente serveur et socket si besoin) et le comparer a la cible
-    	for(int i=0;i<this.targetSequence.getNbFormant();i++){
-    		if(ga.getMessageFromPraat().getFormantAt(i).getFrequency()==this.targetSequence.getFormantAt(i).getFrequency()){
-				matches++;
+	    	for(int i=0;i<this.targetSequence.getNbFormant();i++){
+	    		if(ga.getMessageFromPraat().getFormantAt(i).getFrequency()==this.targetSequence.getFormantAt(i).getFrequency()){
+					matches++;
+				}
+				if(ga.getMessageFromPraat().getFormantAt(i).getBandwith()==this.targetSequence.getFormantAt(i).getBandwith()){
+					matches++;
+				}
+				if(ga.getMessageFromPraat().getFormantAt(i).getAmplitude()==this.targetSequence.getFormantAt(i).getAmplitude()){
+					matches++;
+				}
 			}
-			if(ga.getMessageFromPraat().getFormantAt(i).getBandwith()==this.targetSequence.getFormantAt(i).getBandwith()){
-				matches++;
-			}
-			if(ga.getMessageFromPraat().getFormantAt(i).getAmplitude()==this.targetSequence.getFormantAt(i).getAmplitude()){
-				matches++;
-			}
-		}
-    	System.out.println(candidate.getValuesInString()+" matchScore : "+matches);
+	    	System.out.println(candidate.getValuesInString()+" matchScore : "+matches);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (FormantNumberexception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (PraatScriptException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

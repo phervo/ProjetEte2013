@@ -64,16 +64,23 @@ public class SequenceFactory extends AbstractCandidateFactory<Sequence>{
 	*
 	*/
 	@Override
-	public Sequence generateRandomCandidate(Random rng) {
+	public Sequence generateRandomCandidate(Random rng){
 		// TODO Auto-generated method stub
-		Sequence mySeq = new Sequence(this.length);
-		for(int i=0;i<mySeq.getLength();i++){
-			try {
-				mySeq.setValues(i, alphabet[rng.nextInt(length)]);
-			} catch (SequenceArrayException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		Sequence mySeq=null;
+		try {
+			mySeq = new Sequence(this.length);
+		
+			for(int i=0;i<mySeq.getLength();i++){
+				try {
+					mySeq.setValues(i, alphabet[rng.nextInt(length)]);
+				} catch (SequenceArrayException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}	
+		} catch (SequenceArrayException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
 		return mySeq;
 	}

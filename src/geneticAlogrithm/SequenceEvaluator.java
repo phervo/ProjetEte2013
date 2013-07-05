@@ -77,7 +77,7 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 	* 
 	* 
 	* @param candidate
-	*	 the first parent
+	*	 the candidate to the evaluation
 	* 
 	* @param population
 	* 	?

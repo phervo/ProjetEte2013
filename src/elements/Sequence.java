@@ -50,17 +50,20 @@ public class Sequence {
 	*
 	* @param length
 	* 	the length of the sequence
+	 * @throws SequenceArrayException if you give an incorrect length (<=0)
 	*
 	* @since 0.1
 	*
 	*/
-	public Sequence(int length) {
-		a modifie
-		super();
-		this.length = length;
-		this.values = new double[length];
-		for(int i =0;i<length;i++){
-			this.values[i]=0;
+	public Sequence(int length) throws SequenceArrayException {
+		if(length>0){
+			this.length = length;
+			this.values = new double[length];
+			for(int i =0;i<length;i++){
+				this.values[i]=0;
+			}
+		}else{
+			throw new SequenceArrayException(length);
 		}
 	}
 	
@@ -81,11 +84,11 @@ public class Sequence {
 	*/
 	public Sequence(int length,double[] values) throws SequenceArrayException{
 		
-		if(values.length==this.length){
+		if(values.length==length){
 			this.length = length;
 			this.values = values;
 		}else{
-			throw new SequenceArrayException(length,values.length);
+			throw new SequenceArrayException(length);
 		}
 	}
 

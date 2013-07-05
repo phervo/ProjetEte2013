@@ -2,7 +2,8 @@ package exceptions;
 
 import elements.FormantSequence;
 
-/** <p>Class which is designed to prevent a user to try to overwrite the definition of the SequenceFormantList</p>
+/** <p>Class which is designed to prevent a user to try to overwrite the definition of the SequenceFormantList</>
+ * </p>
  * 
  * @see FormantSequence
  *  
@@ -10,6 +11,22 @@ import elements.FormantSequence;
  * @version 0.1
  */
 public class FormantNumberexception extends Exception{
+	/**
+	 * The number Of formant from the sequence that raise the exception
+	 * 
+	 */
+	private int nbFormants;
+	
+	/**
+	 * The index of the sequence you try to get or set when you raise the exception
+	 * 
+	 */
+	private int index;
+	/**
+	 * The length of the array you try to pass in parameter to the sequence when you raise the exception
+	 * 
+	 */
+	private int listLenght;
 	
 	/**
 	*  Constructor for incorrect number of formant Indicate where the problem is located
@@ -20,12 +37,16 @@ public class FormantNumberexception extends Exception{
 	* @since 0.1
 	*
 	*/
-	public FormantNumberexception(int nbFormants){
+	public FormantNumberexception(int nbFormants){ // a revoir
 		super();
+		/*this.nbFormants=nbFormants;
+		this.index = 0;
+		this.listLenght = 0;*/
+		
 		if(nbFormants==0){
 			System.out.println("nbFormant might be > 0 ");
 		}else{
-			System.out.println("you are trying to set a list that contain either more or less formants than declared in this instance");
+			System.out.println("you are trying to set a list that contain either more or less box than declared in this instance");
 		}
 	}
 	

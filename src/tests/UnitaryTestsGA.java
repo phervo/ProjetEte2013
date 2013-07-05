@@ -12,17 +12,30 @@ import java.util.Random;
 
 
 
+
+
+
+
+
+
+import messages.MessageFromPraat;
+import messages.MessageToPraat;
+
 import org.uncommons.maths.random.MersenneTwisterRNG;
 import org.uncommons.maths.random.Probability;
 
 import communication.CloseServer;
+import communication.OrderToPraat;
 import communication.ServerSide;
 import elements.Formant;
 import elements.FormantSequence;
 import elements.Sequence;
 import exceptions.FormantNumberexception;
+import exceptions.PraatScriptException;
+import exceptions.SequenceArrayException;
 import geneticAlogrithm.GeneticAlgorithmCall;
 import geneticAlogrithm.SequenceCrossOver;
+import geneticAlogrithm.SequenceEvaluator;
 import geneticAlogrithm.SequenceFactory;
 import geneticAlogrithm.SequenceMutation;
 
@@ -51,15 +64,22 @@ public class UnitaryTestsGA {
 	*
 	*/
 	public static void servertest(){
-		GeneticAlgorithmCall ga= new GeneticAlgorithmCall(13);
-		ServerSide serverJavaGa= ServerSide.getInstance(ga);
-		Thread t = new Thread(serverJavaGa,"ThreadServer");
-		t.start();
-		CloseServer.envoyerMessageFermeture();
+		GeneticAlgorithmCall ga;
+		try {
+			ga = new GeneticAlgorithmCall(13);
+			ServerSide serverJavaGa= ServerSide.getInstance(ga);
+			Thread t = new Thread(serverJavaGa,"ThreadServer");
+			t.start();
+			CloseServer.envoyerMessageFermeture();
+		} catch (FormantNumberexception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 	
 	/**
-	* Test of fromants and FormantsSequence, if the method  works and if the exception are raised when needed
+	* Test of formants and FormantsSequence, if the method  works and if the exception are raised when needed
 	*
 	* @since 0.1
 	*
@@ -176,88 +196,226 @@ public class UnitaryTestsGA {
 		
 	}
 	
-	public static void test(){
-		/*note j'ai tout balancer la pour le moment mais de vrais fonctions seront a faire */
-		GeneticAlgorithmCall ga= new GeneticAlgorithmCall(10);
-		//////////////
-		ga.buildTarget();
-		//Sequence target= ga.getTarget();
-		//target.displaySeq();
-		/////////////
-		////////////////////test1///////////////////
-		ga.generateAlphabet();
-		System.out.println("////////////////////test1///////////////////");
-		/*for(int i=0;i<ga.getCandidatListLength();i++){
-			System.out.println(ga.getCandidatList()[i]);
-		}*/
-		System.out.println("///////////////////////////////////////");
-		////////////////////Test1.5//////////////////
-		//Sequence seq = new Sequence(10,ga.getCandidatList());
-		System.out.println("////////////////////Test1.5//////////////////");
-		/*for(int i=0;i<ga.getCandidatListLength();i++){
-			System.out.println(seq.getValues()[i]);
-		}*/
-		System.out.println("///////////////////////////////////////");
-		////////////////////////////////////////////
-		ga.createCandidateFactory();
-		///////////////////test2////////////////////
-		System.out.println("////////////////////test2///////////////////");
-		//SequenceFactory c = ga.getMySequenceFactory();
-		//System.out.println(c.getLength());
-		//c.displayAlphabet();
-		Random rng=new MersenneTwisterRNG();
-		//Sequence newSec1 = c.generateRandomCandidate(rng);
-		//Sequence newSec2 = c.generateRandomCandidate(rng);
-		
-		//MessageGestion.writeInTheLogs(newSec1.getValuesInString());
-		//MessageGestion.writeInTheLogs(newSec2.getValuesInString());
-		System.out.println("///////////////////////////////////////");
-		System.out.println("///////////////////                 ////////////////////");
-		//tester la mutation et le cross over
-		SequenceCrossOver sqco= new SequenceCrossOver(); // 1 point
-		/*List<Sequence> l1= sqco.mate(newSec1, newSec2, 1, rng);
-		for(int i=0;i<l1.size();i++){
-			System.out.println("pour cross over sequence n "+i);
-			l1.get(i).displaySeq();
-		}
-		SequenceMutation sqm= new SequenceMutation(ga.getCandidatList(),new Probability(0.02));
-		List<Sequence> l2=sqm.apply(l1, rng);
-		for(int i=0;i<l2.size();i++){
-			System.out.println("pour mutation sequence n "+i);
-			l2.get(i).displaySeq();
-		}
-		System.out.println("///////////////////////////////////////");
-		//SequenceEvaluator seqeval=new SequenceEvaluator();
-		//double res=seqeval.getFitness(null, null);
-		//System.out.println(res);
-		System.out.println("///////////////////////////////////////");
-		
-		double[] tab = {1.1,1.5};
-		//Sequence candidate= new Sequence(2,tab);
-		//double res=ga.getMySeqEval().getFitness(candidate, null);
-		//System.out.println(res);
-		
-		
-
-		////tests pour le nouveau script d'extraction//////
-		/*GeneticAlgorithmCall ga= new GeneticAlgorithmCall(4); //init
-		ServerSide.launchPraat();
-		ServerSide.initPraat(FileGestion.writePraatScriptHeader());
-		ServerSide.sendMessageToPrat(FileGestion.writePraatScriptAsCandidates(null));
+	/**
+	* Test of the methods from Sequence, if the method  works and if the exception are raised when needed
+	*
+	* @since 0.1
+	*
 	*/
+	public static void testSequence(){
 		
-		//FormantSequence f= new FormantSequence();
-		//f.displayFormantSequence();
+		Sequence s1;
+		try {
+			System.out.println("1 : must print 0.0 0.0");
+			s1 = new Sequence(2);
+			s1.displaySeq();
+			System.out.println();//space in the display
+			System.out.println("1.5 : must raise an exception for 0 length");
+			s1 = new Sequence(0);
+		} catch (SequenceArrayException e) {
+			// TODO Auto-generated catch block
+			//error messqge in the exception
+		}
+		System.out.println();//space in the display
+		double[] d={1.0,1.0};
+		try {
+			System.out.println("2 : must print 1.0 1.0");
+			s1= new Sequence(2, d);
+			s1.displaySeq();
+			System.out.println();//space in the display
+			System.out.println("2.5 : must raise an exception for wrong length");
+			s1= new Sequence(1, d);
+		} catch (SequenceArrayException e) {
+			// TODO Auto-generated catch block
+			//error message in the exception
+		}
+		System.out.println();//space in the display
 		
-		/*String s=FileGestion.writePraatScriptAsCandidatesSansFichier(null);
-		System.out.println(s);
-		ServerSide.sendMessageToPrat(s);*/
+		try {
+			System.out.println("3 : must print 1.0");
+			s1= new Sequence(2, d);
+			System.out.println(s1.getValuesAt(1));
+			System.out.println("3.5 : must raise an exception for wrong index");
+			System.out.println(s1.getValuesAt(2));
+			
+		} catch (SequenceArrayException e) {
+			// TODO Auto-generated catch block
+			//error message in the exception
+		}
+		
+		try {
+			System.out.println("4 : must print 0.2 in 2nd position");
+			s1= new Sequence(2, d);
+			s1.setValues(1,0.2);
+			s1.displaySeq();
+			System.out.println("4.5 : must raise an exception for wrong index");
+			s1.setValues(2,0.2);
+			
+		} catch (SequenceArrayException e) {
+			// TODO Auto-generated catch block
+			//error message in the exception
+		}
+	}
+	
+	/**
+	* Test of the methods to launch and close praat
+	*
+	* @since 0.1
+	*
+	*/
+	public static void testPraat(){
+		OrderToPraat.launchPraat();
+		OrderToPraat.closePraat();
+	}
+	
+	/**
+	* Test of the methods from the GA. We can't see the result because there is no getter nor setter but we can see if
+	* it compile and if the instruction go in the good order.
+	* We can't use start() here case there is no praat instance nor java server to listen. It will be in the integration part.
+	*
+	* @since 0.1
+	*
+	*/
+	public static void testGA(){
+		GeneticAlgorithmCall ga;
+		try {
+			ga = new GeneticAlgorithmCall(10);
+			ga.generateAlphabet();
+			ga.buildTarget();
+			ga.createCandidateFactory();
+			ga.createEvolutionaryOperator();
+			ga.createFitnessEvalutator();
+			ga.createSelection();
+			ga.createRandomGenerator();
+		} catch (FormantNumberexception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 	
-	 private static class ClasseInterne{ // internal class
+	/**
+	* Test of the SequenceFactory class and in particular the method to generateRandomSequence.
+	* As it is generated by random, we cant give value to compare.
+	* We can just see that the two sequence create are different but it is not the case all the time because of the random and the small alphabet.
+	* So if it happened, just call the method again.
+	*
+	* @since 0.1
+	*
+	*/
+	public static void testSequenceFactory(){
+		double[] alphabet= {0.0,0.1,0.2,0.3,0.4};
+		SequenceFactory c = new SequenceFactory(alphabet, 4);
+		System.out.println("alphabet");
+		c.displayAlphabet();
+		System.out.println("1st sequence");
+		Random rng=new MersenneTwisterRNG();
+		Sequence newSec1 = c.generateRandomCandidate(rng);
+		Sequence newSec2 = c.generateRandomCandidate(rng);
+		newSec1.displaySeq();
+		System.out.println("2 nd sequence");
+		newSec2.displaySeq();
+	}
+	
+	/**
+	* Test of the Mutation with SequenceMutation. Same as for testSequenceFactory(), it is generated by random so you can't have the same result twice.
+	* It is just a method to show that it works. Furthermore, there is a little probability of mutation (0.02), so nothing guarantee that the mutation will happened.
+	* If it is not the case, just reload the method.
+	* @since 0.1
+	*
+	*/
+	public static void testMutation(){
+		
+		Random rng=new MersenneTwisterRNG();
+		double[] alphabet= {0.0,0.1,0.2,0.3,0.4};
+		SequenceFactory c = new SequenceFactory(alphabet, 4);
+		SequenceCrossOver sqco= new SequenceCrossOver(); // 1 point cross over
+		System.out.println("parent 0 avant mutation");
+		Sequence newSec1 = c.generateRandomCandidate(rng);
+		newSec1.displaySeq();
+		System.out.println("parent 1 avant mutation");
+		Sequence newSec2 = c.generateRandomCandidate(rng);
+		newSec2.displaySeq();
+		SequenceMutation sqm= new SequenceMutation(alphabet,new Probability(0.02));
+		List<Sequence> l1= sqco.mate(newSec1, newSec2, 1, rng);
+		List<Sequence> l2=sqm.apply(l1, rng);
+		for(int i=0;i<l2.size();i++){
+			System.out.println("parent n "+i+" after crossOver");
+			l2.get(i).displaySeq();
+		}
+	}
+	
+	/**
+	* Test of the Cross Over functions with SequenceCrossOver. Same as for two other above, there is no guarantee to se a difference each time,
+	* Don't hesitate to call again the method if it is the case.
+	* @since 0.1
+	*
+	*/
+	public static void testCrossOver(){
+		Random rng=new MersenneTwisterRNG();
+		double[] alphabet= {0.0,0.1,0.2,0.3,0.4};
+		SequenceFactory c = new SequenceFactory(alphabet, 4);
+		SequenceCrossOver sqco= new SequenceCrossOver(); // 1 point cross over
+		System.out.println("parent 0 before cross over");
+		Sequence newSec1 = c.generateRandomCandidate(rng);
+		newSec1.displaySeq();
+		System.out.println("parent 1 before cross over");
+		Sequence newSec2 = c.generateRandomCandidate(rng);
+		newSec2.displaySeq();
+		
+		List<Sequence> l1= sqco.mate(newSec1, newSec2, 1, rng);
+		for(int i=0;i<l1.size();i++){
+			System.out.println("parent n "+i+" after mutation");
+			l1.get(i).displaySeq();
+		}
+		
+	}
+	
+	public static void testSequenceEvaluator(){
+		//GeneticAlgorithmCall ga;
+		/*try {
+			ga = new GeneticAlgorithmCall(10);
+			ga.buildTarget();
+			FormantSequence fs= new FormantSequence(2);
+			SequenceEvaluator seqeval=new SequenceEvaluator(fs,ga);
+			double res=seqeval.getFitness(fs, null);
+			System.out.println(res);
+		} catch (FormantNumberexception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+		// cant be called without a Server and a Praat instance running, will be put in the integration part 
+	}
+	
+	/**
+	* Show if the praat scipt is correctly build
+	* @since 0.1
+	*
+	*/
+	public static void PraatSCript(){
+		try {
+			Sequence seq= new Sequence(13);
+			String script= MessageToPraat.writePraatScriptWithCandidates(seq);
+			System.out.println(script);
+		} catch (SequenceArrayException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (PraatScriptException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	 private static class ClasseInterne{ // internal class for a main
 		 public static void main(String[] args){
-			 UnitaryTestsGA.testFormantAndFormantSequence();
+			 //UnitaryTestsGA.testFormantAndFormantSequence();
+			 //UnitaryTestsGA.testSequence();
+			 //UnitaryTestsGA.testPraat();
+			 //UnitaryTestsGA.testSequenceFactory();
+			 //UnitaryTestsGA.testCrossOver();
+			 //UnitaryTestsGA.testMutation();
+			 UnitaryTestsGA.PraatSCript();
 		 }
 		 
 	 }

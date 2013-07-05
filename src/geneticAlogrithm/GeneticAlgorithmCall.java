@@ -25,6 +25,7 @@ import org.uncommons.watchmaker.framework.termination.TargetFitness;
 import communication.ServerSide;
 import elements.FormantSequence;
 import elements.Sequence;
+import exceptions.FormantNumberexception;
 
 /** <p>This is the main Class for the GA.<br/>
  * It use the Genetic algorithm device provide by the watchMaker's API and the class I redefined for it. See the corresponding doc for more information<br/>
@@ -123,13 +124,14 @@ public class GeneticAlgorithmCall{
 	*
 	* @param length
 	* 	the length of the Sequence use in the GA
+	 * @throws FormantNumberexception 
 	* 
 	* @see GeneticAlgorithmCall#length
 	*
 	* @since 0.1
 	*
 	*/
-	public GeneticAlgorithmCall(int length) {
+	public GeneticAlgorithmCall(int length) throws FormantNumberexception {
 		super();
 		this.length=length;
 		this.candidatList=null;

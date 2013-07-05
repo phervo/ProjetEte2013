@@ -1,19 +1,13 @@
 package messages;
 
-import elements.Formant;
-import elements.FormantSequence;
 import elements.Sequence;
-import exceptions.FormantNumberexception;
 import exceptions.PraatScriptException;
 import exceptions.SequenceArrayException;
-
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-
 import communication.OrderToPraat;
-import communication.ServerSide;
+
 
 /** <p>Class which define the different messages that are send to Praat<br/>
  *  All the method from this class are static so no need to create an instance<br/>

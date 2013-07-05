@@ -3,6 +3,7 @@ package communication;
 import messages.MessageFromPraat;
 import exceptions.FormantNumberexception;
 import geneticAlogrithm.GeneticAlgorithmCall;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -146,6 +147,7 @@ public final class ServerSide implements Runnable{
 	public void run() {
 	// TODO Auto-generated method stub
     	try {
+    		System.out.println("lancement server");
 			String message_distant="";
     		while(message_distant.compareTo(finChaine)!=0){
 				socketduserveur = socketserver.accept();

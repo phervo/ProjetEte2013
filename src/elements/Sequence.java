@@ -1,7 +1,5 @@
 package elements;
 
-import java.util.ArrayList;
-
 import exceptions.FormantNumberexception;
 import exceptions.SequenceArrayException;
 import geneticAlogrithm.GeneticAlgorithmCall;
@@ -57,6 +55,7 @@ public class Sequence {
 	*
 	*/
 	public Sequence(int length) {
+		a modifie
 		super();
 		this.length = length;
 		this.values = new double[length];

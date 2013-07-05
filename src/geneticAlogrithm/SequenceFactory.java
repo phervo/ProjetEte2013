@@ -1,11 +1,7 @@
 package geneticAlogrithm;
 
 import java.util.Random;
-
-import org.uncommons.watchmaker.framework.FitnessEvaluator;
 import org.uncommons.watchmaker.framework.factories.AbstractCandidateFactory;
-import org.uncommons.watchmaker.framework.operators.AbstractCrossover;
-
 import elements.Sequence;
 import exceptions.SequenceArrayException;
 

@@ -46,16 +46,22 @@ public class FormantSequence {
 	*
 	* @param nbFormant
 	* 	the number of formants
+	* 
+	* @throws FormantNumberexception If you use the wrong parameters.
+	* 
 	* @since 0.1
 	*
 	*/
-	public FormantSequence(int nbFormant) {
-		super();
-		this.soundName="default empty formantSequence";
-		this.nbFormant = nbFormant;
-		this.list= new ArrayList<>();
-		for(int i=0;i<nbFormant;i++){
-			list.add(new Formant());
+	public FormantSequence(int nbFormant) throws FormantNumberexception {
+		if(nbFormant>0){
+			this.soundName="default empty formantSequence";
+			this.nbFormant = nbFormant;
+			this.list= new ArrayList<>();
+			for(int i=0;i<nbFormant;i++){
+				list.add(new Formant());
+			}
+		}else{
+			throw new FormantNumberexception(nbFormant);
 		}
 	}
 	
@@ -81,14 +87,14 @@ public class FormantSequence {
 			this.nbFormant = nbFormant;
 			this.list=list;
 		}else{
-			throw new FormantNumberexception(nbFormant,list.size());
+			throw new FormantNumberexception(nbFormant);
 		}
 	}
 	
 	/**
 	* Constructor which create the formant of the sound given in parameter.
-	* If the sound doesn't exist, return a sequenceFormant with 0.0 attributes
-	*
+	* If the sound doesn't exist, return a sequenceFormant with 0.0 attributes.
+	* If you put an empty String, it wont use it and call the FormantSequence "default empty formantSequence"
 	* @param soundName
 	* 	the name of the sound. Work for "i"
 	*
@@ -96,19 +102,20 @@ public class FormantSequence {
 	*
 	*/
 	public FormantSequence(String soundName) {
-		super();
-		this.soundName = soundName;
+		
+		if(soundName.compareTo("")==0){//if empty
+			this.soundName = "default empty formantSequence"; // we put a default name, wont raise a exception for that
+		}else{
+			this.soundName = soundName;
+		}
 		this.nbFormant = 2;
 		this.list= new ArrayList<>();
 		if(soundName.compareTo("i")==0){
 			list.add(new Formant(280.0, 28.0, 0.0));
 			list.add(new Formant(2250.0, 450.0, 0.0));
-			//list.add(new Formant(2890.0, 867.0, 0.0));
 		}else{
-			//rajouter d'autres par la suite
 			list.add(new Formant());
 			list.add(new Formant());
-			//list.add(formant3);
 		}
 	}
 
@@ -153,7 +160,7 @@ public class FormantSequence {
 		if(index<this.list.size()){
 			return list.get(index);
 		}else{
-			throw new FormantNumberexception(0,0);
+			throw new FormantNumberexception(index,this.list.size());
 		}
 	}
 

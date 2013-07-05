@@ -7,12 +7,10 @@ import messages.MessageToPraat;
 import org.uncommons.watchmaker.framework.FitnessEvaluator;
 
 import communication.OrderToPraat;
-import communication.ServerSide;
 import elements.FormantSequence;
 import elements.Sequence;
 import exceptions.FormantNumberexception;
 import exceptions.PraatScriptException;
-import exceptions.SequenceArrayException;
 
 /** <p>Class which define the Fitness function for your GA.<br/>
  * you had to implement it to use the watchmer's GA API.<br/>

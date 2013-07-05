@@ -6,8 +6,6 @@ import java.util.Random;
 
 import org.uncommons.maths.random.Probability;
 import org.uncommons.watchmaker.framework.operators.AbstractCrossover;
-
-import elements.FormantSequence;
 import elements.Sequence;
 import exceptions.SequenceArrayException;
 

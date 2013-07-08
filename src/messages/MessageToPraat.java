@@ -3,9 +3,11 @@ package messages;
 import elements.Sequence;
 import exceptions.PraatScriptException;
 import exceptions.SequenceArrayException;
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import communication.OrderToPraat;
 
 
@@ -230,6 +232,30 @@ public class MessageToPraat {
 		}
 	}
 
+	/**
+	* script use to clear the memory of praat by removing all the objects in he object list.
+	* We use it because praat had a maximal capacity of object in memory and so using a GA could reach this cpacity.
+	* So we clean the object window from time to time at each end of generation.
+	* this function recreate the two speakers. 
+	 * @return 
+	*
+	* @since 0.1
+	*
+	*/
+	public static String clearPraatObjectWindow(){
+		StringBuilder stb= new StringBuilder(); //utilisation de stringBuilder car je suppose que pas synchroniser
+		stb.append("#-----------------------------------------------\n");
+		stb.append("# Project : Software synthesis using GA\n");
+		stb.append("# Hervo Pierre-Yves, automatic Script generated in java\n");
+		stb.append("#-----------------------------------------------\n");
+		stb.append("select all\n");
+		stb.append("Remove\n");
+		stb.append("#-----------------------------------------------\n");
+		stb.append("Create Speaker... Robovox Female 2\n"); //nom genre typeDeGlottis
+		stb.append("Create Artword... phon 0.5\n");//creation of actions list(init)
+		stb.append("#-----------------------------------------------\n");
+		return stb.toString();
+	}
 	
 	public static void writeInTheLogs(String stringBuffer){ 
 		String adresseDuFichier = "C:/Users/phervo/Documents/dossierProjet/log.txt";

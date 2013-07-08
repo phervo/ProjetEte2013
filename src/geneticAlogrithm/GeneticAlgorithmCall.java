@@ -6,6 +6,7 @@ import java.util.Random;
 import java.util.concurrent.Semaphore;
 
 import messages.MessageFromPraat;
+import messages.MessageToPraat;
 
 import org.uncommons.maths.random.MersenneTwisterRNG;
 import org.uncommons.maths.random.Probability;
@@ -22,6 +23,7 @@ import org.uncommons.watchmaker.framework.termination.GenerationCount;
 
 import org.uncommons.watchmaker.framework.termination.TargetFitness;
 
+import communication.OrderToPraat;
 import communication.ServerSide;
 import elements.FormantSequence;
 import elements.Sequence;
@@ -281,6 +283,7 @@ public class GeneticAlgorithmCall{
 				    	System.out.printf("Generation %d: %s\n",
 				                          data.getGenerationNumber(),
 				                          data.getBestCandidate().getValuesInString());
+				    	OrderToPraat.sendMessageToPrat(MessageToPraat.clearPraatObjectWindow());
 				    }
 				});
 		engine.evolve(10, 0, new TargetFitness(3,true));
@@ -313,7 +316,7 @@ public class GeneticAlgorithmCall{
 	* Method which store the message from praat  in the instance.
 	* It use a mutex to be sure the resource isn't read and write in the same time.
 	* It lock the resource at the beginning and release it at the end.
-	* It also release the lock put by the fitness function and allow the next iteration.
+	*
 	*
 	*
 	* @since 0.1
@@ -324,7 +327,6 @@ public class GeneticAlgorithmCall{
 		{
 			availablevalue.acquire();
 			this.messageFromPraat = messageFromPraat;
-			this.availableFitnessfunction.release();
 		}catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

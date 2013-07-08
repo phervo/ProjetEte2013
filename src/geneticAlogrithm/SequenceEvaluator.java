@@ -98,7 +98,7 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 		
 		//1) j'envoie le candidat courant (var candidate au script)
 		/*write value in the script send to praat and send it*/
-		//System.out.println(candidate.getValuesInString());
+			System.out.println(candidate.getValuesInString());
 			OrderToPraat.sendMessageToPrat(MessageToPraat.writePraatScriptWithCandidates(candidate));
 		//2) recuperer le resultat dans messageFromPraat (attente serveur et socket si besoin) et le comparer a la cible
 	    	for(int i=0;i<this.targetSequence.getNbFormant();i++){
@@ -112,7 +112,7 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 					matches++;
 				}
 			}
-	    	System.out.println(candidate.getValuesInString()+" matchScore : "+matches);
+	    	System.out.println("matchScore : "+matches);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -123,6 +123,7 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		ga.getMutexFitnessFunction().release();
 		return matches;
 	}
 

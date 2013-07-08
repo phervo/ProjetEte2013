@@ -128,8 +128,9 @@ public final class ServerSide implements Runnable{
      * @since 0.1
      *
      */
-	public void storeMessageReceivedFromPraat(String chaine){
+	public void storeMessageReceivedFromPraat(String chaine){ //seauentiel donc on peu mettre lq
 		ga.setMessageFromPraat(MessageFromPraat.splitChaineToFormantSequence(chaine));
+		//ga.getMutexFitnessFunction().release();
 	}
 
 	/**

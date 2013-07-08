@@ -26,6 +26,7 @@ import org.uncommons.watchmaker.framework.termination.TargetFitness;
 import communication.OrderToPraat;
 import communication.ServerSide;
 import elements.FormantSequence;
+import elements.GlobalAlphabet;
 import elements.Sequence;
 import exceptions.FormantNumberexception;
 
@@ -55,7 +56,7 @@ public class GeneticAlgorithmCall{
 	 * The alphabet with all the possible values for the box of a sequence.
 	 * 
 	 */
-	private double[] candidatList;
+	private GlobalAlphabet alphabet;
 	
 	/**
 	 * The values of the formant in the target
@@ -136,7 +137,7 @@ public class GeneticAlgorithmCall{
 	public GeneticAlgorithmCall(int length) throws FormantNumberexception {
 		super();
 		this.length=length;
-		this.candidatList=null;
+		this.alphabet=null;
 		this.target=null;
 		this.mySequenceFactory= null;
 		this.pipeline=null;
@@ -167,33 +168,10 @@ public class GeneticAlgorithmCall{
 	* @since 0.1
 	*
 	*/
-	public void generateAlphabet(){ //fonctionne
+	public void generateAlphabet(){
 		/*It is here that we define all the possible values that can be use by the algorithm to generate a candidate
 		 * it is the list of the unitary values. They will be combined into a sequence to create a candidate by another function*/
-		//int nbArray=(int) ((upperBound-lowerBound)/0.1)+1; //+1 pr 0.0
-		this.candidatList= new double[21];
-		//definition manuelle pour le moment
-		this.candidatList[0]=-1.0;
-		this.candidatList[1]=-0.9;
-		this.candidatList[2]=-0.8;
-		this.candidatList[3]=-0.7;
-		this.candidatList[4]=-0.6;
-		this.candidatList[5]=-0.5;
-		this.candidatList[6]=-0.4;
-		this.candidatList[7]=-0.3;
-		this.candidatList[8]=-0.2;
-		this.candidatList[9]=-0.1;
-		this.candidatList[10]=0.0;
-		this.candidatList[11]=0.1;
-		this.candidatList[12]=0.2;
-		this.candidatList[13]=0.3;
-		this.candidatList[14]=0.4;
-		this.candidatList[15]=0.5;
-		this.candidatList[16]=0.6;
-		this.candidatList[17]=0.7;
-		this.candidatList[18]=0.8;
-		this.candidatList[19]=0.9;
-		this.candidatList[20]=1.0;
+		this.alphabet = new GlobalAlphabet();
 	}
 	
 	/**
@@ -206,7 +184,7 @@ public class GeneticAlgorithmCall{
 	public void createCandidateFactory(){
 		/*
 		 * use the alphabet define previously to create a factorycandidate of type SequenceFactory*/
-		mySequenceFactory = new SequenceFactory(this.candidatList, this.length);
+		mySequenceFactory = new SequenceFactory(this.alphabet, this.length);
 	}
 	
 	/**
@@ -219,7 +197,7 @@ public class GeneticAlgorithmCall{
 	public void createEvolutionaryOperator(){
 		List<EvolutionaryOperator<Sequence>> operators
 	    = new LinkedList<EvolutionaryOperator<Sequence>>();
-		operators.add(new SequenceMutation(this.candidatList,new Probability(0.02)));
+		operators.add(new SequenceMutation(this.alphabet,new Probability(0.02)));
 		operators.add(new SequenceCrossOver());
 		pipeline = new EvolutionPipeline<Sequence>(operators);
 	}

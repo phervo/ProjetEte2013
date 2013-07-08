@@ -20,7 +20,7 @@ public class MainClass {
 		// TODO Auto-generated method stub
 		OrderToPraat.launchPraat(); 
 		OrderToPraat.sendMessageToPrat(MessageToPraat.writePraatScriptHeader());
-		GeneticAlgorithmCall ga= new GeneticAlgorithmCall(13); //init
+		GeneticAlgorithmCall ga= new GeneticAlgorithmCall(20); //init
 		ServerSide serverJavaGa= ServerSide.getInstance(ga);
 		Thread t = new Thread(serverJavaGa,"ThreadServer");
 		t.start();

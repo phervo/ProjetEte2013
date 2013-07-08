@@ -20,6 +20,7 @@ import java.util.Random;
 
 
 
+
 import messages.MessageFromPraat;
 import messages.MessageToPraat;
 
@@ -31,6 +32,7 @@ import communication.OrderToPraat;
 import communication.ServerSide;
 import elements.Formant;
 import elements.FormantSequence;
+import elements.GlobalAlphabet;
 import elements.Sequence;
 import exceptions.CastFormantException;
 import exceptions.FormantNumberexception;
@@ -320,10 +322,10 @@ public class UnitaryTestsGA {
 	*
 	*/
 	public static void testSequenceFactory(){
-		double[] alphabet= {0.0,0.1,0.2,0.3,0.4};
-		SequenceFactory c = new SequenceFactory(alphabet, 4);
+		GlobalAlphabet glba=new GlobalAlphabet();
 		System.out.println("alphabet");
-		c.displayAlphabet();
+		//glba.displayAllAlphabets();
+		SequenceFactory c = new SequenceFactory(glba, 20);
 		System.out.println("1st sequence");
 		Random rng=new MersenneTwisterRNG();
 		Sequence newSec1 = c.generateRandomCandidate(rng);
@@ -343,8 +345,8 @@ public class UnitaryTestsGA {
 	public static void testMutation(){
 		
 		Random rng=new MersenneTwisterRNG();
-		double[] alphabet= {0.0,0.1,0.2,0.3,0.4};
-		SequenceFactory c = new SequenceFactory(alphabet, 4);
+		GlobalAlphabet glba=new GlobalAlphabet();
+		SequenceFactory c = new SequenceFactory(glba, 20);
 		SequenceCrossOver sqco= new SequenceCrossOver(); // 1 point cross over
 		System.out.println("parent 0 avant mutation");
 		Sequence newSec1 = c.generateRandomCandidate(rng);
@@ -352,11 +354,11 @@ public class UnitaryTestsGA {
 		System.out.println("parent 1 avant mutation");
 		Sequence newSec2 = c.generateRandomCandidate(rng);
 		newSec2.displaySeq();
-		SequenceMutation sqm= new SequenceMutation(alphabet,new Probability(0.02));
+		SequenceMutation sqm= new SequenceMutation(glba,new Probability(0.02));
 		List<Sequence> l1= sqco.mate(newSec1, newSec2, 1, rng);
 		List<Sequence> l2=sqm.apply(l1, rng);
 		for(int i=0;i<l2.size();i++){
-			System.out.println("parent n "+i+" after crossOver");
+			System.out.println("parent n "+i+" after mutation");
 			l2.get(i).displaySeq();
 		}
 	}
@@ -369,8 +371,8 @@ public class UnitaryTestsGA {
 	*/
 	public static void testCrossOver(){
 		Random rng=new MersenneTwisterRNG();
-		double[] alphabet= {0.0,0.1,0.2,0.3,0.4};
-		SequenceFactory c = new SequenceFactory(alphabet, 4);
+		GlobalAlphabet glba=new GlobalAlphabet();
+		SequenceFactory c = new SequenceFactory(glba, 20);
 		SequenceCrossOver sqco= new SequenceCrossOver(); // 1 point cross over
 		System.out.println("parent 0 before cross over");
 		Sequence newSec1 = c.generateRandomCandidate(rng);
@@ -381,7 +383,7 @@ public class UnitaryTestsGA {
 		
 		List<Sequence> l1= sqco.mate(newSec1, newSec2, 1, rng);
 		for(int i=0;i<l1.size();i++){
-			System.out.println("parent n "+i+" after mutation");
+			System.out.println("parent n "+i+" after crossOver");
 			l1.get(i).displaySeq();
 		}
 		
@@ -466,8 +468,7 @@ public class UnitaryTestsGA {
 			 //UnitaryTestsGA.testCrossOver();
 			 //UnitaryTestsGA.testMutation();
 			 //UnitaryTestsGA.PraatSCript();
-			 UnitaryTestsGA.castFormantTest();
-			 
+			 //UnitaryTestsGA.castFormantTest();
 		 }
 		 
 	 }

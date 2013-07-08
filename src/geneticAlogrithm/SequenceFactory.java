@@ -1,7 +1,10 @@
 package geneticAlogrithm;
 
 import java.util.Random;
+
 import org.uncommons.watchmaker.framework.factories.AbstractCandidateFactory;
+
+import elements.GlobalAlphabet;
 import elements.Sequence;
 import exceptions.SequenceArrayException;
 
@@ -21,7 +24,7 @@ public class SequenceFactory extends AbstractCandidateFactory<Sequence>{
 	 * The alphabet of all the possible values that a member of a Sequence could take.
 	 * 
 	 */
-	private double[] alphabet;
+	private GlobalAlphabet globalAlphabet;
 	/**
 	 * The length of a Sequence. It will be use to create a Sequence of the given size.
 	 * 
@@ -43,9 +46,9 @@ public class SequenceFactory extends AbstractCandidateFactory<Sequence>{
 	* @since 0.1
 	*
 	*/
-	public SequenceFactory(double[] alphabet,int length){
+	public SequenceFactory(GlobalAlphabet globalAlphabet,int length){
 		this.length=length;
-		this.alphabet=alphabet;
+		this.globalAlphabet=globalAlphabet;
 	}
 	
 	/**
@@ -71,11 +74,20 @@ public class SequenceFactory extends AbstractCandidateFactory<Sequence>{
 			mySeq = new Sequence(this.length);
 		
 			for(int i=0;i<mySeq.getLength();i++){
+				//separation selon les valeurs de var
 				try {
-					mySeq.setValues(i, alphabet[rng.nextInt(length)]);
+					if(i==0 || i==1){ // lungs
+						mySeq.setValues(i, globalAlphabet.getLa().getValueAt(rng.nextInt(globalAlphabet.getLa().getLength())));
+					}else if(i==16 || i==17){ //masseter
+						mySeq.setValues(i, globalAlphabet.getMa().getValueAt(rng.nextInt(globalAlphabet.getMa().getLength())));
+					}else{
+						mySeq.setValues(i, globalAlphabet.getOa().getValueAt(rng.nextInt(globalAlphabet.getOa().getLength())));
+					}
+				
 				} catch (SequenceArrayException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+					e.display();
 				}
 			}	
 		} catch (SequenceArrayException e1) {
@@ -85,12 +97,4 @@ public class SequenceFactory extends AbstractCandidateFactory<Sequence>{
 		return mySeq;
 	}
 	
-	/**
-	 * Display the alphabet on the screen. Use to checkout.
-	 */
-	public void displayAlphabet(){
-		for(int i=0;i<length;i++){
-			System.out.println(this.alphabet[i]);
-		}
-	}
 }

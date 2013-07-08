@@ -9,6 +9,7 @@ import org.uncommons.maths.number.NumberGenerator;
 import org.uncommons.maths.random.Probability;
 import org.uncommons.watchmaker.framework.EvolutionaryOperator;
 
+import elements.GlobalAlphabet;
 import elements.Sequence;
 import exceptions.SequenceArrayException;
 
@@ -26,7 +27,7 @@ public class SequenceMutation implements EvolutionaryOperator<Sequence>{
 	 * The alphabet of all the possible values that a member of a Sequence could take.
 	 * 
 	 */
-	private final double[] alphabet;
+	private final GlobalAlphabet globalAlphabet;
 	/**
 	 * The mutation probability.
 	 * 
@@ -48,9 +49,9 @@ public class SequenceMutation implements EvolutionaryOperator<Sequence>{
 	* @since 0.1
 	*
 	*/
-    public SequenceMutation(double[] alphabet, Probability mutationProbability)
+    public SequenceMutation(GlobalAlphabet globalAlphabet, Probability mutationProbability)
     {
-    	this.alphabet = alphabet.clone();
+    	this.globalAlphabet = globalAlphabet;
     	this.mutationProbability = new ConstantGenerator<Probability>(mutationProbability);
     }
     
@@ -69,8 +70,8 @@ public class SequenceMutation implements EvolutionaryOperator<Sequence>{
 	* @since 0.1
 	*
 	*/
-    public SequenceMutation(double[] alphabet, NumberGenerator<Probability> mutationProbability){
-    	this.alphabet = alphabet.clone();
+    public SequenceMutation(GlobalAlphabet globalAlphabet, NumberGenerator<Probability> mutationProbability){
+    	this.globalAlphabet = globalAlphabet;
     	this.mutationProbability = mutationProbability;
     }
     
@@ -112,7 +113,13 @@ public class SequenceMutation implements EvolutionaryOperator<Sequence>{
             if (mutationProbability.nextValue().nextEvent(rng))
             {
             	try {
-					retour.setValues(i, alphabet[rng.nextInt(alphabet.length)]);
+            		if(i==0 || i==1){ // lungs
+						retour.setValues(i, globalAlphabet.getLa().getValueAt(rng.nextInt(globalAlphabet.getLa().getLength())));
+					}else if(i==16 || i==17){ //masseter
+						retour.setValues(i, globalAlphabet.getMa().getValueAt(rng.nextInt(globalAlphabet.getMa().getLength())));
+					}else{
+						retour.setValues(i, globalAlphabet.getOa().getValueAt(rng.nextInt(globalAlphabet.getOa().getLength())));
+					}
 				} catch (SequenceArrayException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

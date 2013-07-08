@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import communication.ServerSide;
 import elements.Formant;
 import elements.FormantSequence;
+import exceptions.CastFormantException;
 import exceptions.FormantNumberexception;
 import geneticAlogrithm.SequenceEvaluator;
 
@@ -40,19 +41,45 @@ public class MessageFromPraat {
 	*
 	* @return FormantSequence with the values of the praatScript
 	*
+	* @throws CastFormantException if the String isnt of the good size or if it doesnt contain only numbers
+	*
 	* @see FormantSequence
 	* @see ServerSide
 	* @see SequenceEvaluator
 	* 
+	* 
+	* 
 	* @since 0.1
 	*
 	*/
-	public static FormantSequence splitChaineToFormantSequence(String chaine){//gerer le fait que ce soit bien des doubles
+	public static FormantSequence splitChaineToFormantSequence(String chaine) throws CastFormantException{
+		boolean IsOk=true;
 		String[] tab= chaine.split(" ");
 		ArrayList<Formant> list= new ArrayList<Formant>();
 		FormantSequence fms=null; 
 		
-			if(tab.length>1 && tab.length==nbCharFromPraat && tab[0].compareTo("--undefined--")!=0 && tab[1].compareTo("--undefined--")!=0 && tab[2].compareTo("--undefined--")!=0  && tab[3].compareTo("--undefined--")!=0){
+			if(tab.length<1 || tab.length>nbCharFromPraat || (tab.length>1 && tab.length<nbCharFromPraat)){ // if !=1 ou !=4
+				IsOk=false;
+				throw new CastFormantException(String.valueOf(tab.length));
+			}else if(tab.length==1){// 1 or nbCharFromPraat
+				IsOk=false;
+			}else{ //tab.length equal nbCharFromPraat
+				/* three cases :  not a double => raise exception
+				 * an undefined in the sequence =>return a 0.0 seq, it lighter to treat it here than in the praat script wich is already long in time and not really design for if then else
+				 * niether of the two previous one=> the good answer
+				 */
+				for(int i=0;i<nbCharFromPraat;i++){
+					if(tab[i].compareTo("--undefined--")==0){
+						IsOk=false;
+					}else if(!isDouble(tab[i])){
+						IsOk=false;
+						throw new CastFormantException(tab[i]);
+					}//else it is ok
+				}
+			}
+			
+			//now we create the result with the value of IsOk
+			if(IsOk){
 				list.add(new Formant(Double.parseDouble(tab[0]),Double.parseDouble(tab[2]),0.0));
 				list.add(new Formant(Double.parseDouble(tab[1]),Double.parseDouble(tab[3]),0.0));
 				try {
@@ -62,8 +89,9 @@ public class MessageFromPraat {
 					e.printStackTrace();
 					e.display();
 				}
-			}else{//else its "FIN" or one of the formant values is undefined by praat so we create a empty formant and switch to the next
-				try {
+			}else{
+				try { /*its "FIN" or one of the formant values couldnt have been calculated in praat(see corresponding error in the praat script)
+					so we create a empty formant and switch to the next*/
 					list.add(new Formant());
 					list.add(new Formant());
 					fms = new FormantSequence("candidat", 2,list);
@@ -75,4 +103,19 @@ public class MessageFromPraat {
 			}
 			return fms;
 	}
+	
+	/**
+	* method use to query if the string in param is or not a double
+	*
+	* @return corresponding bolean 
+	*
+	* @since 0.1
+	*
+	*/
+	public static boolean isDouble(String s) {
+	       boolean isValid = true;
+	       try{ Double.parseDouble(s); }
+	       catch(NumberFormatException nfe){ isValid = false; }
+	       return isValid;
+	 }
 }

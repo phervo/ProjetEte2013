@@ -1,6 +1,7 @@
 package communication;
 
 import messages.MessageFromPraat;
+import exceptions.CastFormantException;
 import exceptions.FormantNumberexception;
 import geneticAlogrithm.GeneticAlgorithmCall;
 
@@ -129,7 +130,12 @@ public final class ServerSide implements Runnable{
      *
      */
 	public void storeMessageReceivedFromPraat(String chaine){ //seauentiel donc on peu mettre lq
-		ga.setMessageFromPraat(MessageFromPraat.splitChaineToFormantSequence(chaine));
+		try {
+			ga.setMessageFromPraat(MessageFromPraat.splitChaineToFormantSequence(chaine));
+		} catch (CastFormantException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		//ga.getMutexFitnessFunction().release();
 	}
 

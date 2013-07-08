@@ -19,6 +19,7 @@ import java.util.Random;
 
 
 
+
 import messages.MessageFromPraat;
 import messages.MessageToPraat;
 
@@ -31,6 +32,7 @@ import communication.ServerSide;
 import elements.Formant;
 import elements.FormantSequence;
 import elements.Sequence;
+import exceptions.CastFormantException;
 import exceptions.FormantNumberexception;
 import exceptions.PraatScriptException;
 import exceptions.SequenceArrayException;
@@ -423,28 +425,49 @@ public class UnitaryTestsGA {
 	
 	public static void castFormantTest(){
 		String chaine = "4.0 8.0 3.0 5.0"; 
-		FormantSequence fs = MessageFromPraat.splitChaineToFormantSequence(chaine);
-		fs.displayFormantSequence();
-		chaine = "4.0 8.0 3.0 --undefined--"; 
-		fs = MessageFromPraat.splitChaineToFormantSequence(chaine);
-		fs.displayFormantSequence();
-		chaine = "FIN"; 
-		fs = MessageFromPraat.splitChaineToFormantSequence(chaine);
-		fs.displayFormantSequence();
-		chaine = "n impote quoi"; 
-		fs = MessageFromPraat.splitChaineToFormantSequence(chaine);
-		fs.displayFormantSequence();
+		FormantSequence fs;
+		try {
+			System.out.println("1 : must print 4.0 8.0 3.0 5.0");
+			fs = MessageFromPraat.splitChaineToFormantSequence(chaine);
+			fs.displayFormantSequence();
+			System.out.println("2 : must print 0.0 0.0 0.0 0.0");
+			chaine = "4.0 8.0 3.0 --undefined--"; 
+			fs = MessageFromPraat.splitChaineToFormantSequence(chaine);
+			fs.displayFormantSequence();
+			System.out.println("3 : must print 0.0 0.0 0.0 0.0");
+			chaine = "FIN"; 
+			fs = MessageFromPraat.splitChaineToFormantSequence(chaine);
+			fs.displayFormantSequence();
+			System.out.println("4 : must raise an exception for not enought parameters");
+			chaine = "0.1 0.2 0.3"; 
+			fs = MessageFromPraat.splitChaineToFormantSequence(chaine);
+		} catch (CastFormantException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			e.display();
+		}
+		try{
+			System.out.println("5 : must raise an exception for not a double");
+			chaine = "0.1 0.2 0.3 toto"; 
+			fs = MessageFromPraat.splitChaineToFormantSequence(chaine);
+		}catch(CastFormantException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			e.display();
+		}
 	}
 	
 	 private static class ClasseInterne{ // internal class for a main
 		 public static void main(String[] args){
 			 //UnitaryTestsGA.testFormantAndFormantSequence();
-			 UnitaryTestsGA.testSequence();
+			 //UnitaryTestsGA.testSequence();
 			 //UnitaryTestsGA.testPraat();
 			 //UnitaryTestsGA.testSequenceFactory();
 			 //UnitaryTestsGA.testCrossOver();
 			 //UnitaryTestsGA.testMutation();
 			 //UnitaryTestsGA.PraatSCript();
+			 UnitaryTestsGA.castFormantTest();
+			 
 		 }
 		 
 	 }

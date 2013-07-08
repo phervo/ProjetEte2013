@@ -29,7 +29,7 @@ public class FormantNumberexception extends Exception{
 	private int listLenght;
 	
 	/**
-	* Constructor for incorrect setting, getting or init, Indicate where the problem is located
+	* Constructor for incorrect setting, getting or init.
 	*
 	* @param nbFormants
 	*   the number of formant of the instance 

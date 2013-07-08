@@ -234,10 +234,11 @@ public class MessageToPraat {
 
 	/**
 	* script use to clear the memory of praat by removing all the objects in he object list.
-	* We use it because praat had a maximal capacity of object in memory and so using a GA could reach this cpacity.
+	* We use it because praat had a maximal capacity of object in memory and so using a GA could reach this capacity.
 	* So we clean the object window from time to time at each end of generation.
 	* this function recreate the two speakers. 
-	 * @return 
+	*
+	* @return String containing the script to execute
 	*
 	* @since 0.1
 	*

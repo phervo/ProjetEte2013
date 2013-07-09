@@ -147,7 +147,7 @@ public class MessageToPraat {
 					stb.append("# 1) get the values\n");
 					stb.append("To Formant (burg)... 0 5 5500 0.025 50\n");
 					stb.append("numberOfFormant = Get number of formants... 1\n");
-					stb.append("writeInfoLine(numberOfFormant)\n");
+					//stb.append("writeInfoLine(numberOfFormant)\n");
 					stb.append("if numberOfFormant>="+nbFormantMax+"\n"); //if good number of formant
 					stb.append("time = Get total duration\n");
 					stb.append("midTime = time/2\n");

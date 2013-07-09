@@ -21,6 +21,7 @@ import java.util.Random;
 
 
 
+
 import messages.MessageFromPraat;
 import messages.MessageToPraat;
 
@@ -33,6 +34,7 @@ import communication.ServerSide;
 import elements.Formant;
 import elements.FormantSequence;
 import elements.GlobalAlphabet;
+import elements.LungsAlphabet;
 import elements.Sequence;
 import exceptions.CastFormantException;
 import exceptions.FormantNumberexception;
@@ -469,6 +471,8 @@ public class UnitaryTestsGA {
 			 //UnitaryTestsGA.testMutation();
 			 //UnitaryTestsGA.PraatSCript();
 			 //UnitaryTestsGA.castFormantTest();
+			 GlobalAlphabet gla = new GlobalAlphabet();
+			 gla.displayAllAlphabets();
 		 }
 		 
 	 }

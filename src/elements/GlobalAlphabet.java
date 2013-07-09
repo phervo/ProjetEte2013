@@ -1,27 +1,27 @@
 package elements;
 
 public class GlobalAlphabet {
-	private LungsAlphabet la;
-	private MasseterAlphabet ma;
-	private OtherAlphabet oa;
+	private LungsAlphabet lungsAlphabet;
+	private MasseterAlphabet masseterAlphabet;
+	private OtherAlphabet otherAlphabet;
 	
 	public GlobalAlphabet() {
 		super();
-		this.la = new LungsAlphabet();
-		this.ma = new MasseterAlphabet();
-		this.oa = new OtherAlphabet();
+		this.lungsAlphabet = new LungsAlphabet(-0.5,1.5, 1);
+		this.masseterAlphabet = new MasseterAlphabet(-0.5,0.5,1);
+		this.otherAlphabet = new OtherAlphabet(0.0,1.0,1);
 	}
 
-	public LungsAlphabet getLa() {
-		return la;
+	public LungsAlphabet getLungsAlphabet() {
+		return lungsAlphabet;
 	}
 
-	public MasseterAlphabet getMa() {
-		return ma;
+	public MasseterAlphabet getMasseterAlphabet() {
+		return masseterAlphabet;
 	}
 
-	public OtherAlphabet getOa() {
-		return oa;
+	public OtherAlphabet getOtherAlphabe() {
+		return otherAlphabet;
 	}
 	
 	/**
@@ -29,16 +29,16 @@ public class GlobalAlphabet {
 	 */
 	public void displayAllAlphabets(){
 		System.out.println("alphabet of lungs");
-		for(int i=0;i<la.getLength();i++){
-			System.out.println(this.la.getValueAt(i));
+		for(int i=0;i<lungsAlphabet.getLength();i++){
+			System.out.println(this.lungsAlphabet.getValueAt(i));
 		}
 		System.out.println("alphabet of masseter");
-		for(int i=0;i<ma.getLength();i++){
-			System.out.println(this.ma.getValueAt(i));
+		for(int i=0;i<masseterAlphabet.getLength();i++){
+			System.out.println(this.masseterAlphabet.getValueAt(i));
 		}
 		System.out.println("alphabet of others");
-		for(int i=0;i<oa.getLength();i++){
-			System.out.println(this.oa.getValueAt(i));
+		for(int i=0;i<otherAlphabet.getLength();i++){
+			System.out.println(this.otherAlphabet.getValueAt(i));
 		}
 	}
 }

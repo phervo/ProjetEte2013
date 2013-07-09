@@ -77,11 +77,11 @@ public class SequenceFactory extends AbstractCandidateFactory<Sequence>{
 				//separation selon les valeurs de var
 				try {
 					if(i==0 || i==1){ // lungs
-						mySeq.setValues(i, globalAlphabet.getLa().getValueAt(rng.nextInt(globalAlphabet.getLa().getLength())));
+						mySeq.setValues(i, globalAlphabet.getLungsAlphabet().getValueAt(rng.nextInt(globalAlphabet.getLungsAlphabet().getLength())));
 					}else if(i==16 || i==17){ //masseter
-						mySeq.setValues(i, globalAlphabet.getMa().getValueAt(rng.nextInt(globalAlphabet.getMa().getLength())));
+						mySeq.setValues(i, globalAlphabet.getMasseterAlphabet().getValueAt(rng.nextInt(globalAlphabet.getMasseterAlphabet().getLength())));
 					}else{
-						mySeq.setValues(i, globalAlphabet.getOa().getValueAt(rng.nextInt(globalAlphabet.getOa().getLength())));
+						mySeq.setValues(i, globalAlphabet.getOtherAlphabe().getValueAt(rng.nextInt(globalAlphabet.getOtherAlphabe().getLength())));
 					}
 				
 				} catch (SequenceArrayException e) {

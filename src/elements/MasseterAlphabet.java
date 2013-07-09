@@ -1,23 +1,19 @@
 package elements;
 
+import messages.MessageFromPraat;
+
 public class MasseterAlphabet {
 	private double [] values;
 	private int length;
 	
-	public MasseterAlphabet(){
-		this.length=11;
+	public MasseterAlphabet(double minBorn,double maxborn,int nbDigits){
+		this.length = (int) MessageFromPraat.arrondir((((maxborn-minBorn)/0.1)+1),0);//case 0
 		this.values =  new double[this.length];
-		this.values[0]=-0.5;
-		this.values[1]=-0.4;
-		this.values[2]=-0.3;
-		this.values[3]=-0.2;
-		this.values[4]=-0.1;
-		this.values[5]=0.0;
-		this.values[6]=0.1;
-		this.values[7]=0.2;
-		this.values[8]=0.3;
-		this.values[9]=0.4;
-		this.values[10]=0.5;
+		
+		for(int i=0;i<this.length;i++){
+			this.values[i]=minBorn;
+			minBorn=MessageFromPraat.arrondir(minBorn+0.1,nbDigits);
+		}
 	}
 	public double getValueAt(int i){
 		return values[i];

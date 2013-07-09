@@ -80,8 +80,8 @@ public class MessageFromPraat {
 			
 			//now we create the result with the value of IsOk
 			if(IsOk){
-				list.add(new Formant(Double.parseDouble(tab[0]),Double.parseDouble(tab[2]),0.0));
-				list.add(new Formant(Double.parseDouble(tab[1]),Double.parseDouble(tab[3]),0.0));
+				list.add(new Formant(arrondir(Double.parseDouble(tab[0]),1),arrondir(Double.parseDouble(tab[2]),1),0.0));
+				list.add(new Formant(arrondir(Double.parseDouble(tab[1]),1),arrondir(Double.parseDouble(tab[3]),1),0.0));
 				try {
 					fms=new FormantSequence("candidat", 2,list);
 				} catch (FormantNumberexception e) {
@@ -118,4 +118,23 @@ public class MessageFromPraat {
 	       catch(NumberFormatException nfe){ isValid = false; }
 	       return isValid;
 	 }
+	
+	/**
+	* method use get a double with n digit after the comma
+	*
+	* @param value
+	*  the original value
+	*  
+	* @param n
+	* 	the number of digits after the comma
+	*
+	* @return corresponding double 
+	*
+	* @since 0.1
+	*
+	*/
+	static public double arrondir(double value, int n) { 
+		double r = (Math.round(value * Math.pow(10, n))) / (Math.pow(10, n)); 
+		return r; 
+	} 
 }

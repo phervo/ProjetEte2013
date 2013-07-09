@@ -264,7 +264,7 @@ public class GeneticAlgorithmCall{
 				    	OrderToPraat.sendMessageToPrat(MessageToPraat.clearPraatObjectWindow());
 				    }
 				});
-		engine.evolve(10, 0, new TargetFitness(3,true));
+		engine.evolve(10, 0, new TargetFitness(3,mySeqEval.isNatural()));
 	}
 
 	/**

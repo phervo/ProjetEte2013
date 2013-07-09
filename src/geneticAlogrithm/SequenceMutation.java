@@ -114,11 +114,11 @@ public class SequenceMutation implements EvolutionaryOperator<Sequence>{
             {
             	try {
             		if(i==0 || i==1){ // lungs
-						retour.setValues(i, globalAlphabet.getLa().getValueAt(rng.nextInt(globalAlphabet.getLa().getLength())));
+            			retour.setValues(i, globalAlphabet.getLungsAlphabet().getValueAt(rng.nextInt(globalAlphabet.getLungsAlphabet().getLength())));
 					}else if(i==16 || i==17){ //masseter
-						retour.setValues(i, globalAlphabet.getMa().getValueAt(rng.nextInt(globalAlphabet.getMa().getLength())));
+						retour.setValues(i, globalAlphabet.getMasseterAlphabet().getValueAt(rng.nextInt(globalAlphabet.getMasseterAlphabet().getLength())));
 					}else{
-						retour.setValues(i, globalAlphabet.getOa().getValueAt(rng.nextInt(globalAlphabet.getOa().getLength())));
+						retour.setValues(i, globalAlphabet.getOtherAlphabe().getValueAt(rng.nextInt(globalAlphabet.getOtherAlphabe().getLength())));
 					}
 				} catch (SequenceArrayException e) {
 					// TODO Auto-generated catch block

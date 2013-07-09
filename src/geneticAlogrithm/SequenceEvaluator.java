@@ -101,14 +101,25 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 			System.out.println(candidate.getValuesInString());
 			OrderToPraat.sendMessageToPrat(MessageToPraat.writePraatScriptWithCandidates(candidate));
 		//2) recuperer le resultat dans messageFromPraat (attente serveur et socket si besoin) et le comparer a la cible
+			
+			
+					
 	    	for(int i=0;i<this.targetSequence.getNbFormant();i++){
-	    		if(ga.getMessageFromPraat().getFormantAt(i).getFrequency()==this.targetSequence.getFormantAt(i).getFrequency()){
+	    		/*there is an interval of +/-10% around the value so we caluclate this value*/
+	    		double lowerBornfreq = this.targetSequence.getFormantAt(i).getFrequency()*0.9;
+	    		double upperBornfreq = this.targetSequence.getFormantAt(i).getFrequency()*1.1;
+	    		double lowerBornBW = this.targetSequence.getFormantAt(i).getBandwith()*0.9;
+	    		double upperBornBW = this.targetSequence.getFormantAt(i).getBandwith()*1.1;
+	    		double lowerBornA = this.targetSequence.getFormantAt(i).getAmplitude()*0.9;
+	    		double upperBornA = this.targetSequence.getFormantAt(i).getAmplitude()*1.1;
+	    		
+	    		if(ga.getMessageFromPraat().getFormantAt(i).getFrequency()>lowerBornfreq && ga.getMessageFromPraat().getFormantAt(i).getFrequency()<upperBornfreq){
 					matches++;
 				}
-				if(ga.getMessageFromPraat().getFormantAt(i).getBandwith()==this.targetSequence.getFormantAt(i).getBandwith()){
+				if(ga.getMessageFromPraat().getFormantAt(i).getBandwith()>lowerBornBW && ga.getMessageFromPraat().getFormantAt(i).getBandwith()<upperBornBW){
 					matches++;
 				}
-				if(ga.getMessageFromPraat().getFormantAt(i).getAmplitude()==this.targetSequence.getFormantAt(i).getAmplitude()){
+				if(ga.getMessageFromPraat().getFormantAt(i).getAmplitude()>lowerBornA && ga.getMessageFromPraat().getFormantAt(i).getAmplitude()<upperBornA){
 					matches++;
 				}
 			}

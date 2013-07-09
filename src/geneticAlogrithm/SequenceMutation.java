@@ -115,7 +115,7 @@ public class SequenceMutation implements EvolutionaryOperator<Sequence>{
             	try {
             		if(i==0 || i==1){ // lungs
             			retour.setValues(i, globalAlphabet.getLungsAlphabet().getValueAt(rng.nextInt(globalAlphabet.getLungsAlphabet().getLength())));
-					}else if(i==16 || i==17){ //masseter
+					}else if(i==15 || i==16){ //masseter
 						retour.setValues(i, globalAlphabet.getMasseterAlphabet().getValueAt(rng.nextInt(globalAlphabet.getMasseterAlphabet().getLength())));
 					}else{
 						retour.setValues(i, globalAlphabet.getOtherAlphabe().getValueAt(rng.nextInt(globalAlphabet.getOtherAlphabe().getLength())));

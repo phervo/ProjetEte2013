@@ -7,9 +7,9 @@ public class GlobalAlphabet {
 	
 	public GlobalAlphabet() {
 		super();
-		this.lungsAlphabet = new LungsAlphabet(-0.5,1.5, 1);
-		this.masseterAlphabet = new MasseterAlphabet(-0.5,0.5,1);
-		this.otherAlphabet = new OtherAlphabet(0.0,1.0,1);
+		this.lungsAlphabet = new LungsAlphabet(0.0,0.2,2);
+		this.masseterAlphabet = new MasseterAlphabet(-0.5,0.5,2);
+		this.otherAlphabet = new OtherAlphabet(0.0,1.0,2);
 	}
 
 	public LungsAlphabet getLungsAlphabet() {

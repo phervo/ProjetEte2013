@@ -34,7 +34,7 @@ public class MessageToPraat {
 	 * It allow to verify that the sequence given to the function is long enough. 
 	 * 
 	 */
-	private static final int nbVarToSendToPraat=20;
+	private static final int nbVarToSendToPraat=19;
 	
 	/**
 	* constructor without parameters, just create to override the default java constructor.
@@ -97,44 +97,44 @@ public class MessageToPraat {
 				stb.append("#-----------------------------------------------\n");
 				try {
 					stb.append("Set target... 0.0    "+candidat.getValuesAt(0)+" Lungs\n");
-					stb.append("Set target... 0.5     "+candidat.getValuesAt(1)+" Lungs\n");
+					stb.append("Set target... 2.0     "+candidat.getValuesAt(1)+" Lungs\n");
 					stb.append("#-----------------------------------------------\n");
 					stb.append("# Control glottis\n");
 					stb.append("#-----------------------------------------------\n");
 					stb.append("#Glottal closure\n");
-					stb.append("Set target... 0.0   "+candidat.getValuesAt(2)+" Interarytenoid\n");
-					stb.append("Set target... 0.5   "+candidat.getValuesAt(3)+" Interarytenoid\n");
+					stb.append("Set target... 0.0  0.5  Interarytenoid\n"); //this one is fixed
+					stb.append("Set target... 2.0  0.5 Interarytenoid\n");
 					stb.append("#\n");
 					stb.append("# Adduct vocal folds\n");
-					stb.append("Set target... 0.0   "+candidat.getValuesAt(4)+" Cricothyroid\n");
-					stb.append("Set target... 0.5   "+candidat.getValuesAt(5)+" Cricothyroid\n");
+					stb.append("Set target... 0.0   "+candidat.getValuesAt(3)+" Cricothyroid\n");
+					stb.append("Set target... 2.0   "+candidat.getValuesAt(4)+" Cricothyroid\n");
 					stb.append("# Close velopharyngeal port\n");
 					stb.append("#-----------------------------------------------\n");
-					stb.append("Set target... 0.0   "+candidat.getValuesAt(6)+" LevatorPalatini\n");
-					stb.append("Set target... 0.5   "+candidat.getValuesAt(7)+" LevatorPalatini\n");
+					stb.append("Set target... 0.0   "+candidat.getValuesAt(5)+" LevatorPalatini\n");
+					stb.append("Set target... 2.0   "+candidat.getValuesAt(6)+" LevatorPalatini\n");
 					stb.append("#-----------------------------------------------\n");
 					stb.append("#-----------------------------------------------\n");
-					stb.append("Set target... 0.0   "+candidat.getValuesAt(8)+" Genioglossus\n");
-					stb.append("Set target... 0.5   "+candidat.getValuesAt(9)+" Genioglossus\n");
+					stb.append("Set target... 0.0   "+candidat.getValuesAt(7)+" Genioglossus\n");
+					stb.append("Set target... 2.0   "+candidat.getValuesAt(8)+" Genioglossus\n");
 					stb.append("#\n");
-					stb.append("Set target... 0.5   "+candidat.getValuesAt(10)+" Styloglossus\n");
-					stb.append("Set target... 0.5   "+candidat.getValuesAt(11)+" Styloglossus\n");
+					stb.append("Set target... 0.5   "+candidat.getValuesAt(9)+" Styloglossus\n");
+					stb.append("Set target... 2.0   "+candidat.getValuesAt(10)+" Styloglossus\n");
 					stb.append("#\n");
-					stb.append("Set target... 0.5   "+candidat.getValuesAt(12)+" Mylohyoid\n");
-					stb.append("Set target... 0.5   "+candidat.getValuesAt(13)+" Mylohyoid\n");
+					stb.append("Set target... 0.5   "+candidat.getValuesAt(11)+" Mylohyoid\n");
+					stb.append("Set target... 2.0   "+candidat.getValuesAt(12)+" Mylohyoid\n");
 					stb.append("#\n");
-					stb.append("Set target... 0.5   "+candidat.getValuesAt(14)+" OrbicularisOris\n");
-					stb.append("Set target... 0.5   "+candidat.getValuesAt(15)+" OrbicularisOris\n");
+					stb.append("Set target... 0.5   "+candidat.getValuesAt(13)+" OrbicularisOris\n");
+					stb.append("Set target... 2.0   "+candidat.getValuesAt(14)+" OrbicularisOris\n");
 					stb.append("#-----------------------------------------------\n");
 					stb.append("# Shape mouth to open vowel\n");
 					stb.append("#-----------------------------------------------\n");
 					stb.append("# Lower the jaw\n");
 					stb.append("# -----------------------------------------\n");
-					stb.append("Set target... 0.0   "+candidat.getValuesAt(16)+" Masseter\n");
-					stb.append("Set target... 0.5   "+candidat.getValuesAt(17)+" Masseter\n");
+					stb.append("Set target... 0.0   "+candidat.getValuesAt(15)+" Masseter\n");
+					stb.append("Set target... 2.0   "+candidat.getValuesAt(16)+" Masseter\n");
 					stb.append("# Pull tongue backwards\n");
-					stb.append("Set target... 0.0   "+candidat.getValuesAt(18)+" Hyoglossus\n");
-					stb.append("Set target... 0.5   "+candidat.getValuesAt(19)+" Hyoglossus\n");
+					stb.append("Set target... 0.0   "+candidat.getValuesAt(17)+" Hyoglossus\n");
+					stb.append("Set target... 2.0   "+candidat.getValuesAt(18)+" Hyoglossus\n");
 					stb.append("# Synthesise the sound\n");
 					stb.append("#-----------------------------------------------\n");
 					stb.append("select Artword phon\n");

@@ -78,7 +78,7 @@ public class SequenceFactory extends AbstractCandidateFactory<Sequence>{
 				try {
 					if(i==0 || i==1){ // lungs
 						mySeq.setValues(i, globalAlphabet.getLungsAlphabet().getValueAt(rng.nextInt(globalAlphabet.getLungsAlphabet().getLength())));
-					}else if(i==16 || i==17){ //masseter
+					}else if(i==15 || i==16){ //masseter
 						mySeq.setValues(i, globalAlphabet.getMasseterAlphabet().getValueAt(rng.nextInt(globalAlphabet.getMasseterAlphabet().getLength())));
 					}else{
 						mySeq.setValues(i, globalAlphabet.getOtherAlphabe().getValueAt(rng.nextInt(globalAlphabet.getOtherAlphabe().getLength())));

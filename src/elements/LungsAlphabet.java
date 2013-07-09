@@ -8,12 +8,12 @@ public class LungsAlphabet {
 	private int length;
 	
 	public LungsAlphabet(double minBorn,double maxborn,int nbDigits){ //erreures a gerer plus tard exceptions
-		this.length = (int) MessageFromPraat.arrondir((((maxborn-minBorn)/0.1)+1),0);//case 0
+		this.length = (int) MessageFromPraat.arrondir((((maxborn-minBorn)/0.01)+1),0);//case 0
 		this.values =  new double[this.length];
 		
 		for(int i=0;i<this.length;i++){
 			this.values[i]=minBorn;
-			minBorn=MessageFromPraat.arrondir(minBorn+0.1,nbDigits);
+			minBorn=MessageFromPraat.arrondir(minBorn+0.01,nbDigits);
 		}
 	}
 	public double getValueAt(int i){

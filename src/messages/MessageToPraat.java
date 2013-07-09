@@ -125,7 +125,6 @@ public class MessageToPraat {
 					stb.append("#\n");
 					stb.append("Set target... 0.5   "+candidat.getValuesAt(14)+" OrbicularisOris\n");
 					stb.append("Set target... 0.5   "+candidat.getValuesAt(15)+" OrbicularisOris\n");
-					
 					stb.append("#-----------------------------------------------\n");
 					stb.append("# Shape mouth to open vowel\n");
 					stb.append("#-----------------------------------------------\n");

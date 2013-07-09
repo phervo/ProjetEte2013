@@ -113,13 +113,13 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 	    		double lowerBornA = this.targetSequence.getFormantAt(i).getAmplitude()*0.9;
 	    		double upperBornA = this.targetSequence.getFormantAt(i).getAmplitude()*1.1;
 	    		
-	    		if(ga.getMessageFromPraat().getFormantAt(i).getFrequency()>lowerBornfreq && ga.getMessageFromPraat().getFormantAt(i).getFrequency()<upperBornfreq){
+	    		if((ga.getMessageFromPraat().getFormantAt(i).getFrequency()>=lowerBornfreq && ga.getMessageFromPraat().getFormantAt(i).getFrequency()<=upperBornfreq)){
 					matches++;
 				}
-				if(ga.getMessageFromPraat().getFormantAt(i).getBandwith()>lowerBornBW && ga.getMessageFromPraat().getFormantAt(i).getBandwith()<upperBornBW){
+				if(ga.getMessageFromPraat().getFormantAt(i).getBandwith()>=lowerBornBW && ga.getMessageFromPraat().getFormantAt(i).getBandwith()<=upperBornBW ){
 					matches++;
 				}
-				if(ga.getMessageFromPraat().getFormantAt(i).getAmplitude()>lowerBornA && ga.getMessageFromPraat().getFormantAt(i).getAmplitude()<upperBornA){
+				if(ga.getMessageFromPraat().getFormantAt(i).getAmplitude()>=lowerBornA && ga.getMessageFromPraat().getFormantAt(i).getAmplitude()<=upperBornA){
 					matches++;
 				}
 			}

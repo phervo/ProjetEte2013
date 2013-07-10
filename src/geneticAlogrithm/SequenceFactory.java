@@ -21,7 +21,7 @@ import exceptions.SequenceArrayException;
  */
 public class SequenceFactory extends AbstractCandidateFactory<Sequence>{
 	/**
-	 * The alphabet of all the possible values that a member of a Sequence could take.
+	 * The Meta-alphabet of all the possible values that a member of a Sequence could take.
 	 * 
 	 */
 	private GlobalAlphabet globalAlphabet;
@@ -35,12 +35,12 @@ public class SequenceFactory extends AbstractCandidateFactory<Sequence>{
 	* Constructor with given parameters 
 	*
 	*
-	* @param alphabet
+	* @param globalAlphabet
 	* 	see description above
 	* @param length
 	* see description above
 	* 
-	* @see SequenceFactory#alphabet
+	* @see SequenceFactory#globalAlphabet
 	* @see SequenceFactory#length
 	* 
 	* @since 0.1
@@ -81,7 +81,7 @@ public class SequenceFactory extends AbstractCandidateFactory<Sequence>{
 					}else if(i==15 || i==16){ //masseter
 						mySeq.setValues(i, globalAlphabet.getMasseterAlphabet().getValueAt(rng.nextInt(globalAlphabet.getMasseterAlphabet().getLength())));
 					}else{
-						mySeq.setValues(i, globalAlphabet.getOtherAlphabe().getValueAt(rng.nextInt(globalAlphabet.getOtherAlphabe().getLength())));
+						mySeq.setValues(i, globalAlphabet.getOtherAlphabet().getValueAt(rng.nextInt(globalAlphabet.getOtherAlphabet().getLength())));
 					}
 				
 				} catch (SequenceArrayException e) {

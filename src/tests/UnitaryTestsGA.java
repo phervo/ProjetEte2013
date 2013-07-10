@@ -49,7 +49,6 @@ import geneticAlogrithm.SequenceMutation;
 /** <p>Class where i put my unitary test to be sure that if i made modifications on the source code of a class, it will continue
  * to work properly. I will make small functions for each. It is only unitary test, another class is available for integration test</p>
  * 
- * @see IntegrationTest
  *  
  * @author Pierre-Yves Hervo
  * @version 0.1

@@ -38,12 +38,12 @@ public class SequenceMutation implements EvolutionaryOperator<Sequence>{
 	* Constructor with given parameters 
 	*
 	*
-	* @param alphabet
+	* @param  globalAlphabet
 	* 	see description above
 	* @param mutationProbability
 	* see description above
 	* 
-	* @see SequenceMutation#alphabet
+	* @see SequenceMutation#globalAlphabet
 	* @see SequenceMutation#mutationProbability
 	* 
 	* @since 0.1
@@ -59,12 +59,12 @@ public class SequenceMutation implements EvolutionaryOperator<Sequence>{
 	* Constructor with given parameters. Same thing that the previous one but wih another object type for Probability
 	*
 	*
-	* @param alphabet
+	* @param  globalAlphabet
 	* 	see description above
 	* @param mutationProbability
 	* see description above
 	* 
-	* @see SequenceMutation#alphabet
+	* @see SequenceMutation#globalAlphabet
 	* @see SequenceMutation#mutationProbability
 	* 
 	* @since 0.1
@@ -118,7 +118,7 @@ public class SequenceMutation implements EvolutionaryOperator<Sequence>{
 					}else if(i==15 || i==16){ //masseter
 						retour.setValues(i, globalAlphabet.getMasseterAlphabet().getValueAt(rng.nextInt(globalAlphabet.getMasseterAlphabet().getLength())));
 					}else{
-						retour.setValues(i, globalAlphabet.getOtherAlphabe().getValueAt(rng.nextInt(globalAlphabet.getOtherAlphabe().getLength())));
+						retour.setValues(i, globalAlphabet.getOtherAlphabet().getValueAt(rng.nextInt(globalAlphabet.getOtherAlphabet().getLength())));
 					}
 				} catch (SequenceArrayException e) {
 					// TODO Auto-generated catch block

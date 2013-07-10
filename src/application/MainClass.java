@@ -1,3 +1,4 @@
+
 package application;
 
 import java.util.ArrayList;
@@ -5,14 +6,16 @@ import java.util.ArrayList;
 import communication.CloseServer;
 import communication.OrderToPraat;
 import communication.ServerThread;
-import elements.Formant;
-import elements.FormantSequence;
-import elements.Sequence;
 import exceptions.FormantNumberexception;
 import messages.MessageToPraat;
 import geneticAlogrithm.GeneticAlgorithmCall;
 
-
+/** <p>Main class which call the Genetic algorithm, praat and the java Server<br/>
+ * It is the executed part of the program</p>
+ *  
+ * @author Pierre-Yves Hervo
+ * @version 0.1
+ */
 
 public class MainClass {
 	

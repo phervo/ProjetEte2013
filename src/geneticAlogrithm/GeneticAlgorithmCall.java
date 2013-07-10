@@ -317,10 +317,24 @@ public class GeneticAlgorithmCall{
 		availablevalue.release();
 	}
 
+	/**
+	* Return the semaphore for the fitness function. It is used in FitnessEvaluator to forbid the function to be launch twice.
+	* 
+	* @return frequency value of the instance
+	*
+	* @since 0.1
+	*
+	*/
 	public Semaphore getMutexFitnessFunction() {
 		return availableFitnessfunction;
 	}
 	
+	/**
+	* Method which set the value of finalSeauence. it is used at each end of generation to store the value of the best candidate.
+	*
+	* @since 0.1
+	*
+	*/
 	public void setSequence(Sequence c){
 		this.finalsequence = c;
 	}

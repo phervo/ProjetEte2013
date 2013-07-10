@@ -37,7 +37,7 @@ public class FormantNumberexception extends Exception{
 	* @param index
 	* 	the index you try to access
 	* 
-	* @param listLenght
+	* @param parameterlistLenght
 	* 	the length of the list of formant in parameters
 	* 
 

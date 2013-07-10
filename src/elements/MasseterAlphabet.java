@@ -2,6 +2,15 @@ package elements;
 
 import messages.MessageFromPraat;
 
+/** <p>Class which define all the possible values for the masseter parameter of praat.<br/>
+ * It will be use in the class manipulating sequences to give a value in a specific interval to the masseter parameter.
+ * It wont be use directly, it will be use thought a meta alphabet, a GlobalAlphabet</p>
+ * 
+ * @see GlobalAlphabet
+ *  
+ * @author Pierre-Yves Hervo
+ * @version 0.1
+ */
 public class MasseterAlphabet {
 	private double [] values;
 	private int length;
@@ -23,7 +32,9 @@ public class MasseterAlphabet {
 	}
 	
 	/**
-	 * Display the alphabet on the screen. Use to checkout.
+	 * Display the alphabet on the screen. 
+	 * @since 0.1
+	 *
 	 */
 	public void displayAlphabet(){
 		for(int i=0;i<length;i++){

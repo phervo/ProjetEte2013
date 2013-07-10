@@ -101,7 +101,8 @@ public class MessageToPraat {
 				stb.append("#-----------------------------------------------\n");
 				try {
 					stb.append("Set target... 0.0    "+candidat.getValuesAt(0)+" Lungs\n");
-					stb.append("Set target... "+Speachtime+"     "+candidat.getValuesAt(1)+" Lungs\n");
+					stb.append("Set target... 0.25     "+candidat.getValuesAt(1)+" Lungs\n");
+					stb.append("Set target... "+Speachtime+"     0.0 Lungs\n");
 					stb.append("#-----------------------------------------------\n");
 					stb.append("# Control glottis\n");
 					stb.append("#-----------------------------------------------\n");
@@ -182,12 +183,9 @@ public class MessageToPraat {
 	}
 	
 	/**
-	* Return a String containing a praat script fill in with the values of the sequence in parameters.
-	* Contrary to the previous function, it wont query the result neither send a response. 
-	* It is just a way to regenerate a sequence and see in the end if we get the good sequence.
-	* You must have initialize the praat environment with writePraatScriptHeader() before.
+	* Write a file with the script for generate a voice synthesis with parameters from a sequence.
+	* It is designed to be used at the end of the Ga and return the best candidate in a script that can be directly executed under praat.
 	*
-	* @return String containing the script for creating a sound
 	* @throws PraatScriptException If you gave an incorrect sequence
 	*
 	* @since 0.1

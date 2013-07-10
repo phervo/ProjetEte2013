@@ -11,24 +11,25 @@ import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-/** <p>Class wich define a server that will listen for praat answer in a particular port.<br/>
+/** <p>Class wich define a thread containing a Java server that will listen for praat answer in a particular port.<br/>
  * As praat communicate with sockets, it is an obligation to have a server that is listening all the time so the server is design to be a thread.<br/>
  * A waiting mechanism is defined to be sure that the action lanch in this class are finished before doing anything else.<br/>
  * To be sure that there is only one instance of the server at every moment, this class is design on the singleton design pattern principle<br/>
  * As it will be launch in a new thread and wont do anything until catching a message,we create a specific class which will send it the terminaison String
- * It is the class CloseServer</p>
+ * It is the class CloseServer<br/>
+ * IMPORTANT : the implementation need to implements Thread and not extends Thread server to be sure that the thread is created in getInstance and not elsewhere.</p>
  * 
  * @see CloseServer
  *  
  * @author Pierre-Yves Hervo
  * @version 0.1
  */
-public final class ServerSide implements Runnable{
+public final class ServerThread extends Thread{
 	/**
 	 * The instance of ServerSide.
 	 * 
 	 */
-	private static volatile ServerSide instance=null;
+	private static volatile ServerThread instance=null;
 	
 	/**
 	 * a ServerSocket to listen on a particular port.
@@ -64,7 +65,7 @@ public final class ServerSide implements Runnable{
     * @since 0.1
     *
     */
-    private ServerSide(GeneticAlgorithmCall ga){
+    private ServerThread(GeneticAlgorithmCall ga){
     	super();
     	this.ga=ga;
     	try {
@@ -86,15 +87,17 @@ public final class ServerSide implements Runnable{
      * @since 0.1
      *
      */
-    public final static ServerSide getInstance(GeneticAlgorithmCall ga){
-    	if(ServerSide.instance==null){
-    		synchronized(ServerSide.class){
-    			if(ServerSide.instance ==null){
-    				ServerSide.instance = new ServerSide(ga);
+    public final static ServerThread getInstance(GeneticAlgorithmCall ga){
+    	if(ServerThread.instance==null){
+    		synchronized(ServerThread.class){
+    			if(ServerThread.instance ==null){
+    				ServerThread.instance = new ServerThread(ga);
+    				Thread t = new Thread(ServerThread.instance,"ThreadServer");
+    				t.start();
     			}
     		}
     	}
-    	return ServerSide.instance;
+    	return ServerThread.instance;
     }
     
     /**

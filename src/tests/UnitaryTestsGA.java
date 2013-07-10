@@ -30,7 +30,7 @@ import org.uncommons.maths.random.Probability;
 
 import communication.CloseServer;
 import communication.OrderToPraat;
-import communication.ServerSide;
+import communication.ServerThread;
 import elements.Formant;
 import elements.FormantSequence;
 import elements.GlobalAlphabet;
@@ -74,7 +74,7 @@ public class UnitaryTestsGA {
 		GeneticAlgorithmCall ga;
 		try {
 			ga = new GeneticAlgorithmCall(13);
-			ServerSide serverJavaGa= ServerSide.getInstance(ga);
+			ServerThread serverJavaGa= ServerThread.getInstance(ga);
 			Thread t = new Thread(serverJavaGa,"ThreadServer");
 			t.start();
 			CloseServer.envoyerMessageFermeture();

@@ -54,7 +54,7 @@ public class OrderToPraat {
 	* @since 0.1
 	*
 	*/
-	public static void sendMessageToPrat(String fileName){
+	public static synchronized void sendMessageToPrat(String fileName){
 		String[] sendpraatCom ={"sendpraat", "praat",fileName};
 		Runtime run = Runtime.getRuntime();
 		try {

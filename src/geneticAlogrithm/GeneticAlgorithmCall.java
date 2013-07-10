@@ -24,11 +24,12 @@ import org.uncommons.watchmaker.framework.termination.GenerationCount;
 import org.uncommons.watchmaker.framework.termination.TargetFitness;
 
 import communication.OrderToPraat;
-import communication.ServerSide;
+import communication.ServerThread;
 import elements.FormantSequence;
 import elements.GlobalAlphabet;
 import elements.Sequence;
 import exceptions.FormantNumberexception;
+import exceptions.PraatScriptException;
 
 /** <p>This is the main Class for the GA.<br/>
  * It use the Genetic algorithm device provide by the watchMaker's API and the class I redefined for it. See the corresponding doc for more information<br/>
@@ -122,6 +123,12 @@ public class GeneticAlgorithmCall{
 	private final Semaphore availableFitnessfunction = new Semaphore(1, true); 
 	
 	/**
+	 * Var to store the best candidate a each generation. 
+	 * This value will be use at he end to write the correct praat script.
+	 */
+	private Sequence finalsequence;
+	
+	/**
 	* Constructor where we specified the length of the sequence we will use. Initialize the other attribute to null.
 	* 
 	*
@@ -146,6 +153,7 @@ public class GeneticAlgorithmCall{
 		this.rng=null;
 		this.engine=null;
 		this.messageFromPraat=new FormantSequence(2); //it is just an init
+		this.finalsequence=null;
 	}
 	
 	/**
@@ -254,17 +262,14 @@ public class GeneticAlgorithmCall{
 		
 		//start the engine
 		engine = new GenerationalEvolutionEngine<Sequence>(mySequenceFactory, pipeline, mySeqEval, selection, rng);
-		engine.addEvolutionObserver(new EvolutionObserver<Sequence>()
-				{
-				    public void populationUpdate(PopulationData<? extends Sequence> data)
-				    {
-				    	System.out.printf("Generation %d: %s\n",
-				                          data.getGenerationNumber(),
-				                          data.getBestCandidate().getValuesInString());
-				    	OrderToPraat.sendMessageToPrat(MessageToPraat.clearPraatObjectWindow());
-				    }
-				});
+		engine.addEvolutionObserver(new MySequenceEvolutionObserver(this));
 		engine.evolve(10, 0, new TargetFitness(4,mySeqEval.isNatural()));
+		try {
+			MessageToPraat.writePraatScriptInFile(this.finalsequence);
+		} catch (PraatScriptException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -314,5 +319,9 @@ public class GeneticAlgorithmCall{
 
 	public Semaphore getMutexFitnessFunction() {
 		return availableFitnessfunction;
+	}
+	
+	public void setSequence(Sequence c){
+		this.finalsequence = c;
 	}
 }

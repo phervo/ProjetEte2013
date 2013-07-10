@@ -2,7 +2,7 @@ package messages;
 
 import java.util.ArrayList;
 
-import communication.ServerSide;
+import communication.ServerThread;
 import elements.Formant;
 import elements.FormantSequence;
 import exceptions.CastFormantException;
@@ -14,7 +14,7 @@ import geneticAlogrithm.SequenceEvaluator;
  *  </p>
  * 
  * @see MessageToPraat
- * @see ServerSide
+ * @see ServerThread
  *  
  * @author Pierre-Yves Hervo
  * @version 0.1
@@ -44,7 +44,7 @@ public class MessageFromPraat {
 	* @throws CastFormantException if the String isnt of the good size or if it doesnt contain only numbers
 	*
 	* @see FormantSequence
-	* @see ServerSide
+	* @see ServerThread
 	* @see SequenceEvaluator
 	* 
 	* 

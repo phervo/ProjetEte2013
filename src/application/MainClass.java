@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import communication.CloseServer;
 import communication.OrderToPraat;
-import communication.ServerSide;
+import communication.ServerThread;
 import elements.Formant;
 import elements.FormantSequence;
 import elements.Sequence;
@@ -21,9 +21,7 @@ public class MainClass {
 		OrderToPraat.launchPraat(); 
 		OrderToPraat.sendMessageToPrat(MessageToPraat.writePraatScriptHeader());
 		GeneticAlgorithmCall ga= new GeneticAlgorithmCall(19); //init
-		ServerSide serverJavaGa= ServerSide.getInstance(ga);
-		Thread t = new Thread(serverJavaGa,"ThreadServer");
-		t.start();
+		ServerThread.getInstance(ga);
 		ga.startAlgorithm();
 		CloseServer.envoyerMessageFermeture();
 		OrderToPraat.closePraat();

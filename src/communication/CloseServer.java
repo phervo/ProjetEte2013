@@ -10,7 +10,7 @@ import java.net.Socket;
  *  so this class is designed to send it the termination string while the server is still listening <br/>
  * 	All the method are static so no need to instantiate an object</p>
  * 
- *  @see ServerSide
+ *  @see ServerThread
  *  
  * @author Pierre-Yves Hervo
  * @version 0.1

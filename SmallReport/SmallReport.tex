@@ -2,6 +2,7 @@
 \usepackage[latin1]{inputenc} 
 \usepackage[T1]{fontenc}
 \usepackage[francais]{babel}
+\usepackage{layout}
 
 %page de garde 
 \title{Report of the first Phase of the project}
@@ -10,10 +11,28 @@
 
 \begin{document}
 \maketitle
+
+\begin{abstract}
+Le résumé (abstract en anglais) de mon article.
+\end{abstract}
+  
+\tableofcontents
+
+J'insère le premier \cite{ref}, le second \cite{ref2}, le troisième \cite{ref3}, le quatrième \cite{ref4}, le cinquième \cite{ref5} et le sixième \cite{ref6}.
+
+
 \part{Overall}
 \chapter{Chapitre}
 \section{Section}
 \subsection{Une sous-section}
 Hello, I am actually writing a file about LaTeX !
 \part{Technical details}
+\appendix
+\chapter{A scheme}
+
+\listoffigures
+\listoftables
+
+\bibliographystyle{unsrt} % Le style est mis entre accolades.
+\bibliography{bib} % mon fichier de base de données s'appelle bibli.bib
 \end{document}

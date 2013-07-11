@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.7.11)  11 JUL 2013 12:28
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.7.11)  11 JUL 2013 14:51
 entering extended mode
 **SmallReport.tex
-(C:\Users\phervo\Documents\dossierProjet\SmallReport.tex
+(C:\Users\phervo\Documents\dossierProjet\SmallReport\SmallReport.tex
 LaTeX2e <2011/06/27>
 Babel <v3.8m> and hyphenation patterns for english, afrikaans, ancientgreek, ar
 abic, armenian, assamese, basque, bengali, bokmal, bulgarian, catalan, coptic, 
@@ -81,62 +81,138 @@ Package babel Info: Making ? an active character on input line 123.
 Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
 \KV@toks@=\toks16
 )
-(C:\Users\phervo\Documents\dossierProjet\SmallReport.aux)
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Info: Redefining \degres on input line 11.
-LaTeX Info: Redefining \dots on input line 11.
-LaTeX Info: Redefining \up on input line 11.
+(C:\Users\phervo\Documents\laTeX\tex\latex\tools\layout.sty
+Package: layout 2000/09/25 v1.2c Show layout parameters
+\oneinch=\count91
+\cnt@paperwidth=\count92
+\cnt@paperheight=\count93
+\cnt@hoffset=\count94
+\cnt@voffset=\count95
+\cnt@textheight=\count96
+\cnt@textwidth=\count97
+\cnt@topmargin=\count98
+\cnt@oddsidemargin=\count99
+\cnt@evensidemargin=\count100
+\cnt@headheight=\count101
+\cnt@headsep=\count102
+\cnt@marginparsep=\count103
+\cnt@marginparwidth=\count104
+\cnt@marginparpush=\count105
+\cnt@footskip=\count106
+\fheight=\count107
+\ref@top=\count108
+\ref@hoffset=\count109
+\ref@voffset=\count110
+\ref@head=\count111
+\ref@body=\count112
+\ref@foot=\count113
+\ref@margin=\count114
+\ref@marginwidth=\count115
+\ref@marginpar=\count116
+\Interval=\count117
+\ExtraYPos=\count118
+\PositionX=\count119
+\PositionY=\count120
+\ArrowLength=\count121
+)
+(C:\Users\phervo\Documents\dossierProjet\SmallReport\SmallReport.aux)
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Info: Redefining \degres on input line 12.
+LaTeX Info: Redefining \dots on input line 12.
+LaTeX Info: Redefining \up on input line 12.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 12.
+(Font)              <12> on input line 13.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 12.
+(Font)              <8> on input line 13.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 12.
+(Font)              <6> on input line 13.
  [1
 
-{C:/Users/phervo/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}] [1
+{C:/Users/phervo/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 16.
+
+(C:\Users\phervo\Documents\laTeX\tex\latex\base\omscmr.fd
+File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 16.
+ [1]
+(C:\Users\phervo\Documents\dossierProjet\SmallReport\SmallReport.toc
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 4.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 4.
+)
+\tf@toc=\write3
+ [1
+
+]
+[2
 
 ]
 Chapitre 1.
-[2
+[3
 
-] [3
+] [4
 
-] (C:\Users\phervo\Documents\dossierProjet\SmallReport.aux) ) 
+]
+Annexe A.
+[5
+
+] (C:\Users\phervo\Documents\dossierProjet\SmallReport\SmallReport.lof)
+\tf@lof=\write4
+
+[6
+
+] (C:\Users\phervo\Documents\dossierProjet\SmallReport\SmallReport.lot)
+\tf@lot=\write5
+
+(C:\Users\phervo\Documents\dossierProjet\SmallReport\SmallReport.bbl [7
+
+]
+LaTeX Font Info:    Font shape `OMS/cmr/m/it' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 15.
+)
+[8
+
+] (C:\Users\phervo\Documents\dossierProjet\SmallReport\SmallReport.aux) ) 
 Here is how much of TeX's memory you used:
- 1219 strings out of 493921
- 15136 string characters out of 3145675
- 68418 words of memory out of 3000000
- 4544 multiletter control sequences out of 15000+200000
- 14753 words of font info for 34 fonts, out of 3000000 for 9000
+ 1334 strings out of 493921
+ 17137 string characters out of 3145675
+ 70418 words of memory out of 3000000
+ 4637 multiletter control sequences out of 15000+200000
+ 16987 words of font info for 37 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 24i,6n,24p,172b,217s stack positions out of 5000i,500n,10000p,200000b,50000s
- <C:\Users\phervo\
-AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1200.pk> <C:\Us
-ers\phervo\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1440
-.pk> <C:\Users\phervo\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi6
-00\ecrm1000.pk> <C:\Users\phervo\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknap
-pen\ec\dpi600\ecbx2488.pk> <C:\Users\phervo\AppData\Local\MiKTeX\2.9\fonts\pk\l
-jfour\jknappen\ec\dpi600\ecbx2074.pk> <C:\Users\phervo\AppData\Local\MiKTeX\2.9
-\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm0800.pk> <C:\Users\phervo\AppData\Local
-\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\eccc1200.pk> <C:\Users\phervo\Ap
-pData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1200.pk> <C:\User
-s\phervo\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1728.p
-k>
-Output written on SmallReport.pdf (4 pages, 51881 bytes).
+ 24i,6n,24p,195b,217s stack positions out of 5000i,500n,10000p,200000b,50000s
+ <C:\U
+sers\phervo\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecti100
+0.pk> <C:\Users\phervo\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi
+600\ecbx1440.pk> <C:\Users\phervo\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jkna
+ppen\ec\dpi600\ecbx2074.pk> <C:\Users\phervo\AppData\Local\MiKTeX\2.9\fonts\pk\
+ljfour\jknappen\ec\dpi600\ecbx1200.pk> <C:\Users\phervo\AppData\Local\MiKTeX\2.
+9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx2488.pk> <C:\Users\phervo\AppData\Loca
+l\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1000.pk> <C:\Users\phervo\A
+ppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1000.pk> <C:\Use
+rs\phervo\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm0800.
+pk> <C:\Users\phervo\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi60
+0\eccc1200.pk> <C:\Users\phervo\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknapp
+en\ec\dpi600\ecrm1200.pk> <C:\Users\phervo\AppData\Local\MiKTeX\2.9\fonts\pk\lj
+four\jknappen\ec\dpi600\ecrm1728.pk><C:/Users/phervo/Documents/laTeX/fonts/type
+1/public/amsfonts/cm/cmsy10.pfb>
+Output written on SmallReport.pdf (10 pages, 100891 bytes).
 PDF statistics:
- 176 PDF objects out of 1000 (max. 8388607)
+ 311 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

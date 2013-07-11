@@ -1,7 +1,14 @@
 \select@language {french}
 \contentsline {part}{I\hspace {1em}Overall}{2}
-\contentsline {chapter}{\numberline {1}Chapitre}{3}
-\contentsline {section}{\numberline {1.1}Section}{3}
-\contentsline {subsection}{\numberline {1.1.1}Une sous-section}{3}
-\contentsline {part}{II\hspace {1em}Technical details}{4}
-\contentsline {chapter}{\numberline {A}A scheme}{5}
+\contentsline {chapter}{\numberline {1}Presentation of the project}{3}
+\contentsline {chapter}{\numberline {2}Presentation of Genetic algorithms}{4}
+\contentsline {chapter}{\numberline {3}Presentation of Voice Synthesis}{5}
+\contentsline {chapter}{\numberline {4}Presentation of Praat}{6}
+\contentsline {section}{\numberline {4.1}Section}{6}
+\contentsline {subsection}{\numberline {4.1.1}Une sous-section}{6}
+\contentsline {part}{II\hspace {1em}Technical details}{7}
+\contentsline {chapter}{\numberline {5}Praat Scripts}{8}
+\contentsline {chapter}{\numberline {6}Presentation of watchmaker}{9}
+\contentsline {chapter}{\numberline {7}Presentation of the basic manipulated Structures}{10}
+\contentsline {chapter}{\numberline {8}result}{11}
+\contentsline {chapter}{\numberline {A}A scheme}{12}

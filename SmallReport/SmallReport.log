@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.7.11)  11 JUL 2013 14:51
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.7.11)  11 JUL 2013 17:32
 entering extended mode
 **SmallReport.tex
 (C:\Users\phervo\Documents\dossierProjet\SmallReport\SmallReport.tex
@@ -150,9 +150,9 @@ LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
  [1]
 (C:\Users\phervo\Documents\dossierProjet\SmallReport\SmallReport.toc
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 4.
+(Font)              <7> on input line 7.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 4.
+(Font)              <5> on input line 7.
 )
 \tf@toc=\write3
  [1
@@ -164,27 +164,55 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 Chapitre 1.
 [3
 
-] [4
+]
+Chapitre 2.
+[4
+
+]
+Chapitre 3.
+[5
+
+]
+Chapitre 4.
+[6
+
+] [7
+
+]
+Chapitre 5.
+[8
+
+]
+Chapitre 6.
+[9
+
+]
+Chapitre 7.
+[10
+
+]
+Chapitre 8.
+[11
 
 ]
 Annexe A.
-[5
+[12
 
 ] (C:\Users\phervo\Documents\dossierProjet\SmallReport\SmallReport.lof)
 \tf@lof=\write4
 
-[6
+[13
 
 ] (C:\Users\phervo\Documents\dossierProjet\SmallReport\SmallReport.lot)
 \tf@lot=\write5
 
-(C:\Users\phervo\Documents\dossierProjet\SmallReport\SmallReport.bbl [7
+(C:\Users\phervo\Documents\dossierProjet\SmallReport\SmallReport.bbl [14
 
 ]
 LaTeX Font Info:    Font shape `OMS/cmr/m/it' in size <10> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 15.
 )
-[8
+[15
 
 ] (C:\Users\phervo\Documents\dossierProjet\SmallReport\SmallReport.aux) ) 
 Here is how much of TeX's memory you used:
@@ -210,9 +238,9 @@ pk> <C:\Users\phervo\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi60
 en\ec\dpi600\ecrm1200.pk> <C:\Users\phervo\AppData\Local\MiKTeX\2.9\fonts\pk\lj
 four\jknappen\ec\dpi600\ecrm1728.pk><C:/Users/phervo/Documents/laTeX/fonts/type
 1/public/amsfonts/cm/cmsy10.pfb>
-Output written on SmallReport.pdf (10 pages, 100891 bytes).
+Output written on SmallReport.pdf (17 pages, 120161 bytes).
 PDF statistics:
- 311 PDF objects out of 1000 (max. 8388607)
+ 371 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

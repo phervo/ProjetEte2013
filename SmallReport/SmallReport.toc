@@ -1,13 +1,17 @@
 \select@language {french}
+\contentsline {paragraph}{}{1}
 \contentsline {part}{I\hspace {1em}Overall}{2}
 \contentsline {chapter}{\numberline {1}Presentation of the project}{3}
 \contentsline {section}{\numberline {1.1}Quick introduction}{3}
+\contentsline {paragraph}{}{3}
 \contentsline {section}{\numberline {1.2}Presentation of Voice Synthesis}{3}
-\contentsline {chapter}{\numberline {2}Presentation of Genetic algorithms}{5}
-\contentsline {chapter}{\numberline {3}Presentation of Praat}{6}
-\contentsline {part}{II\hspace {1em}Technical details}{7}
-\contentsline {chapter}{\numberline {4}Praat Scripts}{8}
-\contentsline {chapter}{\numberline {5}Presentation of watchmaker}{9}
-\contentsline {chapter}{\numberline {6}Presentation of the basic manipulated Structures}{10}
-\contentsline {chapter}{\numberline {7}result}{11}
-\contentsline {chapter}{\numberline {A}A scheme}{12}
+\contentsline {section}{\numberline {1.3}The goal of the project}{5}
+\contentsline {section}{\numberline {1.4}Why vowels ?}{5}
+\contentsline {chapter}{\numberline {2}Presentation of Genetic algorithms}{6}
+\contentsline {chapter}{\numberline {3}Presentation of Praat}{7}
+\contentsline {part}{II\hspace {1em}Technical details}{8}
+\contentsline {chapter}{\numberline {4}Praat Scripts}{9}
+\contentsline {chapter}{\numberline {5}Presentation of watchmaker}{10}
+\contentsline {chapter}{\numberline {6}Presentation of the basic manipulated Structures}{11}
+\contentsline {chapter}{\numberline {7}result}{12}
+\contentsline {chapter}{\numberline {A}A scheme}{13}

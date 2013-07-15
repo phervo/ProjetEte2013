@@ -15,24 +15,27 @@
 
 \begin{abstract}
 
-The ICCMR laboratory launch a project to design a software which can synthesis human voice by giving it specific values. This global project will be divided into smaller project and perfect each time. I worked on the first step of the project: the launch of the project by developing a solution to recreate vowels. 
+The ICCMR laboratory is a structure which deals with sounds and one of their field of research is the Human voice. In this perspective, they launched a project to design a software which can synthesis human voice by giving it formants values. This is big project which had been divided into smaller ones and which will be improve at each step. I worked on the first step of the project, the launch of the project which consisted in developing a JAVA software to recreate vowels. 
 
-This report presents the work I have realised on my project from the beginning of my internship the 03\up{rd} of June to the end of the first Phase the 12\up{th}of July.
+In this report, I will explain the interest of this project and the work I have realised on the first part.
+\paragraph{}
+NOTE ; This report presents the work I have realised on my project from the beginning of my internship the 03\up{rd} of June to the end of the first Phase the 12\up{th}of July.
 
 \end{abstract}
-  
+
+\renewcommand{\contentsname}{Sommaire}
 \tableofcontents
 
-J'insère le premier \cite{ref}, le second \cite{ref2}, le troisième \cite{ref3}, le quatrième \cite{ref4}, le cinquième \cite{ref5} et le sixième \cite{ref6}.
+J'insère le premier \cite{ref}  \cite{ref2} \cite{ref3} \cite{ref4}
 
 
 \part{Overall}
 \chapter{Presentation of the project}
 \section{Quick introduction}
-As I said in the introduction of this report, i worked on the first phase of the global project by designing and developing a software that is capable of recreating the human vowels.
+As I said in the introduction, i worked on the first phase of the global project by designing and developing a software that is capable of recreating the human vowels.
 But what is the purpose of this project and why do I only worked on vowels ?
 Isn't there existing software to synthesise human sound ?
-
+\paragraph{}
 Before giving the answer I had to make a little recap on the voice synthesis
  
 \section{Presentation of Voice Synthesis}
@@ -48,15 +51,23 @@ According to the position of this muscles, the sound produced will be different.
 
 \begin{figure}
 \begin{center}
-\includegraphics[scale=0.5]{human_voice.jpg} 
+\includegraphics[scale=0.5]{resources/human_voice.jpg} 
 \end{center}
 \caption{Some of the organs use in the voice synthesis process}
 \label{ImageHumanVoice}
 \end{figure}
 
-There is some softwares that allows to create sound =. praat the best.
+There is some software that allows to synthesis voice by given parameters that represents the state of those different elements. Among them, Praat \cite{ref1} is the most advanced.
+It is the software that we will use for this project. We will present it in detail in another part of this report.
 
-\section{Quick introduction}
+\section{The goal of the project}
+The question that comes to mind is something like that already exists, why this project ?
+In fact praat allow to synthesise human voice and the sound you wants if you know the value of the parameters. There is a lot of variables (near 50) and a wide range of possible values for each. So it is hard to determine which parameters send for which sound. The only way you have is to try values after values. You can be helped by your knowledge about the state of the elements for a particular sound. For example, in singing, folds are brought close together so you can guess it will be in a certain range of values in praat.
+
+It is nearly impossible for long sound or it would take a long time. That 's why the ICCMR created this project. We will use Genetic algorithms to determinate the values for praat. This way we will avoid to search in the complete research space and so win time by using our knowledge to restrain the search space.
+
+\section{Why vowels ?}
+Because of the time allow to my project, i could only work for vowels. Vowels get particular formant values and so it is a firs step for the project.They are used a lot in long sounds.
 
 \chapter{Presentation of Genetic algorithms}
 

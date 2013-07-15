@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.7.11)  15 JUL 2013 12:13
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.7.11)  15 JUL 2013 16:44
 entering extended mode
-**SmallReport.tex
-(C:\Users\phervo\Documents\dossierProjet\SmallReport\SmallReport.tex
+**TechnicalReport.tex
+(C:\Users\phervo\Documents\dossierProjet\SmallReport\TechnicalReport.tex
 LaTeX2e <2011/06/27>
 Babel <v3.8m> and hyphenation patterns for english, afrikaans, ancientgreek, ar
 abic, armenian, assamese, basque, bengali, bokmal, bulgarian, catalan, coptic, 
@@ -255,78 +255,47 @@ Package: fontenc 2005/09/27 v1.99g Standard LaTeX package
 File: t1enc.def 2005/09/27 v1.99g Standard LaTeX file
 LaTeX Font Info:    Redeclaring font encoding T1 on input line 43.
 ))
-(C:\Users\phervo\Documents\laTeX\tex\generic\babel\babel.sty
-Package: babel 2008/07/08 v3.8m The Babel package
-
-*************************************
-* Local config file bblopts.cfg used
-*
-(C:\Users\phervo\Documents\laTeX\tex\latex\00miktex\bblopts.cfg
-File: bblopts.cfg 2006/07/31 v1.0 MiKTeX 'babel' configuration
-)
-(C:\Users\phervo\Documents\laTeX\tex\generic\babel\frenchb.ldf
-Language: frenchb 2009/03/16 v2.3d French support from the babel system
-
-(C:\Users\phervo\Documents\laTeX\tex\generic\babel\babel.def
-File: babel.def 2008/07/08 v3.8m Babel common definitions
-\babel@savecnt=\count88
-\U@D=\dimen103
-)
-Package babel Info: Making : an active character on input line 120.
-Package babel Info: Making ; an active character on input line 121.
-Package babel Info: Making ! an active character on input line 122.
-Package babel Info: Making ? an active character on input line 123.
-\FB@Mht=\dimen104
-\std@mcc=\count89
-\dec@mcc=\count90
-\parindentFFN=\dimen105
-
-*************************************
-* Local config file frenchb.cfg used
-*
-(C:\Users\phervo\Documents\laTeX\tex\generic\babel\frenchb.cfg)))
-(C:\Users\phervo\Documents\laTeX\tex\latex\carlisle\scalefnt.sty)
-(C:\Users\phervo\Documents\laTeX\tex\latex\graphics\keyval.sty
-Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
-\KV@toks@=\toks16
-)
 (C:\Users\phervo\Documents\laTeX\tex\latex\tools\layout.sty
 Package: layout 2000/09/25 v1.2c Show layout parameters
-\oneinch=\count91
-\cnt@paperwidth=\count92
-\cnt@paperheight=\count93
-\cnt@hoffset=\count94
-\cnt@voffset=\count95
-\cnt@textheight=\count96
-\cnt@textwidth=\count97
-\cnt@topmargin=\count98
-\cnt@oddsidemargin=\count99
-\cnt@evensidemargin=\count100
-\cnt@headheight=\count101
-\cnt@headsep=\count102
-\cnt@marginparsep=\count103
-\cnt@marginparwidth=\count104
-\cnt@marginparpush=\count105
-\cnt@footskip=\count106
-\fheight=\count107
-\ref@top=\count108
-\ref@hoffset=\count109
-\ref@voffset=\count110
-\ref@head=\count111
-\ref@body=\count112
-\ref@foot=\count113
-\ref@margin=\count114
-\ref@marginwidth=\count115
-\ref@marginpar=\count116
-\Interval=\count117
-\ExtraYPos=\count118
-\PositionX=\count119
-\PositionY=\count120
-\ArrowLength=\count121
+\oneinch=\count88
+\cnt@paperwidth=\count89
+\cnt@paperheight=\count90
+\cnt@hoffset=\count91
+\cnt@voffset=\count92
+\cnt@textheight=\count93
+\cnt@textwidth=\count94
+\cnt@topmargin=\count95
+\cnt@oddsidemargin=\count96
+\cnt@evensidemargin=\count97
+\cnt@headheight=\count98
+\cnt@headsep=\count99
+\cnt@marginparsep=\count100
+\cnt@marginparwidth=\count101
+\cnt@marginparpush=\count102
+\cnt@footskip=\count103
+\fheight=\count104
+\ref@top=\count105
+\ref@hoffset=\count106
+\ref@voffset=\count107
+\ref@head=\count108
+\ref@body=\count109
+\ref@foot=\count110
+\ref@margin=\count111
+\ref@marginwidth=\count112
+\ref@marginpar=\count113
+\Interval=\count114
+\ExtraYPos=\count115
+\PositionX=\count116
+\PositionY=\count117
+\ArrowLength=\count118
 )
 (C:\Users\phervo\Documents\laTeX\tex\latex\graphics\graphicx.sty
 Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
 
+(C:\Users\phervo\Documents\laTeX\tex\latex\graphics\keyval.sty
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks16
+)
 (C:\Users\phervo\Documents\laTeX\tex\latex\graphics\graphics.sty
 Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
 
@@ -347,56 +316,53 @@ Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
 (C:\Users\phervo\Documents\laTeX\tex\generic\oberdiek\ltxcmds.sty
 Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 )
-\Gread@gobject=\count122
+\Gread@gobject=\count119
 ))
-\Gin@req@height=\dimen106
-\Gin@req@width=\dimen107
+\Gin@req@height=\dimen103
+\Gin@req@width=\dimen104
 )
-(C:\Users\phervo\Documents\dossierProjet\SmallReport\SmallReport.aux)
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Info: Redefining \degres on input line 13.
-LaTeX Info: Redefining \dots on input line 13.
-LaTeX Info: Redefining \up on input line 13.
+(C:\Users\phervo\Documents\dossierProjet\SmallReport\TechnicalReport.aux)
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
 
 (C:\Users\phervo\Documents\laTeX\tex\context\base\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count123
-\scratchdimen=\dimen108
+\scratchcounter=\count120
+\scratchdimen=\dimen105
 \scratchbox=\box26
-\nofMPsegments=\count124
-\nofMParguments=\count125
+\nofMPsegments=\count121
+\nofMParguments=\count122
 \everyMPshowfont=\toks17
-\MPscratchCnt=\count126
-\MPscratchDim=\dimen109
-\MPnumerator=\count127
-\makeMPintoPDFobject=\count128
+\MPscratchCnt=\count123
+\MPscratchDim=\dimen106
+\MPnumerator=\count124
+\makeMPintoPDFobject=\count125
 \everyMPtoPDFconversion=\toks18
 )
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <14.4> on input line 14.
+(Font)              <14.4> on input line 13.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 14.
+(Font)              <7> on input line 13.
  [1
 
 {C:/Users/phervo/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
-[1] (C:\Users\phervo\Documents\dossierProjet\SmallReport\SmallReport.toc
+[1] (C:\Users\phervo\Documents\dossierProjet\SmallReport\TechnicalReport.toc
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 5.
+(Font)              <12> on input line 3.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 5.
+(Font)              <8> on input line 3.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 5.
+(Font)              <6> on input line 3.
 )
 \tf@toc=\write3
 
@@ -405,97 +371,81 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 ] [2
 
 ]
-Chapitre 1.
-<resources/human_voice.jpg, id=23, 501.875pt x 521.95pt>
-File: resources/human_voice.jpg Graphic file (type jpg)
+Chapter 1.
+[3
 
-<use resources/human_voice.jpg>
-Package pdftex.def Info: resources/human_voice.jpg used on input line 54.
-(pdftex.def)             Requested size: 250.93687pt x 260.97435pt.
- [3
+] [4]
+Chapter 2.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 48.
+[5
 
-] [4 <C:/Users/phervo/Documents/dossierProjet/SmallReport/resources/human_voice
-.jpg>] [5]
-Chapitre 2.
-[6
+] <resources/architecture.png, id=34, 770.12718pt x 491.58656pt>
+File: resources/architecture.png Graphic file (type png)
+
+<use resources/architecture.png>
+Package pdftex.def Info: resources/architecture.png used on input line 77.
+(pdftex.def)             Requested size: 462.07986pt x 294.95421pt.
+
+Overfull \hbox (72.07986pt too wide) in paragraph at lines 77--78
+ [] 
+ []
+
+[6] [7 <C:/Users/phervo/Documents/dossierProjet/SmallReport/resources/architect
+ure.png>] [8
 
 ]
-Chapitre 3.
-[7
-
-] [8
-
-]
-Chapitre 4.
+Appendix A.
 [9
 
-]
-Chapitre 5.
+] (C:\Users\phervo\Documents\dossierProjet\SmallReport\TechnicalReport.lof)
+\tf@lof=\write4
+
 [10
 
-]
-Chapitre 6.
+] (C:\Users\phervo\Documents\dossierProjet\SmallReport\TechnicalReport.lot)
+\tf@lot=\write5
+
+(C:\Users\phervo\Documents\dossierProjet\SmallReport\TechnicalReport.bbl
 [11
 
 ]
-Chapitre 7.
-[12
-
-]
-Annexe A.
-[13
-
-] (C:\Users\phervo\Documents\dossierProjet\SmallReport\SmallReport.lof)
-\tf@lof=\write4
-
-[14
-
-] (C:\Users\phervo\Documents\dossierProjet\SmallReport\SmallReport.lot)
-\tf@lot=\write5
-
-(C:\Users\phervo\Documents\dossierProjet\SmallReport\SmallReport.bbl [15
-
-]
-Underfull \hbox (badness 1466) in paragraph at lines 4--8
-[]\T1/cmr/m/n/12 Daniel W. Dyer.  Evo-lu-tio-nary com-pu-ta-tion in java. a pra
-c-ti-cal
+Underfull \hbox (badness 10000) in paragraph at lines 4--8
+[]\T1/cmr/m/n/12 Daniel W. Dyer.  Evo-lu-tion-ary com-pu-ta-tion in java. a
  []
 
 
-Underfull \hbox (badness 1817) in paragraph at lines 20--24
-[]\T1/cmr/m/n/12 John H. Hol-land.  Ge-ne-tic al-go-rithms, July 1992.  http :/
-/fa-
+Underfull \hbox (badness 10000) in paragraph at lines 4--8
+\T1/cmr/m/n/12 prac-ti-cal guide to the watch-maker frame-work, feb 2013.
  []
 
-) [16
+) [12
 
-] (C:\Users\phervo\Documents\dossierProjet\SmallReport\SmallReport.aux) ) 
+] (C:\Users\phervo\Documents\dossierProjet\SmallReport\TechnicalReport.aux) ) 
 Here is how much of TeX's memory you used:
- 2358 strings out of 493921
- 29959 string characters out of 3145675
- 86422 words of memory out of 3000000
- 5625 multiletter control sequences out of 15000+200000
- 17799 words of font info for 40 fonts, out of 3000000 for 9000
+ 1678 strings out of 493921
+ 20670 string characters out of 3145675
+ 72438 words of memory out of 3000000
+ 4966 multiletter control sequences out of 15000+200000
+ 16530 words of font info for 38 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 27i,6n,24p,549b,253s stack positions out of 5000i,500n,10000p,200000b,50000s
- <C:\U
-sers\phervo\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecti120
-0.pk> <C:\Users\phervo\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi
-600\eccc1200.pk> <C:\Users\phervo\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jkna
-ppen\ec\dpi600\ecbx1728.pk> <C:\Users\phervo\AppData\Local\MiKTeX\2.9\fonts\pk\
-ljfour\jknappen\ec\dpi600\ecbx1440.pk> <C:\Users\phervo\AppData\Local\MiKTeX\2.
-9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx2488.pk> <C:\Users\phervo\AppData\Loca
-l\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm0800.pk> <C:\Users\phervo\A
-ppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1200.pk> <C:\Use
-rs\phervo\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1200.
-pk> <C:\Users\phervo\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi60
-0\ecrm0900.pk> <C:\Users\phervo\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknapp
-en\ec\dpi600\eccc1440.pk> <C:\Users\phervo\AppData\Local\MiKTeX\2.9\fonts\pk\lj
-four\jknappen\ec\dpi600\ecrm1440.pk> <C:\Users\phervo\AppData\Local\MiKTeX\2.9\
-fonts\pk\ljfour\jknappen\ec\dpi600\ecrm2074.pk>
-Output written on SmallReport.pdf (18 pages, 176632 bytes).
+ 27i,8n,20p,505b,257s stack positions out of 5000i,500n,10000p,200000b,50000s
+ <
+C:\Users\phervo\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecr
+m1000.pk> <C:\Users\phervo\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec
+\dpi600\ecrm0700.pk> <C:\Users\phervo\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\
+jknappen\ec\dpi600\ecrm0800.pk> <C:\Users\phervo\AppData\Local\MiKTeX\2.9\fonts
+\pk\ljfour\jknappen\ec\dpi600\ecbx1728.pk> <C:\Users\phervo\AppData\Local\MiKTe
+X\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1440.pk> <C:\Users\phervo\AppData\
+Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx2488.pk> <C:\Users\pher
+vo\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1200.pk> <C:
+\Users\phervo\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1
+200.pk> <C:\Users\phervo\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\d
+pi600\ecrm1440.pk> <C:\Users\phervo\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jk
+nappen\ec\dpi600\ecrm2074.pk>
+Output written on TechnicalReport.pdf (14 pages, 155184 bytes).
 PDF statistics:
- 390 PDF objects out of 1000 (max. 8388607)
+ 343 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 

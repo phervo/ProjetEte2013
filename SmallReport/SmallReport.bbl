@@ -1,33 +1,31 @@
 \begin{thebibliography}{1}
 
 \bibitem{ref}
-Patrick Durand and René Durand.
-\newblock Les tomates tueuses.
-\newblock {\em Le beau journal}, page~24, jan 2007.
+Daniel~W. Dyer.
+\newblock Evolutionary computation in java. a practical guide to the watchmaker
+  framework, feb 2013.
+\newblock http://watchmaker.uncommons.org/manual/.
 
 \bibitem{ref2}
-Fernand Dupont.
-\newblock {\em Les choux farcis}.
-\newblock Un gros éditeur, 2004.
+Mitchell Melanie.
+\newblock {\em An Introduction to Genetic Algorithms}.
+\newblock MIT Press paperback edition, 1999.
 
 \bibitem{ref3}
-Nestor Dupont.
-\newblock {\em Réparer son vaisseau}.
-\newblock L'Alliance, 2009.
+Andries~P. Engelbrecht.
+\newblock {\em Computational Intelligence, An Introduction}.
+\newblock Wley, 2003.
 
 \bibitem{ref4}
-Les Zéros.
-\newblock Le site du zéro, jun 2009.
-\newblock www.siteduzero.com.
+John~H. Holland.
+\newblock Genetic algorithms, July 1992.
+\newblock
+  http://faculty.samford.edu/~sfdonald/Courses/cosc407/Papers/Genetic%20algorithms%20(Holland).pdf.
 
-\bibitem{ref5}
-Monsieur Barbu.
-\newblock {\em La belle thèse}.
-\newblock PhD thesis, Université, 2002.
-
-\bibitem{ref6}
-Monsieur Mauvais.
-\newblock Mon roman inachevé.
-\newblock il est chouette mon roman, feb 2000.
+\bibitem{ref1}
+Boersma Paul \&~Weenink David.
+\newblock Praat: doing phonetics by computer [computer program]. version
+  5.3.53, July 2013.
+\newblock http://www.praat.org/.
 
 \end{thebibliography}

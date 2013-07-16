@@ -338,4 +338,8 @@ public class GeneticAlgorithmCall{
 	public void setSequence(Sequence c){
 		this.finalsequence = c;
 	}
+	
+	public SequenceEvaluator getMySeqEval(){
+		return this.mySeqEval;
+	}
 }

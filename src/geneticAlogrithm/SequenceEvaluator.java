@@ -1,6 +1,7 @@
 package geneticAlogrithm;
 
 import java.util.List;
+import java.util.concurrent.Semaphore;
 
 import messages.MessageToPraat;
 
@@ -46,7 +47,13 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 	 */
 	private GeneticAlgorithmCall ga=null; 
 	
-	
+	/**
+	 *  a semaphore wich allows to execute the rest of the fitness function while we get a answer from praat.
+	 *  It is lock by default and released when we are sure the java server have store a value into the ga.
+	 * 
+	 * 
+	 */
+	private final Semaphore answerFromPraat = new Semaphore(1, true);
 	/**
 	* Constructor with given parameters.
 	* 
@@ -67,6 +74,12 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 		/*create the instance with the target and a reference to the ga to have access to the stored message from praat*/
 		this.targetSequence=target;
 		this.ga=ga;
+		try {
+			answerFromPraat.acquire();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} //locked
 	}
 	
 	/**
@@ -103,7 +116,7 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 		//2) recuperer le resultat dans messageFromPraat (attente serveur et socket si besoin) et le comparer a la cible
 			
 			
-					
+			answerFromPraat.acquire();	
 	    	for(int i=0;i<this.targetSequence.getNbFormant();i++){
 	    		/*there is an interval of +/-10% around the value so we caluclate this value*/
 	    		double lowerBornfreq = this.targetSequence.getFormantAt(i).getFrequency()*0.9;
@@ -154,4 +167,10 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 		// TODO Auto-generated method stub
 		return true;
 	}
+
+	public Semaphore getAnswerFromPraat() {
+		return answerFromPraat;
+	}
+	
+	
 }

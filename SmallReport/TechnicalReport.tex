@@ -7,7 +7,7 @@
 %page de garde 
 \title{Technical Report of the First Phase of the Project}
 \author{Pierre-Yves Hervo \\Polytech Nantes High school of Engineering }
-\date{11th  of July 2013}
+\date{11th of July 2013}
 
 \begin{document}
 \maketitle
@@ -15,7 +15,8 @@
 \begin{abstract}
 This report explain how I managed to interface Praat and Java and how the Genetic Algorithm is implemented. The first part of this report will be an overAll to explain general concepts and the second part will deals with my particular Java implementation.
 
-Important: This solution is working on windows 7, it is supposed to work on Linux but it wont work on a Mac because of the Praat's API.
+\paragraph*{}
+Important: This solution is working on windows 7, it is supposed to work on Linux but it won't work on a Mac because of the Praat's API.
 
 \end{abstract}
 
@@ -24,21 +25,48 @@ Important: This solution is working on windows 7, it is supposed to work on Linu
 \part{Overall}
 
 \chapter{About the Genetic Algorithm}
-This chapter deals with the basics of how my genetic algorithm work. I will explain it in detail in the second part with the explanations of my code.
+This chapter deals with the basics of how my genetic algorithm work. I will explain my implementation in the second part.
 
 \section{Principle}
+The Genetic Algorithm I use is based on the common genetic algorithm and I introduce some specificities in the fitness function. This section will present the common point with a classical GA and I will present the specificities in the next one.
+
+\subsection{The target}
 The best way to recognise a vowel is to compare the formants of the candidate sound to the formants of a well known sounds.
 
 For example, if we want to know if a sound is a "i", we will compare the formants of the candidate sound to the values which are defined for a i.
 
-\section{The target}
-As I said earlier, the values will be values for both frequency and bandwidth of two formants of a well known vowel. But this value are just a definition, in practice, we can estimate that a formant value can increase or decrease over 10\% of this value. So the fitness function of my GA compare the values of the formants of the candidate to the +/-10\% values of the target formants.
+We declared two formants for each sound. We choose two because some vowels only get two formants and if we look for three, Praat will produce an error. Each of this formant get a value for the frequency and a value for the bandwidth. Praat can easily calculate such data but we still haven't find a way to calculate the amplitude.
 
-\section{The candidate}
-We will compare the candidates formants to the reference formants. But for that purpose, we need to synthesise the sound and calculate its formants. The software Praat will do both for us. We need to send him parameters. The problem of how to send it parameters will be solved in the next chapter.
+But this value are just a definition, in practice, we can estimate that a formant value can increase or decrease over 10\% of this value. That's why the fitness function of my GA compare the values of the formants of the candidate to the +/-10\% values of the target's formants.
 
-We need to send it values for each parameter representing a vocal element. See figure n bidule. Fortunately, Praat will automaticly complete the values for some parameters by default, so on the 49 parameters, we only need to define 20. So the element we will make evolve as a candidate will be sequence of possible values for this 20 parameters.
+\subsection{The candidate}
+We will compare the candidates formants to the reference formants. For that purpose, we need to synthesise the sound and calculate its formants. The software Praat will do both for us. The only thing we need to do is to send it a script with values for each parameter.
 
+The problem of how to send this script will be solved in the next chapter.
+
+\paragraph*{}
+There is 29 parameters for voice synthesis in Praat. We use a linear voice synthesis which means that each parameters get two values to represent time evolution: one for the beginning 0.0 and one for the end,here 2.0.
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics{resources/praatScript.png} 
+\end{center}
+\caption{Example of Praat script to set two variables. Source : \cite{ref5}}
+\label{praatScript}
+\end{figure}
+
+So there is a lot of value to define. Fortunately, Praat will automaticly complete the values for some parameters by default, we will only need to define the 10 most important.
+
+Which means that the structure we will make evolve int the GA is a structure containing 20 values, one for each parameter to set in the Praat script.
+
+\section{Particularities}
+The particularity of my Ga is located in the fitness function. I used another program (Praat) to execute a script. This script will generate a sound, analyse it to get the formants and then get the values back. Then I will compare the formant in the result from praat with the formants given to the program as the target.
+
+It is different from other fitness function that typically take care themselves of the calculation part. Here it delegate it to another program and only do a comparison.
+It do it for each individual of the generation's population.
+
+\subsection{Evolution Operators}
+We use two common evolution operators for a GA : a one point cross over at each generation and then a mutation with a probability of 0.2 to append.
 
 \chapter{How to connect Java and Praat}
 Giving the Praat's API, we need to use two different ways to connect Java and Praat.
@@ -77,7 +105,7 @@ The figure below show how it works :
 \includegraphics[scale=0.6]{resources/architecture.png} 
 \end{center}
 \caption{The exchange of information between Java and Praat and the role of each entity}
-\label{ImageHumanVoice}
+\label{architecture}
 \end{figure}
 
 
@@ -96,6 +124,6 @@ The figure below show how it works :
 \listoffigures
 \listoftables
 
-\bibliographystyle{unsrt} 
+\bibliographystyle{alpha} 
 \bibliography{bib} % mon fichier de base de données s'appelle bibli.bib
 \end{document}

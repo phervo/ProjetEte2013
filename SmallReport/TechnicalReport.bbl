@@ -1,9 +1,15 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{Dye13}
 
-\bibitem{ref}
+\bibitem[Dye13]{ref}
 Daniel~W. Dyer.
 \newblock Evolutionary computation in java. a practical guide to the watchmaker
   framework, feb 2013.
 \newblock http://watchmaker.uncommons.org/manual/.
+
+\bibitem[Mir02]{ref5}
+Eduardo~Reck Miranda.
+\newblock {\em Computer Sound Design: Synthesis techniques and programming
+  (Music Technology)}.
+\newblock Focal press, sept 2002.
 
 \end{thebibliography}

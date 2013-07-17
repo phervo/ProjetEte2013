@@ -6,6 +6,14 @@
 \usepackage{verbatim}
 \usepackage{moreverb}
 \usepackage{url}
+\usepackage{listings}
+\lstset{
+language=Java,
+basicstyle=\footnotesize,
+numbers=left,
+numberstyle=\normalsize,
+numbersep=7pt,
+}
 
 %page de garde 
 \title{Technical Report of the First Phase of the Project}
@@ -227,17 +235,45 @@ If you want to introduce a new alphabet, proceed as follow :
 \item Modify the functions in MessageToPraat to use your alphabet where it is needed.
 \end{enumerate}
 
-\section{the Sequence}
+\subsection{the Sequence}
 The class Sequence represent the 20 values I have presented in \ref{Thecandidate} page \pageref{Thecandidate}. It will be the structure of the candidates values, the structure which will evolve during the GA. We are not suppose to instantiate it directly, the SequenceFactory of the GA will do it for us.
 
-\section{the result}
+\subsection{the formants}
+I build a special structure for the formants. The structure of a formant itself is defined in the Formant class. You can modify it here if you want to change the structure. Then I defined in FormantSequence the structure of the formants I will analyse : two formants. It is this class that you should manipulate if you just want to use the formants and not the other. I created a special constructor in which you can give a vowel letter. It will automaticly create the formant with the values corresponding to the vowel. For the moment I only implemented it for "i" but in the future i will add others. It can be useful to specify the target for example.
 
-\chapter{the communication}
-\section{call to sendPraat}
-\section{the server}
+\subsection{the script}
+I generate a script with a template file and the values of the candidate Sequence. The templates are stored in the MessageToPraat class. They aren't written as a file in the disk because it is too long to procede. Instead, they are store in the central memory of the computer to be faster.
+
+\section{the communication}
+\subsection{SendPraat}
+To run the program you need to have sendPraat installed and a running instance of Praat.
+I created a function to open and close Praat and another to send it an order using sendPraat. All these functions are available in the Communication package. It work using the Java runtime environment which allow to use the command line. Each call create a new process but i add a special parameter to told the program to wait for the full execution of the process before continuing so there is no need of semaphore here.
+
+\subsection{the Server}
+As I said in the overAll, i implemented a server to listen to the Praat's sendsocket port.
+I design it as a thread to be sure that it will listen all the time without blocking the execution of the GA. When it get a message it store it in the Ga specified in parameter during the construction. I separate
+the Ga and the Server to allow it to be use in another application using praat if necessary, you just add to modify a little the run method. 
+
+\section{The run}
+The run of the GA is done according to the watchmaker API. I wrote all the orders in a class called GeneticAlgorithmCall. The only thing it need to know is the length of the sequence we wanted to manipulate.
+
+\section{code}
+Here is the only code you had to use to run my Java Application. All in 7 lines :
+
+\begin{lstlisting}
+OrderToPraat.launchPraat();
+OrderToPraat.sendMessageToPrat(MessageToPraat.writePraatScriptHeader());
+GeneticAlgorithmCall ga= new GeneticAlgorithmCall(19); //init
+ServerThread.getInstance(ga);
+ga.startAlgorithm();
+CloseServer.envoyerMessageFermeture();
+OrderToPraat.closePraat();
+\end{lstlisting}
+
+\section{result}
+For the moment, I found quickly 2 matching point but I never found a full matching. I used the "i" formants and i will try with other sounds during the week.
 
 \listoffigures
-\listoftables
 
 \bibliographystyle{alpha} 
 \bibliography{bib} % mon fichier de base de données s'appelle bibli.bib

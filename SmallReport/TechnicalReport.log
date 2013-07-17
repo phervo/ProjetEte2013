@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.7.11)  17 JUL 2013 15:23
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.7.11)  17 JUL 2013 16:40
 entering extended mode
 **TechnicalReport.tex
 (C:\Users\phervo\Documents\dossierProjet\SmallReport\TechnicalReport.tex
@@ -337,38 +337,67 @@ Package: moreverb 2008/06/03 v2.3a `more' verbatim facilities
 \Urlmuskip=\muskip10
 Package: url 2006/04/12  ver 3.3  Verb mode for urls, etc.
 )
+(C:\Users\phervo\Documents\laTeX\tex\latex\listings\listings.sty
+\lst@mode=\count123
+\lst@gtempboxa=\box26
+\lst@token=\toks19
+\lst@length=\count124
+\lst@currlwidth=\dimen105
+\lst@column=\count125
+\lst@pos=\count126
+\lst@lostspace=\dimen106
+\lst@width=\dimen107
+\lst@newlines=\count127
+\lst@lineno=\count128
+\lst@maxwidth=\dimen108
+
+(C:\Users\phervo\Documents\laTeX\tex\latex\listings\lstmisc.sty
+File: lstmisc.sty 2007/02/22 1.4 (Carsten Heinz)
+\c@lstnumber=\count129
+\lst@skipnumbers=\count130
+\lst@framebox=\box27
+)
+(C:\Users\phervo\Documents\laTeX\tex\latex\listings\listings.cfg
+File: listings.cfg 2007/02/22 1.4 listings configuration
+))
+Package: listings 2007/02/22 1.4 (Carsten Heinz)
+
+(C:\Users\phervo\Documents\laTeX\tex\latex\listings\lstlang1.sty
+File: lstlang1.sty 2004/09/05 1.3 listings language file
+)
 (C:\Users\phervo\Documents\dossierProjet\SmallReport\TechnicalReport.aux)
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
 
 (C:\Users\phervo\Documents\laTeX\tex\context\base\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count123
-\scratchdimen=\dimen105
-\scratchbox=\box26
-\nofMPsegments=\count124
-\nofMParguments=\count125
-\everyMPshowfont=\toks19
-\MPscratchCnt=\count126
-\MPscratchDim=\dimen106
-\MPnumerator=\count127
-\makeMPintoPDFobject=\count128
-\everyMPtoPDFconversion=\toks20
+\scratchcounter=\count131
+\scratchdimen=\dimen109
+\scratchbox=\box28
+\nofMPsegments=\count132
+\nofMParguments=\count133
+\everyMPshowfont=\toks20
+\MPscratchCnt=\count134
+\MPscratchDim=\dimen110
+\MPnumerator=\count135
+\makeMPintoPDFobject=\count136
+\everyMPtoPDFconversion=\toks21
 )
+\c@lstlisting=\count137
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <14.4> on input line 16.
+(Font)              <14.4> on input line 24.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 16.
+(Font)              <7> on input line 24.
  [1
 
 {C:/Users/phervo/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
@@ -394,35 +423,35 @@ Chapter 1.
 File: resources/praatScript.png Graphic file (type png)
 
 <use resources/praatScript.png>
-Package pdftex.def Info: resources/praatScript.png used on input line 53.
+Package pdftex.def Info: resources/praatScript.png used on input line 61.
 (pdftex.def)             Requested size: 294.34895pt x 139.26996pt.
  [5 <C:/Users/phervo/Documents/dossierProjet/SmallReport/resources/praatScript.
 png>] [6]
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 102.
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 110.
 
 
 (C:\Users\phervo\Documents\laTeX\tex\latex\base\t1cmtt.fd
 File: t1cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
-Overfull \hbox (23.624pt too wide) in paragraph at lines 103--103
+Overfull \hbox (23.624pt too wide) in paragraph at lines 111--111
 []\T1/cmtt/m/n/12 1) generate the candidate population with the reduced range v
 alues. 
  []
 
 
-Overfull \hbox (5.10352pt too wide) in paragraph at lines 108--108
+Overfull \hbox (5.10352pt too wide) in paragraph at lines 116--116
 []               \T1/cmtt/m/n/12 -> get the formant values of generated sound b
 ack[] 
  []
 
 
-Overfull \hbox (42.14447pt too wide) in paragraph at lines 109--109
+Overfull \hbox (42.14447pt too wide) in paragraph at lines 117--117
 []               \T1/cmtt/m/n/12 -> compare with the formants values of the tar
 get sound[] 
  []
 
 
-Overfull \hbox (11.27701pt too wide) in paragraph at lines 113--113
+Overfull \hbox (11.27701pt too wide) in paragraph at lines 121--121
 []            \T1/cmtt/m/n/12 cross over and mutation to get an evolved populat
 ion.[] 
  []
@@ -430,44 +459,44 @@ ion.[]
 [7]
 Chapter 2.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 128.
+(Font)              <5> on input line 136.
 [8
 
 ] [9]
-Overfull \hbox (690.36118pt too wide) in paragraph at lines 178--178
+Overfull \hbox (690.36118pt too wide) in paragraph at lines 186--186
 []   \T1/cmtt/m/n/12 A) launch of the function, took the token "function" to av
 oid the GA to launch the next one until        this one is finish. The token "p
 raat result stored" is also locked.[] 
  []
 
 [10]
-Overfull \hbox (17.4505pt too wide) in paragraph at lines 181--181
+Overfull \hbox (17.4505pt too wide) in paragraph at lines 189--189
 []      \T1/cmtt/m/n/12 3) praat execute the script and calculate the formant v
 alues[] 
  []
 
 
-Overfull \hbox (319.95163pt too wide) in paragraph at lines 185--185
+Overfull \hbox (319.95163pt too wide) in paragraph at lines 193--193
 []      \T1/cmtt/m/n/12 B) If the token "praat result stored" is available we c
 an continue, else we wait until it is       available.[] 
  []
 
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 195.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 203.
 
 (C:\Users\phervo\Documents\laTeX\tex\latex\base\omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 195.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 203.
 
 <resources/architecture.png, id=51, 770.12718pt x 491.58656pt>
 File: resources/architecture.png Graphic file (type png)
 
 <use resources/architecture.png>
-Package pdftex.def Info: resources/architecture.png used on input line 203.
+Package pdftex.def Info: resources/architecture.png used on input line 211.
 (pdftex.def)             Requested size: 462.07986pt x 294.95421pt.
 
-Overfull \hbox (72.07986pt too wide) in paragraph at lines 203--204
+Overfull \hbox (72.07986pt too wide) in paragraph at lines 211--212
  [] 
  []
 
@@ -479,16 +508,13 @@ Chapter 3.
 [14
 
 ] [15]
-Chapter 4.
-[16
+Overfull \hbox (41.89783pt too wide) in paragraph at lines 265--266
+[][][][][][][][][][][] 
+ []
 
-] (C:\Users\phervo\Documents\dossierProjet\SmallReport\TechnicalReport.lof)
+[16] [17]
+(C:\Users\phervo\Documents\dossierProjet\SmallReport\TechnicalReport.lof)
 \tf@lof=\write4
-
-[17
-
-] (C:\Users\phervo\Documents\dossierProjet\SmallReport\TechnicalReport.lot)
-\tf@lot=\write5
 
 (C:\Users\phervo\Documents\dossierProjet\SmallReport\TechnicalReport.bbl
 [18
@@ -517,32 +543,34 @@ Underfull \hbox (badness 7030) in paragraph at lines 10--14
 
 ] (C:\Users\phervo\Documents\dossierProjet\SmallReport\TechnicalReport.aux) ) 
 Here is how much of TeX's memory you used:
- 1871 strings out of 493921
- 23871 string characters out of 3145675
- 75055 words of memory out of 3000000
- 5140 multiletter control sequences out of 15000+200000
- 17527 words of font info for 40 fonts, out of 3000000 for 9000
+ 3580 strings out of 493921
+ 46197 string characters out of 3145675
+ 125966 words of memory out of 3000000
+ 6834 multiletter control sequences out of 15000+200000
+ 18989 words of font info for 42 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 27i,8n,20p,538b,268s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 27i,8n,40p,677b,1138s stack positions out of 5000i,500n,10000p,200000b,50000s
  <
 C:\Users\phervo\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ect
 i1200.pk> <C:\Users\phervo\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec
-\dpi600\ecrm1000.pk> <C:\Users\phervo\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\
-jknappen\ec\dpi600\ecrm0700.pk> <C:\Users\phervo\AppData\Local\MiKTeX\2.9\fonts
-\pk\ljfour\jknappen\ec\dpi600\ecrm0800.pk> <C:\Users\phervo\AppData\Local\MiKTe
-X\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ectt1200.pk> <C:\Users\phervo\AppData\
-Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1728.pk> <C:\Users\pher
-vo\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1440.pk> <C:
-\Users\phervo\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx2
-488.pk> <C:\Users\phervo\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\d
-pi600\ecrm1200.pk> <C:\Users\phervo\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jk
-nappen\ec\dpi600\ecbx1200.pk> <C:\Users\phervo\AppData\Local\MiKTeX\2.9\fonts\p
-k\ljfour\jknappen\ec\dpi600\ecrm1440.pk> <C:\Users\phervo\AppData\Local\MiKTeX\
-2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm2074.pk><C:/Users/phervo/Documents/l
-aTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on TechnicalReport.pdf (21 pages, 223336 bytes).
+\dpi600\ecti1000.pk> <C:\Users\phervo\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\
+jknappen\ec\dpi600\ecbx1000.pk> <C:\Users\phervo\AppData\Local\MiKTeX\2.9\fonts
+\pk\ljfour\jknappen\ec\dpi600\ecrm1000.pk> <C:\Users\phervo\AppData\Local\MiKTe
+X\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm0700.pk> <C:\Users\phervo\AppData\
+Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm0800.pk> <C:\Users\pher
+vo\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ectt1200.pk> <C:
+\Users\phervo\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1
+728.pk> <C:\Users\phervo\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\d
+pi600\ecbx1440.pk> <C:\Users\phervo\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jk
+nappen\ec\dpi600\ecbx2488.pk> <C:\Users\phervo\AppData\Local\MiKTeX\2.9\fonts\p
+k\ljfour\jknappen\ec\dpi600\ecrm1200.pk> <C:\Users\phervo\AppData\Local\MiKTeX\
+2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1200.pk> <C:\Users\phervo\AppData\Lo
+cal\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1440.pk> <C:\Users\phervo
+\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm2074.pk><C:/Us
+ers/phervo/Documents/laTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on TechnicalReport.pdf (21 pages, 234317 bytes).
 PDF statistics:
- 492 PDF objects out of 1000 (max. 8388607)
+ 521 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  11 words of extra memory for PDF output out of 10000 (max. 10000000)
 

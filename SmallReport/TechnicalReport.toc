@@ -19,8 +19,12 @@
 \contentsline {section}{\numberline {3.1}watchmaker}{14}
 \contentsline {section}{\numberline {3.2}basics elements to manipulate}{14}
 \contentsline {subsection}{\numberline {3.2.1}The Alphabets}{14}
-\contentsline {section}{\numberline {3.3}the Sequence}{15}
-\contentsline {section}{\numberline {3.4}the result}{15}
-\contentsline {chapter}{\numberline {4}the communication}{16}
-\contentsline {section}{\numberline {4.1}call to sendPraat}{16}
-\contentsline {section}{\numberline {4.2}the server}{16}
+\contentsline {subsection}{\numberline {3.2.2}the Sequence}{15}
+\contentsline {subsection}{\numberline {3.2.3}the formants}{15}
+\contentsline {subsection}{\numberline {3.2.4}the script}{15}
+\contentsline {section}{\numberline {3.3}the communication}{16}
+\contentsline {subsection}{\numberline {3.3.1}SendPraat}{16}
+\contentsline {subsection}{\numberline {3.3.2}the Server}{16}
+\contentsline {section}{\numberline {3.4}The run}{16}
+\contentsline {section}{\numberline {3.5}code}{16}
+\contentsline {section}{\numberline {3.6}result}{17}

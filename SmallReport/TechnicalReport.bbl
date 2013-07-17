@@ -1,4 +1,10 @@
-\begin{thebibliography}{Dye13}
+\begin{thebibliography}{Dav13}
+
+\bibitem[Dav13]{ref1}
+Boersma Paul \&~Weenink David.
+\newblock Praat: doing phonetics by computer [computer program]. version
+  5.3.53, July 2013.
+\newblock http://www.praat.org/.
 
 \bibitem[Dye13]{ref}
 Daniel~W. Dyer.

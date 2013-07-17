@@ -21,7 +21,7 @@ public class GlobalAlphabet {
 	 * @see GlobalAlphabet#getLungsAlphabet()
 	 * 
 	 */
-	private LungsAlphabet lungsAlphabet;
+	private Alphabet lungsAlphabet;
 	
 	/**
 	 * The alphabet for masseter
@@ -29,7 +29,7 @@ public class GlobalAlphabet {
 	 * @see GlobalAlphabet#getMasseterAlphabet()
 	 * 
 	 */
-	private MasseterAlphabet masseterAlphabet;
+	private Alphabet masseterAlphabet;
 	
 	/**
 	 * The alphabet for all the other parameters
@@ -37,7 +37,7 @@ public class GlobalAlphabet {
 	 * @see GlobalAlphabet#getOtherAlphabet()
 	 * 
 	 */
-	private OtherAlphabet otherAlphabet;
+	private Alphabet otherAlphabet;
 	
 	/**
 	* Constructor wich create the alphabet with the default intervalls for each alphabet.
@@ -52,9 +52,9 @@ public class GlobalAlphabet {
 	*/
 	public GlobalAlphabet() {
 		super();
-		this.lungsAlphabet = new LungsAlphabet(0.0,0.2,2);
-		this.masseterAlphabet = new MasseterAlphabet(-0.5,0.5,2);
-		this.otherAlphabet = new OtherAlphabet(0.0,1.0,2);
+		this.lungsAlphabet = new Alphabet("LungsAlphabet",0.0,0.2,2);
+		this.masseterAlphabet = new Alphabet("MasseterAlphabet",-0.5,0.5,2);
+		this.otherAlphabet = new Alphabet("otherAlphabet",0.0,1.0,2);
 	}
 
 	/**
@@ -65,7 +65,7 @@ public class GlobalAlphabet {
 	* @since 0.1
 	*
 	*/
-	public LungsAlphabet getLungsAlphabet() {
+	public Alphabet getLungsAlphabet() {
 		return lungsAlphabet;
 	}
 
@@ -77,7 +77,7 @@ public class GlobalAlphabet {
 	* @since 0.1
 	*
 	*/
-	public MasseterAlphabet getMasseterAlphabet() {
+	public Alphabet getMasseterAlphabet() {
 		return masseterAlphabet;
 	}
 
@@ -89,7 +89,7 @@ public class GlobalAlphabet {
 	* @since 0.1
 	*
 	*/
-	public OtherAlphabet getOtherAlphabet() {
+	public Alphabet getOtherAlphabet() {
 		return otherAlphabet;
 	}
 	

@@ -3,38 +3,16 @@ package tests;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import messages.MessageFromPraat;
 import messages.MessageToPraat;
-
 import org.uncommons.maths.random.MersenneTwisterRNG;
 import org.uncommons.maths.random.Probability;
-
 import communication.CloseServer;
 import communication.OrderToPraat;
 import communication.ServerThread;
 import elements.Formant;
 import elements.FormantSequence;
 import elements.GlobalAlphabet;
-import elements.LungsAlphabet;
 import elements.Sequence;
 import exceptions.CastFormantException;
 import exceptions.FormantNumberexception;

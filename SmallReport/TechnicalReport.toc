@@ -19,7 +19,8 @@
 \contentsline {section}{\numberline {3.1}watchmaker}{14}
 \contentsline {section}{\numberline {3.2}basics elements to manipulate}{14}
 \contentsline {subsection}{\numberline {3.2.1}The Alphabets}{14}
-\contentsline {section}{\numberline {3.3}the result}{14}
-\contentsline {chapter}{\numberline {4}the communication}{15}
-\contentsline {section}{\numberline {4.1}call to sendPraat}{15}
-\contentsline {section}{\numberline {4.2}the server}{15}
+\contentsline {section}{\numberline {3.3}the Sequence}{15}
+\contentsline {section}{\numberline {3.4}the result}{15}
+\contentsline {chapter}{\numberline {4}the communication}{16}
+\contentsline {section}{\numberline {4.1}call to sendPraat}{16}
+\contentsline {section}{\numberline {4.2}the server}{16}

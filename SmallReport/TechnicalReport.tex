@@ -42,6 +42,7 @@ We have two formants for each sound. We choose two because some vowels only get 
 Each of this formant get a value for the frequency and a value for the bandwidth, Praat can easily calculate such data. We still haven't find a way to calculate the amplitude but it could be add in a future version to complete the analyse.
 
 \subsection{The candidate}
+\label{Thecandidate}
 We will compare the candidate's formants to the reference's formants. In that purpose, we need to synthesise the sound and calculate its formants. The software Praat\cite{ref1} will do both for us. The only thing we need to do is send it a script with values for each parameter. The problem of how to send this script will be solved in the next chapter.
 
 \paragraph*{}
@@ -208,16 +209,26 @@ The figure below show how it works :
 \part{Implementation Details}
 \chapter{the GA}
 \section{watchmaker}
-In this project, I used the Watchmaker's Genetic Algorithm API\cite{ref}. It is an Java API wich provided all the objects and methods to run a genetic Algorithm. The only thing I had to do is reimplemented some classes to use my own objects and operations as cross over, mutation, ... but all the structure of the GA behind was already defined.
+In this project, I used the Watchmaker's Genetic Algorithm API\cite{ref}. It is an Java API which provided all the objects and methods to run a genetic Algorithm. The only thing I had to do is reimplemented some classes to use my own objects and operations as cross over, mutation, ... but all the structure of the GA behind was already defined.
 
 \section{basics elements to manipulate}
 I will present here the classes containing the basics elements i manipulated to use the GA.
 I will make a short presentation to explain what the elements are designed for and how to use them in the project perspective. I wont make a technical explanation of each. I have already written a Java documentation for that purpose which is available at : \url{https://github.com/phervo/ProjetEte2013/tree/master/doc}
 
 \subsection{The Alphabets}
-They are class containing all the possible values for a parameter. It can also be for several parameters.
-The goal is to have a interval of possible value very precise for each parameter.
-For the moment I have  special Alphabets for Masseter and Lungs. All the other parameters shared the same alphabet call otherAlphabet but it could be possible to declare new alphabets.
+The class Alphabet is a class which allow to define an interval of value for one or several Praat parameters.
+The goal is to have a interval of possible for each parameter.
+For the moment I have  special Alphabets for masseter and Lungs. All the other parameters shared the same alphabet call otherAlphabet but it could be possible to declare new alphabets. All the alphabets are gathered in a meta-alphabet called GlobalAlphabet. It is the alphabet that will be use by the GA.
+
+\paragraph*{}
+If you want to introduce a new alphabet, proceed as follow :
+\begin{enumerate}
+\item Create a new Alphabet in the GlobalAlphabet Class with the getters and setters you need.
+\item Modify the functions in MessageToPraat to use your alphabet where it is needed.
+\end{enumerate}
+
+\section{the Sequence}
+The class Sequence represent the 20 values I have presented in \ref{Thecandidate} page \pageref{Thecandidate}. It will be the structure of the candidates values, the structure which will evolve during the GA. We are not suppose to instantiate it directly, the SequenceFactory of the GA will do it for us.
 
 \section{the result}
 

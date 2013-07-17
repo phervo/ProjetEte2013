@@ -6,9 +6,7 @@ package elements;
  * It allow to send particular values to some parameters and some others to another.<br/>
  * For example, lungs took values from 0.0 to 0.2 (lungs Alphabet) whereas Genioglossus took is values between 0.0 and 1.0(other Alphabet)</p>
  * 
- * @see LungsAlphabet
- * @see OtherAlphabet
- * @see MasseterAlphabet
+ * @see Alphabet
  *  
  * @author Pierre-Yves Hervo
  * @version 0.1
@@ -43,9 +41,7 @@ public class GlobalAlphabet {
 	* Constructor wich create the alphabet with the default intervalls for each alphabet.
 	* 
 	*
-	* @see LungsAlphabet#LungsAlphabet(double, double, int)
-	* @see MasseterAlphabet#MasseterAlphabet(double, double, int)
-	* @see OtherAlphabet#OtherAlphabet(double, double, int)
+	* @see Alphabet#Alphabet(String, double, double, int)
 	*
 	* @since 0.1
 	*
@@ -96,9 +92,7 @@ public class GlobalAlphabet {
 	/**
 	 * Display all the alphabets on the screen.
 	 * 
-	 * @see LungsAlphabet#displayAlphabet()
-	 * @see MasseterAlphabet#displayAlphabet()
-	 * @see OtherAlphabet#displayAlphabet()
+	 * @see Alphabet#displayAlphabet()
 	 * 
 	 * @since 0.1
 	 *

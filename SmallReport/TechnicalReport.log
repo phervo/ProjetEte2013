@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.7.11)  17 JUL 2013 14:37
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.7.11)  17 JUL 2013 15:23
 entering extended mode
 **TechnicalReport.tex
 (C:\Users\phervo\Documents\dossierProjet\SmallReport\TechnicalReport.tex
@@ -394,35 +394,35 @@ Chapter 1.
 File: resources/praatScript.png Graphic file (type png)
 
 <use resources/praatScript.png>
-Package pdftex.def Info: resources/praatScript.png used on input line 52.
+Package pdftex.def Info: resources/praatScript.png used on input line 53.
 (pdftex.def)             Requested size: 294.34895pt x 139.26996pt.
  [5 <C:/Users/phervo/Documents/dossierProjet/SmallReport/resources/praatScript.
 png>] [6]
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 101.
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 102.
 
 
 (C:\Users\phervo\Documents\laTeX\tex\latex\base\t1cmtt.fd
 File: t1cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
-Overfull \hbox (23.624pt too wide) in paragraph at lines 102--102
+Overfull \hbox (23.624pt too wide) in paragraph at lines 103--103
 []\T1/cmtt/m/n/12 1) generate the candidate population with the reduced range v
 alues. 
  []
 
 
-Overfull \hbox (5.10352pt too wide) in paragraph at lines 107--107
+Overfull \hbox (5.10352pt too wide) in paragraph at lines 108--108
 []               \T1/cmtt/m/n/12 -> get the formant values of generated sound b
 ack[] 
  []
 
 
-Overfull \hbox (42.14447pt too wide) in paragraph at lines 108--108
+Overfull \hbox (42.14447pt too wide) in paragraph at lines 109--109
 []               \T1/cmtt/m/n/12 -> compare with the formants values of the tar
 get sound[] 
  []
 
 
-Overfull \hbox (11.27701pt too wide) in paragraph at lines 112--112
+Overfull \hbox (11.27701pt too wide) in paragraph at lines 113--113
 []            \T1/cmtt/m/n/12 cross over and mutation to get an evolved populat
 ion.[] 
  []
@@ -430,44 +430,44 @@ ion.[]
 [7]
 Chapter 2.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 127.
+(Font)              <5> on input line 128.
 [8
 
 ] [9]
-Overfull \hbox (690.36118pt too wide) in paragraph at lines 177--177
+Overfull \hbox (690.36118pt too wide) in paragraph at lines 178--178
 []   \T1/cmtt/m/n/12 A) launch of the function, took the token "function" to av
 oid the GA to launch the next one until        this one is finish. The token "p
 raat result stored" is also locked.[] 
  []
 
 [10]
-Overfull \hbox (17.4505pt too wide) in paragraph at lines 180--180
+Overfull \hbox (17.4505pt too wide) in paragraph at lines 181--181
 []      \T1/cmtt/m/n/12 3) praat execute the script and calculate the formant v
 alues[] 
  []
 
 
-Overfull \hbox (319.95163pt too wide) in paragraph at lines 184--184
+Overfull \hbox (319.95163pt too wide) in paragraph at lines 185--185
 []      \T1/cmtt/m/n/12 B) If the token "praat result stored" is available we c
 an continue, else we wait until it is       available.[] 
  []
 
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 194.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 195.
 
 (C:\Users\phervo\Documents\laTeX\tex\latex\base\omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 194.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 195.
 
 <resources/architecture.png, id=51, 770.12718pt x 491.58656pt>
 File: resources/architecture.png Graphic file (type png)
 
 <use resources/architecture.png>
-Package pdftex.def Info: resources/architecture.png used on input line 202.
+Package pdftex.def Info: resources/architecture.png used on input line 203.
 (pdftex.def)             Requested size: 462.07986pt x 294.95421pt.
 
-Overfull \hbox (72.07986pt too wide) in paragraph at lines 202--203
+Overfull \hbox (72.07986pt too wide) in paragraph at lines 203--204
  [] 
  []
 
@@ -478,20 +478,20 @@ cture.png>] [13
 Chapter 3.
 [14
 
-]
+] [15]
 Chapter 4.
-[15
+[16
 
 ] (C:\Users\phervo\Documents\dossierProjet\SmallReport\TechnicalReport.lof)
 \tf@lof=\write4
 
-[16
+[17
 
 ] (C:\Users\phervo\Documents\dossierProjet\SmallReport\TechnicalReport.lot)
 \tf@lot=\write5
 
 (C:\Users\phervo\Documents\dossierProjet\SmallReport\TechnicalReport.bbl
-[17
+[18
 
 ]
 Underfull \hbox (badness 1845) in paragraph at lines 4--8
@@ -513,14 +513,14 @@ Underfull \hbox (badness 7030) in paragraph at lines 10--14
 \T1/cmr/m/n/12 prac-ti-cal guide to the watch-maker frame-work, feb 2013.
  []
 
-) [18
+) [19
 
 ] (C:\Users\phervo\Documents\dossierProjet\SmallReport\TechnicalReport.aux) ) 
 Here is how much of TeX's memory you used:
- 1870 strings out of 493921
- 23857 string characters out of 3145675
- 75043 words of memory out of 3000000
- 5139 multiletter control sequences out of 15000+200000
+ 1871 strings out of 493921
+ 23871 string characters out of 3145675
+ 75055 words of memory out of 3000000
+ 5140 multiletter control sequences out of 15000+200000
  17527 words of font info for 40 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
  27i,8n,20p,538b,268s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -540,9 +540,9 @@ nappen\ec\dpi600\ecbx1200.pk> <C:\Users\phervo\AppData\Local\MiKTeX\2.9\fonts\p
 k\ljfour\jknappen\ec\dpi600\ecrm1440.pk> <C:\Users\phervo\AppData\Local\MiKTeX\
 2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm2074.pk><C:/Users/phervo/Documents/l
 aTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on TechnicalReport.pdf (20 pages, 222124 bytes).
+Output written on TechnicalReport.pdf (21 pages, 223336 bytes).
 PDF statistics:
- 489 PDF objects out of 1000 (max. 8388607)
+ 492 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  11 words of extra memory for PDF output out of 10000 (max. 10000000)
 

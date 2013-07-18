@@ -165,7 +165,7 @@ public class GeneticAlgorithmCall{
 	*/
 	public void buildTarget(){
 		/*its here that we define the target*/
-		this.target=new FormantSequence("i"); //i by default
+		this.target=new FormantSequence("e"); //i by default
 		//this.target.displayFormantSequence();
 	}
 
@@ -263,7 +263,7 @@ public class GeneticAlgorithmCall{
 		//start the engine
 		engine = new GenerationalEvolutionEngine<Sequence>(mySequenceFactory, pipeline, mySeqEval, selection, rng);
 		engine.addEvolutionObserver(new MySequenceEvolutionObserver(this));
-		engine.evolve(10, 0, new TargetFitness(4,mySeqEval.isNatural()));
+		engine.evolve(10, 0, new TargetFitness(5,mySeqEval.isNatural()));
 		try {
 			MessageToPraat.writePraatScriptInFile(this.finalsequence);
 		} catch (PraatScriptException e) {

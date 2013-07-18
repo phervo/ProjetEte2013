@@ -116,7 +116,7 @@ public class FormantSequence {
 		}else if(soundName.compareTo("a")==0){
 			list.add(new Formant(710.0,71,0));
 			list.add(new Formant(1100.0,220,0));
-		}else if(soundName.compareTo("a")==0){
+		}else if(soundName.compareTo("e")==0){
 			list.add(new Formant(405.0,40.5,0));
 			list.add(new Formant(2080.0,416.0,0));
 		}else{

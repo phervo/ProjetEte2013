@@ -1,5 +1,6 @@
 package elements;
 
+import exceptions.AlphabetException;
 import exceptions.FormantNumberexception;
 import geneticAlogrithm.GeneticAlgorithmCall;
 import messages.MessageFromPraat;
@@ -39,16 +40,22 @@ public class Alphabet {
 	* 	the end value
 	* @param nbDigits
 	* 	the number of digit for each number
+	* @throws AlphabetException
+	* 	if you enter twice the same value or if you put the higher value on the minBorn.
 	* @since 0.1
 	*/
-	public Alphabet(String name,double minBorn,double maxborn,int nbDigits){
-		this.name=name;
-		this.length = (int) MessageFromPraat.arrondir((((maxborn-minBorn)/0.01)+1),0);//case 0
-		this.values =  new double[this.length];
-		
-		for(int i=0;i<this.length;i++){
-			this.values[i]=minBorn;
-			minBorn=MessageFromPraat.arrondir(minBorn+0.01,nbDigits);
+	public Alphabet(String name,double minBorn,double maxborn,int nbDigits) throws AlphabetException{
+		if(maxborn>minBorn){
+			this.name=name;
+			this.length = (int) MessageFromPraat.arrondir((((maxborn-minBorn)/0.01)+1),0);//case 0
+			this.values =  new double[this.length];
+			
+			for(int i=0;i<this.length;i++){
+				this.values[i]=minBorn;
+				minBorn=MessageFromPraat.arrondir(minBorn+0.01,nbDigits);
+			}
+		}else{
+			throw new AlphabetException(minBorn,maxborn);
 		}
 	}
 	

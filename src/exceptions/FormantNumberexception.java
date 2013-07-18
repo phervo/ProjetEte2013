@@ -51,6 +51,10 @@ public class FormantNumberexception extends Exception{
 		this.listLenght = parameterlistLenght;
 	}
 	
+	/**
+	 * display the type of the error and explain how to change it.
+	 * 
+	 */
 	public void display(){
 		if(nbFormants<=0){
 			System.out.println("nbFormant might be > 0 ");

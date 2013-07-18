@@ -1,7 +1,6 @@
 \documentclass[12pt]{report}
 \usepackage[utf8]{inputenc} 
 \usepackage[T1]{fontenc}
-\usepackage{layout}
 \usepackage{graphicx}
 \usepackage{verbatim}
 \usepackage{moreverb}
@@ -261,7 +260,7 @@ the Ga and the Server to allow it to be use in another application using praat i
 
 \paragraph*{}
 As the program is always listening and that is all, you had to manage to close it in a specific method elsewhere.
-I put it in the CloseServer class. It might be use once the Ga as finish and found a solution.
+I put it in the CloseServer class. It might be use once the Ga has finish and found a solution.
 
 \chapter{Performance and result}
 
@@ -288,10 +287,8 @@ We close it at the end of the execution, line 7, using the specific method dedic
 At the end of the run, my application generate a Praat script with the result values.
 You just have to load it in Praat to listen it.
 
-For the moment, I found quickly 2 matching point but I never found a full matching. I used the "i" formants and i will try with other sounds during the week.
-
 \listoffigures
 
 \bibliographystyle{alpha} 
-\bibliography{bib} % mon fichier de base de données s'appelle bibli.bib
+\bibliography{bib} % mon fichier de base de données s'appelle bib.bib
 \end{document}

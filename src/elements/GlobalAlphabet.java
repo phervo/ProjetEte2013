@@ -1,5 +1,7 @@
 package elements;
 
+import exceptions.AlphabetException;
+
 /** <p>Class wich define the meta alphabet of the program. It contains one instance of each existing alphabet
  * If you want to add a alphabet to the programm, define a new classe with the alphabet and then add an instance here.<br/>
  * This structure will be use in the class building a sequence for example SequenceFactory,SequenceMutation and in SequenceEvaluator.<br/>
@@ -48,10 +50,16 @@ public class GlobalAlphabet {
 	*/
 	public GlobalAlphabet() {
 		super();
-		this.lungsAlphabet = new Alphabet("LungsAlphabet",0.0,0.2,2);
-		this.masseterAlphabet = new Alphabet("MasseterAlphabet",-0.5,0.5,2);
-		this.otherAlphabet = new Alphabet("otherAlphabet",0.0,1.0,2);
-	}
+		try {
+			this.lungsAlphabet = new Alphabet("LungsAlphabet",0.0,0.2,2);
+			this.masseterAlphabet = new Alphabet("MasseterAlphabet",-0.5,0.5,2);
+			this.otherAlphabet = new Alphabet("otherAlphabet",0.0,1.0,2);
+		
+		} catch (AlphabetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}	
 
 	/**
 	* Return the lungsAlphabet

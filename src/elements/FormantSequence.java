@@ -96,13 +96,13 @@ public class FormantSequence {
 	* If the sound doesn't exist, return a sequenceFormant with 0.0 attributes.
 	* If you put an empty String, it wont use it and call the FormantSequence "default empty formantSequence"
 	* @param soundName
-	* 	the name of the sound. Work for "i"
+	* 	the name of the sound. Work for "i", "a" and "e"
 	*
 	* @since 0.1
 	*
 	*/
 	public FormantSequence(String soundName) {
-		
+		//bandwith = 0.1*value of frequency for F1 et 0.2 for F2 
 		if(soundName.compareTo("")==0){//if empty
 			this.soundName = "default empty formantSequence"; // we put a default name, wont raise a exception for that
 		}else{
@@ -113,6 +113,12 @@ public class FormantSequence {
 		if(soundName.compareTo("i")==0){
 			list.add(new Formant(280.0, 28.0, 0.0));
 			list.add(new Formant(2250.0, 450.0, 0.0));
+		}else if(soundName.compareTo("a")==0){
+			list.add(new Formant(710.0,71,0));
+			list.add(new Formant(1100.0,220,0));
+		}else if(soundName.compareTo("a")==0){
+			list.add(new Formant(405.0,40.5,0));
+			list.add(new Formant(2080.0,416.0,0));
 		}else{
 			list.add(new Formant());
 			list.add(new Formant());

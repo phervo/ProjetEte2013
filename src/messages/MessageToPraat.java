@@ -207,7 +207,8 @@ public class MessageToPraat {
 			stb.append("#-----------------------------------------------\n");
 			try {
 				stb.append("Set target... 0.0    "+candidat.getValuesAt(0)+" Lungs\n");
-				stb.append("Set target... "+Speachtime+"     "+candidat.getValuesAt(1)+" Lungs\n");
+				stb.append("Set target... 0.25     "+candidat.getValuesAt(1)+" Lungs\n");
+				stb.append("Set target... "+Speachtime+"     0.0 Lungs\n");
 				stb.append("#-----------------------------------------------\n");
 				stb.append("# Control glottis\n");
 				stb.append("#-----------------------------------------------\n");
@@ -250,7 +251,6 @@ public class MessageToPraat {
 				stb.append("select Artword phon\n");
 				stb.append("plus Speaker Robovox\n");
 				stb.append("To Sound... 22050 25   0 0 0    0 0 0    0 0 0\n");
-				stb.append("#-----------------------------------------------\n");
 				stb.append("#-----------------------------------------------\n");
 				String texte = stb.toString();
 				FileWriter fw = new FileWriter(adressedufichier, false);

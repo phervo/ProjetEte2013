@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.7.11)  17 JUL 2013 16:40
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.7.11)  18 JUL 2013 11:50
 entering extended mode
 **TechnicalReport.tex
 (C:\Users\phervo\Documents\dossierProjet\SmallReport\TechnicalReport.tex
@@ -507,17 +507,25 @@ cture.png>] [13
 Chapter 3.
 [14
 
-] [15]
-Overfull \hbox (41.89783pt too wide) in paragraph at lines 265--266
+] [15] [16]
+Chapter 4.
+[17
+
+]
+Chapter 5.
+
+Overfull \hbox (41.89783pt too wide) in paragraph at lines 273--274
 [][][][][][][][][][][] 
  []
 
-[16] [17]
+[18
+
+] [19]
 (C:\Users\phervo\Documents\dossierProjet\SmallReport\TechnicalReport.lof)
 \tf@lof=\write4
 
 (C:\Users\phervo\Documents\dossierProjet\SmallReport\TechnicalReport.bbl
-[18
+[20
 
 ]
 Underfull \hbox (badness 1845) in paragraph at lines 4--8
@@ -539,7 +547,7 @@ Underfull \hbox (badness 7030) in paragraph at lines 10--14
 \T1/cmr/m/n/12 prac-ti-cal guide to the watch-maker frame-work, feb 2013.
  []
 
-) [19
+) [21
 
 ] (C:\Users\phervo\Documents\dossierProjet\SmallReport\TechnicalReport.aux) ) 
 Here is how much of TeX's memory you used:
@@ -568,9 +576,9 @@ k\ljfour\jknappen\ec\dpi600\ecrm1200.pk> <C:\Users\phervo\AppData\Local\MiKTeX\
 cal\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1440.pk> <C:\Users\phervo
 \AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm2074.pk><C:/Us
 ers/phervo/Documents/laTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on TechnicalReport.pdf (21 pages, 234317 bytes).
+Output written on TechnicalReport.pdf (23 pages, 237207 bytes).
 PDF statistics:
- 521 PDF objects out of 1000 (max. 8388607)
+ 529 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  11 words of extra memory for PDF output out of 10000 (max. 10000000)
 

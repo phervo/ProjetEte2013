@@ -215,7 +215,9 @@ The figure below show how it works :
 \end{figure}
 
 \part{Implementation Details}
+
 \chapter{the GA}
+
 \section{watchmaker}
 In this project, I used the Watchmaker's Genetic Algorithm API\cite{ref}. It is an Java API which provided all the objects and methods to run a genetic Algorithm. The only thing I had to do is reimplemented some classes to use my own objects and operations as cross over, mutation, ... but all the structure of the GA behind was already defined.
 
@@ -244,18 +246,24 @@ I build a special structure for the formants. The structure of a formant itself 
 \subsection{the script}
 I generate a script with a template file and the values of the candidate Sequence. The templates are stored in the MessageToPraat class. They aren't written as a file in the disk because it is too long to procede. Instead, they are store in the central memory of the computer to be faster.
 
-\section{the communication}
-\subsection{SendPraat}
+\section{The run}
+The run of the GA is done according to the watchmaker API. I wrote all the orders in a class called GeneticAlgorithmCall. The only thing it need to know is the length of the sequence we wanted to manipulate.
+
+\chapter{the communication}
+\section{SendPraat}
 To run the program you need to have sendPraat installed and a running instance of Praat.
 I created a function to open and close Praat and another to send it an order using sendPraat. All these functions are available in the Communication package. It work using the Java runtime environment which allow to use the command line. Each call create a new process but i add a special parameter to told the program to wait for the full execution of the process before continuing so there is no need of semaphore here.
 
-\subsection{the Server}
+\section{the Server}
 As I said in the overAll, i implemented a server to listen to the Praat's sendsocket port.
 I design it as a thread to be sure that it will listen all the time without blocking the execution of the GA. When it get a message it store it in the Ga specified in parameter during the construction. I separate
 the Ga and the Server to allow it to be use in another application using praat if necessary, you just add to modify a little the run method. 
 
-\section{The run}
-The run of the GA is done according to the watchmaker API. I wrote all the orders in a class called GeneticAlgorithmCall. The only thing it need to know is the length of the sequence we wanted to manipulate.
+\paragraph*{}
+As the program is always listening and that is all, you had to manage to close it in a specific method elsewhere.
+I put it in the CloseServer class. It might be use once the Ga as finish and found a solution.
+
+\chapter{Performance and result}
 
 \section{code}
 Here is the only code you had to use to run my Java Application. All in 7 lines :
@@ -270,7 +278,16 @@ CloseServer.envoyerMessageFermeture();
 OrderToPraat.closePraat();
 \end{lstlisting}
 
+The first and the last line launch and close praat, the last one is optional.
+The second line create the Praat's speaker and artword.
+The third line initiale a genetic algortihm object. It is launch in the fifth line using the startAlgorithm method.
+As I explain in this report, I designed the server independent from the GA. So you have to get one from the ServerThread.getInstance method line 4.
+We close it at the end of the execution, line 7, using the specific method dedicated to this task or it will continue to run.
+
 \section{result}
+At the end of the run, my application generate a Praat script with the result values.
+You just have to load it in Praat to listen it.
+
 For the moment, I found quickly 2 matching point but I never found a full matching. I used the "i" formants and i will try with other sounds during the week.
 
 \listoffigures

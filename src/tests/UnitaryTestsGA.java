@@ -73,7 +73,7 @@ public class UnitaryTestsGA {
 		Formant f1= new Formant();
 		System.out.println("1 : must return all values at 0.0  =>    "+f1.toString());
 		f1.setAmplitude(0.1);
-		f1.setBandwith(0.1);
+		//f1.setBandwith(0.1);
 		f1.setFrequency(0.1);
 		System.out.println("2 : must return all values at 0.1  =>    "+f1.toString());
 		Formant f2 = new Formant(0.0, 0.2, 0.3);

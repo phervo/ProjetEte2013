@@ -23,7 +23,7 @@ public class MessageFromPraat {
 	/**
 	 * define the number of values that we are waiting from praat
 	 */
-	private static final int nbCharFromPraat=4;
+	private static final int nbCharFromPraat=2;
 	/**
 	* constructor without parameters, just create to override the default java constructor.
 	* No need to use it so we define it as private
@@ -58,7 +58,7 @@ public class MessageFromPraat {
 		ArrayList<Formant> list= new ArrayList<Formant>();
 		FormantSequence fms=null; 
 		
-			if(tab.length<1 || tab.length>nbCharFromPraat || (tab.length>1 && tab.length<nbCharFromPraat)){ // if !=1 ou !=4
+			if(tab.length<1 || tab.length>nbCharFromPraat || (tab.length>1 && tab.length<nbCharFromPraat)){ // if !=1 ou !=nbCharFromPraat
 				IsOk=false;
 				throw new CastFormantException(String.valueOf(tab.length));
 			}else if(tab.length==1){// 1 or nbCharFromPraat
@@ -80,8 +80,11 @@ public class MessageFromPraat {
 			
 			//now we create the result with the value of IsOk
 			if(IsOk){
-				list.add(new Formant(arrondir(Double.parseDouble(tab[0]),1),arrondir(Double.parseDouble(tab[2]),1),0.0));
-				list.add(new Formant(arrondir(Double.parseDouble(tab[1]),1),arrondir(Double.parseDouble(tab[3]),1),0.0));
+				//list.add(new Formant(arrondir(Double.parseDouble(tab[0]),1),arrondir(Double.parseDouble(tab[2]),1),0.0));
+				//list.add(new Formant(arrondir(Double.parseDouble(tab[1]),1),arrondir(Double.parseDouble(tab[3]),1),0.0));
+				list.add(new Formant(arrondir(Double.parseDouble(tab[0]),1),0.0,0.0));
+				list.add(new Formant(arrondir(Double.parseDouble(tab[1]),1),0.0,0.0));
+				
 				try {
 					fms=new FormantSequence("candidat", 2,list);
 				} catch (FormantNumberexception e) {

@@ -84,4 +84,16 @@ public class OrderToPraat {
 			e.printStackTrace();
 		}
 	}
+	
+	public static void reLaunchPraat(){
+		String[] sendpraatQuit ={"sendpraat", "praat","Quit"};
+		Runtime run = Runtime.getRuntime();
+		try {
+			run.exec(sendpraatQuit);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 }

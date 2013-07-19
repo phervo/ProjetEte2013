@@ -25,7 +25,7 @@ public class Formant {
      * @see Formant#getBandwith()
      * @see Formant#setBandwith(double bandwith)
      */
-	private double bandwith;
+	//private double bandwith;
 	
 	/**
      * The formant amplitude
@@ -44,7 +44,7 @@ public class Formant {
 	public Formant() {
 		super();
 		this.frequency = 0.0;
-		this.bandwith = 0.0;
+		//this.bandwith = 0.0;
 		this.amplitude = 0.0;
 	}
 	
@@ -64,7 +64,7 @@ public class Formant {
 	public Formant(double frequency, double bandwith, double amplitude) {
 		super();
 		this.frequency = frequency;
-		this.bandwith = bandwith;
+		//this.bandwith = bandwith;
 		this.amplitude = amplitude;
 	}
 
@@ -101,9 +101,9 @@ public class Formant {
 	 *@since 0.1
 	 *
 	 */
-	public double getBandwith() {
+	/*public double getBandwith() {
 		return bandwith;
-	}
+	}*/
 
 	/**
 	 * Set the value of the Bandwith attribute for the instance.
@@ -114,9 +114,9 @@ public class Formant {
 	 *@since 0.1
 	 *
 	 */
-	public void setBandwith(double bandwith) {
+	/*public void setBandwith(double bandwith) {
 		this.bandwith = bandwith;
-	}
+	}*/
 
 	/**
 	 * Return the value of the Amplitude attribute.
@@ -153,6 +153,7 @@ public class Formant {
 	 *
 	 */
 	public String toString(){
-		return ("frequency: "+this.getFrequency()+" bandWith:"+this.getBandwith()+" amplitude: "+this.getAmplitude());
+		//return ("frequency: "+this.getFrequency()+" bandWith:"+this.getBandwith()+" amplitude: "+this.getAmplitude());
+		return ("frequency: "+this.getFrequency()+" amplitude: "+this.getAmplitude());
 	}
 }

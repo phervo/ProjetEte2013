@@ -138,6 +138,7 @@ public final class ServerThread extends Thread{
 		} catch (CastFormantException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			e.display();
 		}
 		//ga.getMutexFitnessFunction().release();
 	}

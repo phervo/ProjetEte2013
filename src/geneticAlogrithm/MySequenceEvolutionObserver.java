@@ -45,7 +45,15 @@ public class MySequenceEvolutionObserver implements EvolutionObserver<Sequence>{
                 data.getGenerationNumber(),
                 data.getBestCandidate().getValuesInString());
 		this.myGa.setSequence(data.getBestCandidate());
-		OrderToPraat.sendMessageToPrat(MessageToPraat.clearPraatObjectWindow());
+		/*IMPORTANT : praat got a internal memory and can afford only a certain number of object (2000 in my case)
+		 * When reached, praat stop working (error message)
+		 * So some time we need to remove those objects to avoid a calculation crash
+		 * We cant use the praat's remove function cause it only remove the objects from the list, the only way is to close and relaunch praat
+		 * Thats why i didi it here at the generation eval point. I do the operation all the 1000 objects to be sure to be large*/
+		if(data.getGenerationNumber()!=0 && data.getGenerationNumber()%10 == 0){
+			OrderToPraat.reLaunchPraat();
+			OrderToPraat.sendMessageToPrat(MessageToPraat.writePraatScriptHeader());
+		}
 	}
 
 }

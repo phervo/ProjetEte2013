@@ -23,7 +23,7 @@ public class MainClass {
 		// TODO Auto-generated method stub
 		OrderToPraat.launchPraat(); 
 		OrderToPraat.sendMessageToPrat(MessageToPraat.writePraatScriptHeader());
-		GeneticAlgorithmCall ga= new GeneticAlgorithmCall(19); //init
+		GeneticAlgorithmCall ga= new GeneticAlgorithmCall(16); //init
 		ServerThread.getInstance(ga);
 		ga.startAlgorithm();
 		CloseServer.envoyerMessageFermeture();

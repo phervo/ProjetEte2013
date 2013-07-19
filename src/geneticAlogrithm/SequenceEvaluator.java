@@ -121,20 +121,20 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 	    		/*there is an interval of +/-10% around the value so we caluclate this value*/
 	    		double lowerBornfreq = this.targetSequence.getFormantAt(i).getFrequency()*0.9;
 	    		double upperBornfreq = this.targetSequence.getFormantAt(i).getFrequency()*1.1;
-	    		double lowerBornBW = this.targetSequence.getFormantAt(i).getBandwith()*0.9;
-	    		double upperBornBW = this.targetSequence.getFormantAt(i).getBandwith()*1.1;
+	    		//double lowerBornBW = this.targetSequence.getFormantAt(i).getBandwith()*0.9;
+	    		//double upperBornBW = this.targetSequence.getFormantAt(i).getBandwith()*1.1;
 	    		double lowerBornA = this.targetSequence.getFormantAt(i).getAmplitude()*0.9;
 	    		double upperBornA = this.targetSequence.getFormantAt(i).getAmplitude()*1.1;
 	    		
 	    		if((ga.getMessageFromPraat().getFormantAt(i).getFrequency()>=lowerBornfreq && ga.getMessageFromPraat().getFormantAt(i).getFrequency()<=upperBornfreq)){
 					matches++;
 				}
-				if(ga.getMessageFromPraat().getFormantAt(i).getBandwith()>=lowerBornBW && ga.getMessageFromPraat().getFormantAt(i).getBandwith()<=upperBornBW ){
+				/*if(ga.getMessageFromPraat().getFormantAt(i).getBandwith()>=lowerBornBW && ga.getMessageFromPraat().getFormantAt(i).getBandwith()<=upperBornBW ){
 					matches++;
 				}
 				if(ga.getMessageFromPraat().getFormantAt(i).getAmplitude()>=lowerBornA && ga.getMessageFromPraat().getFormantAt(i).getAmplitude()<=upperBornA){
 					matches++;
-				}
+				}*/
 			}
 	    	System.out.println("matchScore : "+matches);
 		} catch (InterruptedException e) {

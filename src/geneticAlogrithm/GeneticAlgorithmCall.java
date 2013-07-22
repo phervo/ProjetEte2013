@@ -263,7 +263,7 @@ public class GeneticAlgorithmCall{
 		//start the engine
 		engine = new GenerationalEvolutionEngine<Sequence>(mySequenceFactory, pipeline, mySeqEval, selection, rng);
 		engine.addEvolutionObserver(new MySequenceEvolutionObserver(this));
-		engine.evolve(10, 0, new TargetFitness(1,mySeqEval.isNatural()));
+		engine.evolve(10, 0, new TargetFitness(2,mySeqEval.isNatural()));
 		try {
 			MessageToPraat.writePraatScriptInFile(this.finalsequence);
 		} catch (PraatScriptException e) {

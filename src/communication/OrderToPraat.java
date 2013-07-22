@@ -129,15 +129,19 @@ public class OrderToPraat {
 	*/
 	public static void reLaunchPraat(){
 		String[] sendpraatQuit1 ={"sendpraat", "praat","Quit"};
-		String[] sendpraatQuit2 ={"praat"};
+		String[] sendpraatLaunch ={"praat"};
 		String[] sendpraatCom ={"sendpraat", "praat",MessageToPraat.writePraatScriptHeader()};
 		Runtime run = Runtime.getRuntime();
 		try {
 			Process runProcess1=run.exec(sendpraatQuit1);
 			runProcess1.waitFor();
-			
-			Process runProcess3=run.exec(sendpraatCom);
-			runProcess3.waitFor();
+			praatLaunch.acquire();
+			run.exec(sendpraatLaunch);
+			praatLaunch.release();
+			praatLaunch.acquire(); //sem here cause it is called in lanchPraat and it guaranti that praat is relaunch before executing runProcess2
+			Process runProcess2=run.exec(sendpraatCom);
+			runProcess2.waitFor();
+			praatLaunch.release();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

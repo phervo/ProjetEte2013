@@ -123,8 +123,8 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 	    		double upperBornfreq = this.targetSequence.getFormantAt(i).getFrequency()*1.1;
 	    		//double lowerBornBW = this.targetSequence.getFormantAt(i).getBandwith()*0.9;
 	    		//double upperBornBW = this.targetSequence.getFormantAt(i).getBandwith()*1.1;
-	    		double lowerBornA = this.targetSequence.getFormantAt(i).getAmplitude()*0.9;
-	    		double upperBornA = this.targetSequence.getFormantAt(i).getAmplitude()*1.1;
+	    		//double lowerBornA = this.targetSequence.getFormantAt(i).getAmplitude()*0.9;
+	    		//double upperBornA = this.targetSequence.getFormantAt(i).getAmplitude()*1.1;
 	    		
 	    		if((ga.getMessageFromPraat().getFormantAt(i).getFrequency()>=lowerBornfreq && ga.getMessageFromPraat().getFormantAt(i).getFrequency()<=upperBornfreq)){
 					matches++;

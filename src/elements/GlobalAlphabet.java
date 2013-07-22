@@ -18,6 +18,9 @@ public class GlobalAlphabet {
 	/**
 	 * The alphabet for lungs
 	 * 
+	 * WE DECIDED TO PUT THE VALUES OF THE LUNG FIXED but i left it here in case we use it again someday
+	 * 
+	 * 
 	 * @see GlobalAlphabet#getLungsAlphabet()
 	 * 
 	 */

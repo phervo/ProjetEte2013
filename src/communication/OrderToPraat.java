@@ -117,8 +117,8 @@ public class OrderToPraat {
 	
 	
 	/**
-	* Function use each 100 generations. Each generation have 10 candidates and produce two sounds (the sound and the formant sound).
-	* So it make 100*10*2 = 2000 sound objects in praat. As there is a praat sound objects limit (something like 2282), this function will allow to
+	* Function use each 50 generations. Each generation have 10 candidates and produce two sounds (the sound and the formant sound).
+	* So it make 50*10*2 = 1000 sound objects in praat. As there is a praat sound objects limit (something like 2000), this function will allow to
 	* relaunch praat with a clean memory. 
 	* 
 	* IMPORTANT NOTE : the praat's remove function only remove the object from the list and not from the memory. That why i use this way.

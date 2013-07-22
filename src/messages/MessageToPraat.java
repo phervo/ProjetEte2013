@@ -97,7 +97,7 @@ public class MessageToPraat {
 				stb.append("# Project : Software synthesis using GA\n");
 				stb.append("# Hervo Pierre-Yves, automatic Script generated in java\n");
 				stb.append("#-----------------------------------------------\n");
-				//we complete artword with the set tqrget methods below
+				//we complete artword with the set target methods below
 				stb.append("select Artword phon\n");
 				stb.append("# Supply lung energy\n");
 				stb.append("#-----------------------------------------------\n");
@@ -284,7 +284,7 @@ public class MessageToPraat {
 	* @return String containing the script to execute
 	*
 	* @since 0.1
-	*
+	* @deprecated Use {@link OrderToPraat#reLaunchPraat()} instead
 	*/
 	public static String clearPraatObjectWindow(){
 		StringBuilder stb= new StringBuilder();

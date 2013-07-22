@@ -21,13 +21,13 @@ public class MainClass {
 	
 	public static void main(String[] args) throws FormantNumberexception {
 		// TODO Auto-generated method stub
-		OrderToPraat.launchPraat(); 
+		OrderToPraat.launchPraat();
 		OrderToPraat.sendMessageToPrat(MessageToPraat.writePraatScriptHeader());
 		GeneticAlgorithmCall ga= new GeneticAlgorithmCall(16); //init
 		ServerThread.getInstance(ga);
 		ga.startAlgorithm();
 		CloseServer.envoyerMessageFermeture();
-		OrderToPraat.closePraat();
+		//OrderToPraat.closePraat();
 		
 		/*GeneticAlgorithmCall ga= new GeneticAlgorithmCall(13); //init
 		double[] d= {-0.6,0.2,-0.9,-0.2,0.2,-0.6,-0.1,-0.5,-0.2,-0.3,-0.7,0.1,-0.5};

@@ -7,6 +7,7 @@ import exceptions.SequenceArrayException;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.concurrent.Semaphore;
 
 import communication.OrderToPraat;
 
@@ -19,7 +20,7 @@ import communication.OrderToPraat;
  * @see OrderToPraat#sendMessageToPrat(String)
  *  
  * @author Pierre-Yves Hervo
- * @version 0.1
+ * @version 0.2
  */
 public class MessageToPraat {
 	/**
@@ -41,6 +42,7 @@ public class MessageToPraat {
 	 * 
 	 */
 	private static final double Speachtime=0.5; //0.5
+	
 	/**
 	* constructor without parameters, just create to override the default java constructor.
 	* No need to use it so we define it as private
@@ -219,35 +221,35 @@ public class MessageToPraat {
 				stb.append("Set target... "+Speachtime+"  0.5 Interarytenoid\n");
 				stb.append("#\n");
 				stb.append("# Adduct vocal folds\n");
-				stb.append("Set target... 0.0   "+candidat.getValuesAt(1)+" Cricothyroid\n");
-				stb.append("Set target... "+Speachtime+"   "+candidat.getValuesAt(2)+" Cricothyroid\n");
+				stb.append("Set target... 0.0   "+candidat.getValuesAt(0)+" Cricothyroid\n");
+				stb.append("Set target... "+Speachtime+"   "+candidat.getValuesAt(1)+" Cricothyroid\n");
 				stb.append("# Close velopharyngeal port\n");
 				stb.append("#-----------------------------------------------\n");
-				stb.append("Set target... 0.0   "+candidat.getValuesAt(3)+" LevatorPalatini\n");
-				stb.append("Set target... "+Speachtime+"   "+candidat.getValuesAt(4)+" LevatorPalatini\n");
+				stb.append("Set target... 0.0   "+candidat.getValuesAt(2)+" LevatorPalatini\n");
+				stb.append("Set target... "+Speachtime+"   "+candidat.getValuesAt(3)+" LevatorPalatini\n");
 				stb.append("#-----------------------------------------------\n");
 				stb.append("#-----------------------------------------------\n");
-				stb.append("Set target... 0.0   "+candidat.getValuesAt(5)+" Genioglossus\n");
-				stb.append("Set target... "+Speachtime+"   "+candidat.getValuesAt(6)+" Genioglossus\n");
+				stb.append("Set target... 0.0   "+candidat.getValuesAt(4)+" Genioglossus\n");
+				stb.append("Set target... "+Speachtime+"   "+candidat.getValuesAt(5)+" Genioglossus\n");
 				stb.append("#\n");
-				stb.append("Set target... 0.0   "+candidat.getValuesAt(7)+" Styloglossus\n");
-				stb.append("Set target... "+Speachtime+"   "+candidat.getValuesAt(8)+" Styloglossus\n");
+				stb.append("Set target... 0.0   "+candidat.getValuesAt(6)+" Styloglossus\n");
+				stb.append("Set target... "+Speachtime+"   "+candidat.getValuesAt(7)+" Styloglossus\n");
 				stb.append("#\n");
-				stb.append("Set target... 0.0   "+candidat.getValuesAt(9)+" Mylohyoid\n");
-				stb.append("Set target... "+Speachtime+"   "+candidat.getValuesAt(10)+" Mylohyoid\n");
+				stb.append("Set target... 0.0   "+candidat.getValuesAt(8)+" Mylohyoid\n");
+				stb.append("Set target... "+Speachtime+"   "+candidat.getValuesAt(9)+" Mylohyoid\n");
 				stb.append("#\n");
-				stb.append("Set target... 0.0   "+candidat.getValuesAt(11)+" OrbicularisOris\n");
-				stb.append("Set target... "+Speachtime+"   "+candidat.getValuesAt(12)+" OrbicularisOris\n");
+				stb.append("Set target... 0.0   "+candidat.getValuesAt(10)+" OrbicularisOris\n");
+				stb.append("Set target... "+Speachtime+"   "+candidat.getValuesAt(11)+" OrbicularisOris\n");
 				stb.append("#-----------------------------------------------\n");
 				stb.append("# Shape mouth to open vowel\n");
 				stb.append("#-----------------------------------------------\n");
 				stb.append("# Lower the jaw\n");
 				stb.append("# -----------------------------------------\n");
-				stb.append("Set target... 0.0   "+candidat.getValuesAt(13)+" Masseter\n");
-				stb.append("Set target... "+Speachtime+"   "+candidat.getValuesAt(14)+" Masseter\n");
+				stb.append("Set target... 0.0   "+candidat.getValuesAt(12)+" Masseter\n");
+				stb.append("Set target... "+Speachtime+"   "+candidat.getValuesAt(13)+" Masseter\n");
 				stb.append("# Pull tongue backwards\n");
-				stb.append("Set target... 0.0   "+candidat.getValuesAt(15)+" Hyoglossus\n");
-				stb.append("Set target... "+Speachtime+"   "+candidat.getValuesAt(16)+" Hyoglossus\n");
+				stb.append("Set target... 0.0   "+candidat.getValuesAt(14)+" Hyoglossus\n");
+				stb.append("Set target... "+Speachtime+"   "+candidat.getValuesAt(15)+" Hyoglossus\n");
 				stb.append("# Synthesise the sound\n");
 				stb.append("#-----------------------------------------------\n");
 				stb.append("select Artword phon\n");

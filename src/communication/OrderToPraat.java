@@ -1,8 +1,10 @@
 package communication;
 
 import java.io.IOException;
+import java.util.concurrent.Semaphore;
 
 import messages.MessageFromPraat;
+import messages.MessageToPraat;
 
 
 /** <p>Class which contains the different order you can give to praat<br/>
@@ -10,12 +12,24 @@ import messages.MessageFromPraat;
  * 
  *  
  * @author Pierre-Yves Hervo
- * @version 0.1
+ * @version 0.2
+ * 
  */
 public class OrderToPraat {
 	
 	/**
-	    * Constructor, Private to forbid people to instanciate 
+	 * The function launch praat doesnt use the waitFor() method of runtime.
+	 * If we do it, it will block the execution of the rest of the program (deadlock).
+	 * so it is not a thread nor a prioritary process. It means that the rest of the code wich use specific process or thread can be execute before.
+	 * It is the case of the function sendMessageToPrat(String string) for exemple.
+	 * But this function use sendpraat and as I said, it needs a RUNNING instance of praat.
+	 * So we need to use a semaphore to forbid the other functions to launch before this one have finished.
+	 * 
+	 */
+	private static final Semaphore praatLaunch = new Semaphore(1, true);
+	
+	/**
+	    * Constructor, Private to forbid people to instantiate 
 	    * just overwrite the default constructor
 	    *
 	    *
@@ -34,35 +48,51 @@ public class OrderToPraat {
 	*
 	*/
 	public static void launchPraat(){
-		/*launch praat */
-		Runtime run = Runtime.getRuntime();
-		String[] sendpraatCom ={"praat"};
+		/*surtout pas de waitFor sinon on bloque tout*/
 		try {
-			run.exec(sendpraatCom);
-		} catch (IOException e) {
+			praatLaunch.acquire();
+			Runtime run = Runtime.getRuntime();
+			String[] sendpraatCom ={"praat"};
+			try {
+				run.exec(sendpraatCom);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			praatLaunch.release();
+		} catch (InterruptedException e1) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			e1.printStackTrace();
 		}
+		
 	}
 
 	/**
 	* send a script to praat. The script must be in a String.
 	* Use the function in the messages package.
 	*
-	*
+	*@param string
+	*	A String containing the scipt
 	* @see MessageFromPraat
 	* @since 0.1
 	*
 	*/
-	public static synchronized void sendMessageToPrat(String fileName){
-		String[] sendpraatCom ={"sendpraat", "praat",fileName};
-		Runtime run = Runtime.getRuntime();
+	public static synchronized void sendMessageToPrat(String string){
 		try {
-			Process runProcess=run.exec(sendpraatCom);
-			runProcess.waitFor(); //le thread qui l'a lance attend la fin de l'execution
-		} catch (IOException | InterruptedException e) {
+			praatLaunch.acquire();
+			String[] sendpraatCom ={"sendpraat", "praat",string};
+			Runtime run = Runtime.getRuntime();
+			try {
+				Process runProcess=run.exec(sendpraatCom);
+				runProcess.waitFor(); //le thread qui l'a lance attend la fin de l'execution
+			} catch (IOException | InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			praatLaunch.release();
+		} catch (InterruptedException e1) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			e1.printStackTrace();
 		}
 	}
 	
@@ -85,12 +115,33 @@ public class OrderToPraat {
 		}
 	}
 	
+	
+	/**
+	* Function use each 100 generations. Each generation have 10 candidates and produce two sounds (the sound and the formant sound).
+	* So it make 100*10*2 = 2000 sound objects in praat. As there is a praat sound objects limit (something like 2282), this function will allow to
+	* relaunch praat with a clean memory. 
+	* 
+	* IMPORTANT NOTE : the praat's remove function only remove the object from the list and not from the memory. That why i use this way.
+	*
+	*
+	* @since 0.1
+	*
+	*/
 	public static void reLaunchPraat(){
-		String[] sendpraatQuit ={"sendpraat", "praat","Quit"};
+		String[] sendpraatQuit1 ={"sendpraat", "praat","Quit"};
+		String[] sendpraatQuit2 ={"praat"};
+		String[] sendpraatCom ={"sendpraat", "praat",MessageToPraat.writePraatScriptHeader()};
 		Runtime run = Runtime.getRuntime();
 		try {
-			run.exec(sendpraatQuit);
+			Process runProcess1=run.exec(sendpraatQuit1);
+			runProcess1.waitFor();
+			
+			Process runProcess3=run.exec(sendpraatCom);
+			runProcess3.waitFor();
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

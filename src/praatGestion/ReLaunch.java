@@ -26,6 +26,12 @@ public class ReLaunch extends PraatState{
 		praatObject.setState(new Close());
 	}
 
+	@Override
+	public void headerSet(Praat praatObject) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 
 }

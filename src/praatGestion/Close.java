@@ -9,7 +9,7 @@ public class Close extends PraatState{
 	@Override
 	public void launch(Praat praatObject) {
 		// TODO Auto-generated method stub
-		System.out.println("etat clos, on lance");
+		
 		praatObject.setState(new Launch());
 	}
 
@@ -23,6 +23,12 @@ public class Close extends PraatState{
 	public void close(Praat praatObject) {
 		// TODO Auto-generated method stub
 		//no action so i leave it empty
+	}
+
+	@Override
+	public void headerSet(Praat praatObject) {
+		// TODO Auto-generated method stub
+		
 	}
 
 

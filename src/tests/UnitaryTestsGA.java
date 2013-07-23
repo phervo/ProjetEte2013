@@ -259,17 +259,6 @@ public class UnitaryTestsGA {
 	}
 	
 	/**
-	* Test of the methods to launch and close praat
-	*
-	* @since 0.1
-	*
-	*/
-	public static void testPraat(){
-		OrderToPraat.launchPraat();
-		OrderToPraat.closePraat();
-	}
-	
-	/**
 	* Test of the methods from the GA. We can't see the result because there is no getter nor setter but we can see if
 	* it compile and if the instruction go in the good order.
 	* We can't use start() here case there is no praat instance nor java server to listen. It will be in the integration part.
@@ -452,7 +441,7 @@ public class UnitaryTestsGA {
 	/**
 	 * test of the different operations from praat : open, header, close
 	 */
-	public static void praatLaunchHeaderClose(){
+	/*public static void praatLaunchHeaderClose(){
 			System.out.printf("tout d abord je suis ici : %s",Thread.currentThread().getName());
 			try {
 				for(int i=0;i<10;i++){
@@ -466,14 +455,11 @@ public class UnitaryTestsGA {
 			}
 		
 		//OrderToPraat.reLaunchPraat();
-	}
+	}*/
 	
 	public static void testStatePattern(){
 		Praat p = new Praat(); //close
 		p.launch();
-		p.reLaunch();
-		p.reLaunch();
-		p.close();
 	}
 	
 	 private static class ClasseInterne{ // internal class for a main

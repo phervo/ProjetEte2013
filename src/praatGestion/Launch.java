@@ -26,4 +26,10 @@ public class Launch extends PraatState{
 		praatObject.setState(new Close());
 	}
 
+	@Override
+	public void headerSet(Praat praatObject) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

@@ -16,16 +16,9 @@ import tests.UnitaryTestsGA;
  */
 public class IntegrationTest {
 	
-	public static void testPraat(){
-		Praat p = new Praat();
-		p.addObserver(new OrderToPraat());
-		p.blabla();
-	}
-	
 	
 	private static class ClasseInterne{ // internal class for a main
 		 public static void main(String[] args){
-			 testPraat();
 		 }
 	}
 }

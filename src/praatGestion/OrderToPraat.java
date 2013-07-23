@@ -10,7 +10,14 @@ import messages.MessageToPraat;
 
 
 /** <p>Class which contains the different order you can give to praat<br/>
- *  all the method are static so no need to instantiate an object</p>
+ *  The ordertoPraat object is created in the Praat object. You are not suppose to instantiate one elsewhere.
+ *  This classe define the calls to the praat programm using the runtime environment an the command line.
+ *  All those method are private to forbid them beiing use outer the classe.
+ *  They are used in the update function to do the proper task (corresponding to the new state) and launch automaticly the next
+ *  state. 
+ *  
+ *  Important note : I could have define the operation directly in the different states but i preferred to deal with all the runtime tacks in a single
+ *  class to avoid code repetition. So if you had to change anything in this op, you wont have to change it directly in the states</p>
  * 
  *  
  * @author Pierre-Yves Hervo
@@ -20,10 +27,10 @@ import messages.MessageToPraat;
 public class OrderToPraat implements Observer {
 	
 	/**
-	 * The function launch praat doesnt use the waitFor() method of runtime.
+	 * The function launch praat doesn't use the waitFor() method of runtime.
 	 * If we do it, it will block the execution of the rest of the program (deadlock).
-	 * so it is not a thread nor a prioritary process. It means that the rest of the code wich use specific process or thread can be execute before.
-	 * It is the case of the function sendMessageToPrat(String string) for exemple.
+	 * so it is not a thread nor a prioritary process. It means that the rest of the code which use specific process or thread can be execute before.
+	 * It is the case of the function sendMessageToPrat(String string) for example.
 	 * But this function use sendpraat and as I said, it needs a RUNNING instance of praat.
 	 * So we need to use a semaphore to forbid the other functions to launch before this one have finished.
 	 * 
@@ -31,7 +38,7 @@ public class OrderToPraat implements Observer {
 	//private static final Semaphore praatLaunch = new Semaphore(1, true);
 	
 	/**
-	    * Constructor, Private to forbid people to instantiate 
+	    * Constructor
 	    * just overwrite the default constructor
 	    *
 	    *
@@ -49,23 +56,17 @@ public class OrderToPraat implements Observer {
 	* @since 0.1
 	*
 	*/
-	public static void launchPraat(){
+	private static void launchPraat(){
 		/*surtout pas de waitFor sinon on bloque tout*/
-		System.out.printf("Puis je rentre dans launchPraat ici");
-		//process main qui gere ca
 			Runtime run = Runtime.getRuntime();
 			String[] sendpraatLaunch ={"praat"};
-			String[] sendpraatHeader ={"sendpraat", "praat",MessageToPraat.writePraatScriptHeader()};
 			try {
-				Process runProcess=run.exec(sendpraatLaunch);
-				Process runProcess2=run.exec(sendpraatHeader);
+				run.exec(sendpraatLaunch);
 				//runProcess.waitFor();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-		
 	}
 
 	/**
@@ -78,7 +79,7 @@ public class OrderToPraat implements Observer {
 	* @since 0.1
 	*
 	*/
-	public static synchronized void sendMessageToPrat(String string){
+	private static void sendMessageToPrat(String string){
 		
 			String[] sendpraatCom ={"sendpraat", "praat",string};
 			Runtime run = Runtime.getRuntime();
@@ -100,7 +101,7 @@ public class OrderToPraat implements Observer {
 	* @since 0.1
 	*
 	*/
-	public static void closePraat(){
+	private static void closePraat(){
 		String[] sendpraatCom ={"sendpraat", "praat","Quit"};
 		Runtime run = Runtime.getRuntime();
 		try {
@@ -123,7 +124,7 @@ public class OrderToPraat implements Observer {
 	* @since 0.1
 	*
 	*/
-	public static void reLaunchPraat(){
+	private static void reLaunchPraat(){
 		String[] sendpraatQuit1 ={"sendpraat", "praat","Quit"};
 		String[] sendpraatLaunch ={"praat"};
 		String[] sendpraatCom ={"sendpraat", "praat",MessageToPraat.writePraatScriptHeader()};
@@ -146,21 +147,22 @@ public class OrderToPraat implements Observer {
 		}
 	}
 
+	/**
+	 * principle : automatisation of the state pattern transitions
+	 */
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		// TODO Auto-generated method stub
-		System.out.println("praat a ete lance");
-		try {
-		Runtime run = Runtime.getRuntime();
-		String[] sendpraatHeader ={"sendpraat", "praat",MessageToPraat.writePraatScriptHeader()};
-		Process p;
-			p = run.exec(sendpraatHeader);
-			p.waitFor();
-		} catch (IOException | InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		System.out.println("action detectee");
+		Praat p = (Praat)arg0; //cast
+		if(p.getState().getClass()==Launch.class){
+			launchPraat();
+			p.headerSet();
+		}else if(p.getState().getClass()==ReLaunch.class){
+			sendMessageToPrat(MessageToPraat.writePraatScriptHeader());
+		}else if(p.getState().getClass()==Close.class){
+			
 		}
-		
 	}
 	
 }

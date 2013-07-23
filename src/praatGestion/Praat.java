@@ -12,14 +12,17 @@ import java.util.Observable;
 public class Praat extends Observable{
 	/**
 	 * the state of the Praat object, cf design pattern
+	 * 
 	 */
 	private PraatState current;
 	
 	/**
 	 * public constructor
+	 * define the state to close by default and set the observers
 	 */
 	public Praat(){
 		current = new Close();
+		this.addObserver(new OrderToPraat());
 	}
 	
 	/**
@@ -30,11 +33,13 @@ public class Praat extends Observable{
 	 */
 	public void setState(PraatState s){ 
 		current = s;
+		
 	}
 	
 	/////////////////////////////////////the functions for the state pattern//////////////////////////
 	/*
 	 * the same as those from the states without the parameters
+	 * it is here we had the setchange et notifyObservers
 	 */
 	
 	/**
@@ -43,6 +48,8 @@ public class Praat extends Observable{
 	 */
 	public void launch(){
 		current.launch(this);
+		setChanged();
+	    notifyObservers();
 	}
 	
 	/**
@@ -50,6 +57,17 @@ public class Praat extends Observable{
 	 */
 	public void reLaunch(){
 		current.reLaunch(this);
+		setChanged();
+	    notifyObservers();
+	}
+	
+	/**
+	 * close praat 
+	 */
+	public void headerSet(){
+		current.headerSet(this);
+		setChanged();
+	    notifyObservers();
 	}
 	
 	/**
@@ -57,18 +75,11 @@ public class Praat extends Observable{
 	 */
 	public void close(){
 		current.close(this);
+		setChanged();
+	    notifyObservers();
 	}
 	////////////////////////////////////////////////////////////////////////////////////////////////
-	public void blabla(){
-		try {
-			Runtime run = Runtime.getRuntime();
-			String[] sendpraatLaunch ={"praat"};
-			run.exec(sendpraatLaunch);
-			setChanged();
-	        notifyObservers();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public PraatState getState(){ 
+		return current;
 	}
 }

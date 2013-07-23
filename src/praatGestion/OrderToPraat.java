@@ -153,7 +153,7 @@ public class OrderToPraat implements Observer {
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		// TODO Auto-generated method stub
-		System.out.println("action detectee");
+		//System.out.println("action detected");
 		Praat p = (Praat)arg0; //cast
 		if(p.getState().getClass()==Launch.class){
 			launchPraat();
@@ -162,9 +162,10 @@ public class OrderToPraat implements Observer {
 			sendMessageToPrat(MessageToPraat.writePraatScriptHeader());
 			p.running();
 		}else if(p.getState().getClass()==Running.class){
-			System.out.println("a faire");
+			//nothing
 		}else if(p.getState().getClass()==ReLaunch.class){
-			System.out.println("a faire");
+			closePraat();
+			p.launch();
 		}else if(p.getState().getClass()==Close.class){
 			closePraat();
 		}

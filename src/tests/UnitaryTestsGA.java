@@ -460,6 +460,8 @@ public class UnitaryTestsGA {
 	public static void testStatePattern(){
 		Praat p = new Praat(); //close
 		p.launch();
+		p.reLaunch();
+		p.close();
 	}
 	
 	 private static class ClasseInterne{ // internal class for a main

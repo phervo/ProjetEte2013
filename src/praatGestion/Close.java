@@ -1,0 +1,29 @@
+package praatGestion;
+
+public class Close extends PraatState{
+
+	public Close(){
+		System.out.println("etat ferme");
+	}
+	
+	@Override
+	public void launch(Praat praatObject) {
+		// TODO Auto-generated method stub
+		System.out.println("etat clos, on lance");
+		praatObject.setState(new Launch());
+	}
+
+	@Override
+	public void reLaunch(Praat praatObject) {
+		// TODO Auto-generated method stub
+		// non action so i leave it empty
+	}
+
+	@Override
+	public void close(Praat praatObject) {
+		// TODO Auto-generated method stub
+		//no action so i leave it empty
+	}
+
+
+}

@@ -7,7 +7,7 @@ import messages.MessageToPraat;
 
 import org.uncommons.watchmaker.framework.FitnessEvaluator;
 
-import communication.OrderToPraat;
+import praatGestion.OrderToPraat;
 import elements.FormantSequence;
 import elements.Sequence;
 import exceptions.FormantNumberexception;

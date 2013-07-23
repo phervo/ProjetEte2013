@@ -3,8 +3,8 @@ package application;
 
 import java.util.ArrayList;
 
+import praatGestion.OrderToPraat;
 import communication.CloseServer;
-import communication.OrderToPraat;
 import communication.ServerThread;
 import exceptions.FormantNumberexception;
 import messages.MessageToPraat;

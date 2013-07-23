@@ -23,7 +23,7 @@ import org.uncommons.watchmaker.framework.termination.GenerationCount;
 
 import org.uncommons.watchmaker.framework.termination.TargetFitness;
 
-import communication.OrderToPraat;
+import praatGestion.OrderToPraat;
 import communication.ServerThread;
 import elements.FormantSequence;
 import elements.GlobalAlphabet;

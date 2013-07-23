@@ -9,7 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.concurrent.Semaphore;
 
-import communication.OrderToPraat;
+import praatGestion.OrderToPraat;
 
 
 /** <p>Class which define the different messages that are send to Praat<br/>
@@ -20,7 +20,7 @@ import communication.OrderToPraat;
  * @see OrderToPraat#sendMessageToPrat(String)
  *  
  * @author Pierre-Yves Hervo
- * @version 0.2
+ * @version 0.1
  */
 public class MessageToPraat {
 	/**

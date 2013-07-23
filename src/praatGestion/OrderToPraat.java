@@ -1,6 +1,8 @@
-package communication;
+package praatGestion;
 
 import java.io.IOException;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.concurrent.Semaphore;
 
 import messages.MessageFromPraat;
@@ -12,10 +14,10 @@ import messages.MessageToPraat;
  * 
  *  
  * @author Pierre-Yves Hervo
- * @version 0.2
+ * @version 0.1
  * 
  */
-public class OrderToPraat {
+public class OrderToPraat implements Observer {
 	
 	/**
 	 * The function launch praat doesnt use the waitFor() method of runtime.
@@ -26,7 +28,7 @@ public class OrderToPraat {
 	 * So we need to use a semaphore to forbid the other functions to launch before this one have finished.
 	 * 
 	 */
-	private static final Semaphore praatLaunch = new Semaphore(1, true);
+	//private static final Semaphore praatLaunch = new Semaphore(1, true);
 	
 	/**
 	    * Constructor, Private to forbid people to instantiate 
@@ -36,7 +38,7 @@ public class OrderToPraat {
 	    * @since 0.1
 	    *
 	    */
-	private OrderToPraat(){
+	public OrderToPraat(){
 		
 	}
 	
@@ -49,21 +51,20 @@ public class OrderToPraat {
 	*/
 	public static void launchPraat(){
 		/*surtout pas de waitFor sinon on bloque tout*/
-		try {
-			praatLaunch.acquire();
+		System.out.printf("Puis je rentre dans launchPraat ici");
+		//process main qui gere ca
 			Runtime run = Runtime.getRuntime();
-			String[] sendpraatCom ={"praat"};
+			String[] sendpraatLaunch ={"praat"};
+			String[] sendpraatHeader ={"sendpraat", "praat",MessageToPraat.writePraatScriptHeader()};
 			try {
-				run.exec(sendpraatCom);
+				Process runProcess=run.exec(sendpraatLaunch);
+				Process runProcess2=run.exec(sendpraatHeader);
+				//runProcess.waitFor();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			praatLaunch.release();
-		} catch (InterruptedException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+			
 		
 	}
 
@@ -78,8 +79,7 @@ public class OrderToPraat {
 	*
 	*/
 	public static synchronized void sendMessageToPrat(String string){
-		try {
-			praatLaunch.acquire();
+		
 			String[] sendpraatCom ={"sendpraat", "praat",string};
 			Runtime run = Runtime.getRuntime();
 			try {
@@ -89,11 +89,7 @@ public class OrderToPraat {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			praatLaunch.release();
-		} catch (InterruptedException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		
 	}
 	
 	/**
@@ -135,13 +131,12 @@ public class OrderToPraat {
 		try {
 			Process runProcess1=run.exec(sendpraatQuit1);
 			runProcess1.waitFor();
-			praatLaunch.acquire();
+			
 			run.exec(sendpraatLaunch);
-			praatLaunch.release();
-			praatLaunch.acquire(); //sem here cause it is called in lanchPraat and it guaranti that praat is relaunch before executing runProcess2
+			
+			 //sem here cause it is called in lanchPraat and it guaranti that praat is relaunch before executing runProcess2
 			Process runProcess2=run.exec(sendpraatCom);
 			runProcess2.waitFor();
-			praatLaunch.release();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -149,6 +144,23 @@ public class OrderToPraat {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public void update(Observable arg0, Object arg1) {
+		// TODO Auto-generated method stub
+		System.out.println("praat a ete lance");
+		try {
+		Runtime run = Runtime.getRuntime();
+		String[] sendpraatHeader ={"sendpraat", "praat",MessageToPraat.writePraatScriptHeader()};
+		Process p;
+			p = run.exec(sendpraatHeader);
+			p.waitFor();
+		} catch (IOException | InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 	
 }

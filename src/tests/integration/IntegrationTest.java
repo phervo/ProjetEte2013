@@ -1,9 +1,9 @@
 package tests.integration;
 
+import praatGestion.OrderToPraat;
+import praatGestion.Praat;
 import messages.MessageFromPraat;
-import communication.OrderToPraat;
 import elements.FormantSequence;
-
 import tests.UnitaryTestsGA;
 
 /** <p>Class where i put my integration test to be sure that if i made modifications on the source code of a class, it will continue
@@ -16,10 +16,16 @@ import tests.UnitaryTestsGA;
  */
 public class IntegrationTest {
 	
+	public static void testPraat(){
+		Praat p = new Praat();
+		p.addObserver(new OrderToPraat());
+		p.blabla();
+	}
 	
 	
 	private static class ClasseInterne{ // internal class for a main
 		 public static void main(String[] args){
+			 testPraat();
 		 }
 	}
 }

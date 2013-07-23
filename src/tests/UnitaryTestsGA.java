@@ -3,12 +3,16 @@ package tests;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
 import messages.MessageFromPraat;
 import messages.MessageToPraat;
+
 import org.uncommons.maths.random.MersenneTwisterRNG;
 import org.uncommons.maths.random.Probability;
+
+import praatGestion.OrderToPraat;
+import praatGestion.Praat;
 import communication.CloseServer;
-import communication.OrderToPraat;
 import communication.ServerThread;
 import elements.Formant;
 import elements.FormantSequence;
@@ -438,6 +442,40 @@ public class UnitaryTestsGA {
 		}
 	}
 	
+	public static void testGlobalAlphabet(){
+		GlobalAlphabet gla = new GlobalAlphabet();
+		gla.displayAllAlphabets();
+	}
+	//test des alphabets a mettre egalement
+	
+	
+	/**
+	 * test of the different operations from praat : open, header, close
+	 */
+	public static void praatLaunchHeaderClose(){
+			System.out.printf("tout d abord je suis ici : %s",Thread.currentThread().getName());
+			try {
+				for(int i=0;i<10;i++){
+					OrderToPraat.launchPraat();
+					Thread.sleep(500);
+					OrderToPraat.closePraat();
+				}
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+		//OrderToPraat.reLaunchPraat();
+	}
+	
+	public static void testStatePattern(){
+		Praat p = new Praat(); //close
+		p.launch();
+		p.reLaunch();
+		p.reLaunch();
+		p.close();
+	}
+	
 	 private static class ClasseInterne{ // internal class for a main
 		 public static void main(String[] args){
 			 //UnitaryTestsGA.testFormantAndFormantSequence();
@@ -448,8 +486,8 @@ public class UnitaryTestsGA {
 			 //UnitaryTestsGA.testMutation();
 			 //UnitaryTestsGA.PraatSCript();
 			 //UnitaryTestsGA.castFormantTest();
-			 GlobalAlphabet gla = new GlobalAlphabet();
-			 gla.displayAllAlphabets();
+			 //praatLaunchHeaderClose();
+			 testStatePattern();
 		 }
 		 
 	 }

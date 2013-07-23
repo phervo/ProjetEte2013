@@ -5,15 +5,14 @@ import messages.MessageToPraat;
 import org.uncommons.watchmaker.framework.EvolutionObserver;
 import org.uncommons.watchmaker.framework.PopulationData;
 
-import communication.OrderToPraat;
-
+import praatGestion.OrderToPraat;
 import elements.Sequence;
 
 /** <p>Overwrite of the EvolutionObserver<Sequence>. I need to use it with a ga in parameter to change the value of the attribute 
  * finalSequence and store the best candidate at each generation. So i overwrite it</p>
  *  
  * @author Pierre-Yves Hervo
- * @version 0.2
+ * @version 0.1
  */
 
 public class MySequenceEvolutionObserver implements EvolutionObserver<Sequence>{
@@ -55,9 +54,9 @@ public class MySequenceEvolutionObserver implements EvolutionObserver<Sequence>{
 		 * So some time we need to remove those objects to avoid a calculation crash
 		 * We cant use the praat's remove function cause it only remove the objects from the list, the only way is to close and relaunch praat
 		 * Thats why i didi it here at the generation eval point. I do the operation all the 1000 objects to be sure to be large*/
-		/*if(data.getGenerationNumber()!=0 && data.getGenerationNumber()%1 == 0.0){
+		if(data.getGenerationNumber()!=0 && data.getGenerationNumber()%1 == 0.0){
 			OrderToPraat.reLaunchPraat();
-		}*/
+		}
 	}
 
 }

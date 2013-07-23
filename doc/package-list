@@ -4,5 +4,6 @@ elements
 exceptions
 geneticAlogrithm
 messages
+praatGestion
 tests
 tests.integration

@@ -4,6 +4,7 @@ package application;
 import java.util.ArrayList;
 
 import praatGestion.OrderToPraat;
+import praatGestion.Praat;
 import communication.CloseServer;
 import communication.ServerThread;
 import exceptions.FormantNumberexception;
@@ -21,8 +22,6 @@ public class MainClass {
 	
 	public static void main(String[] args) throws FormantNumberexception {
 		// TODO Auto-generated method stub
-		OrderToPraat.launchPraat();
-		OrderToPraat.sendMessageToPrat(MessageToPraat.writePraatScriptHeader());
 		GeneticAlgorithmCall ga= new GeneticAlgorithmCall(16); //init
 		ServerThread.getInstance(ga);
 		ga.startAlgorithm();

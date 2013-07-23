@@ -24,6 +24,7 @@ import org.uncommons.watchmaker.framework.termination.GenerationCount;
 import org.uncommons.watchmaker.framework.termination.TargetFitness;
 
 import praatGestion.OrderToPraat;
+import praatGestion.Praat;
 import communication.ServerThread;
 import elements.FormantSequence;
 import elements.GlobalAlphabet;
@@ -129,6 +130,13 @@ public class GeneticAlgorithmCall{
 	private Sequence finalsequence;
 	
 	/**
+	 * praat object wich indicate the state in wich praat is. It will be use to made praat evolv beetween the different possible state
+	 * and be sure the differnet operations are used at the good time.
+	 * 
+	 */
+	private Praat praatObject;
+	
+	/**
 	* Constructor where we specified the length of the sequence we will use. Initialize the other attribute to null.
 	* 
 	*
@@ -154,7 +162,18 @@ public class GeneticAlgorithmCall{
 		this.engine=null;
 		this.messageFromPraat=new FormantSequence(2); //it is just an init
 		this.finalsequence=null;
+		this.praatObject=null;
 	}
+	
+	
+	/**
+	 * build the Praat object and lanch it
+	 */
+	public void buildPraatState(){
+		this.praatObject=new Praat();
+		praatObject.launch();
+	}
+	
 	
 	/**
 	* Initialize the target
@@ -168,7 +187,7 @@ public class GeneticAlgorithmCall{
 		this.target=new FormantSequence("e");
 		//this.target.displayFormantSequence();
 	}
-
+	
 	/**
 	* Initialize the alphabet
 	*
@@ -252,6 +271,7 @@ public class GeneticAlgorithmCall{
 	*/
 	public void startAlgorithm(){
 		//load the different elements
+		buildPraatState();
 		this.generateAlphabet();
 		this.buildTarget();
 		this.createCandidateFactory();
@@ -341,5 +361,10 @@ public class GeneticAlgorithmCall{
 	
 	public SequenceEvaluator getMySeqEval(){
 		return this.mySeqEval;
+	}
+	
+	
+	public Praat getPraatObject(){
+		return this.praatObject;
 	}
 }

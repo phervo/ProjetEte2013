@@ -442,7 +442,7 @@ public class UnitaryTestsGA {
 	 * test of the different operations from praat : open, header, close
 	 */
 	/*public static void praatLaunchHeaderClose(){
-			System.out.printf("tout d abord je suis ici : %s",Thread.currentThread().getName());
+			System.out.printf("tout d abord je suis ici : %s",Thread.currentThread().getName());   
 			try {
 				for(int i=0;i<10;i++){
 					OrderToPraat.launchPraat();
@@ -460,8 +460,7 @@ public class UnitaryTestsGA {
 	public static void testStatePattern(){
 		Praat p = new Praat(); //close
 		p.launch();
-		p.reLaunch();
-		p.close();
+		//p.reLaunch();
 	}
 	
 	 private static class ClasseInterne{ // internal class for a main

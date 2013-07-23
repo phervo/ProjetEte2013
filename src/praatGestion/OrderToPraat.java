@@ -79,7 +79,7 @@ public class OrderToPraat implements Observer {
 	* @since 0.1
 	*
 	*/
-	private static void sendMessageToPrat(String string){
+	public static void sendMessageToPrat(String string){
 		
 			String[] sendpraatCom ={"sendpraat", "praat",string};
 			Runtime run = Runtime.getRuntime();
@@ -105,8 +105,12 @@ public class OrderToPraat implements Observer {
 		String[] sendpraatCom ={"sendpraat", "praat","Quit"};
 		Runtime run = Runtime.getRuntime();
 		try {
-			run.exec(sendpraatCom);
+			Process p=run.exec(sendpraatCom);
+			p.waitFor();
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -120,7 +124,8 @@ public class OrderToPraat implements Observer {
 	* 
 	* IMPORTANT NOTE : the praat's remove function only remove the object from the list and not from the memory. That why i use this way.
 	*
-	*
+	* @deprecated
+	* 	look at the update function instead
 	* @since 0.1
 	*
 	*/

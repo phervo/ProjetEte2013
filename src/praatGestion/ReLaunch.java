@@ -32,6 +32,12 @@ public class ReLaunch extends PraatState{
 		
 	}
 
+	@Override
+	public void running(Praat praatObject) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 
 }

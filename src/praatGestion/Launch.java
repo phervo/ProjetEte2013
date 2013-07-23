@@ -29,7 +29,14 @@ public class Launch extends PraatState{
 	@Override
 	public void headerSet(Praat praatObject) {
 		// TODO Auto-generated method stub
-		
+		System.out.println("etat lance, on head");
+		praatObject.setState(new HeaderSet());
+	}
+
+	@Override
+	public void running(Praat praatObject) {
+		// TODO Auto-generated method stub
+		//nothing
 	}
 
 }

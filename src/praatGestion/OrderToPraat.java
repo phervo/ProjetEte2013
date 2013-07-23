@@ -158,10 +158,15 @@ public class OrderToPraat implements Observer {
 		if(p.getState().getClass()==Launch.class){
 			launchPraat();
 			p.headerSet();
-		}else if(p.getState().getClass()==ReLaunch.class){
+		}else if(p.getState().getClass()==HeaderSet.class){
 			sendMessageToPrat(MessageToPraat.writePraatScriptHeader());
+			p.running();
+		}else if(p.getState().getClass()==Running.class){
+			System.out.println("a faire");
+		}else if(p.getState().getClass()==ReLaunch.class){
+			System.out.println("a faire");
 		}else if(p.getState().getClass()==Close.class){
-			
+			closePraat();
 		}
 	}
 	

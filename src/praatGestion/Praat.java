@@ -62,10 +62,19 @@ public class Praat extends Observable{
 	}
 	
 	/**
-	 * close praat 
+	 * set the headers
 	 */
 	public void headerSet(){
 		current.headerSet(this);
+		setChanged();
+	    notifyObservers();
+	}
+	
+	/**
+	 * set the headers
+	 */
+	public void running(){
+		current.running(this);
 		setChanged();
 	    notifyObservers();
 	}

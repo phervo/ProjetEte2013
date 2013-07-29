@@ -54,7 +54,8 @@ public class MySequenceEvolutionObserver implements EvolutionObserver<Sequence>{
 		 * So some time we need to remove those objects to avoid a calculation crash
 		 * We cant use the praat's remove function cause it only remove the objects from the list, the only way is to close and relaunch praat
 		 * Thats why i didi it here at the generation eval point. I do the operation all the 1000 objects to be sure to be large*/
-		if(data.getGenerationNumber()!=0 && data.getGenerationNumber()%1 == 0.0){
+		if(data.getGenerationNumber()%1 == 0.0){
+		//if(data.getGenerationNumber()!=0 && data.getGenerationNumber()%1 == 0.0){
 			myGa.getPraatObject().reLaunch();
 		}
 	}

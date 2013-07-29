@@ -1,5 +1,7 @@
 package praatGestion;
 
+import geneticAlogrithm.GeneticAlgorithmCall;
+
 import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
@@ -38,6 +40,15 @@ public class OrderToPraat implements Observer {
 	//private static final Semaphore praatLaunch = new Semaphore(1, true);
 	
 	/**
+	 * A mutex to protect the separate execution of each instruction
+	 * 
+	 * @see launchPraat()
+	 * @see endMessageToPrat(String string)
+	 * 
+	 */
+	private static final Semaphore token = new Semaphore(1, true);
+	
+	/**
 	    * Constructor
 	    * just overwrite the default constructor
 	    *
@@ -57,16 +68,31 @@ public class OrderToPraat implements Observer {
 	*
 	*/
 	private static void launchPraat(){
-		/*surtout pas de waitFor sinon on bloque tout*/
+		try {
+			System.out.println("etat du semaphore "+token.toString()+"possibilite prendre un jeton "+token.availablePermits()+" nombre de threads en attente "+token.getQueueLength());
+			token.acquire();
+			System.out.println("etat du semaphore "+token.toString()+"possibilite prendre un jeton "+token.availablePermits()+" nombre de threads en attente "+token.getQueueLength());
+			/*surtout pas de waitFor sinon on bloque tout*/
 			Runtime run = Runtime.getRuntime();
 			String[] sendpraatLaunch ={"praat"};
 			try {
 				run.exec(sendpraatLaunch);
+				Thread.currentThread().sleep(500); //it is a trick but i havent found a better solution
+				System.out.println("etat du semaphore "+token.toString()+"possibilite prendre un jeton "+token.availablePermits()+" nombre de threads en attente "+token.getQueueLength());
+				token.release();
+				System.out.println("etat du semaphore "+token.toString()+"possibilite prendre un jeton "+token.availablePermits()+" nombre de threads en attente "+token.getQueueLength());
 				//runProcess.waitFor();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			//note : the semaphore is release at the end of the function, it doesnt wait the end of praat without the waitFor()
+			
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
 	}
 
 	/**
@@ -80,17 +106,26 @@ public class OrderToPraat implements Observer {
 	*
 	*/
 	public static void sendMessageToPrat(String string){
-		
-			String[] sendpraatCom ={"sendpraat", "praat",string};
-			Runtime run = Runtime.getRuntime();
 			try {
-				Process runProcess=run.exec(sendpraatCom);
-				runProcess.waitFor(); //le thread qui l'a lance attend la fin de l'execution
-			} catch (IOException | InterruptedException e) {
+				System.out.println("etat du semaphore "+token.toString()+"possibilite prendre un jeton "+token.availablePermits()+" nombre de threads en attente "+token.getQueueLength());
+				token.acquire();
+				System.out.println("etat du semaphore "+token.toString()+"possibilite prendre un jeton "+token.availablePermits()+" nombre de threads en attente "+token.getQueueLength());
+				String[] sendpraatCom ={"sendpraat", "praat",string};
+				Runtime run = Runtime.getRuntime();
+				try {
+					Process runProcess=run.exec(sendpraatCom);
+					runProcess.waitFor(); //le thread qui l'a lance attend la fin de l'execution
+				} catch (IOException | InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				System.out.println("etat du semaphore "+token.toString()+"possibilite prendre un jeton "+token.availablePermits()+" nombre de threads en attente "+token.getQueueLength());
+				token.release();
+				System.out.println("etat du semaphore "+token.toString()+"possibilite prendre un jeton "+token.availablePermits()+" nombre de threads en attente "+token.getQueueLength());
+			} catch (InterruptedException e1) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				e1.printStackTrace();
 			}
-		
 	}
 	
 	/**
@@ -102,18 +137,31 @@ public class OrderToPraat implements Observer {
 	*
 	*/
 	private static void closePraat(){
-		String[] sendpraatCom ={"sendpraat", "praat","Quit"};
-		Runtime run = Runtime.getRuntime();
+		System.out.println("etat du semaphore "+token.toString()+"possibilite prendre un jeton "+token.availablePermits()+" nombre de threads en attente "+token.getQueueLength());
 		try {
-			Process p=run.exec(sendpraatCom);
-			p.waitFor();
-		} catch (IOException e) {
+			token.acquire();
+			System.out.println("etat du semaphore "+token.toString()+"possibilite prendre un jeton "+token.availablePermits()+" nombre de threads en attente "+token.getQueueLength());
+			String[] sendpraatCom ={"sendpraat", "praat","Quit"};
+			Runtime run = Runtime.getRuntime();
+			try {
+				Process p=run.exec(sendpraatCom);
+				p.waitFor();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.println("etat du semaphore "+token.toString()+"possibilite prendre un jeton "+token.availablePermits()+" nombre de threads en attente "+token.getQueueLength());
+			token.release();
+			System.out.println("etat du semaphore "+token.toString()+"possibilite prendre un jeton "+token.availablePermits()+" nombre de threads en attente "+token.getQueueLength());
+		
+		} catch (InterruptedException e1) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			e1.printStackTrace();
 		}
+		
 	}
 	
 	

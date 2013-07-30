@@ -49,6 +49,13 @@ public class OrderToPraat implements Observer {
 	private static final Semaphore token = new Semaphore(1, true);
 	
 	/**
+	 * A boleean which indicate if the praat software is launch or not.
+	 * Be carefull, it doesnt indicate that we have launch the process to launch praat and that it is maybe running,
+	 * it indicate if the software is completely launch and running.
+	 */
+	public static boolean PraatLaunch=false;
+	
+	/**
 	    * Constructor
 	    * just overwrite the default constructor
 	    *
@@ -77,7 +84,7 @@ public class OrderToPraat implements Observer {
 			String[] sendpraatLaunch ={"praat"};
 			try {
 				run.exec(sendpraatLaunch);
-				Thread.currentThread().sleep(500); //it is a trick but i havent found a better solution
+				//Thread.currentThread().sleep(250); //it is a trick but i havent found a better solution
 				System.out.println("etat du semaphore "+token.toString()+"possibilite prendre un jeton "+token.availablePermits()+" nombre de threads en attente "+token.getQueueLength());
 				token.release();
 				System.out.println("etat du semaphore "+token.toString()+"possibilite prendre un jeton "+token.availablePermits()+" nombre de threads en attente "+token.getQueueLength());
@@ -202,6 +209,7 @@ public class OrderToPraat implements Observer {
 
 	/**
 	 * principle : automatisation of the state pattern transitions
+	 * avoid to duplicate the code
 	 */
 	@Override
 	public void update(Observable arg0, Object arg1) {
@@ -212,7 +220,11 @@ public class OrderToPraat implements Observer {
 			launchPraat();
 			p.headerSet();
 		}else if(p.getState().getClass()==HeaderSet.class){
+			while(OrderToPraat.PraatLaunch!=true){
+				sendMessageToPrat(MessageToPraat.writePraatLaunchTest());
+			}
 			sendMessageToPrat(MessageToPraat.writePraatScriptHeader());
+			OrderToPraat.PraatLaunch=false;
 			p.running();
 		}else if(p.getState().getClass()==Running.class){
 			//nothing

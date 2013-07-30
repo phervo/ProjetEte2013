@@ -76,6 +76,24 @@ public class MessageToPraat {
 		stb.append("#-----------------------------------------------\n");
 		return stb.toString();
 	}
+	
+	/**
+	 * function which will send a message to praat and ask it to return the string LAUNCH in socket.
+	 * It is use when we launch praat to see that praat have finish to launch before sending the other scripts.
+	 * For more explanation, see the technical documentation.
+	 * @return a string containing a script that ask for a socket
+	 */
+	public static String writePraatLaunchTest(){
+		StringBuilder stb= new StringBuilder(); 
+		stb.append("#-----------------------------------------------\n");
+		stb.append("# Project : Software synthesis using GA\n");
+		stb.append("# Hervo Pierre-Yves, automatic Script generated in java\n");
+		stb.append("#-----------------------------------------------\n");
+		stb.append("sendsocket localhost:2009 LAUNCH \n");
+		stb.append("#-----------------------------------------------\n");
+		return stb.toString();
+	}
+
 
 	/**
 	* Return a String containing a praat script fill in with the values of the sequence in parameters.

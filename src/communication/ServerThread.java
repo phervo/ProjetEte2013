@@ -11,6 +11,8 @@ import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import praatGestion.OrderToPraat;
+
 /** <p>Class wich define a thread containing a Java server that will listen for praat answer in a particular port.<br/>
  * As praat communicate with sockets, it is an obligation to have a server that is listening all the time so the server is design to be a thread.<br/>
  * A waiting mechanism is defined to be sure that the action lanch in this class are finished before doing anything else.<br/>
@@ -159,8 +161,15 @@ public final class ServerThread extends Thread{
 				socketduserveur = socketserver.accept();
 				BufferedReader in = new BufferedReader (new InputStreamReader (socketduserveur.getInputStream()));
 				message_distant = in.readLine().trim();
-				storeMessageReceivedFromPraat(message_distant);
-				ga.getMySeqEval().getAnswerFromPraat().release(); // we realease the sem here
+				//it is "FIN" OR "LAUNCH"
+				//it is message i use to communicate so no need to make a specific tretment to cast in Formant behind
+				if(message_distant.compareTo("LAUNCH")==0){
+					OrderToPraat.PraatLaunch=true;//it means the praat software is lauch so we put the boolean to true
+				}else{
+					storeMessageReceivedFromPraat(message_distant);
+					ga.getMySeqEval().getAnswerFromPraat().release(); // we realease the sem here
+				}
+				
 				System.out.println("J'ai recu le message suivant : "+message_distant);
 				socketduserveur.close();
 			}

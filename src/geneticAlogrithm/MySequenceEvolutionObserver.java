@@ -7,6 +7,7 @@ import org.uncommons.watchmaker.framework.PopulationData;
 
 import praatGestion.OrderToPraat;
 import elements.Sequence;
+import exceptions.PraatScriptException;
 
 /** <p>Overwrite of the EvolutionObserver<Sequence>. I need to use it with a ga in parameter to change the value of the attribute 
  * finalSequence and store the best candidate at each generation. So i overwrite it</p>
@@ -49,13 +50,32 @@ public class MySequenceEvolutionObserver implements EvolutionObserver<Sequence>{
                 data.getGenerationNumber(),
                 data.getBestCandidate().getValuesInString());
 		this.myGa.setSequence(data.getBestCandidate());
-		/*IMPORTANT : praat got a internal memory and can afford only a certain number of object (2000 in my case)
+		
+		//store the sound produce all the 100 objects
+		/*/*
+	 * all the 100 object so 100/2 = 50 sequence to generate
+	 * 50/10 individual = 5 generation
+	 * for a generation you got 2 object speaker and artwork (objects number 1 and 2)
+	 * and 20 object sound and formant
+	 * we need to store the best contain in data.getBestCandidate()
+	 */
+
+		if(data.getGenerationNumber()!=0 && data.getGenerationNumber()%5 == 0.0){
+			//OrderToPraat.sendMessageToPrat(MessageToPraat.saveSoundFile());
+			try {
+				MessageToPraat.writePraatScriptInFile2(data.getBestCandidate(),"SoundNumber"+data.getGenerationNumber()/5);
+			} catch (PraatScriptException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		/*IMPORTANT : praat got a internal memory and can afford only a certain number of object (1800 in my case)
 		 * When reached, praat stop working (error message)
 		 * So some time we need to remove those objects to avoid a calculation crash
 		 * We cant use the praat's remove function cause it only remove the objects from the list, the only way is to close and relaunch praat
 		 * Thats why i didi it here at the generation eval point. I do the operation all the 1000 objects to be sure to be large*/
-		if(data.getGenerationNumber()%1 == 0.0){
-		//if(data.getGenerationNumber()!=0 && data.getGenerationNumber()%1 == 0.0){
+		if(data.getGenerationNumber()!=0 && data.getGenerationNumber()%50 == 0.0){
 			myGa.getPraatObject().reLaunch();
 		}
 	}

@@ -285,7 +285,7 @@ public class GeneticAlgorithmCall{
 		engine.addEvolutionObserver(new MySequenceEvolutionObserver(this));
 		engine.evolve(10, 0, new TargetFitness(2,mySeqEval.isNatural()));
 		try {
-			MessageToPraat.writePraatScriptInFile2(this.finalsequence,"praatScriptWithCorrectValues");
+			MessageToPraat.writePraatScriptInFile(this.finalsequence,"praatScriptWithCorrectValues");
 		} catch (PraatScriptException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

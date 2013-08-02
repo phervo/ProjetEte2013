@@ -81,7 +81,7 @@ public class OrderToPraat implements Observer {
 			System.out.println("etat du semaphore "+token.toString()+"possibilite prendre un jeton "+token.availablePermits()+" nombre de threads en attente "+token.getQueueLength());
 			/*surtout pas de waitFor sinon on bloque tout*/
 			Runtime run = Runtime.getRuntime();
-			String[] sendpraatLaunch ={"praat","do (\"Read from file...\", \"C:/Users/phervo/Documents/dossierProjet/Play.praat.txt\")"};
+			String[] sendpraatLaunch ={"praat"};
 			try {
 				run.exec(sendpraatLaunch);
 				//Thread.currentThread().sleep(250); //it is a trick but i havent found a better solution

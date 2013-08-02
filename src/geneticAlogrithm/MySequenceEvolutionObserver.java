@@ -63,7 +63,7 @@ public class MySequenceEvolutionObserver implements EvolutionObserver<Sequence>{
 		if(data.getGenerationNumber()!=0 && data.getGenerationNumber()%5 == 0.0){
 			//OrderToPraat.sendMessageToPrat(MessageToPraat.saveSoundFile());
 			try {
-				MessageToPraat.writePraatScriptInFile2(data.getBestCandidate(),"SoundNumber"+data.getGenerationNumber()/5);
+				MessageToPraat.writePraatScriptInFile(data.getBestCandidate(),"SoundNumber"+data.getGenerationNumber()/5);
 			} catch (PraatScriptException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

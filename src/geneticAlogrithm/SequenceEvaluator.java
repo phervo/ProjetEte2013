@@ -112,7 +112,7 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 		//1) j'envoie le candidat courant (var candidate au script)
 		/*write value in the script send to praat and send it*/
 			System.out.println(candidate.getValuesInString());
-			OrderToPraat.sendMessageToPrat(MessageToPraat.writePraatScriptWithCandidates2(candidate)); // change
+			OrderToPraat.sendMessageToPrat(MessageToPraat.writePraatScriptWithCandidates(candidate)); // change
 		//2) recuperer le resultat dans messageFromPraat (attente serveur et socket si besoin) et le comparer a la cible
 			
 			

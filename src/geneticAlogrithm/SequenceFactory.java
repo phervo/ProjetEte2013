@@ -72,36 +72,6 @@ public class SequenceFactory extends AbstractCandidateFactory<Sequence>{
 	* @since 0.1
 	*
 	*/
-	@Override
-	/*public Sequence generateRandomCandidate(Random rng){
-		// TODO Auto-generated method stub
-		Sequence mySeq=null;
-		try {
-			mySeq = new Sequence(this.length);
-		
-			for(int i=0;i<mySeq.getLength();i++){
-				//separation selon les valeurs de var
-				try {
-					//I have deleted the lungAlphabet but for example if we use it, we should have said if position =0 ou 1 get value in the globalAlphabet.getLungsAlphabet()
-					if(i==12 || i==13){ //masseter
-						mySeq.setValues(i, globalAlphabet.getMasseterAlphabet().getValueAt(rng.nextInt(globalAlphabet.getMasseterAlphabet().getLength())));
-					}else{
-						mySeq.setValues(i, globalAlphabet.getOtherAlphabet().getValueAt(rng.nextInt(globalAlphabet.getOtherAlphabet().getLength())));
-					}
-				
-				} catch (SequenceArrayException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-					e.display();
-				}
-			}	
-		} catch (SequenceArrayException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		return mySeq;
-	}*/
-	
 	
 	public Sequence generateRandomCandidate(Random rng){
 		// TODO Auto-generated method stub

@@ -105,7 +105,7 @@ public class SequenceMutation implements EvolutionaryOperator<Sequence>{
 	* @since 0.1
 	*
 	*/
-	private Sequence mutateString(Sequence s, Random rng)
+	/*private Sequence mutateString(Sequence s, Random rng)
     {
 		Sequence retour= s;
         for (int i = 0; i < s.getLength(); i++)
@@ -114,6 +114,28 @@ public class SequenceMutation implements EvolutionaryOperator<Sequence>{
             {
             	try {
             		if(i==12 || i==13){ //masseter
+						retour.setValues(i, globalAlphabet.getMasseterAlphabet().getValueAt(rng.nextInt(globalAlphabet.getMasseterAlphabet().getLength())));
+					}else{
+						retour.setValues(i, globalAlphabet.getOtherAlphabet().getValueAt(rng.nextInt(globalAlphabet.getOtherAlphabet().getLength())));
+					}
+				} catch (SequenceArrayException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+            }
+        }
+        return retour;
+    }*/
+	
+	private Sequence mutateString(Sequence s, Random rng)
+    {
+		Sequence retour= s;
+        for (int i = 0; i < s.getLength(); i++)
+        {
+            if (mutationProbability.nextValue().nextEvent(rng))
+            {
+            	try {
+            		if(i==6){ //masseter
 						retour.setValues(i, globalAlphabet.getMasseterAlphabet().getValueAt(rng.nextInt(globalAlphabet.getMasseterAlphabet().getLength())));
 					}else{
 						retour.setValues(i, globalAlphabet.getOtherAlphabet().getValueAt(rng.nextInt(globalAlphabet.getOtherAlphabet().getLength())));

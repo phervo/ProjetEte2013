@@ -463,6 +463,11 @@ public class UnitaryTestsGA {
 		//p.reLaunch();
 	}
 	
+	public static void testExcel(){
+		
+		//MessageFromPraat.ecrireDansFichierExcel("C:/Users/phervo/Documents/dossierProjet/testECriture.xls");
+		MessageFromPraat.lireFichierExcel("C:/Users/phervo/Documents/dossierProjet/testECriture.xls");
+	}
 	 private static class ClasseInterne{ // internal class for a main
 		 public static void main(String[] args){
 			 //UnitaryTestsGA.testFormantAndFormantSequence();
@@ -474,7 +479,8 @@ public class UnitaryTestsGA {
 			 //UnitaryTestsGA.PraatSCript();
 			 //UnitaryTestsGA.castFormantTest();
 			 //praatLaunchHeaderClose();
-			 testStatePattern();
+			 //testStatePattern();
+			 testExcel();
 		 }
 		 
 	 }

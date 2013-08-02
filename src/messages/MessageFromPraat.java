@@ -1,14 +1,25 @@
 package messages;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
-
-import praatGestion.OrderToPraat;
+import jxl.Cell;
+import jxl.Sheet;
+import jxl.Workbook;
+import jxl.read.biff.BiffException;
+import jxl.write.Label;
+import jxl.write.WritableSheet;
+import jxl.write.WritableWorkbook;
+import jxl.write.WriteException;
+import jxl.write.biff.RowsExceededException;
+import jxl.write.Number;
 import communication.ServerThread;
 import elements.Formant;
 import elements.FormantSequence;
 import exceptions.CastFormantException;
 import exceptions.FormantNumberexception;
 import geneticAlogrithm.SequenceEvaluator;
+
 
 /** <p>Class which deals with the message received from praat to transform them into the object we wanted<br/>
  *  All the method from this class are static so no need to create an instance<br/>
@@ -141,4 +152,90 @@ public class MessageFromPraat {
 		double r = (Math.round(value * Math.pow(10, n))) / (Math.pow(10, n)); 
 		return r; 
 	} 
+	
+	
+	
+		
+	public static void lireFichierExcel(String nomFic){
+		Workbook workbook = null;
+		try {
+			/* Récupération du classeur Excel (en lecture) */
+			workbook = Workbook.getWorkbook(new File(nomFic));
+			
+			/* Un fichier excel est composé de plusieurs feuilles, on y accède de la manière suivante*/
+			Sheet sheet = workbook.getSheet(0);
+			
+			/* On accède aux cellules avec la méthode getCell(indiceColonne, indiceLigne) */
+			Cell a1 = sheet.getCell(0,0); 
+			
+			/* On peut également le faire avec getCell(nomCellule) */
+			Cell c5 = sheet.getCell(0,1);
+			
+			/* On peut récupérer le contenu d'une cellule en utilisant la méthode getContents() */
+			String contenuA1= a1.getContents();
+			String contenuC5 = c5.getContents();
+			
+			System.out.println(contenuA1);
+			System.out.println(contenuC5);
+		} 
+		catch (BiffException e) {
+			e.printStackTrace();
+		} 
+		catch (IOException e) {
+			e.printStackTrace();
+		} 
+		finally {
+			if(workbook!=null){
+				/* On ferme le worbook pour libérer la mémoire */
+				workbook.close(); 
+			}
+		}
+	}
+	
+		public static void ecrireDansFichierExcel(String nomFichier,int generationNumber) {
+			WritableWorkbook workbook = null;
+			try {
+				/* On créé un nouveau worbook et on l'ouvre en écriture */
+				workbook = Workbook.createWorkbook(new File(nomFichier));
+				
+				/* On créé une nouvelle feuille (test en position 0) et on l'ouvre en écriture */
+				WritableSheet sheet = workbook.createSheet("test", 0); 
+				
+				/* Creation d'un champ au format texte */
+				Number number1 = new Number(generationNumber, 0, 1.02);
+				sheet.addCell(number1);
+				/* Creation d'un champ au format numerique */
+				Number number2 = new Number(generationNumber, 1, 3.1459);
+				sheet.addCell(number2); 
+				
+				/* On ecrit le classeur */
+				workbook.write(); 
+				
+			} 
+			catch (IOException e) {
+				e.printStackTrace();
+			} 
+			catch (RowsExceededException e) {
+				e.printStackTrace();
+			}
+			catch (WriteException e) {
+				e.printStackTrace();
+			}
+			finally {
+				if(workbook!=null){
+					/* On ferme le worbook pour libérer la mémoire */
+					try {
+						workbook.close();
+					} 
+					catch (WriteException e) {
+						e.printStackTrace();
+					} 
+					catch (IOException e) {
+						e.printStackTrace();
+					} 
+				}
+			}
+		}
+	
+
 }

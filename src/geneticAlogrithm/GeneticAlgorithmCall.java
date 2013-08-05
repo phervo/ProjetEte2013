@@ -136,6 +136,13 @@ public class GeneticAlgorithmCall{
 	 */
 	private Praat praatObject;
 	
+	
+	/**
+	 * indicate the time at which we launch the algorithm, it is utse to calculate the execution time.
+	 * initiate in the constructor
+	 */
+	private long start=0;
+	
 	/**
 	* Constructor where we specified the length of the sequence we will use. Initialize the other attribute to null.
 	* 
@@ -163,6 +170,7 @@ public class GeneticAlgorithmCall{
 		this.messageFromPraat=new FormantSequence(2); //it is just an init
 		this.finalsequence=null;
 		this.praatObject=null;
+		this.start=System.currentTimeMillis();
 	}
 	
 	
@@ -366,5 +374,9 @@ public class GeneticAlgorithmCall{
 	
 	public Praat getPraatObject(){
 		return this.praatObject;
+	}
+	
+	public double getStartTime(){
+		return this.start;
 	}
 }

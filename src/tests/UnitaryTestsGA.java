@@ -474,9 +474,10 @@ public class UnitaryTestsGA {
 			 //UnitaryTestsGA.PraatSCript();
 			 //UnitaryTestsGA.castFormantTest();
 			 //praatLaunchHeaderClose();
-			 testStatePattern();
+			 //testStatePattern();
+			 OrderToPraat.launchAllScripts();
 		 }
-		 
 	 }
+	 
 	
 }

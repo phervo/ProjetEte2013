@@ -1,5 +1,8 @@
 package geneticAlogrithm;
 
+import java.io.IOException;
+
+import messages.MessageFromPraat;
 import messages.MessageToPraat;
 
 import org.uncommons.watchmaker.framework.EvolutionObserver;
@@ -52,24 +55,40 @@ public class MySequenceEvolutionObserver implements EvolutionObserver<Sequence>{
 		this.myGa.setSequence(data.getBestCandidate());
 		
 		//store the sound produce all the 100 objects
-		/*/*
-	 * all the 100 object so 100/2 = 50 sequence to generate
-	 * 50/10 individual = 5 generation
-	 * for a generation you got 2 object speaker and artwork (objects number 1 and 2)
-	 * and 20 object sound and formant
-	 * we need to store the best contain in data.getBestCandidate()
-	 */
-
-		if(data.getGenerationNumber()!=0 && data.getGenerationNumber()%5 == 0.0){
-			//OrderToPraat.sendMessageToPrat(MessageToPraat.saveSoundFile());
+	
+		
+		if(data.getGenerationNumber()==0){
 			try {
-				MessageToPraat.writePraatScriptInFile(data.getBestCandidate(),"SoundNumber"+data.getGenerationNumber()/5);
-			} catch (PraatScriptException e) {
+				MessageFromPraat.writeCSVFile("C:/Users/phervo/Documents/dossierProjet/algoritmProgression.csv",false,getExecTime(),data.getBestCandidateFitness());
+			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			/*
+			 * all the 100 object so 100/2 = 50 sequence to generate
+			 * 50/10 individual = 5 generation
+			 * for a generation you got 2 object speaker and artwork (objects number 1 and 2)
+			 * and 20 object sound and formant
+			 * we need to store the best contain in data.getBestCandidate()
+			 */
+		}else{
+			try{
+				MessageFromPraat.writeCSVFile("C:/Users/phervo/Documents/dossierProjet/algoritmProgression.csv",true,getExecTime(),data.getBestCandidateFitness());
+			}catch (IOException e) {
+				e.printStackTrace();
+			}
+				if(data.getGenerationNumber()!=0 && data.getGenerationNumber()%5 == 0.0){
+					try {
+						
+						MessageToPraat.writePraatScriptInFile(data.getBestCandidate(),"SoundNumber"+data.getGenerationNumber()/5);
+					} catch (PraatScriptException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				
 		}
-		
+			
 		/*IMPORTANT : praat got a internal memory and can afford only a certain number of object (1800 in my case)
 		 * When reached, praat stop working (error message)
 		 * So some time we need to remove those objects to avoid a calculation crash
@@ -78,6 +97,16 @@ public class MySequenceEvolutionObserver implements EvolutionObserver<Sequence>{
 		if(data.getGenerationNumber()!=0 && data.getGenerationNumber()%40 == 0.0){
 			myGa.getPraatObject().reLaunch();
 		}
+	}
+	
+	/**
+	 * function which calculate the exec time using the start variable of the geneAlgoCall
+	 * @return double containing the time in seconds of execution since the launch
+	 */
+	public double getExecTime(){
+		long end = System.currentTimeMillis();
+		float time = ((float) (end-myGa.getStartTime())) / 1000f;
+		return time;
 	}
 
 }

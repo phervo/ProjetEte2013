@@ -11,5 +11,7 @@
 	<classpathentry kind="lib" path="C:/Users/phervo/Documents/dossierProjet/jars/watchmaker-framework-0.7.1-src.jar"/>
 	<classpathentry kind="lib" path="C:/Users/phervo/Documents/dossierProjet/jars/watchmaker-swing-0.7.1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/phervo/Documents/dossierProjet/jars/watchmaker-swing-0.7.1-src.jar"/>
+	<classpathentry kind="lib" path="C:/Users/phervo/Documents/dossierProjet/jars/junit-4.7.jar"/>
+	<classpathentry kind="lib" path="C:/Users/phervo/Documents/dossierProjet/jars/opencsv-2.3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

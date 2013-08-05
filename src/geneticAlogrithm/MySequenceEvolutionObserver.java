@@ -64,14 +64,14 @@ public class MySequenceEvolutionObserver implements EvolutionObserver<Sequence>{
 	 */
 		if(data.getGenerationNumber()==0){
 			try {
-				MessageFromPraat.writeCSVFile("C:/Users/phervo/Documents/dossierProjet/algoritmProgression.csv",false,0.0,data.getBestCandidateFitness());
+				MessageFromPraat.writeCSVFile("C:/Users/phervo/Documents/dossierProjet/algoritmProgression.csv",false,getExecTime(),data.getBestCandidateFitness());
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}else if(data.getGenerationNumber()!=0 && data.getGenerationNumber()%5 == 0.0){
 			try {
-				MessageFromPraat.writeCSVFile("C:/Users/phervo/Documents/dossierProjet/algoritmProgression.csv",true,0.5,data.getBestCandidateFitness());
+				MessageFromPraat.writeCSVFile("C:/Users/phervo/Documents/dossierProjet/algoritmProgression.csv",true,getExecTime(),data.getBestCandidateFitness());
 				MessageToPraat.writePraatScriptInFile(data.getBestCandidate(),"SoundNumber"+data.getGenerationNumber()/5);
 			} catch (PraatScriptException | IOException e) {
 				// TODO Auto-generated catch block
@@ -87,6 +87,16 @@ public class MySequenceEvolutionObserver implements EvolutionObserver<Sequence>{
 		if(data.getGenerationNumber()!=0 && data.getGenerationNumber()%40 == 0.0){
 			myGa.getPraatObject().reLaunch();
 		}
+	}
+	
+	/**
+	 * function which calculate the exec time using the start variable of the geneAlgoCall
+	 * @return double containing the time in seconds of execution since the launch
+	 */
+	public double getExecTime(){
+		long end = System.currentTimeMillis();
+		float time = ((float) (end-myGa.getStartTime())) / 1000f;
+		return time;
 	}
 
 }

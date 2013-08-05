@@ -64,7 +64,7 @@ public class MySequenceEvolutionObserver implements EvolutionObserver<Sequence>{
 		if(data.getGenerationNumber()!=0 && data.getGenerationNumber()%5 == 0.0){
 			//OrderToPraat.sendMessageToPrat(MessageToPraat.saveSoundFile());
 			try {
-				MessageFromPraat.ecrireDansFichierExcel("C:/Users/phervo/Documents/dossierProjet/testECriture.xls",data.getGenerationNumber());
+				//MessageFromPraat.ecrireDansFichierExcel("C:/Users/phervo/Documents/dossierProjet/testECriture.xls",data.getGenerationNumber());
 				MessageToPraat.writePraatScriptInFile(data.getBestCandidate(),"SoundNumber"+data.getGenerationNumber()/5);
 			} catch (PraatScriptException e) {
 				// TODO Auto-generated catch block

@@ -1,5 +1,6 @@
 package tests;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -465,8 +466,15 @@ public class UnitaryTestsGA {
 	
 	public static void testExcel(){
 		
-		//MessageFromPraat.ecrireDansFichierExcel("C:/Users/phervo/Documents/dossierProjet/testECriture.xls");
-		MessageFromPraat.lireFichierExcel("C:/Users/phervo/Documents/dossierProjet/testECriture.xls");
+		try {
+			//MessageFromPraat.readCSVFile("C:/Users/phervo/Documents/dossierProjet/test.csv");
+			MessageFromPraat.writeCSVFile("C:/Users/phervo/Documents/dossierProjet/test.csv",false,0.1,5);
+			MessageFromPraat.writeCSVFile("C:/Users/phervo/Documents/dossierProjet/test.csv",true,0.2,6);
+			MessageFromPraat.writeCSVFile("C:/Users/phervo/Documents/dossierProjet/test.csv",true,0.3,7);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	 private static class ClasseInterne{ // internal class for a main
 		 public static void main(String[] args){

@@ -1,18 +1,13 @@
 package messages;
 
 import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import jxl.Cell;
-import jxl.Sheet;
-import jxl.Workbook;
-import jxl.read.biff.BiffException;
-import jxl.write.Label;
-import jxl.write.WritableSheet;
-import jxl.write.WritableWorkbook;
-import jxl.write.WriteException;
-import jxl.write.biff.RowsExceededException;
-import jxl.write.Number;
+
+import au.com.bytecode.opencsv.CSVReader;
+import au.com.bytecode.opencsv.CSVWriter;
 import communication.ServerThread;
 import elements.Formant;
 import elements.FormantSequence;
@@ -153,89 +148,51 @@ public class MessageFromPraat {
 		return r; 
 	} 
 	
-	
-	
-		
-	public static void lireFichierExcel(String nomFic){
-		Workbook workbook = null;
-		try {
-			/* Récupération du classeur Excel (en lecture) */
-			workbook = Workbook.getWorkbook(new File(nomFic));
-			
-			/* Un fichier excel est composé de plusieurs feuilles, on y accède de la manière suivante*/
-			Sheet sheet = workbook.getSheet(0);
-			
-			/* On accède aux cellules avec la méthode getCell(indiceColonne, indiceLigne) */
-			Cell a1 = sheet.getCell(0,0); 
-			
-			/* On peut également le faire avec getCell(nomCellule) */
-			Cell c5 = sheet.getCell(0,1);
-			
-			/* On peut récupérer le contenu d'une cellule en utilisant la méthode getContents() */
-			String contenuA1= a1.getContents();
-			String contenuC5 = c5.getContents();
-			
-			System.out.println(contenuA1);
-			System.out.println(contenuC5);
-		} 
-		catch (BiffException e) {
-			e.printStackTrace();
-		} 
-		catch (IOException e) {
-			e.printStackTrace();
-		} 
-		finally {
-			if(workbook!=null){
-				/* On ferme le worbook pour libérer la mémoire */
-				workbook.close(); 
-			}
-		}
+	/**
+	 * function for monitoring. Read the values of a csv file.=> better not use it and directly look with excel
+	 * 
+	 * @throws IOException 
+	 * 	if the file doesnt exist
+	 */
+	public static void readCSVFile(String fileName) throws IOException{
+		CSVReader reader = new CSVReader(new FileReader(fileName));
+	    String [] nextLine;
+	    while ((nextLine = reader.readNext()) != null) {
+	        // nextLine[] is an array of values from the line
+	        System.out.println(nextLine[0]+'\t'+ nextLine[1] +'\t'+ nextLine[2]+'\t' +nextLine[3]+'\t' +nextLine[4]);
+	    }
 	}
 	
-		public static void ecrireDansFichierExcel(String nomFichier,int generationNumber) {
-			WritableWorkbook workbook = null;
-			try {
-				/* On créé un nouveau worbook et on l'ouvre en écriture */
-				workbook = Workbook.createWorkbook(new File(nomFichier));
-				
-				/* On créé une nouvelle feuille (test en position 0) et on l'ouvre en écriture */
-				WritableSheet sheet = workbook.createSheet("test", 0); 
-				
-				/* Creation d'un champ au format texte */
-				Number number1 = new Number(generationNumber, 0, 1.02);
-				sheet.addCell(number1);
-				/* Creation d'un champ au format numerique */
-				Number number2 = new Number(generationNumber, 1, 3.1459);
-				sheet.addCell(number2); 
-				
-				/* On ecrit le classeur */
-				workbook.write(); 
-				
-			} 
-			catch (IOException e) {
-				e.printStackTrace();
-			} 
-			catch (RowsExceededException e) {
-				e.printStackTrace();
-			}
-			catch (WriteException e) {
-				e.printStackTrace();
-			}
-			finally {
-				if(workbook!=null){
-					/* On ferme le worbook pour libérer la mémoire */
-					try {
-						workbook.close();
-					} 
-					catch (WriteException e) {
-						e.printStackTrace();
-					} 
-					catch (IOException e) {
-						e.printStackTrace();
-					} 
-				}
-			}
+	/**
+	 * function for monitoring.
+	 * Write the values in a csv file. So we can open it under excel and do graph with the data.
+	 * 
+	 * @param fileName
+	 * 		the path of the file
+	 * @param erasePreviousFile
+	 * 		indicate if you want to erase the previous file or simply write at the end. True if you want the file to stay or false if
+	 * 		you want a new file
+	 * @param exectutionTime
+	 * 		the execution time since the program was launch
+	 * @param score
+	 * 		the score of the current sequence
+	 * 
+	 * @throws IOException 
+	 * 	if the file doesn't exist
+	 */
+	public static void writeCSVFile(String fileName,boolean notErasePreviousFile,double exectutionTime, int score) throws IOException{
+		// need to use that trick to use the append at the end of the file
+		FileWriter mFileWriter = new FileWriter(fileName, notErasePreviousFile); 
+		CSVWriter mCsvWriter = new CSVWriter(mFileWriter);
+		String[] entries;
+		//if new file, we put headers
+		if(!notErasePreviousFile){
+			entries= "TIME,SCORE".split(",");
+			mCsvWriter.writeNext(entries);
 		}
-	
+	    entries = (exectutionTime+","+score).split(",");
+	    mCsvWriter.writeNext(entries);
+	    mCsvWriter.close();
+	}
 
 }

@@ -180,7 +180,7 @@ public class MessageFromPraat {
 	 * @throws IOException 
 	 * 	if the file doesn't exist
 	 */
-	public static void writeCSVFile(String fileName,boolean notErasePreviousFile,double exectutionTime, int score) throws IOException{
+	public static void writeCSVFile(String fileName,boolean notErasePreviousFile,double exectutionTime, double score) throws IOException{
 		// need to use that trick to use the append at the end of the file
 		FileWriter mFileWriter = new FileWriter(fileName, notErasePreviousFile); 
 		CSVWriter mCsvWriter = new CSVWriter(mFileWriter);

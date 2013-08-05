@@ -1,5 +1,7 @@
 package geneticAlogrithm;
 
+import java.io.IOException;
+
 import messages.MessageFromPraat;
 import messages.MessageToPraat;
 
@@ -60,13 +62,18 @@ public class MySequenceEvolutionObserver implements EvolutionObserver<Sequence>{
 	 * and 20 object sound and formant
 	 * we need to store the best contain in data.getBestCandidate()
 	 */
-
-		if(data.getGenerationNumber()!=0 && data.getGenerationNumber()%5 == 0.0){
-			//OrderToPraat.sendMessageToPrat(MessageToPraat.saveSoundFile());
+		if(data.getGenerationNumber()==0){
 			try {
-				//MessageFromPraat.ecrireDansFichierExcel("C:/Users/phervo/Documents/dossierProjet/testECriture.xls",data.getGenerationNumber());
+				MessageFromPraat.writeCSVFile("C:/Users/phervo/Documents/dossierProjet/algoritmProgression.csv",false,0.0,data.getBestCandidateFitness());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}else if(data.getGenerationNumber()!=0 && data.getGenerationNumber()%5 == 0.0){
+			try {
+				MessageFromPraat.writeCSVFile("C:/Users/phervo/Documents/dossierProjet/algoritmProgression.csv",true,0.5,data.getBestCandidateFitness());
 				MessageToPraat.writePraatScriptInFile(data.getBestCandidate(),"SoundNumber"+data.getGenerationNumber()/5);
-			} catch (PraatScriptException e) {
+			} catch (PraatScriptException | IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}

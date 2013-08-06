@@ -246,22 +246,8 @@ public class OrderToPraat implements Observer {
 		System.out.println(fl.length); 
 		//then for each launch praat commande to load
 		for(int i=0;i<fl.length;i++){
-			OrderToPraat.sendMessageToPrat(fl[i].toString());
+			OrderToPraat.sendMessageToPrat("execute "+fl[i].toString());
 		}
 	}
-	
-	/**
-	 * function to delete all the files in th edirectory before using it.
-	 * It avoid to keep file which arent usefull.
-	 * @param folder
-	 */
-	public static void emptyDirectory(File folder){
-		   for(File file : folder.listFiles()){
-		      if(file.isDirectory()){
-		          emptyDirectory(file);
-		      }
-		       file.delete();
-		   }
-		}
 	
 }

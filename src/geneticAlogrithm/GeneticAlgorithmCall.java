@@ -173,7 +173,7 @@ public class GeneticAlgorithmCall{
 		this.praatObject=null;
 		this.start=System.currentTimeMillis();
 		//deleting the files in the folder containing the previous results to avoid keeping result that doesnt suit the current run
-		OrderToPraat.emptyDirectory(new File("C:/Users/phervo/Documents/dossierProjet/results"));
+		emptyDirectory(new File("C:/Users/phervo/Documents/dossierProjet/results"));
 	}
 	
 	
@@ -294,13 +294,16 @@ public class GeneticAlgorithmCall{
 		//start the engine
 		engine = new GenerationalEvolutionEngine<Sequence>(mySequenceFactory, pipeline, mySeqEval, selection, rng);
 		engine.addEvolutionObserver(new MySequenceEvolutionObserver(this));
-		engine.evolve(10, 0, new TargetFitness(2,mySeqEval.isNatural()));
+		engine.evolve(10, 0, new TargetFitness(1,mySeqEval.isNatural()));
 		try {
 			MessageToPraat.writePraatScriptInFile(this.finalsequence,"praatScriptWithCorrectValues");
 		} catch (PraatScriptException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		//relaunch praat and display the result we saved during the run
+		praatObject.reLaunch();
+		OrderToPraat.launchAllScripts();
 	}
 
 	/**
@@ -381,5 +384,19 @@ public class GeneticAlgorithmCall{
 	
 	public double getStartTime(){
 		return this.start;
+	}
+	
+	/**
+	 * function to delete all the files in th edirectory before using it.
+	 * It avoid to keep file which arent usefull.
+	 * @param folder
+	 */
+	public static void emptyDirectory(File folder){
+		   for(File file : folder.listFiles()){
+		      if(file.isDirectory()){
+		    	  emptyDirectory(file);
+		   }
+		   file.delete();
+		 }
 	}
 }

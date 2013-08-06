@@ -476,8 +476,9 @@ public class UnitaryTestsGA {
 			 //UnitaryTestsGA.castFormantTest();
 			 //praatLaunchHeaderClose();
 			 //testStatePattern();
+			 //OrderToPraat.launchAllScripts();
+			 //MonitoringCSV.displayCSV();
 			 OrderToPraat.launchAllScripts();
-			 MonitoringCSV.displayCSV();
 		 }
 	 }
 	 

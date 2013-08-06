@@ -1,5 +1,6 @@
 package geneticAlogrithm;
 
+import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
@@ -171,6 +172,8 @@ public class GeneticAlgorithmCall{
 		this.finalsequence=null;
 		this.praatObject=null;
 		this.start=System.currentTimeMillis();
+		//deleting the files in the folder containing the previous results to avoid keeping result that doesnt suit the current run
+		OrderToPraat.emptyDirectory(new File("C:/Users/phervo/Documents/dossierProjet/results"));
 	}
 	
 	

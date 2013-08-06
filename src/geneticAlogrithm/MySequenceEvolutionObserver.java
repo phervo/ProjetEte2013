@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import messages.MessageFromPraat;
 import messages.MessageToPraat;
+import monitoring.MonitoringCSV;
 
 import org.uncommons.watchmaker.framework.EvolutionObserver;
 import org.uncommons.watchmaker.framework.PopulationData;
@@ -25,7 +26,7 @@ public class MySequenceEvolutionObserver implements EvolutionObserver<Sequence>{
 	 * during the call.
 	 */
 	private GeneticAlgorithmCall myGa;
-	
+
 	/**
 	 * Constructor to create the object specifying the GA
 	 * 
@@ -53,32 +54,42 @@ public class MySequenceEvolutionObserver implements EvolutionObserver<Sequence>{
                 data.getGenerationNumber(),
                 data.getBestCandidate().getValuesInString());
 		this.myGa.setSequence(data.getBestCandidate());
-		
+
 		//store the sound produce all the 100 objects
-		/*/*
-	 * all the 100 object so 100/2 = 50 sequence to generate
-	 * 50/10 individual = 5 generation
-	 * for a generation you got 2 object speaker and artwork (objects number 1 and 2)
-	 * and 20 object sound and formant
-	 * we need to store the best contain in data.getBestCandidate()
-	 */
+
+
 		if(data.getGenerationNumber()==0){
 			try {
-				MessageFromPraat.writeCSVFile("C:/Users/phervo/Documents/dossierProjet/algoritmProgression.csv",false,getExecTime(),data.getBestCandidateFitness());
+				MonitoringCSV.writeCSVFile("C:/Users/phervo/Documents/dossierProjet/algoritmProgression.csv",false,getExecTime(),data.getBestCandidateFitness());
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}else if(data.getGenerationNumber()!=0 && data.getGenerationNumber()%5 == 0.0){
-			try {
-				MessageFromPraat.writeCSVFile("C:/Users/phervo/Documents/dossierProjet/algoritmProgression.csv",true,getExecTime(),data.getBestCandidateFitness());
-				MessageToPraat.writePraatScriptInFile(data.getBestCandidate(),"SoundNumber"+data.getGenerationNumber()/5);
-			} catch (PraatScriptException | IOException e) {
-				// TODO Auto-generated catch block
+			/*
+			 * all the 100 object so 100/2 = 50 sequence to generate
+			 * 50/10 individual = 5 generation
+			 * for a generation you got 2 object speaker and artwork (objects number 1 and 2)
+			 * and 20 object sound and formant
+			 * we need to store the best contain in data.getBestCandidate()
+			 */
+		}else{
+			try{
+				MonitoringCSV.writeCSVFile("C:/Users/phervo/Documents/dossierProjet/algoritmProgression.csv",true,getExecTime(),data.getBestCandidateFitness());
+			}catch (IOException e) {
 				e.printStackTrace();
 			}
+				if(data.getGenerationNumber()!=0 && data.getGenerationNumber()%5 == 0.0){
+					try {
+
+						MessageToPraat.writePraatScriptInFile(data.getBestCandidate(),"SoundNumber"+data.getGenerationNumber()/5);
+					} catch (PraatScriptException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+
 		}
-		
+
 		/*IMPORTANT : praat got a internal memory and can afford only a certain number of object (1800 in my case)
 		 * When reached, praat stop working (error message)
 		 * So some time we need to remove those objects to avoid a calculation crash
@@ -88,7 +99,7 @@ public class MySequenceEvolutionObserver implements EvolutionObserver<Sequence>{
 			myGa.getPraatObject().reLaunch();
 		}
 	}
-	
+
 	/**
 	 * function which calculate the exec time using the start variable of the geneAlgoCall
 	 * @return double containing the time in seconds of execution since the launch

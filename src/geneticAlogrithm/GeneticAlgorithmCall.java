@@ -1,5 +1,6 @@
 package geneticAlogrithm;
 
+import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
@@ -171,6 +172,8 @@ public class GeneticAlgorithmCall{
 		this.finalsequence=null;
 		this.praatObject=null;
 		this.start=System.currentTimeMillis();
+		//deleting the files in the folder containing the previous results to avoid keeping result that doesnt suit the current run
+		emptyDirectory(new File("C:/Users/phervo/Documents/dossierProjet/results"));
 	}
 	
 	
@@ -298,6 +301,9 @@ public class GeneticAlgorithmCall{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		//relaunch praat and display the result we saved during the run
+		praatObject.reLaunch();
+		OrderToPraat.launchAllScripts();
 	}
 
 	/**
@@ -379,4 +385,18 @@ public class GeneticAlgorithmCall{
 	public double getStartTime(){
 		return this.start;
 	}
+	
+	/**
+	   * function to delete all the files in th edirectory before using it.
+	   * It avoid to keep file which arent usefull.
+	   * @param folder
+	   */
+	  public static void emptyDirectory(File folder){
+	       for(File file : folder.listFiles()){
+	          if(file.isDirectory()){
+	            emptyDirectory(file);
+	       }
+	       file.delete();
+	     }
+	  }
 }

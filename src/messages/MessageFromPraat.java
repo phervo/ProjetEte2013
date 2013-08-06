@@ -147,52 +147,5 @@ public class MessageFromPraat {
 		double r = (Math.round(value * Math.pow(10, n))) / (Math.pow(10, n)); 
 		return r; 
 	} 
-	
-	/**
-	 * function for monitoring. Read the values of a csv file.=> better not use it and directly look with excel
-	 * 
-	 * @throws IOException 
-	 * 	if the file doesnt exist
-	 */
-	public static void readCSVFile(String fileName) throws IOException{
-		CSVReader reader = new CSVReader(new FileReader(fileName));
-	    String [] nextLine;
-	    while ((nextLine = reader.readNext()) != null) {
-	        // nextLine[] is an array of values from the line
-	        System.out.println(nextLine[0]+'\t'+ nextLine[1] +'\t'+ nextLine[2]+'\t' +nextLine[3]+'\t' +nextLine[4]);
-	    }
-	}
-	
-	/**
-	 * function for monitoring.
-	 * Write the values in a csv file. So we can open it under excel and do graph with the data.
-	 * 
-	 * @param fileName
-	 * 		the path of the file
-	 * @param erasePreviousFile
-	 * 		indicate if you want to erase the previous file or simply write at the end. True if you want the file to stay or false if
-	 * 		you want a new file
-	 * @param exectutionTime
-	 * 		the execution time since the program was launch
-	 * @param score
-	 * 		the score of the current sequence
-	 * 
-	 * @throws IOException 
-	 * 	if the file doesn't exist
-	 */
-	public static void writeCSVFile(String fileName,boolean notErasePreviousFile,double exectutionTime, double score) throws IOException{
-		// need to use that trick to use the append at the end of the file
-		FileWriter mFileWriter = new FileWriter(fileName, notErasePreviousFile); 
-		CSVWriter mCsvWriter = new CSVWriter(mFileWriter);
-		String[] entries;
-		//if new file, we put headers
-		if(!notErasePreviousFile){
-			entries= "TIME,SCORE".split(",");
-			mCsvWriter.writeNext(entries);
-		}
-	    entries = (exectutionTime+","+score).split(",");
-	    mCsvWriter.writeNext(entries);
-	    mCsvWriter.close();
-	}
 
 }

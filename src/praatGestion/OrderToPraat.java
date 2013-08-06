@@ -2,6 +2,7 @@ package praatGestion;
 
 import geneticAlogrithm.GeneticAlgorithmCall;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
@@ -233,6 +234,20 @@ public class OrderToPraat implements Observer {
 			p.launch();
 		}else if(p.getState().getClass()==Close.class){
 			closePraat();
+		}
+	}
+	
+	//lauchall
+	public static void launchAllScripts(){
+		//comnpter le nombre de fichiers
+		File di   = new File("C:/Users/phervo/Documents/dossierProjet/results");
+		File fl[] = di.listFiles();
+		System.out.println(fl.length); //comnpter le nombre de fichiers
+		System.out.println(fl.length);
+		//then for each launch praat commande to load
+		for(int i=0;i<fl.length;i++){
+			OrderToPraat.sendMessageToPrat(fl[i].toString());
+			OrderToPraat.sendMessageToPrat("execute "+fl[i].toString());
 		}
 	}
 	

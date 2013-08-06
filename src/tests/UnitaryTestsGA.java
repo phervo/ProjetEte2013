@@ -6,6 +6,7 @@ import java.util.Random;
 
 import messages.MessageFromPraat;
 import messages.MessageToPraat;
+import monitoring.MonitoringCSV;
 
 import org.uncommons.maths.random.MersenneTwisterRNG;
 import org.uncommons.maths.random.Probability;
@@ -476,6 +477,7 @@ public class UnitaryTestsGA {
 			 //praatLaunchHeaderClose();
 			 //testStatePattern();
 			 OrderToPraat.launchAllScripts();
+			 MonitoringCSV.displayCSV();
 		 }
 	 }
 	 

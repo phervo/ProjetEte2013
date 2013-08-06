@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import messages.MessageFromPraat;
 import messages.MessageToPraat;
+import monitoring.MonitoringCSV;
 
 import org.uncommons.watchmaker.framework.EvolutionObserver;
 import org.uncommons.watchmaker.framework.PopulationData;
@@ -59,7 +60,7 @@ public class MySequenceEvolutionObserver implements EvolutionObserver<Sequence>{
 		
 		if(data.getGenerationNumber()==0){
 			try {
-				MessageFromPraat.writeCSVFile("C:/Users/phervo/Documents/dossierProjet/algoritmProgression.csv",false,getExecTime(),data.getBestCandidateFitness());
+				MonitoringCSV.writeCSVFile("C:/Users/phervo/Documents/dossierProjet/algoritmProgression.csv",false,getExecTime(),data.getBestCandidateFitness());
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -73,7 +74,7 @@ public class MySequenceEvolutionObserver implements EvolutionObserver<Sequence>{
 			 */
 		}else{
 			try{
-				MessageFromPraat.writeCSVFile("C:/Users/phervo/Documents/dossierProjet/algoritmProgression.csv",true,getExecTime(),data.getBestCandidateFitness());
+				MonitoringCSV.writeCSVFile("C:/Users/phervo/Documents/dossierProjet/algoritmProgression.csv",true,getExecTime(),data.getBestCandidateFitness());
 			}catch (IOException e) {
 				e.printStackTrace();
 			}

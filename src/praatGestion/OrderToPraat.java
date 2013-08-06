@@ -243,6 +243,9 @@ public class OrderToPraat implements Observer {
 		File di   = new File("C:/Users/phervo/Documents/dossierProjet/results");
 		File fl[] = di.listFiles();
 		System.out.println(fl.length); //comnpter le nombre de fichiers
+		for(int i=0;i<fl.length;i++){
+			System.out.println(fl[i]);
+		}
 		//then for each launch praat commande to load
 	}
 	

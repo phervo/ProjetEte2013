@@ -93,11 +93,13 @@ public class MessageToPraat {
 		return stb.toString();
 	}
 
-	/*
+	/**
 	 * all the 100 object so 100/2 = 50 sequence to generate
 	 * 50/10 individual = 5 generation
 	 * for a generation you got 2 object speaker and artwork (objects number 1 and 2)
 	 * and 20 object sound and
+	 
+	 *@deprecated
 	 */
 	public static String saveSoundFile(){
 		StringBuilder stb= new StringBuilder(); 

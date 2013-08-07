@@ -469,9 +469,10 @@ public class UnitaryTestsGA {
 		new Curve();
 	}
 	
-	public static void test(){
-		
+	public static void loadAllSounds(){
+		OrderToPraat.launchAllScripts();
 	}
+	
 	 private static class ClasseInterne{ // internal class for a main
 		 public static void main(String[] args){
 			 //UnitaryTestsGA.testFormantAndFormantSequence();
@@ -486,6 +487,7 @@ public class UnitaryTestsGA {
 			 //testStatePattern();
 			// testExcel();
 			testGraph();
+			loadAllSounds();
 		 }
 		 
 	 }

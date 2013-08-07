@@ -42,6 +42,13 @@ public class Curve{
 			    compteur++;
 			}
 			reader.close();
+			for(int i=0;i<content.size();i++){
+				System.out.println(absis[i]);
+			}
+			System.out.println();
+			for(int i=0;i<content.size();i++){
+				System.out.println(ordonee[i]);
+			}
 			
 			/*
 			 *then the drawing part 
@@ -55,7 +62,7 @@ public class Curve{
 			
 			// add a line plot to the PlotPanel
 			plot.addLinePlot("my plot", absis, ordonee);
-	 
+			//plot.addLinePlot("my second plot", ordonee, absis);
 			// put the PlotPanel in a JFrame like a JPanel
 			JFrame frame = new JFrame("a plot panel");
 			frame.setSize(600, 600);

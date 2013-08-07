@@ -117,6 +117,9 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 			
 			
 			answerFromPraat.acquire();	
+			//store the formants from praat in the sequence :
+			candidate.setF1(ga.getMessageFromPraat().getFormantAt(0));
+			candidate.setF2(ga.getMessageFromPraat().getFormantAt(1));
 	    	for(int i=0;i<this.targetSequence.getNbFormant();i++){
 	    		/*there is an interval of +/-10% around the value so we caluclate this value*/
 	    		double lowerBornfreq = this.targetSequence.getFormantAt(i).getFrequency()*0.9;

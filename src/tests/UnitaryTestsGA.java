@@ -487,7 +487,7 @@ public class UnitaryTestsGA {
 			 //testStatePattern();
 			// testExcel();
 			testGraph();
-			loadAllSounds();
+			//loadAllSounds();
 		 }
 		 
 	 }

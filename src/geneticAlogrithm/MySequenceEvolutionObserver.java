@@ -60,8 +60,9 @@ public class MySequenceEvolutionObserver implements EvolutionObserver<Sequence>{
 
 		if(data.getGenerationNumber()==0){
 			try {
-				MonitoringCSV.writeCSVFile("C:/Users/phervo/Documents/dossierProjet/algoritmProgression.csv",false,getExecTime(),data.getBestCandidateFitness());
-			} catch (IOException e) {
+				MonitoringCSV.writeCSVFile("C:/Users/phervo/Documents/dossierProjet/algoritmProgression.csv",false,getExecTime(),data.getBestCandidateFitness(),data.getBestCandidate());
+				MessageToPraat.writePraatScriptInFile(data.getBestCandidate(),"SoundNumber"+data.getGenerationNumber()/5);
+			} catch (IOException | PraatScriptException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -72,21 +73,14 @@ public class MySequenceEvolutionObserver implements EvolutionObserver<Sequence>{
 			 * and 20 object sound and formant
 			 * we need to store the best contain in data.getBestCandidate()
 			 */
-		}else{
+		}else if(data.getGenerationNumber()!=0 && data.getGenerationNumber()%5 == 0.0){
 			try{
-				MonitoringCSV.writeCSVFile("C:/Users/phervo/Documents/dossierProjet/algoritmProgression.csv",true,getExecTime(),data.getBestCandidateFitness());
-			}catch (IOException e) {
+				MonitoringCSV.writeCSVFile("C:/Users/phervo/Documents/dossierProjet/algoritmProgression.csv",true,getExecTime(),data.getBestCandidateFitness(),data.getBestCandidate());
+				MessageToPraat.writePraatScriptInFile(data.getBestCandidate(),"SoundNumber"+data.getGenerationNumber()/5);
+			}catch (IOException | PraatScriptException e) {
 				e.printStackTrace();
 			}
-				if(data.getGenerationNumber()!=0 && data.getGenerationNumber()%5 == 0.0){
-					try {
-
-						MessageToPraat.writePraatScriptInFile(data.getBestCandidate(),"SoundNumber"+data.getGenerationNumber()/5);
-					} catch (PraatScriptException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
+			
 
 		}
 

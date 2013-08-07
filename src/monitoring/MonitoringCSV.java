@@ -3,6 +3,8 @@ package monitoring;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+
+import elements.Sequence;
 import au.com.bytecode.opencsv.CSVReader;
 import au.com.bytecode.opencsv.CSVWriter;
 
@@ -20,11 +22,12 @@ public class MonitoringCSV {
 	 * 		the execution time since the program was launch
 	 * @param score
 	 * 		the score of the current sequence
-	 * 
+	 * @param sequence 
+	 * 		the best sequence of the generation
 	 * @throws IOException 
 	 * 	if the file doesn't exist
 	 */
-	public static void writeCSVFile(String fileName,boolean notErasePreviousFile,double exectutionTime, double score) throws IOException{
+	public static void writeCSVFile(String fileName,boolean notErasePreviousFile,double exectutionTime, double score, Sequence sequence) throws IOException{
 		// need to use that trick to use the append at the end of the file
 		FileWriter mFileWriter = new FileWriter(fileName, notErasePreviousFile); 
 		CSVWriter mCsvWriter = new CSVWriter(mFileWriter,',',' ');// i put a white space so i can use the trim function during the readind and avoid a regular expression or
@@ -32,10 +35,10 @@ public class MonitoringCSV {
 		String[] entries;
 		//if new file, we put headers
 		if(!notErasePreviousFile){
-			entries= "TIME,SCORE".split(",");
+			entries= "TIME,SCORE,F1,F2,Sequence".split(",");
 			mCsvWriter.writeNext(entries);
 		}
-	    entries = (exectutionTime+","+score).split(",");
+	    entries = (exectutionTime+","+score+","+sequence.getF1().getFrequency()+","+sequence.getF2().getFrequency()+","+sequence.getValuesInString()).split(",");
 	    mCsvWriter.writeNext(entries);
 	    mCsvWriter.close();
 	}

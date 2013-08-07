@@ -8,6 +8,7 @@ import java.util.concurrent.Semaphore;
 
 import messages.MessageFromPraat;
 import messages.MessageToPraat;
+import monitoring.MonitoringCSV;
 
 import org.uncommons.maths.random.MersenneTwisterRNG;
 import org.uncommons.maths.random.Probability;
@@ -294,7 +295,7 @@ public class GeneticAlgorithmCall{
 		//start the engine
 		engine = new GenerationalEvolutionEngine<Sequence>(mySequenceFactory, pipeline, mySeqEval, selection, rng);
 		engine.addEvolutionObserver(new MySequenceEvolutionObserver(this));
-		engine.evolve(10, 0, new TargetFitness(2,mySeqEval.isNatural()));
+		engine.evolve(10, 0, new TargetFitness(1,mySeqEval.isNatural()));
 		try {
 			MessageToPraat.writePraatScriptInFile(this.finalsequence,"praatScriptWithCorrectValues");
 		} catch (PraatScriptException e) {
@@ -304,6 +305,9 @@ public class GeneticAlgorithmCall{
 		//relaunch praat and display the result we saved during the run
 		praatObject.reLaunch();
 		OrderToPraat.launchAllScripts();
+		
+		//at the end, we launch the monitoring function to display the results
+		MonitoringCSV.displayCSV();
 	}
 
 	/**

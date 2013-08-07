@@ -7,6 +7,7 @@ import java.util.Random;
 
 import messages.MessageFromPraat;
 import messages.MessageToPraat;
+import monitoring.Curve;
 
 import org.uncommons.maths.random.MersenneTwisterRNG;
 import org.uncommons.maths.random.Probability;
@@ -464,8 +465,8 @@ public class UnitaryTestsGA {
 		//p.reLaunch();
 	}
 	
-	public static void testExcel(){
-	
+	public static void testGraph(){
+		new Curve();
 	}
 	 private static class ClasseInterne{ // internal class for a main
 		 public static void main(String[] args){
@@ -479,7 +480,8 @@ public class UnitaryTestsGA {
 			 //UnitaryTestsGA.castFormantTest();
 			 //praatLaunchHeaderClose();
 			 //testStatePattern();
-			 testExcel();
+			// testExcel();
+			testGraph();
 		 }
 		 
 	 }

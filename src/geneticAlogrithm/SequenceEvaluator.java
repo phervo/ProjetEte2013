@@ -105,7 +105,6 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 		// TODO Auto-generated method stub
 		//max 9 in fitness
 		int matches=0;
-		String formantFound=null;
 		//0) put a mutex
 		try {
 			ga.getMutexFitnessFunction().acquire();
@@ -121,6 +120,7 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 			//store the formants from praat in the sequence :
 			candidate.setF1(ga.getMessageFromPraat().getFormantAt(0));
 			candidate.setF2(ga.getMessageFromPraat().getFormantAt(1));
+			candidate.setFormantFound("none");
 	    	for(int i=0;i<this.targetSequence.getNbFormant();i++){
 	    		/*there is an interval of +/-10% around the value so we caluclate this value*/
 	    		double lowerBornfreq = this.targetSequence.getFormantAt(i).getFrequency()*0.9;
@@ -132,7 +132,7 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 	    		
 	    		if((ga.getMessageFromPraat().getFormantAt(i).getFrequency()>=lowerBornfreq && ga.getMessageFromPraat().getFormantAt(i).getFrequency()<=upperBornfreq)){
 					matches++;
-					formantFound="F"+(i+1); //difference beetween the index and the real formant number
+					candidate.setFormantFound("F"+(i+1)); //difference beetween the index and the real formant number
 				}
 				/*if(ga.getMessageFromPraat().getFormantAt(i).getBandwith()>=lowerBornBW && ga.getMessageFromPraat().getFormantAt(i).getBandwith()<=upperBornBW ){
 					matches++;
@@ -142,11 +142,8 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 				}*/
 			}
 	    	if(matches==2){
-	    		formantFound="both";
-	    	}else if(matches==0){
-	    		formantFound="none";
+	    		candidate.setFormantFound("both");
 	    	}
-	    	candidate.setFormantFound(formantFound);
 	    	System.out.println("matchScore : "+matches);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block

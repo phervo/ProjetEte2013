@@ -132,7 +132,7 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 	    		
 	    		if((ga.getMessageFromPraat().getFormantAt(i).getFrequency()>=lowerBornfreq && ga.getMessageFromPraat().getFormantAt(i).getFrequency()<=upperBornfreq)){
 					matches++;
-					formantFound="F"+i;
+					formantFound="F"+(i+1); //difference beetween the index and the real formant number
 				}
 				/*if(ga.getMessageFromPraat().getFormantAt(i).getBandwith()>=lowerBornBW && ga.getMessageFromPraat().getFormantAt(i).getBandwith()<=upperBornBW ){
 					matches++;
@@ -143,6 +143,8 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 			}
 	    	if(matches==2){
 	    		formantFound="both";
+	    	}else if(matches==0){
+	    		formantFound="none";
 	    	}
 	    	candidate.setFormantFound(formantFound);
 	    	System.out.println("matchScore : "+matches);

@@ -32,6 +32,8 @@ public class Curve{
 		double[] ordoneeF1=null;
 		double[] ordoneeF2=null;
 		int compteur=0;
+		double[] F1Value;
+		double[] F2Value;
 		try {
 			/*
 			 * 1st we read the csv file to extract the information and get tzo array representing the absis and the ordonee
@@ -43,6 +45,8 @@ public class Curve{
 			absis= new double[content.size()];			
 			ordoneeF1 =new double[content.size()];	
 			ordoneeF2 =new double[content.size()];	
+			F1Value=new double[content.size()];	
+			F2Value=new double[content.size()];
 			//decomposition in two array, one for the values of the absis and one for the values of the ordonee
 			for (Object object : content) {
 			    row = (String[]) object;
@@ -55,7 +59,9 @@ public class Curve{
 			}
 			reader.close();
 			for(int i=0;i<content.size();i++){
-				System.out.println(absis[i]);
+				//define the const to get a line
+				F1Value[i]=ga.getTarget().getFormantAt(0).getFrequency();
+				F2Value[i]=ga.getTarget().getFormantAt(0).getFrequency();
 			}
 			System.out.println();
 			for(int i=0;i<content.size();i++){
@@ -78,8 +84,10 @@ public class Curve{
 			plot.addLegend("SOUTH");
 			
 			// add a line plot to the PlotPanel
-			plot.addLinePlot("F1", absis, ordoneeF1);
-			plot.addLinePlot("F2",absis,ordoneeF2);
+			plot.addLinePlot("F1 of candidate", absis, ordoneeF1);
+			plot.addLinePlot("F2 of candidate",absis,ordoneeF2);
+			plot.addLinePlot("F1 expected value",absis,F1Value);
+			plot.addLinePlot("F2 expected value",absis,F2Value);
 			// put the PlotPanel in a JFrame like a JPanel
 			JFrame frame = new JFrame("a plot panel");
 			frame.setSize(600, 600);

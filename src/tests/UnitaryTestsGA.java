@@ -468,6 +468,10 @@ public class UnitaryTestsGA {
 	public static void testGraph(){
 		new Curve();
 	}
+	
+	public static void test(){
+		
+	}
 	 private static class ClasseInterne{ // internal class for a main
 		 public static void main(String[] args){
 			 //UnitaryTestsGA.testFormantAndFormantSequence();

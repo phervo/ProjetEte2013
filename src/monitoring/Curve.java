@@ -51,19 +51,19 @@ public class Curve{
 			for (Object object : content) {
 			    row = (String[]) object;
 			    absis[compteur]=Double.parseDouble(row[0].trim());
-			    ordoneeF1[compteur]=405.0-Double.parseDouble(row[2].trim());
-			    ordoneeF2[compteur]=2080.0-Double.parseDouble(row[3].trim());
-			    //ordoneeF1[compteur]=ga.getTarget().getFormantAt(0).getFrequency()-Double.parseDouble(row[2].trim());
-			    //ordoneeF2[compteur]=ga.getTarget().getFormantAt(1).getFrequency()-Double.parseDouble(row[3].trim());
+			    //ordoneeF1[compteur]=405.0-Double.parseDouble(row[2].trim());
+			    //ordoneeF2[compteur]=2080.0-Double.parseDouble(row[3].trim());
+			    ordoneeF1[compteur]=ga.getTarget().getFormantAt(0).getFrequency()-Double.parseDouble(row[2].trim());
+			    ordoneeF2[compteur]=ga.getTarget().getFormantAt(1).getFrequency()-Double.parseDouble(row[3].trim());
 			    compteur++;
 			}
 			reader.close();
 			for(int i=0;i<content.size();i++){
 				//define the const to get a line
 				F1Value[i]=ga.getTarget().getFormantAt(0).getFrequency();
-				F2Value[i]=ga.getTarget().getFormantAt(0).getFrequency();
+				F2Value[i]=ga.getTarget().getFormantAt(1).getFrequency();
 			}
-			System.out.println();
+			/*System.out.println();
 			for(int i=0;i<content.size();i++){
 				System.out.println(ordoneeF1[i]);
 			}
@@ -71,7 +71,7 @@ public class Curve{
 			System.out.println();
 			for(int i=0;i<content.size();i++){
 				System.out.println(ordoneeF2[i]);
-			}
+			}*/
 			
 			/*
 			 *then the drawing part 

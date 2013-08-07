@@ -5,6 +5,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import elements.Sequence;
+import exceptions.FormantNumberexception;
+import geneticAlogrithm.GeneticAlgorithmCall;
 import au.com.bytecode.opencsv.CSVReader;
 import au.com.bytecode.opencsv.CSVWriter;
 
@@ -35,18 +37,25 @@ public class MonitoringCSV {
 		String[] entries;
 		//if new file, we put headers
 		if(!notErasePreviousFile){
-			entries= "TIME,SCORE,F1,F2,Sequence".split(",");
+			entries= "TIME,SCORE,F1,F2,FORMANT_FOUND,Sequence".split(",");
 			mCsvWriter.writeNext(entries);
 		}
-	    entries = (exectutionTime+","+score+","+sequence.getF1().getFrequency()+","+sequence.getF2().getFrequency()+","+sequence.getValuesInString()).split(",");
+	    entries = (exectutionTime+","+score+","+sequence.getF1().getFrequency()+","+sequence.getF2().getFrequency()+","+sequence.getFormantFound()+","+sequence.getValuesInString()).split(",");
 	    mCsvWriter.writeNext(entries);
 	    mCsvWriter.close();
 	}
 
 	/**
 	 * function which display the curve of values stored in the csv
+	 * @param ga
+	 * 		the ga used. We need it to get the target and do the comparison
 	 */
-	public static void displayCSV(){
-		new Curve();
+	public static void displayCSV(GeneticAlgorithmCall ga){
+		try {
+			new Curve(ga);
+		} catch (FormantNumberexception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

@@ -8,6 +8,7 @@ import java.util.Random;
 import messages.MessageFromPraat;
 import messages.MessageToPraat;
 import monitoring.Curve;
+import monitoring.MonitoringCSV;
 
 import org.uncommons.maths.random.MersenneTwisterRNG;
 import org.uncommons.maths.random.Probability;
@@ -465,8 +466,8 @@ public class UnitaryTestsGA {
 		//p.reLaunch();
 	}
 	
-	public static void testGraph(){
-		new Curve();
+	public static void testGraph(GeneticAlgorithmCall ga){
+		MonitoringCSV.displayCSV(ga);
 	}
 	
 	public static void loadAllSounds(){
@@ -486,7 +487,14 @@ public class UnitaryTestsGA {
 			 //praatLaunchHeaderClose();
 			 //testStatePattern();
 			// testExcel();
-			testGraph();
+			 GeneticAlgorithmCall ga;
+			try {
+				ga = new GeneticAlgorithmCall(16);
+				testGraph(ga);
+			} catch (FormantNumberexception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			//loadAllSounds();
 		 }
 		 

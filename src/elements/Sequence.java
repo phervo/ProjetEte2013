@@ -53,6 +53,13 @@ public class Sequence {
 	 * the second formant. We just initialise the value here. we will put the good value in the SequenceEvaluator.
 	 */
 	private Formant f2;
+	
+	/**
+	 * field which indicate which formant the algo has found
+	 * 4 possible values "none","F1","F2","both".
+	 * here is just the init, the value will be set during the evaluation
+	 */
+	private String formantFound;
 	/**
 	* Constructor without parameters. Create a array of 0 of the length put in param. 
 	* 
@@ -73,6 +80,7 @@ public class Sequence {
 			}
 			f1=new Formant();
 			f2=new Formant();
+			formantFound="none";
 		}else{
 			throw new SequenceArrayException(length,length,length);
 		}
@@ -100,6 +108,7 @@ public class Sequence {
 			this.values = values;
 			f1=new Formant();
 			f2=new Formant();
+			formantFound="none";
 		}else{
 			throw new SequenceArrayException(length,0,values.length);
 		}
@@ -209,6 +218,13 @@ public class Sequence {
 	public void setF2(Formant f2) {
 		this.f2 = f2;
 	}
-	
+
+	public String getFormantFound() {
+		return formantFound;
+	}
+
+	public void setFormantFound(String formantFound) {
+		this.formantFound = formantFound;
+	}
 	
 }

@@ -1,5 +1,8 @@
 package monitoring;
 
+import exceptions.FormantNumberexception;
+import geneticAlogrithm.GeneticAlgorithmCall;
+
 import javax.swing.JFrame;
 
 import org.math.plot.Plot2DPanel;
@@ -17,12 +20,17 @@ public class Curve{
 	/**
 	 * function which read the csv file and draw the curve.
 	 * Use the read functions of the opencsv api and the mathPlot 2.0 api to draw the curve
+	 * 
+	 * @param ga
+	 * 		the ga used. We need it to get the target and do the comparison
+	 * @throws FormantNumberexception 
 	 */
-	public Curve(){
+	public Curve(GeneticAlgorithmCall ga) throws FormantNumberexception{
 		CSVReader reader;
 		String[] row = null;
-		double[] absis=null;
-		double[] ordonee=null;
+		double[] absis=null; // the same for the two
+		double[] ordoneeF1=null;
+		double[] ordoneeF2=null;
 		int compteur=0;
 		try {
 			/*
@@ -33,12 +41,16 @@ public class Curve{
 			List content = reader.readAll();
 			//init of the lists
 			absis= new double[content.size()];			
-			ordonee =new double[content.size()];	
+			ordoneeF1 =new double[content.size()];	
+			ordoneeF2 =new double[content.size()];	
 			//decomposition in two array, one for the values of the absis and one for the values of the ordonee
 			for (Object object : content) {
 			    row = (String[]) object;
 			    absis[compteur]=Double.parseDouble(row[0].trim());
-			    ordonee[compteur]=Double.parseDouble(row[1].trim());
+			    ordoneeF1[compteur]=405.0-Double.parseDouble(row[2].trim());
+			    ordoneeF2[compteur]=2080.0-Double.parseDouble(row[3].trim());
+			    //ordoneeF1[compteur]=ga.getTarget().getFormantAt(0).getFrequency()-Double.parseDouble(row[2].trim());
+			    //ordoneeF2[compteur]=ga.getTarget().getFormantAt(1).getFrequency()-Double.parseDouble(row[3].trim());
 			    compteur++;
 			}
 			reader.close();
@@ -47,7 +59,12 @@ public class Curve{
 			}
 			System.out.println();
 			for(int i=0;i<content.size();i++){
-				System.out.println(ordonee[i]);
+				System.out.println(ordoneeF1[i]);
+			}
+			
+			System.out.println();
+			for(int i=0;i<content.size();i++){
+				System.out.println(ordoneeF2[i]);
 			}
 			
 			/*
@@ -61,8 +78,8 @@ public class Curve{
 			plot.addLegend("SOUTH");
 			
 			// add a line plot to the PlotPanel
-			plot.addLinePlot("my plot", absis, ordonee);
-			//plot.addLinePlot("my second plot", ordonee, absis);
+			plot.addLinePlot("F1", absis, ordoneeF1);
+			plot.addLinePlot("F2",absis,ordoneeF2);
 			// put the PlotPanel in a JFrame like a JPanel
 			JFrame frame = new JFrame("a plot panel");
 			frame.setSize(600, 600);

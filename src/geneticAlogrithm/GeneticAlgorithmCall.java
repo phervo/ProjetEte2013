@@ -307,7 +307,7 @@ public class GeneticAlgorithmCall{
 		OrderToPraat.launchAllScripts();
 		
 		//at the end, we launch the monitoring function to display the results
-		MonitoringCSV.displayCSV();
+		MonitoringCSV.displayCSV(this);
 	}
 
 	/**
@@ -402,5 +402,9 @@ public class GeneticAlgorithmCall{
 	       }
 	       file.delete();
 	     }
+	  }
+	  
+	  public FormantSequence getTarget(){
+		return target;
 	  }
 }

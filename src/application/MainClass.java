@@ -22,7 +22,7 @@ public class MainClass {
 	
 	public static void main(String[] args) throws FormantNumberexception {
 		// TODO Auto-generated method stub
-		GeneticAlgorithmCall ga= new GeneticAlgorithmCall(16); //init
+		GeneticAlgorithmCall ga= new GeneticAlgorithmCall(8); //init
 		ServerThread.getInstance(ga);
 		ga.startAlgorithm();
 		CloseServer.envoyerMessageFermeture();

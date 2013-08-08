@@ -113,7 +113,7 @@ public class SequenceMutation implements EvolutionaryOperator<Sequence>{
             if (mutationProbability.nextValue().nextEvent(rng))
             {
             	try {
-            		if(i==6){ //masseter
+            		if(i==12 || i==13){ //masseter
 						retour.setValues(i, globalAlphabet.getMasseterAlphabet().getValueAt(rng.nextInt(globalAlphabet.getMasseterAlphabet().getLength())));
 					}else{
 						retour.setValues(i, globalAlphabet.getOtherAlphabet().getValueAt(rng.nextInt(globalAlphabet.getOtherAlphabet().getLength())));

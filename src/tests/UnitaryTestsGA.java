@@ -1,11 +1,13 @@
 package tests;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 import messages.MessageFromPraat;
 import messages.MessageToPraat;
+import monitoring.Curve;
 import monitoring.MonitoringCSV;
 
 import org.uncommons.maths.random.MersenneTwisterRNG;
@@ -464,6 +466,14 @@ public class UnitaryTestsGA {
 		//p.reLaunch();
 	}
 	
+	public static void testGraph(GeneticAlgorithmCall ga){
+		MonitoringCSV.displayCSV(ga);
+	}
+	
+	public static void loadAllSounds(){
+		OrderToPraat.launchAllScripts();
+	}
+	
 	 private static class ClasseInterne{ // internal class for a main
 		 public static void main(String[] args){
 			 //UnitaryTestsGA.testFormantAndFormantSequence();
@@ -476,11 +486,18 @@ public class UnitaryTestsGA {
 			 //UnitaryTestsGA.castFormantTest();
 			 //praatLaunchHeaderClose();
 			 //testStatePattern();
-			 //OrderToPraat.launchAllScripts();
-			 //MonitoringCSV.displayCSV();
-			 OrderToPraat.launchAllScripts();
+			// testExcel();
+			//GeneticAlgorithmCall ga;
+			//try {
+			//	ga = new GeneticAlgorithmCall(16);
+			//	testGraph(ga);
+			//} catch (FormantNumberexception e) {
+				// TODO Auto-generated catch block
+			//	e.printStackTrace();
+			//}
+			loadAllSounds();
 		 }
+		 
 	 }
-	 
 	
 }

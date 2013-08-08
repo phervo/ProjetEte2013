@@ -45,6 +45,24 @@ public class Sequence {
 	private double[] values; //primitif type so not a list to avoid the casts
 	
 	/**
+	 * the first formant. We just initialise the value here. we will put the good value in the SequenceEvaluator.
+	 */
+	private Formant f1;
+	
+	/**
+	 * the second formant. We just initialise the value here. we will put the good value in the SequenceEvaluator.
+	 */
+	private Formant f2;
+	
+	/**
+	 * field which indicate which formant the algo has found
+	 * 4 possible values "none","F1","F2","both".
+	 * here is just the init, the value will be set during the evaluation
+	 */
+	private String formantFound;
+	
+	private double fitnessScore;
+	/**
 	* Constructor without parameters. Create a array of 0 of the length put in param. 
 	* 
 	*
@@ -62,6 +80,10 @@ public class Sequence {
 			for(int i =0;i<length;i++){
 				this.values[i]=0;
 			}
+			f1=new Formant();
+			f2=new Formant();
+			formantFound="none";
+			fitnessScore=0;
 		}else{
 			throw new SequenceArrayException(length,length,length);
 		}
@@ -87,6 +109,10 @@ public class Sequence {
 		if(values.length==length){
 			this.length = length;
 			this.values = values;
+			f1=new Formant();
+			f2=new Formant();
+			formantFound="none";
+			fitnessScore=0;
 		}else{
 			throw new SequenceArrayException(length,0,values.length);
 		}
@@ -180,4 +206,39 @@ public class Sequence {
 		}
 		return st.toString();
 	}
+
+	public Formant getF1() {
+		return f1;
+	}
+
+	public void setF1(Formant f1) {
+		this.f1 = f1;
+	}
+
+	public Formant getF2() {
+		return f2;
+	}
+
+	public void setF2(Formant f2) {
+		this.f2 = f2;
+	}
+
+	public String getFormantFound() {
+		return formantFound;
+	}
+
+	public void setFormantFound(String formantFound) {
+		this.formantFound = formantFound;
+	}
+
+	public double getFitnessScore() {
+		return fitnessScore;
+	}
+
+	public void setFitnessScore(double fitnessScore) {
+		this.fitnessScore = fitnessScore;
+	}
+	
+	
+	
 }

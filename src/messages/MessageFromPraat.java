@@ -1,5 +1,6 @@
 package messages;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -7,13 +8,13 @@ import java.util.ArrayList;
 
 import au.com.bytecode.opencsv.CSVReader;
 import au.com.bytecode.opencsv.CSVWriter;
-import praatGestion.OrderToPraat;
 import communication.ServerThread;
 import elements.Formant;
 import elements.FormantSequence;
 import exceptions.CastFormantException;
 import exceptions.FormantNumberexception;
 import geneticAlogrithm.SequenceEvaluator;
+
 
 /** <p>Class which deals with the message received from praat to transform them into the object we wanted<br/>
  *  All the method from this class are static so no need to create an instance<br/>
@@ -145,5 +146,6 @@ public class MessageFromPraat {
 	static public double arrondir(double value, int n) { 
 		double r = (Math.round(value * Math.pow(10, n))) / (Math.pow(10, n)); 
 		return r; 
-	}
+	} 
+
 }

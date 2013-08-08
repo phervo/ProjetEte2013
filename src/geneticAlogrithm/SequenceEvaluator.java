@@ -112,11 +112,15 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 		//1) j'envoie le candidat courant (var candidate au script)
 		/*write value in the script send to praat and send it*/
 			System.out.println(candidate.getValuesInString());
-			OrderToPraat.sendMessageToPrat(MessageToPraat.writePraatScriptWithCandidates(candidate));
+			OrderToPraat.sendMessageToPrat(MessageToPraat.writePraatScriptWithCandidates(candidate)); // change
 		//2) recuperer le resultat dans messageFromPraat (attente serveur et socket si besoin) et le comparer a la cible
 			
 			
 			answerFromPraat.acquire();	
+			//store the formants from praat in the sequence :
+			candidate.setF1(ga.getMessageFromPraat().getFormantAt(0));
+			candidate.setF2(ga.getMessageFromPraat().getFormantAt(1));
+			candidate.setFormantFound("none");
 	    	for(int i=0;i<this.targetSequence.getNbFormant();i++){
 	    		/*there is an interval of +/-10% around the value so we caluclate this value*/
 	    		double lowerBornfreq = this.targetSequence.getFormantAt(i).getFrequency()*0.9;
@@ -128,6 +132,7 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 	    		
 	    		if((ga.getMessageFromPraat().getFormantAt(i).getFrequency()>=lowerBornfreq && ga.getMessageFromPraat().getFormantAt(i).getFrequency()<=upperBornfreq)){
 					matches++;
+					candidate.setFormantFound("F"+(i+1)); //difference beetween the index and the real formant number
 				}
 				/*if(ga.getMessageFromPraat().getFormantAt(i).getBandwith()>=lowerBornBW && ga.getMessageFromPraat().getFormantAt(i).getBandwith()<=upperBornBW ){
 					matches++;
@@ -136,6 +141,10 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 					matches++;
 				}*/
 			}
+	    	if(matches==2){
+	    		candidate.setFormantFound("both");
+	    	}
+	    	candidate.setFitnessScore(matches);
 	    	System.out.println("matchScore : "+matches);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block

@@ -300,7 +300,7 @@ public class GeneticAlgorithmCall{
 		//save the result in a final file,idem for the csv
 		try {
 			MessageToPraat.writePraatScriptInFile(this.finalsequence,"praatScriptWithCorrectValues");
-			MonitoringCSV.writeCSVFile("C:/Users/phervo/Documents/dossierProjet/algoritmProgression.csv",true,getFinalExecTime(),this.finalsequence.getFitnessScore(),this.finalsequence);
+			MonitoringCSV.writeCSVFile("C:/Users/phervo/Documents/dossierProjet/results/algoritmProgression.csv",true,getFinalExecTime(),this.finalsequence.getFitnessScore(),this.finalsequence);
 		} catch (PraatScriptException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

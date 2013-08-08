@@ -60,8 +60,8 @@ public class Curve{
 			reader.close();
 			for(int i=0;i<content.size();i++){
 				//define the const to get a line
-				F1Value[i]=ga.getTarget().getFormantAt(0).getFrequency();
-				F2Value[i]=ga.getTarget().getFormantAt(1).getFrequency();
+				F1Value[i]=0.1*ga.getTarget().getFormantAt(0).getFrequency();
+				F2Value[i]=0.1*ga.getTarget().getFormantAt(1).getFrequency();
 			}
 			/*System.out.println();
 			for(int i=0;i<content.size();i++){
@@ -86,8 +86,8 @@ public class Curve{
 			// add a line plot to the PlotPanel
 			plot.addLinePlot("F1 of candidate", absis, ordoneeF1);
 			plot.addLinePlot("F2 of candidate",absis,ordoneeF2);
-			plot.addLinePlot("F1 expected value",absis,F1Value);
-			plot.addLinePlot("F2 expected value",absis,F2Value);
+			plot.addLinePlot("F1 margin",absis,F1Value);
+			plot.addLinePlot("F2 margin",absis,F2Value);
 			// put the PlotPanel in a JFrame like a JPanel
 			JFrame frame = new JFrame("a plot panel");
 			frame.setSize(600, 600);

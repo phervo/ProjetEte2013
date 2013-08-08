@@ -60,6 +60,8 @@ public class Sequence {
 	 * here is just the init, the value will be set during the evaluation
 	 */
 	private String formantFound;
+	
+	private double fitnessScore;
 	/**
 	* Constructor without parameters. Create a array of 0 of the length put in param. 
 	* 
@@ -81,6 +83,7 @@ public class Sequence {
 			f1=new Formant();
 			f2=new Formant();
 			formantFound="none";
+			fitnessScore=0;
 		}else{
 			throw new SequenceArrayException(length,length,length);
 		}
@@ -109,6 +112,7 @@ public class Sequence {
 			f1=new Formant();
 			f2=new Formant();
 			formantFound="none";
+			fitnessScore=0;
 		}else{
 			throw new SequenceArrayException(length,0,values.length);
 		}
@@ -226,5 +230,15 @@ public class Sequence {
 	public void setFormantFound(String formantFound) {
 		this.formantFound = formantFound;
 	}
+
+	public double getFitnessScore() {
+		return fitnessScore;
+	}
+
+	public void setFitnessScore(double fitnessScore) {
+		this.fitnessScore = fitnessScore;
+	}
+	
+	
 	
 }

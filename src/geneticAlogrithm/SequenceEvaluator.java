@@ -144,6 +144,7 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 	    	if(matches==2){
 	    		candidate.setFormantFound("both");
 	    	}
+	    	candidate.setFitnessScore(matches);
 	    	System.out.println("matchScore : "+matches);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block

@@ -1,6 +1,7 @@
 package geneticAlogrithm;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
@@ -296,9 +297,14 @@ public class GeneticAlgorithmCall{
 		engine = new GenerationalEvolutionEngine<Sequence>(mySequenceFactory, pipeline, mySeqEval, selection, rng);
 		engine.addEvolutionObserver(new MySequenceEvolutionObserver(this));
 		engine.evolve(10, 0, new TargetFitness(2,mySeqEval.isNatural()));
+		//save the result in a final file,idem for the csv
 		try {
 			MessageToPraat.writePraatScriptInFile(this.finalsequence,"praatScriptWithCorrectValues");
+			MonitoringCSV.writeCSVFile("C:/Users/phervo/Documents/dossierProjet/algoritmProgression.csv",true,getFinalExecTime(),this.finalsequence.getFitnessScore(),this.finalsequence);
 		} catch (PraatScriptException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -407,4 +413,14 @@ public class GeneticAlgorithmCall{
 	  public FormantSequence getTarget(){
 		return target;
 	  }
+	  
+	  /**
+		 * function which calculate the total exec time using the start variable of the geneAlgoCall
+		 * @return double containing the time in seconds of execution since the launch
+		 */
+		public double getFinalExecTime(){
+			long end = System.currentTimeMillis();
+			float time = ((float) (end-getStartTime())) / 1000f;
+			return time;
+		}
 }

@@ -227,7 +227,7 @@ public class OrderToPraat implements Observer {
 			OrderToPraat.PraatLaunch=false;
 			p.running();
 		}else if(p.getState().getClass()==Running.class){
-			//nothing
+			//nothing i change it manually
 		}else if(p.getState().getClass()==ReLaunch.class){
 			closePraat();
 			p.launch();
@@ -243,7 +243,7 @@ public class OrderToPraat implements Observer {
 		File fl[] = di.listFiles();
 		//then for each launch praat commande to load
 		for(int i=0;i<fl.length;i++){
-			OrderToPraat.sendMessageToPrat("execute "+fl[i].toString());
+			OrderToPraat.sendMessageToPrat("execute "+fl[i].toString()+" "+fl[i].getName());//i put it twice one for the name of the script to execute and one for the param to rename
 		}
 	}
 	

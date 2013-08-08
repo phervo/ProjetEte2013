@@ -94,25 +94,6 @@ public class MessageToPraat {
 	}
 
 	/**
-	 * all the 100 object so 100/2 = 50 sequence to generate
-	 * 50/10 individual = 5 generation
-	 * for a generation you got 2 object speaker and artwork (objects number 1 and 2)
-	 * and 20 object sound and
-	 
-	 *@deprecated
-	 */
-	public static String saveSoundFile(){
-		StringBuilder stb= new StringBuilder(); 
-		stb.append("#-----------------------------------------------\n");
-		stb.append("# Project : Software synthesis using GA\n");
-		stb.append("# Hervo Pierre-Yves, automatic Script generated in java\n");
-		stb.append("#-----------------------------------------------\n");
-		stb.append("selectObject (1)\n");
-		stb.append("#-----------------------------------------------\n");
-		return stb.toString();
-	}
-
-	/**
 	* Return a String containing a praat script fill in with the values of the sequence in parameters.
 	* This script when useds will query the formants informations of the generated sound and send them back to the program.
 	* It is designed to be use at each step of the GA to evaluate the current sequence. For more details,
@@ -293,6 +274,13 @@ public class MessageToPraat {
 				stb.append("select Artword phon\n");
 				stb.append("plus Speaker Robovox\n");
 				stb.append("To Sound... 22050 25   0 0 0    0 0 0    0 0 0\n");
+				stb.append("#-----------------------------------------------\n");
+				//part were i wrote a command to rename the sound as the parameter given to the execute praat command (see launchAll)
+				stb.append("#-----------------------------------------------\n");
+				stb.append("form Param\n"); // i use a form for the param, see praat api
+				stb.append("sentence value \"default\"\n");
+				stb.append("endform\n");
+				stb.append("Rename... 'value$'\n"); // dont forget the quote or the result wont print
 				stb.append("#-----------------------------------------------\n");
 				String texte = stb.toString();
 				FileWriter fw = new FileWriter(adressedufichier, false);

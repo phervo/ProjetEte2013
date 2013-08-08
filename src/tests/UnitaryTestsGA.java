@@ -487,15 +487,15 @@ public class UnitaryTestsGA {
 			 //praatLaunchHeaderClose();
 			 //testStatePattern();
 			// testExcel();
-			 GeneticAlgorithmCall ga;
-			try {
-				ga = new GeneticAlgorithmCall(16);
-				testGraph(ga);
-			} catch (FormantNumberexception e) {
+			//GeneticAlgorithmCall ga;
+			//try {
+			//	ga = new GeneticAlgorithmCall(16);
+			//	testGraph(ga);
+			//} catch (FormantNumberexception e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			//loadAllSounds();
+			//	e.printStackTrace();
+			//}
+			loadAllSounds();
 		 }
 		 
 	 }

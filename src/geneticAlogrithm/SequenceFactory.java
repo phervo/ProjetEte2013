@@ -2,9 +2,7 @@ package geneticAlogrithm;
 
 import java.util.Random;
 import messages.MessageToPraat;
-
 import org.uncommons.watchmaker.framework.factories.AbstractCandidateFactory;
-
 import elements.GlobalAlphabet;
 import elements.Sequence;
 import exceptions.SequenceArrayException;

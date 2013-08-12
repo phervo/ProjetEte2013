@@ -1,8 +1,6 @@
 package elements;
 
 import exceptions.AlphabetException;
-import exceptions.FormantNumberexception;
-import geneticAlogrithm.GeneticAlgorithmCall;
 import messages.MessageFromPraat;
 
 /** <p>Class which define all the possible values for a Praat parameter or several praat parameter (specify it in the name).<br/>

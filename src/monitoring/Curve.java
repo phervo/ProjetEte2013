@@ -2,14 +2,9 @@ package monitoring;
 
 import exceptions.FormantNumberexception;
 import geneticAlogrithm.GeneticAlgorithmCall;
-
 import javax.swing.JFrame;
-
 import org.math.plot.Plot2DPanel;
-
 import au.com.bytecode.opencsv.CSVReader;
-
-import java.awt.Graphics;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -39,7 +34,7 @@ public class Curve{
 			 * 1st we read the csv file to extract the information and get tzo array representing the absis and the ordonee
 			 * For that purpose we use the opencsv api 
 			 */
-			reader = new CSVReader(new FileReader("C:/Users/phervo/Documents/dossierProjet/algoritmProgression.csv"),',',' ' , 1); //cf opencsv api
+			reader = new CSVReader(new FileReader(System.getProperty("user.dir") + "/results/algoritmProgression.csv"),',',' ' , 1); //cf opencsv api
 			List content = reader.readAll();
 			//init of the lists
 			absis= new double[content.size()];			

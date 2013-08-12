@@ -326,21 +326,4 @@ public class MessageToPraat {
 		stb.append("#-----------------------------------------------\n");
 		return stb.toString();
 	}
-	
-	public static void writeInTheLogs(String stringBuffer){ 
-		String adresseDuFichier = "C:/Users/phervo/Documents/dossierProjet/log.txt";
-		FileWriter f;
-		BufferedWriter output;
-		try {
-			f= new FileWriter(adresseDuFichier, true); //modifier ici pr le append
-			output= new BufferedWriter(f);
-			output.write(stringBuffer+" \n");
-			output.flush();
-			output.close();
-			f.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-	}
 }

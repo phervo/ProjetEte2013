@@ -2,11 +2,8 @@ package geneticAlogrithm;
 
 import java.util.List;
 import java.util.concurrent.Semaphore;
-
 import messages.MessageToPraat;
-
 import org.uncommons.watchmaker.framework.FitnessEvaluator;
-
 import praatGestion.OrderToPraat;
 import elements.FormantSequence;
 import elements.Sequence;

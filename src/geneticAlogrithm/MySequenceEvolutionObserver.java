@@ -1,15 +1,10 @@
 package geneticAlogrithm;
 
 import java.io.IOException;
-
-import messages.MessageFromPraat;
 import messages.MessageToPraat;
 import monitoring.MonitoringCSV;
-
 import org.uncommons.watchmaker.framework.EvolutionObserver;
 import org.uncommons.watchmaker.framework.PopulationData;
-
-import praatGestion.OrderToPraat;
 import elements.Sequence;
 import exceptions.PraatScriptException;
 
@@ -60,7 +55,7 @@ public class MySequenceEvolutionObserver implements EvolutionObserver<Sequence>{
 
 		if(data.getGenerationNumber()==0){
 			try {
-				MonitoringCSV.writeCSVFile("C:/Users/phervo/Documents/dossierProjet/results/algoritmProgression.csv",false,getExecTime(),data.getBestCandidateFitness(),data.getBestCandidate());
+				MonitoringCSV.writeCSVFile(System.getProperty("user.dir") + "/results/filenamealgoritmProgression.csv",false,getExecTime(),data.getBestCandidateFitness(),data.getBestCandidate());
 				MessageToPraat.writePraatScriptInFile(data.getBestCandidate(),"SoundNumber"+data.getGenerationNumber()/5);
 			} catch (IOException | PraatScriptException e) {
 				// TODO Auto-generated catch block
@@ -75,7 +70,7 @@ public class MySequenceEvolutionObserver implements EvolutionObserver<Sequence>{
 			 */
 		}else if(data.getGenerationNumber()!=0 && data.getGenerationNumber()%5 == 0.0){
 			try{
-				MonitoringCSV.writeCSVFile("C:/Users/phervo/Documents/dossierProjet/results/algoritmProgression.csv",true,getExecTime(),data.getBestCandidateFitness(),data.getBestCandidate());
+				MonitoringCSV.writeCSVFile(System.getProperty("user.dir") + "/results/filenamealgoritmProgression.csv",true,getExecTime(),data.getBestCandidateFitness(),data.getBestCandidate());
 				MessageToPraat.writePraatScriptInFile(data.getBestCandidate(),"SoundNumber"+data.getGenerationNumber()/5);
 			}catch (IOException | PraatScriptException e) {
 				e.printStackTrace();

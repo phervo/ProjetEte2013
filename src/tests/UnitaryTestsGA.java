@@ -466,8 +466,8 @@ public class UnitaryTestsGA {
 		//p.reLaunch();
 	}
 	
-	public static void testGraph(GeneticAlgorithmCall ga){
-		MonitoringCSV.displayCSV(ga);
+	public static void testGraph(FormantSequence target){
+		MonitoringCSV.displayCSV(target);
 	}
 	
 	public static void loadAllSounds(){
@@ -486,16 +486,8 @@ public class UnitaryTestsGA {
 			 //UnitaryTestsGA.castFormantTest();
 			 //praatLaunchHeaderClose();
 			 //testStatePattern();
-			// testExcel();
-			//GeneticAlgorithmCall ga;
-			//try {
-			//	ga = new GeneticAlgorithmCall(16);
-			//	testGraph(ga);
-			//} catch (FormantNumberexception e) {
-				// TODO Auto-generated catch block
-			//	e.printStackTrace();
-			//}
-			loadAllSounds();
+			 //testGraph(new FormantSequence("e"));
+			 loadAllSounds();
 		 }
 		 
 	 }

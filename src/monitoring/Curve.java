@@ -1,5 +1,6 @@
 package monitoring;
 
+import elements.FormantSequence;
 import exceptions.FormantNumberexception;
 import geneticAlogrithm.GeneticAlgorithmCall;
 import javax.swing.JFrame;
@@ -20,7 +21,7 @@ public class Curve{
 	 * 		the ga used. We need it to get the target and do the comparison
 	 * @throws FormantNumberexception 
 	 */
-	public Curve(GeneticAlgorithmCall ga) throws FormantNumberexception{
+	public Curve(FormantSequence target) throws FormantNumberexception{
 		CSVReader reader;
 		String[] row = null;
 		double[] absis=null; // the same for the two
@@ -48,15 +49,15 @@ public class Curve{
 			    absis[compteur]=Double.parseDouble(row[0].trim());
 			    //ordoneeF1[compteur]=405.0-Double.parseDouble(row[2].trim());
 			    //ordoneeF2[compteur]=2080.0-Double.parseDouble(row[3].trim());
-			    ordoneeF1[compteur]=ga.getTarget().getFormantAt(0).getFrequency()-Double.parseDouble(row[2].trim());
-			    ordoneeF2[compteur]=ga.getTarget().getFormantAt(1).getFrequency()-Double.parseDouble(row[3].trim());
+			    ordoneeF1[compteur]=target.getFormantAt(0).getFrequency()-Double.parseDouble(row[2].trim());
+			    ordoneeF2[compteur]=target.getFormantAt(1).getFrequency()-Double.parseDouble(row[3].trim());
 			    compteur++;
 			}
 			reader.close();
 			for(int i=0;i<content.size();i++){
 				//define the const to get a line
-				F1Value[i]=0.1*ga.getTarget().getFormantAt(0).getFrequency();
-				F2Value[i]=0.1*ga.getTarget().getFormantAt(1).getFrequency();
+				F1Value[i]=0.1*target.getFormantAt(0).getFrequency();
+				F2Value[i]=0.1*target.getFormantAt(1).getFrequency();
 			}
 			/*System.out.println();
 			for(int i=0;i<content.size();i++){

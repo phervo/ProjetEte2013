@@ -166,7 +166,7 @@ public class GeneticAlgorithmCall{
 		this.praatObject=null;
 		this.start=System.currentTimeMillis();
 		//deleting the files in the folder containing the previous results to avoid keeping result that doesnt suit the current run
-		emptyDirectory(new File("C:/Users/phervo/Documents/dossierProjet/results"));
+		emptyDirectory(new File(System.getProperty("user.dir") + "/results/"));
 	}
 	
 	
@@ -291,7 +291,7 @@ public class GeneticAlgorithmCall{
 		//save the result in a final file,idem for the csv
 		try {
 			MessageToPraat.writePraatScriptInFile(this.finalsequence,"praatScriptWithCorrectValues");
-			MonitoringCSV.writeCSVFile(System.getProperty("user.dir") + "/results/filenamealgoritmProgression.csv",true,getFinalExecTime(),this.finalsequence.getFitnessScore(),this.finalsequence);
+			MonitoringCSV.writeCSVFile(System.getProperty("user.dir") + "/results/algoritmProgression.csv",true,getFinalExecTime(),this.finalsequence.getFitnessScore(),this.finalsequence);
 		} catch (PraatScriptException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -304,7 +304,7 @@ public class GeneticAlgorithmCall{
 		OrderToPraat.launchAllScripts();
 		
 		//at the end, we launch the monitoring function to display the results
-		MonitoringCSV.displayCSV(this);
+		MonitoringCSV.displayCSV(this.getTarget());
 	}
 
 	/**

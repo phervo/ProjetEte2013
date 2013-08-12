@@ -1,8 +1,6 @@
-
 package application;
 
 import java.util.ArrayList;
-
 import praatGestion.OrderToPraat;
 import praatGestion.Praat;
 import communication.CloseServer;

@@ -3,9 +3,11 @@ package praatGestion;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.ObjectInputStream.GetField;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.concurrent.Semaphore;
+
 import messages.MessageFromPraat;
 import messages.MessageToPraat;
 
@@ -204,7 +206,9 @@ public class OrderToPraat implements Observer {
 		File fl[] = di.listFiles();
 		//then for each launch praat commande to load
 		for(int i=0;i<fl.length;i++){
+			if(!fl[i].getName().equals("algoritmProgression.csv")){//the csv genrated cant be read by praat
 			OrderToPraat.sendMessageToPrat("execute "+fl[i].toString()+" "+fl[i].getName());//i put it twice one for the name of the script to execute and one for the param to rename
+			}
 		}
 	}
 	

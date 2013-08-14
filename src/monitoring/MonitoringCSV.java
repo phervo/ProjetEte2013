@@ -2,11 +2,9 @@ package monitoring;
 
 import java.io.FileWriter;
 import java.io.IOException;
-
 import elements.FormantSequence;
 import elements.Sequence;
 import exceptions.FormantNumberexception;
-import geneticAlogrithm.GeneticAlgorithmCall;
 import au.com.bytecode.opencsv.CSVWriter;
 
 public class MonitoringCSV {

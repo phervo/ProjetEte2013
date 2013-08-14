@@ -2,7 +2,6 @@ package monitoring;
 
 import elements.FormantSequence;
 import exceptions.FormantNumberexception;
-import geneticAlogrithm.GeneticAlgorithmCall;
 import javax.swing.JFrame;
 import org.math.plot.Plot2DPanel;
 import au.com.bytecode.opencsv.CSVReader;
@@ -55,12 +54,6 @@ public class Curve{
 			    compteur++;
 			}
 			reader.close();
-			for(int i=0;i<content.size();i++){
-				System.out.println(ordoneeFitness[i]);
-				System.out.println(ordoneeF1[i]);
-				System.out.println(ordoneeF1[i]);
-				System.out.println();
-			}
 			for(int i=0;i<content.size();i++){
 				//define the const to get a line
 				F1Value[i]=0.1*target.getFormantAt(0).getFrequency();

@@ -256,8 +256,8 @@ public class GeneticAlgorithmCall{
 	*
 	*/
 	public void createSelection(){
-		selection=new TournamentSelection(new Probability(0.6));
-		//selection=new RouletteWheelSelection();
+		//selection=new TournamentSelection(new Probability(0.6));
+		selection=new RouletteWheelSelection();
 	}
 	
 	/**
@@ -292,7 +292,7 @@ public class GeneticAlgorithmCall{
 		//start the engine
 		engine = new GenerationalEvolutionEngine<Sequence>(mySequenceFactory, pipeline, mySeqEval, selection, rng);
 		engine.addEvolutionObserver(new MySequenceEvolutionObserver(this));
-		engine.evolve(10, 0, new TargetFitness(2,mySeqEval.isNatural()));
+		engine.evolve(10, 2, new TargetFitness(2,mySeqEval.isNatural()));
 		//save the result in a final file,idem for the csv
 		try {
 			MessageToPraat.writePraatScriptInFile(this.finalsequence,"praatScriptWithCorrectValues.praat");

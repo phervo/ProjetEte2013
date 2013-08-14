@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
- 
+ */
 
 #include "praat.h"
 #include "praat_version.h"
@@ -43,9 +43,9 @@ static void logo (Graphics g) {
 	Graphics_setFontSize (g, 10);
 	Graphics_text (g, 0.5, 0.16, L"Copyright \\co 1992-" xstr(PRAAT_YEAR) " by Paul Boersma and David Weenink");
 }
-
+/*
 int main (int argc, char *argv []) {
-	/*try {
+	try {
 		#if cocoa
 			Melder_setTracing (true);
 		#endif
@@ -60,14 +60,21 @@ int main (int argc, char *argv []) {
 	return 0;
 	
 }*/
-#include "praat.h"
 
-wchar_t myScript = "writeInfoLine(\"42\")\n"
+wchar_t myScript [ ] = L""
+    "writeInfoLine(42)\n\
+	writeInfoLine(42)\n"
 ;
 
 int main (int argc, char *argv [ ]) {
-   printf("hello world");
+    praat_setStandAloneScriptText (myScript);
+    praat_init ("Praat test", argc, argv);
+    INCLUDE_LIBRARY (praat_uvafon_init)
+    praat_run ();
     return 0;
 }
+
+
+
 
 /* End of file main_Praat.cpp */

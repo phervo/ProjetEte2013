@@ -96,6 +96,7 @@ public class SequenceFactory extends AbstractCandidateFactory<Sequence>{
 		} catch (SequenceArrayException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
+			e1.display();
 		}
 		return mySeq;
 	}

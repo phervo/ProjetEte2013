@@ -27,12 +27,13 @@ public class Curve{
 		double[] absis=null; // the same for the two
 		double[] ordoneeF1=null;
 		double[] ordoneeF2=null;
+		double[] ordoneeFitness=null;
 		int compteur=0;
 		double[] F1Value;
 		double[] F2Value;
 		try {
 			/*
-			 * 1st we read the csv file to extract the information and get tzo array representing the absis and the ordonee
+			 * 1st we read the csv file to extract the information and get tzo array representing the absis and the ordonees
 			 * For that purpose we use the opencsv api 
 			 */
 			reader = new CSVReader(new FileReader(System.getProperty("user.dir") + "/results/algoritmProgression.csv"),',',' ' , 1); //cf opencsv api
@@ -43,52 +44,60 @@ public class Curve{
 			ordoneeF2 =new double[content.size()];	
 			F1Value=new double[content.size()];	
 			F2Value=new double[content.size()];
+			ordoneeFitness = new double[content.size()];
 			//decomposition in two array, one for the values of the absis and one for the values of the ordonee
 			for (Object object : content) {
 			    row = (String[]) object;
 			    absis[compteur]=Double.parseDouble(row[0].trim());
-			    //ordoneeF1[compteur]=405.0-Double.parseDouble(row[2].trim());
-			    //ordoneeF2[compteur]=2080.0-Double.parseDouble(row[3].trim());
+			    ordoneeFitness[compteur]=Double.parseDouble(row[1].trim());
 			    ordoneeF1[compteur]=target.getFormantAt(0).getFrequency()-Double.parseDouble(row[2].trim());
 			    ordoneeF2[compteur]=target.getFormantAt(1).getFrequency()-Double.parseDouble(row[3].trim());
 			    compteur++;
 			}
 			reader.close();
 			for(int i=0;i<content.size();i++){
+				System.out.println(ordoneeFitness[i]);
+				System.out.println(ordoneeF1[i]);
+				System.out.println(ordoneeF1[i]);
+				System.out.println();
+			}
+			for(int i=0;i<content.size();i++){
 				//define the const to get a line
 				F1Value[i]=0.1*target.getFormantAt(0).getFrequency();
 				F2Value[i]=0.1*target.getFormantAt(1).getFrequency();
 			}
-			/*System.out.println();
-			for(int i=0;i<content.size();i++){
-				System.out.println(ordoneeF1[i]);
-			}
 			
-			System.out.println();
-			for(int i=0;i<content.size();i++){
-				System.out.println(ordoneeF2[i]);
-			}*/
+			
 			
 			/*
 			 *then the drawing part 
 			 */
 			
 			// create your PlotPanel (you can use it as a JPanel)
-			Plot2DPanel plot = new Plot2DPanel();
+			Plot2DPanel plotDifferenceToTarget = new Plot2DPanel();
+			Plot2DPanel plotFitness = new Plot2DPanel();
 			
 			// define the legend position
-			plot.addLegend("SOUTH");
+			plotDifferenceToTarget.addLegend("SOUTH");
+			plotFitness.addLegend("SOUTH");
 			
 			// add a line plot to the PlotPanel
-			plot.addLinePlot("F1 of candidate", absis, ordoneeF1);
-			plot.addLinePlot("F2 of candidate",absis,ordoneeF2);
-			plot.addLinePlot("F1 margin",absis,F1Value);
-			plot.addLinePlot("F2 margin",absis,F2Value);
+			plotDifferenceToTarget.addLinePlot("F1 of candidate", absis, ordoneeF1);
+			plotDifferenceToTarget.addLinePlot("F2 of candidate",absis,ordoneeF2);
+			plotDifferenceToTarget.addLinePlot("F1 margin",absis,F1Value);
+			plotDifferenceToTarget.addLinePlot("F2 margin",absis,F2Value);
+			plotFitness.addLinePlot("Fitness Curve", absis,ordoneeFitness);
+			
 			// put the PlotPanel in a JFrame like a JPanel
-			JFrame frame = new JFrame("a plot panel");
-			frame.setSize(600, 600);
-			frame.setContentPane(plot);
-			frame.setVisible(true);
+			JFrame frameDifferenceToTarget = new JFrame("a plot of the difference to the target");
+			frameDifferenceToTarget.setSize(600, 600);
+			frameDifferenceToTarget.setContentPane(plotDifferenceToTarget);
+			frameDifferenceToTarget.setVisible(true);
+			
+			JFrame frameFitness = new JFrame("a plot to show the fitness evolution");
+			frameFitness.setSize(600, 600);
+			frameFitness.setContentPane(plotFitness);
+			frameFitness.setVisible(true);
 			
 			 
 		} catch (FileNotFoundException e) {

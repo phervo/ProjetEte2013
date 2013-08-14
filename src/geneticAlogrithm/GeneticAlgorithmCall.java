@@ -6,9 +6,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Semaphore;
+
 import messages.MessageFromPraat;
 import messages.MessageToPraat;
 import monitoring.MonitoringCSV;
+
 import org.uncommons.maths.random.MersenneTwisterRNG;
 import org.uncommons.maths.random.Probability;
 import org.uncommons.watchmaker.framework.EvolutionEngine;
@@ -17,7 +19,9 @@ import org.uncommons.watchmaker.framework.GenerationalEvolutionEngine;
 import org.uncommons.watchmaker.framework.SelectionStrategy;
 import org.uncommons.watchmaker.framework.operators.EvolutionPipeline;
 import org.uncommons.watchmaker.framework.selection.RouletteWheelSelection;
+import org.uncommons.watchmaker.framework.selection.TournamentSelection;
 import org.uncommons.watchmaker.framework.termination.TargetFitness;
+
 import praatGestion.OrderToPraat;
 import praatGestion.Praat;
 import elements.FormantSequence;
@@ -252,7 +256,8 @@ public class GeneticAlgorithmCall{
 	*
 	*/
 	public void createSelection(){
-		selection=new RouletteWheelSelection();
+		selection=new TournamentSelection(new Probability(0.6));
+		//selection=new RouletteWheelSelection();
 	}
 	
 	/**
@@ -290,7 +295,7 @@ public class GeneticAlgorithmCall{
 		engine.evolve(10, 0, new TargetFitness(2,mySeqEval.isNatural()));
 		//save the result in a final file,idem for the csv
 		try {
-			MessageToPraat.writePraatScriptInFile(this.finalsequence,"praatScriptWithCorrectValues");
+			MessageToPraat.writePraatScriptInFile(this.finalsequence,"praatScriptWithCorrectValues.praat");
 			MonitoringCSV.writeCSVFile(System.getProperty("user.dir") + "/results/algoritmProgression.csv",true,getFinalExecTime(),this.finalsequence.getFitnessScore(),this.finalsequence);
 		} catch (PraatScriptException e) {
 			// TODO Auto-generated catch block

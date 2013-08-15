@@ -102,6 +102,9 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 		// TODO Auto-generated method stub
 		//max 9 in fitness
 		int matches=0;
+		int diffF1=0;
+		int diffF2=0;
+		int formantFound=0;
 		//0) put a mutex
 		try {
 			ga.getMutexFitnessFunction().acquire();
@@ -109,7 +112,7 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 		//1) j'envoie le candidat courant (var candidate au script)
 		/*write value in the script send to praat and send it*/
 			System.out.println(candidate.getValuesInString());
-			OrderToPraat.sendMessageToPrat(MessageToPraat.writePraatScriptWithCandidates(candidate)); // change
+			OrderToPraat.sendMessageToPrat(MessageToPraat.writePraatScriptWithCandidates(candidate));
 		//2) recuperer le resultat dans messageFromPraat (attente serveur et socket si besoin) et le comparer a la cible
 			
 			
@@ -127,10 +130,15 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 	    		//double lowerBornA = this.targetSequence.getFormantAt(i).getAmplitude()*0.9;
 	    		//double upperBornA = this.targetSequence.getFormantAt(i).getAmplitude()*1.1;
 	    		
+	    		//just for print in the cvs, not use for the fitness itself
 	    		if((ga.getMessageFromPraat().getFormantAt(i).getFrequency()>=lowerBornfreq && ga.getMessageFromPraat().getFormantAt(i).getFrequency()<=upperBornfreq)){
-					matches++;
+					formantFound++;
 					candidate.setFormantFound("F"+(i+1)); //difference beetween the index and the real formant number
 				}
+	    		
+	    		diffF1=Math.abs((int) (candidate.getF1().getFrequency()-ga.getTarget().getFormantAt(0).getFrequency()));
+	    		diffF1=Math.abs((int) (candidate.getF2().getFrequency()-ga.getTarget().getFormantAt(1).getFrequency()));
+	    		matches=diffF1+diffF1;
 				/*if(ga.getMessageFromPraat().getFormantAt(i).getBandwith()>=lowerBornBW && ga.getMessageFromPraat().getFormantAt(i).getBandwith()<=upperBornBW ){
 					matches++;
 				}
@@ -138,7 +146,7 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 					matches++;
 				}*/
 			}
-	    	if(matches==2){
+	    	if(formantFound==2){
 	    		candidate.setFormantFound("both");
 	    	}
 	    	candidate.setFitnessScore(matches);
@@ -171,7 +179,7 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 	@Override
 	public boolean isNatural() {
 		// TODO Auto-generated method stub
-		return true;
+		return false;
 	}
 
 	public Semaphore getAnswerFromPraat() {

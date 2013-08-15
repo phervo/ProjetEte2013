@@ -282,6 +282,19 @@ public class MessageToPraat {
 				stb.append("endform\n");
 				stb.append("Rename... 'value$'\n"); // dont forget the quote or the result wont print
 				stb.append("#-----------------------------------------------\n");
+				
+				stb.append("# Automatic data extraction part\n");
+				stb.append("# 1) get the values\n");
+				stb.append("To Formant (burg)... 0 5 5500 0.025 50\n");
+				stb.append("numberOfFormant = Get number of formants... 1\n");
+				stb.append("writeInfoLine(numberOfFormant)\n");
+				stb.append("time1 = 0.0\n");
+				stb.append("time2 = 0.25\n");
+				stb.append("for intervalNumber from 1 to numberOfFormant \n");
+				stb.append("temp1 = Get mean... intervalNumber 0.0  "+Speachtime+"\"Hertz\"\n");
+				stb.append("appendInfoLine(temp1)\n");
+				stb.append("endfor\n");
+				
 				String texte = stb.toString();
 				FileWriter fw = new FileWriter(adressedufichier, false);
 				BufferedWriter output = new BufferedWriter(fw);

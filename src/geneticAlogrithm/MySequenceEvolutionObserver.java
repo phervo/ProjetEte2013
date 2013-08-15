@@ -45,10 +45,13 @@ public class MySequenceEvolutionObserver implements EvolutionObserver<Sequence>{
 	@Override
 	public void populationUpdate(PopulationData<? extends Sequence> data) {
 		// TODO Auto-generated method stub
+		System.out.println();
 		System.out.printf("Generation %d: %s\n",
                 data.getGenerationNumber(),
                 data.getBestCandidate().getValuesInString());
 		this.myGa.setSequence(data.getBestCandidate());
+		System.out.println("marghe acceptee : "+myGa.fitnessMargin());
+		System.out.println();
 
 		//store the sound produce all the 100 objects
 

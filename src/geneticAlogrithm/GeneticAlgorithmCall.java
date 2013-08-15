@@ -291,8 +291,9 @@ public class GeneticAlgorithmCall{
 		
 		//start the engine
 		engine = new GenerationalEvolutionEngine<Sequence>(mySequenceFactory, pipeline, mySeqEval, selection, rng);
+		//engine = new MyGenerationalBidule<Sequence>(mySequenceFactory, pipeline, mySeqEval, selection, rng);
 		engine.addEvolutionObserver(new MySequenceEvolutionObserver(this));
-		engine.evolve(10, 2, new TargetFitness(2,mySeqEval.isNatural()));
+		engine.evolve(10, 0, new TargetFitness(fitnessMargin(),mySeqEval.isNatural()));
 		//save the result in a final file,idem for the csv
 		try {
 			MessageToPraat.writePraatScriptInFile(this.finalsequence,"praatScriptWithCorrectValues.praat");
@@ -419,4 +420,25 @@ public class GeneticAlgorithmCall{
 			float time = ((float) (end-getStartTime())) / 1000f;
 			return time;
 		}
+		
+		/**
+		 * function wich calculate the margin authorise in the calculation of the formants.
+		 * it is this value which will be used to determine when to stop the GA.
+		 * @return the min born for the Genetic algorithm
+		 */
+		public int fitnessMargin(){
+			int res=0;
+			int bornF1=0;
+			int bornF2=0;
+			try {
+				bornF1 = (int) (0.1*target.getFormantAt(0).getFrequency());
+				bornF2 = (int) (0.1*target.getFormantAt(1).getFrequency());
+				res=bornF1+bornF2;
+			} catch (FormantNumberexception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return res;
+		}
+	
 }

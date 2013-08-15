@@ -30,6 +30,7 @@ public class Curve{
 		int compteur=0;
 		double[] F1Value;
 		double[] F2Value;
+		double[] absisBarre;//the 0 axe
 		try {
 			/*
 			 * 1st we read the csv file to extract the information and get tzo array representing the absis and the ordonees
@@ -43,24 +44,24 @@ public class Curve{
 			ordoneeF2 =new double[content.size()];	
 			F1Value=new double[content.size()];	
 			F2Value=new double[content.size()];
+			absisBarre=new double[content.size()];
 			ordoneeFitness = new double[content.size()];
 			//decomposition in two array, one for the values of the absis and one for the values of the ordonee
 			for (Object object : content) {
 			    row = (String[]) object;
+			    //constantes lines
 			    absis[compteur]=Double.parseDouble(row[0].trim());
-			    ordoneeFitness[compteur]=Double.parseDouble(row[1].trim());
-			    ordoneeF1[compteur]=target.getFormantAt(0).getFrequency()-Double.parseDouble(row[2].trim());
+			    F1Value[compteur]=0.1*target.getFormantAt(0).getFrequency();
+				F2Value[compteur]=0.1*target.getFormantAt(1).getFrequency();
+				absisBarre[compteur]=0;
+				//calculation of the variables ordonness
+				ordoneeFitness[compteur]=Double.parseDouble(row[1].trim());
+				ordoneeF1[compteur]=target.getFormantAt(0).getFrequency()-Double.parseDouble(row[2].trim());
 			    ordoneeF2[compteur]=target.getFormantAt(1).getFrequency()-Double.parseDouble(row[3].trim());
-			    compteur++;
+				compteur++; // attention a celui la
 			}
 			reader.close();
-			for(int i=0;i<content.size();i++){
-				//define the const to get a line
-				F1Value[i]=0.1*target.getFormantAt(0).getFrequency();
-				F2Value[i]=0.1*target.getFormantAt(1).getFrequency();
-			}
-			
-			
+						
 			
 			/*
 			 *then the drawing part 
@@ -79,6 +80,7 @@ public class Curve{
 			plotDifferenceToTarget.addLinePlot("F2 of candidate",absis,ordoneeF2);
 			plotDifferenceToTarget.addLinePlot("F1 margin",absis,F1Value);
 			plotDifferenceToTarget.addLinePlot("F2 margin",absis,F2Value);
+			plotDifferenceToTarget.addLinePlot("0",absis,absisBarre);
 			plotFitness.addLinePlot("Fitness Curve", absis,ordoneeFitness);
 			
 			// put the PlotPanel in a JFrame like a JPanel

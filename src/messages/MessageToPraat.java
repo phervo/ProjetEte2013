@@ -284,15 +284,20 @@ public class MessageToPraat {
 				stb.append("#-----------------------------------------------\n");
 				
 				stb.append("# Automatic data extraction part\n");
-				stb.append("# 1) get the values\n");
 				stb.append("To Formant (burg)... 0 5 5500 0.025 50\n");
 				stb.append("numberOfFormant = Get number of formants... 1\n");
-				stb.append("writeInfoLine(numberOfFormant)\n");
-				stb.append("time1 = 0.0\n");
-				stb.append("time2 = 0.25\n");
+				stb.append("writeInfoLine(\"number of formants :\", numberOfFormant)\n");
 				stb.append("for intervalNumber from 1 to numberOfFormant \n");
-				stb.append("temp1 = Get mean... intervalNumber 0.0  "+Speachtime+"\"Hertz\"\n");
-				stb.append("appendInfoLine(temp1)\n");
+				stb.append("temp1 = Get value at time... intervalNumber 0.1 Hertz Linear\n");
+				stb.append("appendInfoLine(\"Valeur de temp1 \",temp1)\n");
+				stb.append("temp2 = Get value at time... intervalNumber 0.25 Hertz Linear\n");
+				stb.append("appendInfoLine(\"Valeur de temp2 \",temp2)\n");
+				stb.append("temp3 = Get value at time... intervalNumber 0.5 Hertz Linear\n");
+				stb.append("appendInfoLine(\"Valeur de temp3 \",temp3)\n");
+				stb.append("temp4 = Get value at time... intervalNumber 0.9 Hertz Linear\n");
+				stb.append("appendInfoLine(\"Valeur de temp4 \",temp4)\n");
+				stb.append("mymean = (temp1+temp2+temp3+temp4)/4 \n");
+				stb.append("appendInfoLine(\"Valeur moyenne du formant \",intervalNumber,\":\",mymean)\n");
 				stb.append("endfor\n");
 				
 				String texte = stb.toString();

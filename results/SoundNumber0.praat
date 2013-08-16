@@ -19,35 +19,35 @@ Set target... 0.0  0.5  Interarytenoid
 Set target... 1.0  0.5 Interarytenoid
 #
 # Adduct vocal folds
-Set target... 0.0   0.17 Cricothyroid
-Set target... 1.0   0.17 Cricothyroid
+Set target... 0.0   0.58 Cricothyroid
+Set target... 1.0   0.21 Cricothyroid
 # Close velopharyngeal port
 #-----------------------------------------------
-Set target... 0.0   0.78 LevatorPalatini
-Set target... 1.0   0.78 LevatorPalatini
+Set target... 0.0   0.24 LevatorPalatini
+Set target... 1.0   0.5 LevatorPalatini
 #-----------------------------------------------
 #-----------------------------------------------
-Set target... 0.0   0.58 Genioglossus
-Set target... 1.0   0.58 Genioglossus
+Set target... 0.0   0.6 Genioglossus
+Set target... 1.0   0.25 Genioglossus
 #
-Set target... 0.0   0.62 Styloglossus
-Set target... 1.0   0.62 Styloglossus
+Set target... 0.0   0.63 Styloglossus
+Set target... 1.0   0.6 Styloglossus
 #
-Set target... 0.0   0.0 Mylohyoid
-Set target... 1.0   0.0 Mylohyoid
+Set target... 0.0   0.72 Mylohyoid
+Set target... 1.0   0.98 Mylohyoid
 #
-Set target... 0.0   0.05 OrbicularisOris
-Set target... 1.0   0.05 OrbicularisOris
+Set target... 0.0   0.7 OrbicularisOris
+Set target... 1.0   0.95 OrbicularisOris
 #-----------------------------------------------
 # Shape mouth to open vowel
 #-----------------------------------------------
 # Lower the jaw
 # -----------------------------------------
-Set target... 0.0   0.45 Masseter
-Set target... 1.0   0.45 Masseter
+Set target... 0.0   -0.5 Masseter
+Set target... 1.0   -0.44 Masseter
 # Pull tongue backwards
-Set target... 0.0   0.08 Hyoglossus
-Set target... 1.0   0.08 Hyoglossus
+Set target... 0.0   0.14 Hyoglossus
+Set target... 1.0   0.5 Hyoglossus
 # Synthesise the sound
 #-----------------------------------------------
 select Artword phon
@@ -74,6 +74,11 @@ temp3 = Get value at time... intervalNumber 0.5 Hertz Linear
 appendInfoLine("Valeur de temp3 ",temp3)
 temp4 = Get value at time... intervalNumber 0.9 Hertz Linear
 appendInfoLine("Valeur de temp4 ",temp4)
+if temp1 <> "--undefined" 
+different de undefined
+else
+undefined
+endif
 mymean = (temp1+temp2+temp3+temp4)/4 
 appendInfoLine("Valeur moyenne du formant ",intervalNumber,":",mymean)
 endfor

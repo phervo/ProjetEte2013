@@ -285,6 +285,7 @@ public class MessageToPraat {
 				
 				stb.append("# Automatic data extraction part\n");
 				stb.append("To Formant (burg)... 0 5 5500 0.025 50\n");
+				stb.append("Speckle... 0 0 5500 30 yes\n");
 				stb.append("numberOfFormant = Get number of formants... 1\n");
 				stb.append("writeInfoLine(\"number of formants :\", numberOfFormant)\n");
 				stb.append("for intervalNumber from 1 to numberOfFormant \n");

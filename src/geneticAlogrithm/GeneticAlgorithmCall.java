@@ -233,7 +233,7 @@ public class GeneticAlgorithmCall{
 	public void createEvolutionaryOperator(){
 		List<EvolutionaryOperator<Sequence>> operators
 	    = new LinkedList<EvolutionaryOperator<Sequence>>();
-		operators.add(new SequenceMutation(this.alphabet,new Probability(0.02)));
+		operators.add(new SequenceMutation(this.alphabet,new Probability(0.1)));
 		operators.add(new SequenceCrossOver());
 		pipeline = new EvolutionPipeline<Sequence>(operators);
 	}

@@ -19,35 +19,35 @@ Set target... 0.0  0.5  Interarytenoid
 Set target... 1.0  0.5 Interarytenoid
 #
 # Adduct vocal folds
-Set target... 0.0   0.48 Cricothyroid
-Set target... 1.0   0.09 Cricothyroid
+Set target... 0.0   0.17 Cricothyroid
+Set target... 1.0   0.17 Cricothyroid
 # Close velopharyngeal port
 #-----------------------------------------------
-Set target... 0.0   0.15 LevatorPalatini
-Set target... 1.0   0.04 LevatorPalatini
+Set target... 0.0   0.78 LevatorPalatini
+Set target... 1.0   0.78 LevatorPalatini
 #-----------------------------------------------
 #-----------------------------------------------
-Set target... 0.0   0.62 Genioglossus
-Set target... 1.0   0.75 Genioglossus
+Set target... 0.0   0.58 Genioglossus
+Set target... 1.0   0.58 Genioglossus
 #
-Set target... 0.0   1.0 Styloglossus
-Set target... 1.0   0.64 Styloglossus
+Set target... 0.0   0.62 Styloglossus
+Set target... 1.0   0.62 Styloglossus
 #
-Set target... 0.0   0.57 Mylohyoid
-Set target... 1.0   0.98 Mylohyoid
+Set target... 0.0   0.0 Mylohyoid
+Set target... 1.0   0.0 Mylohyoid
 #
-Set target... 0.0   0.09 OrbicularisOris
-Set target... 1.0   0.18 OrbicularisOris
+Set target... 0.0   0.05 OrbicularisOris
+Set target... 1.0   0.05 OrbicularisOris
 #-----------------------------------------------
 # Shape mouth to open vowel
 #-----------------------------------------------
 # Lower the jaw
 # -----------------------------------------
-Set target... 0.0   -0.38 Masseter
-Set target... 1.0   -0.27 Masseter
+Set target... 0.0   0.45 Masseter
+Set target... 1.0   0.45 Masseter
 # Pull tongue backwards
-Set target... 0.0   0.33 Hyoglossus
-Set target... 1.0   0.23 Hyoglossus
+Set target... 0.0   0.08 Hyoglossus
+Set target... 1.0   0.08 Hyoglossus
 # Synthesise the sound
 #-----------------------------------------------
 select Artword phon

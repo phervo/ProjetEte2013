@@ -61,6 +61,10 @@ public class Sequence {
 	 */
 	private String formantFound;
 	
+	/**
+	 * field wich indicqte the fitness score found when compqring the formqnt of the sequence to the tqrget formants.
+	 * We init it to 0 here, the final score will be set in the fitness function in fitnessEvqluator
+	 */
 	private double fitnessScore;
 	/**
 	* Constructor without parameters. Create a array of 0 of the length put in param. 

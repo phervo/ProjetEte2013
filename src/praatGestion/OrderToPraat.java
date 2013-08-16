@@ -1,16 +1,15 @@
 package praatGestion;
 
-import geneticAlogrithm.GeneticAlgorithmCall;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.ObjectInputStream.GetField;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.concurrent.Semaphore;
 
 import messages.MessageFromPraat;
 import messages.MessageToPraat;
-
 
 /** <p>Class which contains the different order you can give to praat<br/>
  *  The ordertoPraat object is created in the Praat object. You are not suppose to instantiate one elsewhere.
@@ -170,42 +169,6 @@ public class OrderToPraat implements Observer {
 		}
 		
 	}
-	
-	
-	/**
-	* Function use each 50 generations. Each generation have 10 candidates and produce two sounds (the sound and the formant sound).
-	* So it make 50*10*2 = 1000 sound objects in praat. As there is a praat sound objects limit (something like 2000), this function will allow to
-	* relaunch praat with a clean memory. 
-	* 
-	* IMPORTANT NOTE : the praat's remove function only remove the object from the list and not from the memory. That why i use this way.
-	*
-	* @deprecated
-	* 	look at the update function instead
-	* @since 0.1
-	*
-	*/
-	private static void reLaunchPraat(){
-		String[] sendpraatQuit1 ={"sendpraat", "praat","Quit"};
-		String[] sendpraatLaunch ={"praat"};
-		String[] sendpraatCom ={"sendpraat", "praat",MessageToPraat.writePraatScriptHeader()};
-		Runtime run = Runtime.getRuntime();
-		try {
-			Process runProcess1=run.exec(sendpraatQuit1);
-			runProcess1.waitFor();
-			
-			run.exec(sendpraatLaunch);
-			
-			 //sem here cause it is called in lanchPraat and it guaranti that praat is relaunch before executing runProcess2
-			Process runProcess2=run.exec(sendpraatCom);
-			runProcess2.waitFor();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 
 	/**
 	 * principle : automatisation of the state pattern transitions
@@ -239,11 +202,13 @@ public class OrderToPraat implements Observer {
 	//lauchall
 	public static void launchAllScripts(){
 		//comnpter le nombre de fichiers
-		File di   = new File("C:/Users/phervo/Documents/dossierProjet/results");
+		File di   = new File(System.getProperty("user.dir") + "/results/");
 		File fl[] = di.listFiles();
 		//then for each launch praat commande to load
 		for(int i=0;i<fl.length;i++){
+			if(!fl[i].getName().equals("algoritmProgression.csv")){//the csv genrated cant be read by praat
 			OrderToPraat.sendMessageToPrat("execute "+fl[i].toString()+" "+fl[i].getName());//i put it twice one for the name of the script to execute and one for the param to rename
+			}
 		}
 	}
 	

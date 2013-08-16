@@ -2,7 +2,6 @@ package communication;
 
 import messages.MessageFromPraat;
 import exceptions.CastFormantException;
-import exceptions.FormantNumberexception;
 import geneticAlogrithm.GeneticAlgorithmCall;
 
 import java.io.BufferedReader;

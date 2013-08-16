@@ -107,23 +107,34 @@ public class SequenceMutation implements EvolutionaryOperator<Sequence>{
 	*/
 	private Sequence mutateString(Sequence s, Random rng)
     {
-		Sequence retour= s;
-        for (int i = 0; i < s.getLength(); i++)
-        {
-            if (mutationProbability.nextValue().nextEvent(rng))
-            {
-            	try {
-            		if(i==6){ //masseter
-						retour.setValues(i, globalAlphabet.getMasseterAlphabet().getValueAt(rng.nextInt(globalAlphabet.getMasseterAlphabet().getLength())));
-					}else{
-						retour.setValues(i, globalAlphabet.getOtherAlphabet().getValueAt(rng.nextInt(globalAlphabet.getOtherAlphabet().getLength())));
+		Sequence retour = null;
+		try {
+			retour = new Sequence(s.getLength()); //very important to create a new object or the elitism will disapear
+			//1st we copy the values
+			for(int i = 0; i < s.getLength(); i++){
+				retour.setValues(i, s.getValuesAt(i));
+			}
+			//then we mutate amoung the rng
+	        for (int i = 0; i < retour.getLength(); i++)
+	        {
+	            if (mutationProbability.nextValue().nextEvent(rng))
+	            {
+	            	try {
+	            		if(i==12 || i==13){ //masseter
+							retour.setValues(i, globalAlphabet.getMasseterAlphabet().getValueAt(rng.nextInt(globalAlphabet.getMasseterAlphabet().getLength())));
+						}else{
+							retour.setValues(i, globalAlphabet.getOtherAlphabet().getValueAt(rng.nextInt(globalAlphabet.getOtherAlphabet().getLength())));
+						}
+					} catch (SequenceArrayException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}
-				} catch (SequenceArrayException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-            }
-        }
+	            }
+	        }
+		} catch (SequenceArrayException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
         return retour;
     }
 

@@ -1,15 +1,10 @@
 package geneticAlogrithm;
 
 import java.io.IOException;
-
-import messages.MessageFromPraat;
 import messages.MessageToPraat;
 import monitoring.MonitoringCSV;
-
 import org.uncommons.watchmaker.framework.EvolutionObserver;
 import org.uncommons.watchmaker.framework.PopulationData;
-
-import praatGestion.OrderToPraat;
 import elements.Sequence;
 import exceptions.PraatScriptException;
 
@@ -50,18 +45,21 @@ public class MySequenceEvolutionObserver implements EvolutionObserver<Sequence>{
 	@Override
 	public void populationUpdate(PopulationData<? extends Sequence> data) {
 		// TODO Auto-generated method stub
+		System.out.println();
 		System.out.printf("Generation %d: %s\n",
                 data.getGenerationNumber(),
                 data.getBestCandidate().getValuesInString());
 		this.myGa.setSequence(data.getBestCandidate());
+		System.out.println("marghe acceptee : "+myGa.fitnessMargin());
+		System.out.println();
 
 		//store the sound produce all the 100 objects
 
 
 		if(data.getGenerationNumber()==0){
 			try {
-				MonitoringCSV.writeCSVFile("C:/Users/phervo/Documents/dossierProjet/results/algoritmProgression.csv",false,getExecTime(),data.getBestCandidateFitness(),data.getBestCandidate());
-				MessageToPraat.writePraatScriptInFile(data.getBestCandidate(),"SoundNumber"+data.getGenerationNumber()/5);
+				MonitoringCSV.writeCSVFile(System.getProperty("user.dir") + "/results/algoritmProgression.csv",false,getExecTime(),data.getBestCandidateFitness(),data.getBestCandidate());
+				MessageToPraat.writePraatScriptInFile(data.getBestCandidate(),"SoundNumber"+data.getGenerationNumber()/5+".praat");
 			} catch (IOException | PraatScriptException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -73,10 +71,10 @@ public class MySequenceEvolutionObserver implements EvolutionObserver<Sequence>{
 			 * and 20 object sound and formant
 			 * we need to store the best contain in data.getBestCandidate()
 			 */
-		}else if(data.getGenerationNumber()!=0 && data.getGenerationNumber()%5 == 0.0){
+		}else{
 			try{
-				MonitoringCSV.writeCSVFile("C:/Users/phervo/Documents/dossierProjet/results/algoritmProgression.csv",true,getExecTime(),data.getBestCandidateFitness(),data.getBestCandidate());
-				MessageToPraat.writePraatScriptInFile(data.getBestCandidate(),"SoundNumber"+data.getGenerationNumber()/5);
+				MonitoringCSV.writeCSVFile(System.getProperty("user.dir") + "/results/algoritmProgression.csv",true,getExecTime(),data.getBestCandidateFitness(),data.getBestCandidate());
+				MessageToPraat.writePraatScriptInFile(data.getBestCandidate(),"SoundNumber"+data.getGenerationNumber()/5+".praat");
 			}catch (IOException | PraatScriptException e) {
 				e.printStackTrace();
 			}

@@ -14,21 +14,17 @@ import monitoring.MonitoringCSV;
 import org.uncommons.maths.random.MersenneTwisterRNG;
 import org.uncommons.maths.random.Probability;
 import org.uncommons.watchmaker.framework.EvolutionEngine;
-import org.uncommons.watchmaker.framework.EvolutionObserver;
 import org.uncommons.watchmaker.framework.EvolutionaryOperator;
 import org.uncommons.watchmaker.framework.GenerationalEvolutionEngine;
-import org.uncommons.watchmaker.framework.PopulationData;
 import org.uncommons.watchmaker.framework.SelectionStrategy;
 import org.uncommons.watchmaker.framework.operators.EvolutionPipeline;
 import org.uncommons.watchmaker.framework.selection.RouletteWheelSelection;
-import org.uncommons.watchmaker.framework.termination.GenerationCount;
-
-
+import org.uncommons.watchmaker.framework.selection.StochasticUniversalSampling;
+import org.uncommons.watchmaker.framework.selection.TournamentSelection;
 import org.uncommons.watchmaker.framework.termination.TargetFitness;
 
 import praatGestion.OrderToPraat;
 import praatGestion.Praat;
-import communication.ServerThread;
 import elements.FormantSequence;
 import elements.GlobalAlphabet;
 import elements.Sequence;
@@ -175,7 +171,7 @@ public class GeneticAlgorithmCall{
 		this.praatObject=null;
 		this.start=System.currentTimeMillis();
 		//deleting the files in the folder containing the previous results to avoid keeping result that doesnt suit the current run
-		emptyDirectory(new File("C:/Users/phervo/Documents/dossierProjet/results"));
+		emptyDirectory(new File(System.getProperty("user.dir") + "/results/"));
 	}
 	
 	
@@ -261,7 +257,9 @@ public class GeneticAlgorithmCall{
 	*
 	*/
 	public void createSelection(){
-		selection=new RouletteWheelSelection();
+		//selection=new TournamentSelection(new Probability(0.6));
+		//selection=new RouletteWheelSelection();
+		selection= new StochasticUniversalSampling();
 	}
 	
 	/**
@@ -295,12 +293,13 @@ public class GeneticAlgorithmCall{
 		
 		//start the engine
 		engine = new GenerationalEvolutionEngine<Sequence>(mySequenceFactory, pipeline, mySeqEval, selection, rng);
+		//engine = new MyGenerationalBidule<Sequence>(mySequenceFactory, pipeline, mySeqEval, selection, rng);
 		engine.addEvolutionObserver(new MySequenceEvolutionObserver(this));
-		engine.evolve(10, 0, new TargetFitness(2,mySeqEval.isNatural()));
+		engine.evolve(10, 1, new TargetFitness(fitnessMargin(),mySeqEval.isNatural()));
 		//save the result in a final file,idem for the csv
 		try {
-			MessageToPraat.writePraatScriptInFile(this.finalsequence,"praatScriptWithCorrectValues");
-			MonitoringCSV.writeCSVFile("C:/Users/phervo/Documents/dossierProjet/results/algoritmProgression.csv",true,getFinalExecTime(),this.finalsequence.getFitnessScore(),this.finalsequence);
+			MessageToPraat.writePraatScriptInFile(this.finalsequence,"praatScriptWithCorrectValues.praat");
+			MonitoringCSV.writeCSVFile(System.getProperty("user.dir") + "/results/algoritmProgression.csv",true,getFinalExecTime(),this.finalsequence.getFitnessScore(),this.finalsequence);
 		} catch (PraatScriptException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -313,7 +312,7 @@ public class GeneticAlgorithmCall{
 		OrderToPraat.launchAllScripts();
 		
 		//at the end, we launch the monitoring function to display the results
-		MonitoringCSV.displayCSV(this);
+		MonitoringCSV.displayCSV(this.getTarget());
 	}
 
 	/**
@@ -423,4 +422,25 @@ public class GeneticAlgorithmCall{
 			float time = ((float) (end-getStartTime())) / 1000f;
 			return time;
 		}
+		
+		/**
+		 * function wich calculate the margin authorise in the calculation of the formants.
+		 * it is this value which will be used to determine when to stop the GA.
+		 * @return the min born for the Genetic algorithm
+		 */
+		public int fitnessMargin(){
+			int res=0;
+			int bornF1=0;
+			int bornF2=0;
+			try {
+				bornF1 = (int) (0.1*target.getFormantAt(0).getFrequency());
+				bornF2 = (int) (0.1*target.getFormantAt(1).getFrequency());
+				res=bornF1+bornF2;
+			} catch (FormantNumberexception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return res;
+		}
+	
 }

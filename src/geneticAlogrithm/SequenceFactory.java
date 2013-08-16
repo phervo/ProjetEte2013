@@ -2,9 +2,7 @@ package geneticAlogrithm;
 
 import java.util.Random;
 import messages.MessageToPraat;
-
 import org.uncommons.watchmaker.framework.factories.AbstractCandidateFactory;
-
 import elements.GlobalAlphabet;
 import elements.Sequence;
 import exceptions.SequenceArrayException;
@@ -83,7 +81,7 @@ public class SequenceFactory extends AbstractCandidateFactory<Sequence>{
 				//separation selon les valeurs de var
 				try {
 					//I have deleted the lungAlphabet but for example if we use it, we should have said if position =0 ou 1 get value in the globalAlphabet.getLungsAlphabet()
-					if(i==6){ //masseter
+					if(i==12 || i==13){ //masseter
 						mySeq.setValues(i, globalAlphabet.getMasseterAlphabet().getValueAt(rng.nextInt(globalAlphabet.getMasseterAlphabet().getLength())));
 					}else{
 						mySeq.setValues(i, globalAlphabet.getOtherAlphabet().getValueAt(rng.nextInt(globalAlphabet.getOtherAlphabet().getLength())));
@@ -98,6 +96,7 @@ public class SequenceFactory extends AbstractCandidateFactory<Sequence>{
 		} catch (SequenceArrayException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
+			e1.display();
 		}
 		return mySeq;
 	}

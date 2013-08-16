@@ -1,13 +1,10 @@
 package monitoring;
 
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-
+import elements.FormantSequence;
 import elements.Sequence;
 import exceptions.FormantNumberexception;
-import geneticAlogrithm.GeneticAlgorithmCall;
-import au.com.bytecode.opencsv.CSVReader;
 import au.com.bytecode.opencsv.CSVWriter;
 
 public class MonitoringCSV {
@@ -50,9 +47,9 @@ public class MonitoringCSV {
 	 * @param ga
 	 * 		the ga used. We need it to get the target and do the comparison
 	 */
-	public static void displayCSV(GeneticAlgorithmCall ga){
+	public static void displayCSV(FormantSequence target){
 		try {
-			new Curve(ga);
+			new Curve(target);
 		} catch (FormantNumberexception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

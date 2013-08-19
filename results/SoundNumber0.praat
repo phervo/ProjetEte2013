@@ -19,35 +19,35 @@ Set target... 0.0  0.5  Interarytenoid
 Set target... 1.0  0.5 Interarytenoid
 #
 # Adduct vocal folds
-Set target... 0.0   0.58 Cricothyroid
-Set target... 1.0   0.21 Cricothyroid
+Set target... 0.0   0.66 Cricothyroid
+Set target... 1.0   0.91 Cricothyroid
 # Close velopharyngeal port
 #-----------------------------------------------
-Set target... 0.0   0.24 LevatorPalatini
-Set target... 1.0   0.5 LevatorPalatini
+Set target... 0.0   0.29 LevatorPalatini
+Set target... 1.0   0.48 LevatorPalatini
 #-----------------------------------------------
 #-----------------------------------------------
-Set target... 0.0   0.6 Genioglossus
-Set target... 1.0   0.25 Genioglossus
+Set target... 0.0   0.45 Genioglossus
+Set target... 1.0   0.11 Genioglossus
 #
-Set target... 0.0   0.63 Styloglossus
-Set target... 1.0   0.6 Styloglossus
+Set target... 0.0   0.16 Styloglossus
+Set target... 1.0   0.76 Styloglossus
 #
-Set target... 0.0   0.72 Mylohyoid
-Set target... 1.0   0.98 Mylohyoid
+Set target... 0.0   0.59 Mylohyoid
+Set target... 1.0   0.3 Mylohyoid
 #
-Set target... 0.0   0.7 OrbicularisOris
-Set target... 1.0   0.95 OrbicularisOris
+Set target... 0.0   0.25 OrbicularisOris
+Set target... 1.0   0.96 OrbicularisOris
 #-----------------------------------------------
 # Shape mouth to open vowel
 #-----------------------------------------------
 # Lower the jaw
 # -----------------------------------------
-Set target... 0.0   -0.5 Masseter
-Set target... 1.0   -0.44 Masseter
+Set target... 0.0   0.24 Masseter
+Set target... 1.0   -0.23 Masseter
 # Pull tongue backwards
-Set target... 0.0   0.14 Hyoglossus
-Set target... 1.0   0.5 Hyoglossus
+Set target... 0.0   0.92 Hyoglossus
+Set target... 1.0   0.82 Hyoglossus
 # Synthesise the sound
 #-----------------------------------------------
 select Artword phon
@@ -65,20 +65,18 @@ To Formant (burg)... 0 5 5500 0.025 50
 Speckle... 0 0 5500 30 yes
 numberOfFormant = Get number of formants... 1
 writeInfoLine("number of formants :", numberOfFormant)
-for intervalNumber from 1 to numberOfFormant 
+for intervalNumber from 1 to 2 
 temp1 = Get value at time... intervalNumber 0.1 Hertz Linear
-appendInfoLine("Valeur de temp1 ",temp1)
+temp1$ = string$(temp1)
+appendInfoLine("Valeur de temp1 ",temp1$)
 temp2 = Get value at time... intervalNumber 0.25 Hertz Linear
+temp2$ = string$(temp2)
 appendInfoLine("Valeur de temp2 ",temp2)
 temp3 = Get value at time... intervalNumber 0.5 Hertz Linear
+temp3$ = string$(temp3)
 appendInfoLine("Valeur de temp3 ",temp3)
 temp4 = Get value at time... intervalNumber 0.9 Hertz Linear
+temp4$ = string$(temp4)
 appendInfoLine("Valeur de temp4 ",temp4)
-if temp1 <> "--undefined" 
-different de undefined
-else
-undefined
-endif
-mymean = (temp1+temp2+temp3+temp4)/4 
-appendInfoLine("Valeur moyenne du formant ",intervalNumber,":",mymean)
-endfor
+varMeans[intervalNumber] = Get mean... intervalNumber 0 0 Hertz
+appendInfoLine("Valeur moyenne du formant ",intervalNumber,":",varMeans[intervalNumber])

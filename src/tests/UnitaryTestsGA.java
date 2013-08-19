@@ -388,12 +388,9 @@ public class UnitaryTestsGA {
 	public static void PraatSCript(){
 		try {
 			Sequence seq= new Sequence(13);
-			String script= MessageToPraat.writePraatScriptWithCandidates(seq);
-			System.out.println(script);
+			//String script= MessageToPraat.writePraatScriptWithCandidates(seq);
+			//System.out.println(script);
 		} catch (SequenceArrayException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (PraatScriptException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -487,7 +484,7 @@ public class UnitaryTestsGA {
 			 //praatLaunchHeaderClose();
 			 //testStatePattern();
 			 testGraph(new FormantSequence("e"));
-			 //loadAllSounds();
+			 loadAllSounds();
 		 }
 		 
 	 }

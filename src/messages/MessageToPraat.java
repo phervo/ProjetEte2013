@@ -297,8 +297,9 @@ public class MessageToPraat {
 				stb.append("Rename... 'value$'\n"); // dont forget the quote or the result wont print
 				stb.append("#-----------------------------------------------\n");
 				
-				stb.append("# Automatic data extraction part\n");
+				/*stb.append("# Automatic data extraction part\n");
 				stb.append("To Formant (burg)... 0 5 5500 0.025 50\n");
+				stb.append("Erase all\n");
 				stb.append("Speckle... 0 0 5500 30 yes\n");
 				stb.append("numberOfFormant = Get number of formants... 1\n");
 				stb.append("writeInfoLine(\"number of formants :\", numberOfFormant)\n");
@@ -317,7 +318,7 @@ public class MessageToPraat {
 				stb.append("appendInfoLine(\"Valeur de temp4 \",temp4)\n");
 				stb.append("varMeans[intervalNumber] = Get mean... intervalNumber 0 0 Hertz\n");
 				stb.append("appendInfoLine(\"Valeur moyenne du formant \",intervalNumber,\":\",varMeans[intervalNumber])\n");
-		
+				stb.append("endfor\n");*/
 
 				String texte = stb.toString();
 				FileWriter fw = new FileWriter(adressedufichier, false);

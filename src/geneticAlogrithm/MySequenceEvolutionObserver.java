@@ -46,9 +46,10 @@ public class MySequenceEvolutionObserver implements EvolutionObserver<Sequence>{
 	public void populationUpdate(PopulationData<? extends Sequence> data) {
 		// TODO Auto-generated method stub
 		System.out.println();
-		System.out.printf("Generation %d: %s\n",
+		System.out.printf("Generation %d: %s Fitness: %f\n",
                 data.getGenerationNumber(),
-                data.getBestCandidate().getValuesInString());
+                data.getBestCandidate().getValuesInString(),
+                data.getBestCandidateFitness());
 		this.myGa.setSequence(data.getBestCandidate());
 		System.out.println("marge acceptee : "+myGa.fitnessMargin());
 		System.out.println();

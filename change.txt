@@ -15,6 +15,9 @@ dans sequencemutation:
 idem
 
 dans MessageToPraat :
+
+private static final int nbVarToSendToPraat=8; ou 16
+
 stb.append("# Adduct vocal folds\n");
 stb.append("Set target... 0.0   "+candidat.getValuesAt(0)+" Cricothyroid\n");
 stb.append("Set target... "+Speachtime+"   "+candidat.getValuesAt(1)+" Cricothyroid\n");

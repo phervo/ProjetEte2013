@@ -3,10 +3,11 @@ package messages;
 import elements.Sequence;
 import exceptions.PraatScriptException;
 import exceptions.SequenceArrayException;
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-
+import java.io.UnsupportedEncodingException;
 
 import praatGestion.OrderToPraat;
 
@@ -106,7 +107,7 @@ public class MessageToPraat {
 	* @since 0.1
 	*
 	*/
-	public static String writePraatScriptWithCandidates(Sequence candidat) throws PraatScriptException{ // catch a corrige pareil en dessous
+	public static void writePraatScriptWithCandidates(Sequence candidat) throws PraatScriptException{ // catch a corrige pareil en dessous
 			if(candidat.getLength()==nbVarToSendToPraat){
 				StringBuilder stb= new StringBuilder(); //utilisation de stringBuilder car je suppose que pas synchroniser
 				stb.append("#-----------------------------------------------\n");
@@ -166,37 +167,50 @@ public class MessageToPraat {
 					stb.append("#-----------------------------------------------\n");
 					stb.append("#-----------------------------------------------\n");
 					stb.append("# Automatic data extraction part\n");
-					stb.append("# 1) get the values\n");
 					stb.append("To Formant (burg)... 0 5 5500 0.025 50\n");
+					stb.append("Speckle... 0 0 5500 30 yes\n");
 					stb.append("numberOfFormant = Get number of formants... 1\n");
-					//stb.append("writeInfoLine(numberOfFormant)\n");
-					stb.append("if numberOfFormant>="+nbFormantMax+"\n"); //if good number of formant
-					stb.append("time = Get total duration\n");
-					stb.append("midTime = time/2\n");
+					stb.append("writeInfoLine(\"number of formants :\", numberOfFormant)\n");
 					stb.append("for intervalNumber from 1 to "+nbFormantMax+" \n");
-					stb.append("varTabFreq[intervalNumber] = Get mean... intervalNumber 0 0 \"Hertz\"\n");
-					//stb.append("varTabBandWith[intervalNumber] =  Get bandwidth at time... intervalNumber midTime \"Hertz\" \"Linear\"\n");
-					stb.append("endfor\n");
-					stb.append("# convert it into string for sendsocket\n");
-					//i havent find a way with this version of praat to do otherwise
-					//that to write like that but  it could maybe be change in the future if the praat api change
-					stb.append("temp1$=string$(varTabFreq[1])\n");
-					stb.append("temp2$=string$(varTabFreq[2])\n");
-					//stb.append("temp4$=string$(varTabBandWith[1])\n");
-					//stb.append("temp5$=string$(varTabBandWith[2])\n");
-					//stb.append("sendsocket localhost:2009 'temp1$' 'temp2$' 'temp4$' 'temp5$' \n");
-					stb.append("sendsocket localhost:2009 'temp1$' 'temp2$' \n");
-					//sinon on passe un message d erreur
-					stb.append("else\n"); //else send error caracter
-					stb.append("sendsocket localhost:2009 INF \n");
+					stb.append("temp1 = Get value at time... intervalNumber 0.1 Hertz Linear\n");
+					stb.append("temp1$ = string$(temp1)\n");
+					stb.append("appendInfoLine(\"Valeur de temp1 \",temp1$)\n");
+					stb.append("temp2 = Get value at time... intervalNumber 0.25 Hertz Linear\n");
+					stb.append("temp2$ = string$(temp2)\n");
+					stb.append("appendInfoLine(\"Valeur de temp2 \",temp2)\n");
+					stb.append("temp3 = Get value at time... intervalNumber 0.5 Hertz Linear\n");
+					stb.append("temp3$ = string$(temp3)\n");
+					stb.append("appendInfoLine(\"Valeur de temp3 \",temp3)\n");
+					stb.append("temp4 = Get value at time... intervalNumber 0.9 Hertz Linear\n");
+					stb.append("temp4$ = string$(temp4)\n");
+					stb.append("appendInfoLine(\"Valeur de temp4 \",temp4)\n");
+					stb.append("if temp1$ <> \"--undefined--\" and temp2$ <> \"--undefined--\" and temp3$ <> \"--undefined--\" and temp4$ <> \"--undefined--\"\n");
+					stb.append("varMeans[intervalNumber] = Get mean... intervalNumber 0 0 Hertz\n");
+					stb.append("appendInfoLine(intervalNumber,\":\",varMeans[intervalNumber])\n");
+					stb.append("else\n");
+					stb.append("appendInfoLine(\"undefined\")\n");
+					stb.append("varMeans[1]=0\n");
+					stb.append("varMeans[2]=0\n");
+					stb.append("goto break\n");
 					stb.append("endif\n");
-					
+					stb.append("endfor\n");
+					stb.append("label break\n");
+					stb.append("sendsocket localhost:2009 'varMeans[1]' 'varMeans[2]'\n");
+					String texte = stb.toString();
+					FileWriter fw = new FileWriter(System.getProperty("user.dir") + "/results/fichierEncours.praat", false);
+					BufferedWriter output = new BufferedWriter(fw);
+					output.write(texte);
+					output.flush();
+					output.close();
+					fw.close();
 				} catch (SequenceArrayException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 					e.display();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
-				return stb.toString();
 			}else{
 				throw new PraatScriptException(candidat.getLength(),nbVarToSendToPraat);
 			}
@@ -283,24 +297,29 @@ public class MessageToPraat {
 				stb.append("Rename... 'value$'\n"); // dont forget the quote or the result wont print
 				stb.append("#-----------------------------------------------\n");
 				
-				stb.append("# Automatic data extraction part\n");
+				/*stb.append("# Automatic data extraction part\n");
 				stb.append("To Formant (burg)... 0 5 5500 0.025 50\n");
+				stb.append("Erase all\n");
 				stb.append("Speckle... 0 0 5500 30 yes\n");
 				stb.append("numberOfFormant = Get number of formants... 1\n");
 				stb.append("writeInfoLine(\"number of formants :\", numberOfFormant)\n");
-				stb.append("for intervalNumber from 1 to numberOfFormant \n");
+				stb.append("for intervalNumber from 1 to "+nbFormantMax+" \n");
 				stb.append("temp1 = Get value at time... intervalNumber 0.1 Hertz Linear\n");
-				stb.append("appendInfoLine(\"Valeur de temp1 \",temp1)\n");
+				stb.append("temp1$ = string$(temp1)\n");
+				stb.append("appendInfoLine(\"Valeur de temp1 \",temp1$)\n");
 				stb.append("temp2 = Get value at time... intervalNumber 0.25 Hertz Linear\n");
+				stb.append("temp2$ = string$(temp2)\n");
 				stb.append("appendInfoLine(\"Valeur de temp2 \",temp2)\n");
 				stb.append("temp3 = Get value at time... intervalNumber 0.5 Hertz Linear\n");
+				stb.append("temp3$ = string$(temp3)\n");
 				stb.append("appendInfoLine(\"Valeur de temp3 \",temp3)\n");
 				stb.append("temp4 = Get value at time... intervalNumber 0.9 Hertz Linear\n");
+				stb.append("temp4$ = string$(temp4)\n");
 				stb.append("appendInfoLine(\"Valeur de temp4 \",temp4)\n");
-				stb.append("mymean = (temp1+temp2+temp3+temp4)/4 \n");
-				stb.append("appendInfoLine(\"Valeur moyenne du formant \",intervalNumber,\":\",mymean)\n");
-				stb.append("endfor\n");
-				
+				stb.append("varMeans[intervalNumber] = Get mean... intervalNumber 0 0 Hertz\n");
+				stb.append("appendInfoLine(\"Valeur moyenne du formant \",intervalNumber,\":\",varMeans[intervalNumber])\n");
+				stb.append("endfor\n");*/
+
 				String texte = stb.toString();
 				FileWriter fw = new FileWriter(adressedufichier, false);
 				BufferedWriter output = new BufferedWriter(fw);

@@ -106,7 +106,7 @@ public class OrderToPraat implements Observer {
 	* Use the function in the messages package.
 	*
 	*@param string
-	*	A String containing the scipt
+	*	A String containing a script
 	* @see MessageFromPraat
 	* @since 0.1
 	*
@@ -133,6 +133,21 @@ public class OrderToPraat implements Observer {
 				e1.printStackTrace();
 			}
 	}
+	
+	/**
+	* send a script to praat. The script must be in a String.
+	* Use the function in the messages package.
+	*
+	*@param fileName
+	*	A String containing a script
+	* @see MessageFromPraat
+	* @since 0.1
+	*
+	*/
+	public static void sendCandidiateScriptToPrat(String fileName){
+		OrderToPraat.sendMessageToPrat("execute "+fileName);
+	}
+	
 	
 	/**
 	* close praat. Use it as the last command or the sendpraat routine will continue to be send but nothing will happen.

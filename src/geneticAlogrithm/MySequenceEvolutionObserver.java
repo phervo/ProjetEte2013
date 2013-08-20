@@ -46,11 +46,12 @@ public class MySequenceEvolutionObserver implements EvolutionObserver<Sequence>{
 	public void populationUpdate(PopulationData<? extends Sequence> data) {
 		// TODO Auto-generated method stub
 		System.out.println();
-		System.out.printf("Generation %d: %s\n",
+		System.out.printf("Generation %d: %s Fitness: %f\n",
                 data.getGenerationNumber(),
-                data.getBestCandidate().getValuesInString());
+                data.getBestCandidate().getValuesInString(),
+                data.getBestCandidateFitness());
 		this.myGa.setSequence(data.getBestCandidate());
-		System.out.println("marghe acceptee : "+myGa.fitnessMargin());
+		System.out.println("marge acceptee : "+myGa.fitnessMargin());
 		System.out.println();
 
 		//store the sound produce all the 100 objects
@@ -59,7 +60,7 @@ public class MySequenceEvolutionObserver implements EvolutionObserver<Sequence>{
 		if(data.getGenerationNumber()==0){
 			try {
 				MonitoringCSV.writeCSVFile(System.getProperty("user.dir") + "/results/algoritmProgression.csv",false,getExecTime(),data.getBestCandidateFitness(),data.getBestCandidate());
-				MessageToPraat.writePraatScriptInFile(data.getBestCandidate(),"SoundNumber"+data.getGenerationNumber()/5+".praat");
+				MessageToPraat.writePraatScriptInFile(data.getBestCandidate(),"SoundNumber"+data.getGenerationNumber()+".praat");
 			} catch (IOException | PraatScriptException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -71,10 +72,10 @@ public class MySequenceEvolutionObserver implements EvolutionObserver<Sequence>{
 			 * and 20 object sound and formant
 			 * we need to store the best contain in data.getBestCandidate()
 			 */
-		}else if(data.getGenerationNumber()!=0 && data.getGenerationNumber()%5 == 0.0){
+		}else{
 			try{
 				MonitoringCSV.writeCSVFile(System.getProperty("user.dir") + "/results/algoritmProgression.csv",true,getExecTime(),data.getBestCandidateFitness(),data.getBestCandidate());
-				MessageToPraat.writePraatScriptInFile(data.getBestCandidate(),"SoundNumber"+data.getGenerationNumber()/5+".praat");
+				MessageToPraat.writePraatScriptInFile(data.getBestCandidate(),"SoundNumber"+data.getGenerationNumber()+".praat");
 			}catch (IOException | PraatScriptException e) {
 				e.printStackTrace();
 			}

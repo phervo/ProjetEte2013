@@ -95,8 +95,21 @@ public class SequenceCrossOver extends AbstractCrossover<Sequence>{
         {
             throw new IllegalArgumentException("Cannot perform cross-over with different length parents.");
         }
-		Sequence sq1=parent1;
-		Sequence sq2=parent2;
+		Sequence sq1=null;
+		Sequence sq2=null;
+		try {
+			//1 : clone the object, important for the elitism
+			sq1 = new Sequence(parent1.getLength());
+			sq2 = new Sequence(parent2.getLength());
+			for(int i=0;i<parent1.getLength();i++){
+				sq1.setValues(i, parent1.getValuesAt(i));
+				sq2.setValues(i, parent2.getValuesAt(i));
+			}
+		} catch (SequenceArrayException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
 		for (int i = 0; i < numberOfCrossoverPoints; i++)
         {
 			int crossoverIndex = (1 + rng.nextInt(parent1.getLength()-1)); //cf doc watchmaker
@@ -110,8 +123,7 @@ public class SequenceCrossOver extends AbstractCrossover<Sequence>{
 				} catch (SequenceArrayException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}
-               
+				}  
             }
         }
 		List<Sequence> result = new ArrayList<Sequence>(2);

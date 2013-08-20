@@ -13,12 +13,14 @@ import monitoring.MonitoringCSV;
 
 import org.uncommons.maths.random.MersenneTwisterRNG;
 import org.uncommons.maths.random.Probability;
+import org.uncommons.watchmaker.framework.CachingFitnessEvaluator;
 import org.uncommons.watchmaker.framework.EvolutionEngine;
 import org.uncommons.watchmaker.framework.EvolutionaryOperator;
 import org.uncommons.watchmaker.framework.GenerationalEvolutionEngine;
 import org.uncommons.watchmaker.framework.SelectionStrategy;
 import org.uncommons.watchmaker.framework.operators.EvolutionPipeline;
 import org.uncommons.watchmaker.framework.selection.RouletteWheelSelection;
+import org.uncommons.watchmaker.framework.selection.StochasticUniversalSampling;
 import org.uncommons.watchmaker.framework.selection.TournamentSelection;
 import org.uncommons.watchmaker.framework.termination.TargetFitness;
 
@@ -139,6 +141,8 @@ public class GeneticAlgorithmCall{
 	 */
 	private long start=0;
 	
+	private CachingFitnessEvaluator<Sequence> myCachingEval;
+	
 	private Praat praatObject;
 	
 	/**
@@ -168,6 +172,7 @@ public class GeneticAlgorithmCall{
 		this.messageFromPraat=new FormantSequence(2); //it is just an init
 		this.finalsequence=null;
 		this.praatObject=null;
+		this.myCachingEval=null;
 		this.start=System.currentTimeMillis();
 		//deleting the files in the folder containing the previous results to avoid keeping result that doesnt suit the current run
 		emptyDirectory(new File(System.getProperty("user.dir") + "/results/"));
@@ -232,8 +237,8 @@ public class GeneticAlgorithmCall{
 	public void createEvolutionaryOperator(){
 		List<EvolutionaryOperator<Sequence>> operators
 	    = new LinkedList<EvolutionaryOperator<Sequence>>();
-		operators.add(new SequenceMutation(this.alphabet,new Probability(0.02)));
-		operators.add(new SequenceCrossOver());
+		operators.add(new SequenceMutation(this.alphabet,new Probability(0.05)));
+		operators.add(new SequenceCrossOver(2));
 		pipeline = new EvolutionPipeline<Sequence>(operators);
 	}
 	
@@ -245,7 +250,8 @@ public class GeneticAlgorithmCall{
 	*
 	*/
 	public void createFitnessEvalutator(){
-		mySeqEval=new SequenceEvaluator(this.target,this);
+		mySeqEval =new SequenceEvaluator(this.target,this);
+		myCachingEval = new CachingFitnessEvaluator<>(mySeqEval);
 	}
 	
 	/**
@@ -257,7 +263,8 @@ public class GeneticAlgorithmCall{
 	*/
 	public void createSelection(){
 		//selection=new TournamentSelection(new Probability(0.6));
-		selection=new RouletteWheelSelection();
+		//selection=new RouletteWheelSelection();
+		selection= new StochasticUniversalSampling();
 	}
 	
 	/**
@@ -290,10 +297,10 @@ public class GeneticAlgorithmCall{
 		this.createRandomGenerator();
 		
 		//start the engine
-		engine = new GenerationalEvolutionEngine<Sequence>(mySequenceFactory, pipeline, mySeqEval, selection, rng);
+		engine = new GenerationalEvolutionEngine<Sequence>(mySequenceFactory, pipeline, myCachingEval, selection, rng);
 		//engine = new MyGenerationalBidule<Sequence>(mySequenceFactory, pipeline, mySeqEval, selection, rng);
 		engine.addEvolutionObserver(new MySequenceEvolutionObserver(this));
-		engine.evolve(10, 0, new TargetFitness(fitnessMargin(),mySeqEval.isNatural()));
+		engine.evolve(10, 1, new TargetFitness(fitnessMargin(),mySeqEval.isNatural()));
 		//save the result in a final file,idem for the csv
 		try {
 			MessageToPraat.writePraatScriptInFile(this.finalsequence,"praatScriptWithCorrectValues.praat");
@@ -306,6 +313,7 @@ public class GeneticAlgorithmCall{
 			e.printStackTrace();
 		}
 		//relaunch praat and display the result we saved during the run
+		deleteFile(System.getProperty("user.dir") + "/results/fichierEncours.praat");
 		praatObject.reLaunch();
 		OrderToPraat.launchAllScripts();
 		
@@ -397,6 +405,7 @@ public class GeneticAlgorithmCall{
 	   * function to delete all the files in th edirectory before using it.
 	   * It avoid to keep file which arent usefull.
 	   * @param folder
+	   * 	the folder to clear
 	   */
 	  public static void emptyDirectory(File folder){
 	       for(File file : folder.listFiles()){
@@ -405,6 +414,18 @@ public class GeneticAlgorithmCall{
 	       }
 	       file.delete();
 	     }
+	  }
+	  
+	  /**
+	   * function to delete a specific file.
+	   * It avoid to keep file which arent usefull. I use it to delete the temp file on wich i work during the run.
+	   * this script is different from those og the save one with sendsocket wich cause a error once the run is finish and the serveur close.
+	   * @param file
+	   * 	the path to the file
+	   */
+	  public static void deleteFile(String file){
+		  File MyFile = new File(file); 
+		  MyFile.delete(); 
 	  }
 	  
 	  public FormantSequence getTarget(){

@@ -2,8 +2,11 @@ package geneticAlogrithm;
 
 import java.util.List;
 import java.util.concurrent.Semaphore;
+
 import messages.MessageToPraat;
+
 import org.uncommons.watchmaker.framework.FitnessEvaluator;
+
 import praatGestion.OrderToPraat;
 import elements.FormantSequence;
 import elements.Sequence;
@@ -112,7 +115,8 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 		//1) j'envoie le candidat courant (var candidate au script)
 		/*write value in the script send to praat and send it*/
 			System.out.println(candidate.getValuesInString());
-			OrderToPraat.sendMessageToPrat(MessageToPraat.writePraatScriptWithCandidates(candidate));
+			MessageToPraat.writePraatScriptWithCandidates(candidate);
+			OrderToPraat.sendCandidiateScriptToPrat(System.getProperty("user.dir") + "/results/fichierEncours.praat");
 		//2) recuperer le resultat dans messageFromPraat (attente serveur et socket si besoin) et le comparer a la cible
 			
 			
@@ -137,8 +141,8 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 				}
 	    		
 	    		diffF1=Math.abs((int) (candidate.getF1().getFrequency()-ga.getTarget().getFormantAt(0).getFrequency()));
-	    		diffF1=Math.abs((int) (candidate.getF2().getFrequency()-ga.getTarget().getFormantAt(1).getFrequency()));
-	    		matches=diffF1+diffF1;
+	    		diffF2=Math.abs((int) (candidate.getF2().getFrequency()-ga.getTarget().getFormantAt(1).getFrequency()));
+	    		matches=diffF1+diffF2;
 				/*if(ga.getMessageFromPraat().getFormantAt(i).getBandwith()>=lowerBornBW && ga.getMessageFromPraat().getFormantAt(i).getBandwith()<=upperBornBW ){
 					matches++;
 				}

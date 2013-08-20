@@ -210,6 +210,33 @@ public class Sequence {
 		}
 		return st.toString();
 	}
+	
+	/**
+	 * method which allow to compare two sequence to know if it is the same or not.
+	 * @param toCompare
+	 * 		the sequence to compare to.
+	 * @return a boolean to say if it match or not
+	 */
+	public boolean equals(Sequence toCompare){
+		boolean match=true;
+		if(toCompare.length!=this.length){
+			match=false;
+		}else{
+			for(int i=0;i<length;i++){
+				try {
+					if(this.getValuesAt(i)!=toCompare.getValuesAt(i)){
+						match=false;
+					}
+				} catch (SequenceArrayException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+		}
+		return match;
+		
+	}
 
 	public Formant getF1() {
 		return f1;

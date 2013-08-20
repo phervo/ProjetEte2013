@@ -114,7 +114,10 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 		
 		//1) j'envoie le candidat courant (var candidate au script)
 		/*write value in the script send to praat and send it*/
-			System.out.println(candidate.getValuesInString());
+			System.out.println("candidat :"+candidate.getValuesInString());
+			if(candidate.getFitnessScore()!=0.0){
+				System.out.println("EEEHHH JE SUIS DIFFERENT !!!");
+			}
 			MessageToPraat.writePraatScriptWithCandidates(candidate);
 			OrderToPraat.sendCandidiateScriptToPrat(System.getProperty("user.dir") + "/results/fichierEncours.praat");
 		//2) recuperer le resultat dans messageFromPraat (attente serveur et socket si besoin) et le comparer a la cible
@@ -126,7 +129,7 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 			candidate.setF2(ga.getMessageFromPraat().getFormantAt(1));
 			candidate.setFormantFound("none");
 	    	for(int i=0;i<this.targetSequence.getNbFormant();i++){
-	    		/*there is an interval of +/-10% around the value so we caluclate this value*/
+	    		//there is an interval of +/-10% around the value so we caluclate this value
 	    		double lowerBornfreq = this.targetSequence.getFormantAt(i).getFrequency()*0.9;
 	    		double upperBornfreq = this.targetSequence.getFormantAt(i).getFrequency()*1.1;
 	    		//double lowerBornBW = this.targetSequence.getFormantAt(i).getBandwith()*0.9;
@@ -143,12 +146,12 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 	    		diffF1=Math.abs((int) (candidate.getF1().getFrequency()-ga.getTarget().getFormantAt(0).getFrequency()));
 	    		diffF2=Math.abs((int) (candidate.getF2().getFrequency()-ga.getTarget().getFormantAt(1).getFrequency()));
 	    		matches=diffF1+diffF2;
-				/*if(ga.getMessageFromPraat().getFormantAt(i).getBandwith()>=lowerBornBW && ga.getMessageFromPraat().getFormantAt(i).getBandwith()<=upperBornBW ){
-					matches++;
-				}
-				if(ga.getMessageFromPraat().getFormantAt(i).getAmplitude()>=lowerBornA && ga.getMessageFromPraat().getFormantAt(i).getAmplitude()<=upperBornA){
-					matches++;
-				}*/
+				//if(ga.getMessageFromPraat().getFormantAt(i).getBandwith()>=lowerBornBW && ga.getMessageFromPraat().getFormantAt(i).getBandwith()<=upperBornBW ){
+				//	matches++;
+				//}
+				//if(ga.getMessageFromPraat().getFormantAt(i).getAmplitude()>=lowerBornA && ga.getMessageFromPraat().getFormantAt(i).getAmplitude()<=upperBornA){
+				//	matches++;
+				//}
 			}
 	    	if(formantFound==2){
 	    		candidate.setFormantFound("both");

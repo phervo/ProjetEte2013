@@ -6,24 +6,18 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Semaphore;
-
 import messages.MessageFromPraat;
 import messages.MessageToPraat;
 import monitoring.MonitoringCSV;
-
 import org.uncommons.maths.random.MersenneTwisterRNG;
 import org.uncommons.maths.random.Probability;
-import org.uncommons.watchmaker.framework.CachingFitnessEvaluator;
 import org.uncommons.watchmaker.framework.EvolutionEngine;
 import org.uncommons.watchmaker.framework.EvolutionaryOperator;
 import org.uncommons.watchmaker.framework.GenerationalEvolutionEngine;
 import org.uncommons.watchmaker.framework.SelectionStrategy;
 import org.uncommons.watchmaker.framework.operators.EvolutionPipeline;
-import org.uncommons.watchmaker.framework.selection.RouletteWheelSelection;
 import org.uncommons.watchmaker.framework.selection.StochasticUniversalSampling;
-import org.uncommons.watchmaker.framework.selection.TournamentSelection;
 import org.uncommons.watchmaker.framework.termination.TargetFitness;
-
 import praatGestion.OrderToPraat;
 import praatGestion.Praat;
 import elements.FormantSequence;
@@ -141,8 +135,6 @@ public class GeneticAlgorithmCall{
 	 */
 	private long start=0;
 	
-	private CachingFitnessEvaluator<Sequence> myCachingEval;
-	
 	private Praat praatObject;
 	
 	/**
@@ -172,7 +164,6 @@ public class GeneticAlgorithmCall{
 		this.messageFromPraat=new FormantSequence(2); //it is just an init
 		this.finalsequence=null;
 		this.praatObject=null;
-		this.myCachingEval=null;
 		this.start=System.currentTimeMillis();
 		//deleting the files in the folder containing the previous results to avoid keeping result that doesnt suit the current run
 		emptyDirectory(new File(System.getProperty("user.dir") + "/results/"));
@@ -251,7 +242,6 @@ public class GeneticAlgorithmCall{
 	*/
 	public void createFitnessEvalutator(){
 		mySeqEval =new SequenceEvaluator(this.target,this);
-		myCachingEval = new CachingFitnessEvaluator<>(mySeqEval);
 	}
 	
 	/**
@@ -297,7 +287,7 @@ public class GeneticAlgorithmCall{
 		this.createRandomGenerator();
 		
 		//start the engine
-		engine = new GenerationalEvolutionEngine<Sequence>(mySequenceFactory, pipeline, myCachingEval, selection, rng);
+		engine = new GenerationalEvolutionEngine<Sequence>(mySequenceFactory, pipeline, mySeqEval, selection, rng);
 		//engine = new MyGenerationalBidule<Sequence>(mySequenceFactory, pipeline, mySeqEval, selection, rng);
 		engine.addEvolutionObserver(new MySequenceEvolutionObserver(this));
 		engine.evolve(10, 1, new TargetFitness(fitnessMargin(),mySeqEval.isNatural()));

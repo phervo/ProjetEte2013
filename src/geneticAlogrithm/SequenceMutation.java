@@ -34,6 +34,8 @@ public class SequenceMutation implements EvolutionaryOperator<Sequence>{
 	 */
     private final NumberGenerator<Probability> mutationProbability;
     
+    
+    private List<Sequence> selectedCandidates;
     /**
 	* Constructor with given parameters 
 	*
@@ -53,6 +55,7 @@ public class SequenceMutation implements EvolutionaryOperator<Sequence>{
     {
     	this.globalAlphabet = globalAlphabet;
     	this.mutationProbability = new ConstantGenerator<Probability>(mutationProbability);
+    	this.selectedCandidates=null;
     }
     
     /**
@@ -73,12 +76,14 @@ public class SequenceMutation implements EvolutionaryOperator<Sequence>{
     public SequenceMutation(GlobalAlphabet globalAlphabet, NumberGenerator<Probability> mutationProbability){
     	this.globalAlphabet = globalAlphabet;
     	this.mutationProbability = mutationProbability;
+    	this.selectedCandidates=null;
     }
     
     
 	@Override
 	public List<Sequence> apply(List<Sequence> selectedCandidates, Random rng) {
 		// TODO Auto-generated method stub
+		this.selectedCandidates=selectedCandidates;
 		List<Sequence> mutatedPopulation = new ArrayList<Sequence>(selectedCandidates.size());
         for (Sequence s : selectedCandidates)
         {
@@ -135,6 +140,13 @@ public class SequenceMutation implements EvolutionaryOperator<Sequence>{
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		//a ce moment precis j ai une nouvelle sequence, c est maintenant que je peux regarder s il correpsond a l un des precendents
+		for(int i=0;i<selectedCandidates.size();i++){
+			if(retour.equals(selectedCandidates.get(i))){
+				retour.setFitnessScore(selectedCandidates.get(i).getFitnessScore());
+			}
+		}
+		
         return retour;
     }
 

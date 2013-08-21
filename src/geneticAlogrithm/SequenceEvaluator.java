@@ -117,47 +117,48 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 			System.out.println("candidat :"+candidate.getValuesInString());
 			if(candidate.getFitnessScore()!=0.0){
 				System.out.println("EEEHHH JE SUIS DIFFERENT !!!");
-			}
-			MessageToPraat.writePraatScriptWithCandidates(candidate);
-			OrderToPraat.sendCandidiateScriptToPrat(System.getProperty("user.dir") + "/results/fichierEncours.praat");
-		//2) recuperer le resultat dans messageFromPraat (attente serveur et socket si besoin) et le comparer a la cible
-			
-			
-			answerFromPraat.acquire();	
-			//store the formants from praat in the sequence :
-			candidate.setF1(ga.getMessageFromPraat().getFormantAt(0));
-			candidate.setF2(ga.getMessageFromPraat().getFormantAt(1));
-			candidate.setFormantFound("none");
-	    	for(int i=0;i<this.targetSequence.getNbFormant();i++){
-	    		//there is an interval of +/-10% around the value so we caluclate this value
-	    		double lowerBornfreq = this.targetSequence.getFormantAt(i).getFrequency()*0.9;
-	    		double upperBornfreq = this.targetSequence.getFormantAt(i).getFrequency()*1.1;
-	    		//double lowerBornBW = this.targetSequence.getFormantAt(i).getBandwith()*0.9;
-	    		//double upperBornBW = this.targetSequence.getFormantAt(i).getBandwith()*1.1;
-	    		//double lowerBornA = this.targetSequence.getFormantAt(i).getAmplitude()*0.9;
-	    		//double upperBornA = this.targetSequence.getFormantAt(i).getAmplitude()*1.1;
-	    		
-	    		//just for print in the cvs, not use for the fitness itself
-	    		if((ga.getMessageFromPraat().getFormantAt(i).getFrequency()>=lowerBornfreq && ga.getMessageFromPraat().getFormantAt(i).getFrequency()<=upperBornfreq)){
-					formantFound++;
-					candidate.setFormantFound("F"+(i+1)); //difference beetween the index and the real formant number
+				matches = (int) candidate.getFitnessScore();
+			}else{
+				MessageToPraat.writePraatScriptWithCandidates(candidate);
+				OrderToPraat.sendCandidiateScriptToPrat(System.getProperty("user.dir") + "/results/fichierEncours.praat");
+				//2) recuperer le resultat dans messageFromPraat (attente serveur et socket si besoin) et le comparer a la cible
+				
+				
+				answerFromPraat.acquire();	
+				//store the formants from praat in the sequence :
+				candidate.setF1(ga.getMessageFromPraat().getFormantAt(0));
+				candidate.setF2(ga.getMessageFromPraat().getFormantAt(1));
+				candidate.setFormantFound("none");
+		    	for(int i=0;i<this.targetSequence.getNbFormant();i++){
+		    		//there is an interval of +/-10% around the value so we caluclate this value
+		    		double lowerBornfreq = this.targetSequence.getFormantAt(i).getFrequency()*0.9;
+		    		double upperBornfreq = this.targetSequence.getFormantAt(i).getFrequency()*1.1;
+		    		//double lowerBornBW = this.targetSequence.getFormantAt(i).getBandwith()*0.9;
+		    		//double upperBornBW = this.targetSequence.getFormantAt(i).getBandwith()*1.1;
+		    		//double lowerBornA = this.targetSequence.getFormantAt(i).getAmplitude()*0.9;
+		    		//double upperBornA = this.targetSequence.getFormantAt(i).getAmplitude()*1.1;
+		    		
+		    		//just for print in the cvs, not use for the fitness itself
+		    		if((ga.getMessageFromPraat().getFormantAt(i).getFrequency()>=lowerBornfreq && ga.getMessageFromPraat().getFormantAt(i).getFrequency()<=upperBornfreq)){
+						formantFound++;
+						candidate.setFormantFound("F"+(i+1)); //difference beetween the index and the real formant number
+					}
+		    		
+		    		diffF1=Math.abs((int) (candidate.getF1().getFrequency()-ga.getTarget().getFormantAt(0).getFrequency()));
+		    		diffF2=Math.abs((int) (candidate.getF2().getFrequency()-ga.getTarget().getFormantAt(1).getFrequency()));
+		    		matches=diffF1+diffF2;
+					//if(ga.getMessageFromPraat().getFormantAt(i).getBandwith()>=lowerBornBW && ga.getMessageFromPraat().getFormantAt(i).getBandwith()<=upperBornBW ){
+					//	matches++;
+					//}
+					//if(ga.getMessageFromPraat().getFormantAt(i).getAmplitude()>=lowerBornA && ga.getMessageFromPraat().getFormantAt(i).getAmplitude()<=upperBornA){
+					//	matches++;
+					//}
 				}
-	    		
-	    		diffF1=Math.abs((int) (candidate.getF1().getFrequency()-ga.getTarget().getFormantAt(0).getFrequency()));
-	    		diffF2=Math.abs((int) (candidate.getF2().getFrequency()-ga.getTarget().getFormantAt(1).getFrequency()));
-	    		matches=diffF1+diffF2;
-				//if(ga.getMessageFromPraat().getFormantAt(i).getBandwith()>=lowerBornBW && ga.getMessageFromPraat().getFormantAt(i).getBandwith()<=upperBornBW ){
-				//	matches++;
-				//}
-				//if(ga.getMessageFromPraat().getFormantAt(i).getAmplitude()>=lowerBornA && ga.getMessageFromPraat().getFormantAt(i).getAmplitude()<=upperBornA){
-				//	matches++;
-				//}
+		    	if(formantFound==2){
+		    		candidate.setFormantFound("both");
+		    	}
+		    	candidate.setFitnessScore(matches);
 			}
-	    	if(formantFound==2){
-	    		candidate.setFormantFound("both");
-	    	}
-	    	candidate.setFitnessScore(matches);
-	    	System.out.println("matchScore : "+matches);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -168,6 +169,7 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println("matchScore : "+matches);
 		ga.getMutexFitnessFunction().release();
 		return matches;
 	}

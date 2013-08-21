@@ -129,6 +129,7 @@ public class SequenceCrossOver extends AbstractCrossover<Sequence>{
 		List<Sequence> result = new ArrayList<Sequence>(2);
         result.add(sq1);
         result.add(sq2);
+        
         return result;
 	}
 }

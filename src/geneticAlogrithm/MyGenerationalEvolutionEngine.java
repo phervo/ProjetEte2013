@@ -56,7 +56,6 @@ public class MyGenerationalEvolutionEngine<T> extends GenerationalEvolutionEngin
 		        this.myGa=myGa;
 				}
 		
-		@SuppressWarnings("unchecked")
 		protected List<EvaluatedCandidate<T>> nextEvolutionStep(List<EvaluatedCandidate<T>> evaluatedPopulation,
                 int eliteCount,
                 Random rng)

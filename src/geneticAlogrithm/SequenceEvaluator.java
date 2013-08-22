@@ -76,11 +76,10 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 	* @since 0.1
 	*
 	*/
-	public SequenceEvaluator(FormantSequence target,GeneticAlgorithmCall ga,List<Sequence> previousPopulation){
+	public SequenceEvaluator(FormantSequence target,GeneticAlgorithmCall ga){
 		/*create the instance with the target and a reference to the ga to have access to the stored message from praat*/
 		this.targetSequence=target;
 		this.ga=ga;
-		this.previousPopulation=previousPopulation;
 		try {
 			answerFromPraat.acquire();
 		} catch (InterruptedException e) {
@@ -123,10 +122,11 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 		/*write value in the script send to praat and send it*/
 			System.out.println("candidat :"+candidate.getValuesInString());
 			//a ce moment precis j ai une nouvelle sequence, c est maintenant que je peux regarder s il correpsond a l un des precendents
-			if(previousPopulation!=null){
-				for(int i=0;i<previousPopulation.size();i++){
-					if(candidate.equals(previousPopulation.get(i))){
-						candidate.setFitnessScore(previousPopulation.get(i).getFitnessScore());
+			if(ga.getPreviousGeneration()!=null && candidate.getFitnessScore()==0.0){ //avoid to reaffect those which already got a score(elites)
+				for(int i=0;i<ga.getPreviousGeneration().size();i++){
+					if(candidate.equals(ga.getPreviousGeneration().get(i))){
+						System.out.println("je passe dans la reaffectation de score");
+						candidate.setFitnessScore(ga.getPreviousGeneration().get(i).getFitnessScore());
 					}
 				}
 			}

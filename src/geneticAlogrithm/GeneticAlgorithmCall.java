@@ -244,7 +244,7 @@ public class GeneticAlgorithmCall{
 	*
 	*/
 	public void createFitnessEvalutator(){
-		mySeqEval = new SequenceEvaluator(this.target,this,this.getPreviousGeneration());
+		mySeqEval = new SequenceEvaluator(this.target,this);
 	}
 	
 	/**

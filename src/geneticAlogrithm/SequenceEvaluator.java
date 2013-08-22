@@ -5,6 +5,7 @@ import java.util.concurrent.Semaphore;
 
 import messages.MessageToPraat;
 
+import org.uncommons.watchmaker.framework.EvaluatedCandidate;
 import org.uncommons.watchmaker.framework.FitnessEvaluator;
 
 import praatGestion.OrderToPraat;
@@ -54,6 +55,11 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 	 * 
 	 */
 	private final Semaphore answerFromPraat = new Semaphore(1, true);
+	
+	/**
+	 * the list of the 
+	 */
+	private List<Sequence> previousPopulation;
 	/**
 	* Constructor with given parameters.
 	* 
@@ -70,10 +76,11 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 	* @since 0.1
 	*
 	*/
-	public SequenceEvaluator(FormantSequence target,GeneticAlgorithmCall ga){
+	public SequenceEvaluator(FormantSequence target,GeneticAlgorithmCall ga,List<Sequence> previousPopulation){
 		/*create the instance with the target and a reference to the ga to have access to the stored message from praat*/
 		this.targetSequence=target;
 		this.ga=ga;
+		this.previousPopulation=previousPopulation;
 		try {
 			answerFromPraat.acquire();
 		} catch (InterruptedException e) {
@@ -115,6 +122,14 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 		//1) j'envoie le candidat courant (var candidate au script)
 		/*write value in the script send to praat and send it*/
 			System.out.println("candidat :"+candidate.getValuesInString());
+			//a ce moment precis j ai une nouvelle sequence, c est maintenant que je peux regarder s il correpsond a l un des precendents
+			if(previousPopulation!=null){
+				for(int i=0;i<previousPopulation.size();i++){
+					if(candidate.equals(previousPopulation.get(i))){
+						candidate.setFitnessScore(previousPopulation.get(i).getFitnessScore());
+					}
+				}
+			}
 			if(candidate.getFitnessScore()!=0.0){
 				System.out.println("EEEHHH JE SUIS DIFFERENT !!!");
 				matches = (int) candidate.getFitnessScore();

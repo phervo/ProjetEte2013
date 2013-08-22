@@ -140,12 +140,6 @@ public class SequenceMutation implements EvolutionaryOperator<Sequence>{
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		//a ce moment precis j ai une nouvelle sequence, c est maintenant que je peux regarder s il correpsond a l un des precendents
-		for(int i=0;i<selectedCandidates.size();i++){
-			if(retour.equals(selectedCandidates.get(i))){
-				retour.setFitnessScore(selectedCandidates.get(i).getFitnessScore());
-			}
-		}
 		
         return retour;
     }

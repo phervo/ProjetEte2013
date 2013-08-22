@@ -270,6 +270,4 @@ public class Sequence {
 		this.fitnessScore = fitnessScore;
 	}
 	
-	
-	
 }

@@ -277,7 +277,7 @@ public class UnitaryTestsGA {
 			ga.buildTarget();
 			ga.createCandidateFactory();
 			ga.createEvolutionaryOperator();
-			ga.createFitnessEvalutator();
+			//ga.createFitnessEvalutator();
 			ga.createSelection();
 			ga.createRandomGenerator();
 		} catch (FormantNumberexception e) {
@@ -483,7 +483,7 @@ public class UnitaryTestsGA {
 			 //UnitaryTestsGA.castFormantTest();
 			 //praatLaunchHeaderClose();
 			 //testStatePattern();
-			 testGraph(new FormantSequence("e"));
+			 testGraph(new FormantSequence("a"));
 			 loadAllSounds();
 		 }
 		 

@@ -94,7 +94,7 @@ public class GeneticAlgorithmCall{
 	 * The EvolutionEngine used by the GA
 	 * 
 	 */
-	private EvolutionEngine<Sequence> engine;
+	private MyGenerationalEvolutionEngine<Sequence> engine;
 	
 	/**
 	 * The message received From Praat by the server. It is a String so it must be cast by the splitChaineToFormantSequence function 
@@ -137,6 +137,8 @@ public class GeneticAlgorithmCall{
 	
 	private Praat praatObject;
 	
+	private List<Sequence> previousGeneration;
+	
 	/**
 	* Constructor where we specified the length of the sequence we will use. Initialize the other attribute to null.
 	* 
@@ -167,6 +169,7 @@ public class GeneticAlgorithmCall{
 		this.start=System.currentTimeMillis();
 		//deleting the files in the folder containing the previous results to avoid keeping result that doesnt suit the current run
 		emptyDirectory(new File(System.getProperty("user.dir") + "/results/"));
+		this.previousGeneration=null;
 	}
 	
 	
@@ -241,7 +244,7 @@ public class GeneticAlgorithmCall{
 	*
 	*/
 	public void createFitnessEvalutator(){
-		mySeqEval =new SequenceEvaluator(this.target,this);
+		mySeqEval = new SequenceEvaluator(this.target,this,this.getPreviousGeneration());
 	}
 	
 	/**
@@ -287,7 +290,7 @@ public class GeneticAlgorithmCall{
 		this.createRandomGenerator();
 		
 		//start the engine
-		engine = new GenerationalEvolutionEngine<Sequence>(mySequenceFactory, pipeline, mySeqEval, selection, rng);
+		engine = new MyGenerationalEvolutionEngine<Sequence>(mySequenceFactory, pipeline,mySeqEval , selection, rng,this);
 		//engine = new MyGenerationalBidule<Sequence>(mySequenceFactory, pipeline, mySeqEval, selection, rng);
 		engine.addEvolutionObserver(new MySequenceEvolutionObserver(this));
 		engine.evolve(10, 1, new TargetFitness(fitnessMargin(),mySeqEval.isNatural()));
@@ -450,6 +453,13 @@ public class GeneticAlgorithmCall{
 				e.printStackTrace();
 			}
 			return res;
+		}
+		
+		public void setPreviouGeneration(List<Sequence> previousGeneration){
+			this.previousGeneration=previousGeneration;
+		}
+		public List<Sequence> getPreviousGeneration(){
+			return previousGeneration;
 		}
 	
 }

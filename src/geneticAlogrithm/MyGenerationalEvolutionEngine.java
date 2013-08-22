@@ -15,35 +15,48 @@ import org.uncommons.watchmaker.framework.interactive.InteractiveSelection;
 
 import elements.Sequence;
 
-public class MyGenerationalBidule<T> extends GenerationalEvolutionEngine<T> {
+/**
+ * I overwrite the existing class in the api to store the population each time and have a comparaison point with the new individuals created via evolutionary operators
+ * @author phervo
+ *
+ * @param <T>
+ * 	the type of object you make evolve
+ */
+public class MyGenerationalEvolutionEngine<T> extends GenerationalEvolutionEngine<T> {
 	
 	 	private final EvolutionaryOperator<T> evolutionScheme;
 	    private final FitnessEvaluator<? super T> fitnessEvaluator;
 	    private final SelectionStrategy<? super T> selectionStrategy;
-
-		public MyGenerationalBidule(CandidateFactory<T> candidateFactory,
+	    private final GeneticAlgorithmCall myGa;
+	    
+		public MyGenerationalEvolutionEngine(CandidateFactory<T> candidateFactory,
 			EvolutionaryOperator<T> evolutionScheme,
 			FitnessEvaluator<? super T> fitnessEvaluator,
-			SelectionStrategy<? super T> selectionStrategy, Random rng) {
+			SelectionStrategy<? super T> selectionStrategy, Random rng,
+			GeneticAlgorithmCall myGa) {
 		super(candidateFactory, evolutionScheme, fitnessEvaluator, selectionStrategy,
 				rng);
 		this.evolutionScheme = evolutionScheme;
         this.fitnessEvaluator = fitnessEvaluator;
         this.selectionStrategy = selectionStrategy;
+        this.myGa=myGa;
 		// TODO Auto-generated constructor stub
 	}
 		
-		public MyGenerationalBidule(CandidateFactory<T> candidateFactory,
+		public MyGenerationalEvolutionEngine(CandidateFactory<T> candidateFactory,
                 EvolutionaryOperator<T> evolutionScheme,
                 InteractiveSelection<T> selectionStrategy,
-                Random rng)
+                Random rng,
+                GeneticAlgorithmCall myGa)
 				{
 				super(candidateFactory, evolutionScheme, selectionStrategy,rng);
 				this.evolutionScheme = evolutionScheme;
 		        this.fitnessEvaluator = null;
 		        this.selectionStrategy = selectionStrategy;
+		        this.myGa=myGa;
 				}
 		
+		@SuppressWarnings("unchecked")
 		protected List<EvaluatedCandidate<T>> nextEvolutionStep(List<EvaluatedCandidate<T>> evaluatedPopulation,
                 int eliteCount,
                 Random rng)
@@ -68,12 +81,8 @@ public class MyGenerationalBidule<T> extends GenerationalEvolutionEngine<T> {
 	        // When the evolution is finished, add the elite to the population.
 	        population.addAll(elite);
 	        
-	      	for(int i=0;i<population.size();i++){
-	      		Sequence s= (Sequence)population.get(i);
-	      		System.out.println(s.getValuesInString());
-	        	System.out.println();
-	        }
-	        	
+	      	//I change the population after creating the new individuals above so I can still compare the new individual to the "old","parent" population
+	        this.myGa.setPreviouGeneration((List<Sequence>) population);// no need to be sort
 	        return evaluatePopulation(population);
 			
          }

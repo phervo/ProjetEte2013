@@ -442,8 +442,8 @@ public class GeneticAlgorithmCall{
 			int bornF1=0;
 			int bornF2=0;
 			try {
-				bornF1 = (int) (0.1*target.getFormantAt(0).getFrequency());
-				bornF2 = (int) (0.1*target.getFormantAt(1).getFrequency());
+				bornF1 = (int) (target.getAutorisedMargin()*target.getFormantAt(0).getFrequency());
+				bornF2 = (int) (target.getAutorisedMargin()*target.getFormantAt(1).getFrequency());
 				res=bornF1+bornF2;
 			} catch (FormantNumberexception e) {
 				// TODO Auto-generated catch block

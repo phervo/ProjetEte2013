@@ -131,8 +131,8 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 				candidate.setFormantFound("none");
 		    	for(int i=0;i<this.targetSequence.getNbFormant();i++){
 		    		//there is an interval of +/-10% around the value so we caluclate this value
-		    		double lowerBornfreq = this.targetSequence.getFormantAt(i).getFrequency()*0.9;
-		    		double upperBornfreq = this.targetSequence.getFormantAt(i).getFrequency()*1.1;
+		    		double lowerBornfreq = this.targetSequence.getFormantAt(i).getFrequency()+(this.targetSequence.getAutorisedMargin()*this.targetSequence.getFormantAt(i).getFrequency());
+		    		double upperBornfreq = this.targetSequence.getFormantAt(i).getFrequency()+(this.targetSequence.getAutorisedMargin()*this.targetSequence.getFormantAt(i).getFrequency());
 		    		//double lowerBornBW = this.targetSequence.getFormantAt(i).getBandwith()*0.9;
 		    		//double upperBornBW = this.targetSequence.getFormantAt(i).getBandwith()*1.1;
 		    		//double lowerBornA = this.targetSequence.getFormantAt(i).getAmplitude()*0.9;

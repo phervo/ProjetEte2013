@@ -137,11 +137,11 @@ public class UnitaryTestsGA {
 		l.add(f3);
 		try {
 			System.out.println("7 : must return a sentence with 3 formant, values from f1 f2 f3 and nomBidon name");
-			FormantSequence fs3 = new FormantSequence("nomBidon",3,l);
+			FormantSequence fs3 = new FormantSequence("nomBidon",3,l,0.1);
 			fs3.displayFormantSequence();
 			System.out.println();//space in the display
 			System.out.println("7.5 : must launch a exception for too much object in the list in parameter");
-			fs3 = new FormantSequence("nomBidon",2,l);
+			fs3 = new FormantSequence("nomBidon",2,l,0.1);
 			System.out.println();//space in the display
 			
 		} catch (FormantNumberexception e) {
@@ -151,7 +151,7 @@ public class UnitaryTestsGA {
 		System.out.println();//space in the display
 		try {
 			System.out.println("7.5.2 : must launch a exception for not enough box in the list");
-			FormantSequence fs3 = new FormantSequence("nomBidon",4,l);
+			FormantSequence fs3 = new FormantSequence("nomBidon",4,l,0.1);
 			System.out.println();//space in the display
 			
 		} catch (FormantNumberexception e) {
@@ -162,7 +162,7 @@ public class UnitaryTestsGA {
 		
 		try {
 			System.out.println("8 : must display a value");
-			FormantSequence fs3 = new FormantSequence("nomBidon",3,l);
+			FormantSequence fs3 = new FormantSequence("nomBidon",3,l,0.1);
 			System.out.println(fs3.getFormantAt(2).getAmplitude());
 			System.out.println();//space in the display
 			System.out.println("8.5 : must raise en exception for wrong index");
@@ -191,7 +191,7 @@ public class UnitaryTestsGA {
 		try {
 			System.out.println("10 : must raise a exception for empty list");
 			ArrayList<Formant> list = new ArrayList<Formant>();
-			fs1 = new FormantSequence("test",1,list);
+			fs1 = new FormantSequence("test",1,list,0.1);
 			System.out.println();//space in the display
 		} catch (FormantNumberexception e) {
 			// TODO Auto-generated catch block

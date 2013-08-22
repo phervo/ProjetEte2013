@@ -33,6 +33,12 @@ public class FormantSequence {
 	private int nbFormant;
 	
 	/**
+	 * allow to define a interval in % to find the formants.
+	 * It allow a little margin to find the result.
+	 * Example if you type 0.1, it will allow a margin of 10 % above and below the formant value to find a result.
+	 */
+	private double autorisedMargin;
+	/**
 	 * <p>The list of all the formants used in the object FormantSequence. Is size is nbFormant.<br/>
 	 * You can change a formant after the creation but you cannot add new formants.
 	 * 
@@ -60,6 +66,7 @@ public class FormantSequence {
 			for(int i=0;i<nbFormant;i++){
 				list.add(new Formant());
 			}
+			this.setAutorisedMargin(0.0); //not important here, it is just a template for error, will be interesting in the constructor with name param
 		}else{
 			throw new FormantNumberexception(nbFormant,nbFormant,nbFormant); //only the 1st parameter matter,just don't put 0
 		}
@@ -81,11 +88,12 @@ public class FormantSequence {
 	* @since 0.1
 	*
 	*/
-	public FormantSequence(String soundName, int nbFormant,ArrayList<Formant> list) throws FormantNumberexception{
+	public FormantSequence(String soundName, int nbFormant,ArrayList<Formant> list,double autorisedMargin) throws FormantNumberexception{
 		if(list.size()==nbFormant && nbFormant!=0){
 			this.soundName = soundName;
 			this.nbFormant = nbFormant;
 			this.list=list;
+			this.setAutorisedMargin(autorisedMargin);
 		}else{
 			throw new FormantNumberexception(nbFormant,0,list.size());
 		}
@@ -113,15 +121,19 @@ public class FormantSequence {
 		if(soundName.compareTo("i")==0){
 			list.add(new Formant(280.0, 28.0, 0.0));
 			list.add(new Formant(2250.0, 450.0, 0.0));
+			this.setAutorisedMargin(0.1);
 		}else if(soundName.compareTo("a")==0){
 			list.add(new Formant(710.0,71,0));
 			list.add(new Formant(1100.0,220,0));
+			this.setAutorisedMargin(0.1);
 		}else if(soundName.compareTo("e")==0){
 			list.add(new Formant(405.0,40.5,0));
 			list.add(new Formant(2080.0,416.0,0));
+			this.setAutorisedMargin(0.1);
 		}else{
 			list.add(new Formant());
 			list.add(new Formant());
+			this.setAutorisedMargin(0.0);
 		}
 	}
 
@@ -210,6 +222,14 @@ public class FormantSequence {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	public double getAutorisedMargin() {
+		return autorisedMargin;
+	}
+
+	public void setAutorisedMargin(double autorisedMargin) {
+		this.autorisedMargin = autorisedMargin;
 	}
 	
 }

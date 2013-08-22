@@ -81,7 +81,7 @@ public class SequenceFactory extends AbstractCandidateFactory<Sequence>{
 				//separation selon les valeurs de var
 				try {
 					//I have deleted the lungAlphabet but for example if we use it, we should have said if position =0 ou 1 get value in the globalAlphabet.getLungsAlphabet()
-					if(i==12 || i==13){ //masseter
+					if(i==6){ //masseter
 						mySeq.setValues(i, globalAlphabet.getMasseterAlphabet().getValueAt(rng.nextInt(globalAlphabet.getMasseterAlphabet().getLength())));
 					}else{
 						mySeq.setValues(i, globalAlphabet.getOtherAlphabet().getValueAt(rng.nextInt(globalAlphabet.getOtherAlphabet().getLength())));

@@ -191,7 +191,7 @@ public class GeneticAlgorithmCall{
 	*/
 	public void buildTarget(){
 		/*its here that we define the target*/
-		this.target=new FormantSequence("e");
+		this.target=new FormantSequence("a");
 		//this.target.displayFormantSequence();
 	}
 	
@@ -297,7 +297,7 @@ public class GeneticAlgorithmCall{
 		//save the result in a final file,idem for the csv
 		try {
 			MessageToPraat.writePraatScriptInFile(this.finalsequence,"praatScriptWithCorrectValues.praat");
-			MonitoringCSV.writeCSVFile(System.getProperty("user.dir") + "/results/algoritmProgression.csv",true,getFinalExecTime(),this.finalsequence.getFitnessScore(),this.finalsequence);
+			MonitoringCSV.writeCSVFile(System.getProperty("user.dir") + "/results/algoritmProgression.csv",true,getFinalExecTime(),this.finalsequence.getFitnessScore(),this.finalsequence,this.getTarget());
 		} catch (PraatScriptException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

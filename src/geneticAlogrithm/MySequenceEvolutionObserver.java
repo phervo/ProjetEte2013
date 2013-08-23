@@ -59,7 +59,7 @@ public class MySequenceEvolutionObserver implements EvolutionObserver<Sequence>{
 
 		if(data.getGenerationNumber()==0){
 			try {
-				MonitoringCSV.writeCSVFile(System.getProperty("user.dir") + "/results/algoritmProgression.csv",false,getExecTime(),data.getBestCandidateFitness(),data.getBestCandidate());
+				MonitoringCSV.writeCSVFile(System.getProperty("user.dir") + "/results/algoritmProgression.csv",false,getExecTime(),data.getBestCandidateFitness(),data.getBestCandidate(),myGa.getTarget());
 				MessageToPraat.writePraatScriptInFile(data.getBestCandidate(),"SoundNumber"+data.getGenerationNumber()+".praat");
 			} catch (IOException | PraatScriptException e) {
 				// TODO Auto-generated catch block
@@ -74,7 +74,7 @@ public class MySequenceEvolutionObserver implements EvolutionObserver<Sequence>{
 			 */
 		}else{
 			try{
-				MonitoringCSV.writeCSVFile(System.getProperty("user.dir") + "/results/algoritmProgression.csv",true,getExecTime(),data.getBestCandidateFitness(),data.getBestCandidate());
+				MonitoringCSV.writeCSVFile(System.getProperty("user.dir") + "/results/algoritmProgression.csv",true,getExecTime(),data.getBestCandidateFitness(),data.getBestCandidate(),myGa.getTarget());
 				MessageToPraat.writePraatScriptInFile(data.getBestCandidate(),"SoundNumber"+data.getGenerationNumber()+".praat");
 			}catch (IOException | PraatScriptException e) {
 				e.printStackTrace();

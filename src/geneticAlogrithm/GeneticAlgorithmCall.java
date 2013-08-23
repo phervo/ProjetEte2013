@@ -43,7 +43,7 @@ import exceptions.PraatScriptException;
 public class GeneticAlgorithmCall{
 	
 	/**
-	 * The length of the sequence we will use. It musn't be modified ones it is set.
+	 * The length of the sequence we will use. It musn't be modified onces it is set.
 	 * 
 	 */
 	int length;
@@ -444,10 +444,12 @@ public class GeneticAlgorithmCall{
 			int res=0;
 			int bornF1=0;
 			int bornF2=0;
+			int bornF3=0;
 			try {
 				bornF1 = (int) (target.getAutorisedMargin()*target.getFormantAt(0).getFrequency());
 				bornF2 = (int) (target.getAutorisedMargin()*target.getFormantAt(1).getFrequency());
-				res=bornF1+bornF2;
+				bornF3 = (int) (target.getAutorisedMargin()*target.getFormantAt(2).getFrequency());
+				res=bornF1+bornF2+bornF3;
 			} catch (FormantNumberexception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

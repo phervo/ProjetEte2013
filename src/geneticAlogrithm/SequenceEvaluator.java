@@ -57,10 +57,6 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 	private final Semaphore answerFromPraat = new Semaphore(1, true);
 	
 	/**
-	 * the list of the 
-	 */
-	private List<Sequence> previousPopulation;
-	/**
 	* Constructor with given parameters.
 	* 
 	*
@@ -113,6 +109,7 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 		int matches=0;
 		int diffF1=0;
 		int diffF2=0;
+		int diffF3=0;
 		int formantFound=0;
 		//0) put a mutex
 		try {
@@ -143,6 +140,7 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 				//store the formants from praat in the sequence :
 				candidate.setF1(ga.getMessageFromPraat().getFormantAt(0));
 				candidate.setF2(ga.getMessageFromPraat().getFormantAt(1));
+				candidate.setF3(ga.getMessageFromPraat().getFormantAt(2));
 				candidate.setFormantFound("none");
 		    	for(int i=0;i<this.targetSequence.getNbFormant();i++){
 		    		//there is an interval of +/-10% around the value so we caluclate this value
@@ -161,7 +159,8 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 		    		
 		    		diffF1=Math.abs((int) (candidate.getF1().getFrequency()-ga.getTarget().getFormantAt(0).getFrequency()));
 		    		diffF2=Math.abs((int) (candidate.getF2().getFrequency()-ga.getTarget().getFormantAt(1).getFrequency()));
-		    		matches=diffF1+diffF2;
+		    		diffF3=Math.abs((int) (candidate.getF2().getFrequency()-ga.getTarget().getFormantAt(1).getFrequency()));
+		    		matches=diffF1+diffF2+diffF3;
 					//if(ga.getMessageFromPraat().getFormantAt(i).getBandwith()>=lowerBornBW && ga.getMessageFromPraat().getFormantAt(i).getBandwith()<=upperBornBW ){
 					//	matches++;
 					//}
@@ -169,8 +168,11 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 					//	matches++;
 					//}
 				}
-		    	if(formantFound==2){
-		    		candidate.setFormantFound("both");
+		    	
+		    	if(formantFound==3){
+		    		candidate.setFormantFound("two");
+		    	}else if(formantFound==3){
+		    		candidate.setFormantFound("all");
 		    	}
 		    	candidate.setFitnessScore(matches);
 			}

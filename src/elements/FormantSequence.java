@@ -82,6 +82,8 @@ public class FormantSequence {
 	* 	the number of formants
 	* @param list
 	* 	the list of Formants
+	* @param autorisedMargin
+	* 	the autorised margin, cf param doc above for more info
 	* 
 	* @throws FormantNumberexception If you use the wrong parameters.
 	*
@@ -116,21 +118,25 @@ public class FormantSequence {
 		}else{
 			this.soundName = soundName;
 		}
-		this.nbFormant = 2;
+		this.nbFormant = 3;
 		this.list= new ArrayList<>();
 		if(soundName.compareTo("i")==0){
 			list.add(new Formant(280.0, 28.0, 0.0));
 			list.add(new Formant(2250.0, 450.0, 0.0));
+			list.add(new Formant(0.0,0.0,0));
 			this.setAutorisedMargin(0.1);
 		}else if(soundName.compareTo("a")==0){
 			list.add(new Formant(710.0,71,0));
 			list.add(new Formant(1100.0,220,0));
-			this.setAutorisedMargin(0.1);
+			list.add(new Formant(2450.0,735.0,0));
+			this.setAutorisedMargin(0.05);
 		}else if(soundName.compareTo("e")==0){
 			list.add(new Formant(405.0,40.5,0));
 			list.add(new Formant(2080.0,416.0,0));
+			list.add(new Formant(0.0,0.0,0));
 			this.setAutorisedMargin(0.1);
 		}else{
+			list.add(new Formant());
 			list.add(new Formant());
 			list.add(new Formant());
 			this.setAutorisedMargin(0.0);

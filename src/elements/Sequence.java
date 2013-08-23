@@ -55,14 +55,19 @@ public class Sequence {
 	private Formant f2;
 	
 	/**
+	 * the third formant. We just initialise the value here. we will put the good value in the SequenceEvaluator.
+	 */
+	private Formant f3;
+	
+	/**
 	 * field which indicate which formant the algo has found
-	 * 4 possible values "none","F1","F2","both".
+	 * 5 possible values "none","F1","F2","F3","both".
 	 * here is just the init, the value will be set during the evaluation
 	 */
 	private String formantFound;
 	
 	/**
-	 * field wich indicqte the fitness score found when compqring the formqnt of the sequence to the tqrget formants.
+	 * field which indicate the fitness score found when comparing the formant of the sequence to the target formants.
 	 * We init it to 0 here, the final score will be set in the fitness function in fitnessEvqluator
 	 */
 	private double fitnessScore;
@@ -86,6 +91,7 @@ public class Sequence {
 			}
 			f1=new Formant();
 			f2=new Formant();
+			f3=new Formant();
 			formantFound="none";
 			fitnessScore=0;
 		}else{
@@ -115,6 +121,7 @@ public class Sequence {
 			this.values = values;
 			f1=new Formant();
 			f2=new Formant();
+			f3=new Formant();
 			formantFound="none";
 			fitnessScore=0;
 		}else{
@@ -268,6 +275,14 @@ public class Sequence {
 
 	public void setFitnessScore(double fitnessScore) {
 		this.fitnessScore = fitnessScore;
+	}
+
+	public Formant getF3() {
+		return f3;
+	}
+
+	public void setF3(Formant f3) {
+		this.f3 = f3;
 	}
 	
 }

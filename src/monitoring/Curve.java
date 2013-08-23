@@ -26,10 +26,12 @@ public class Curve{
 		double[] absis=null; // the same for the two
 		double[] ordoneeF1=null;
 		double[] ordoneeF2=null;
+		double[] ordoneeF3=null;
 		double[] ordoneeFitness=null;
 		int compteur=0;
 		double[] F1Value;
 		double[] F2Value;
+		double[] F3Value;
 		double[] absisBarre;//the 0 axe
 		try {
 			/*
@@ -42,8 +44,10 @@ public class Curve{
 			absis= new double[content.size()];			
 			ordoneeF1 =new double[content.size()];	
 			ordoneeF2 =new double[content.size()];	
+			ordoneeF3 =new double[content.size()];
 			F1Value=new double[content.size()];	
 			F2Value=new double[content.size()];
+			F3Value =new double[content.size()];
 			absisBarre=new double[content.size()];
 			ordoneeFitness = new double[content.size()];
 			//decomposition in two array, one for the values of the absis and one for the values of the ordonee
@@ -53,11 +57,13 @@ public class Curve{
 			    absis[compteur]=Double.parseDouble(row[0].trim());
 			    F1Value[compteur]=0.1*target.getFormantAt(0).getFrequency();
 				F2Value[compteur]=0.1*target.getFormantAt(1).getFrequency();
+				F3Value[compteur]=0.1*target.getFormantAt(2).getFrequency();
 				absisBarre[compteur]=0;
 				//calculation of the variables ordonness
 				ordoneeFitness[compteur]=Double.parseDouble(row[1].trim());
 				ordoneeF1[compteur]=target.getFormantAt(0).getFrequency()-Double.parseDouble(row[2].trim());
 			    ordoneeF2[compteur]=target.getFormantAt(1).getFrequency()-Double.parseDouble(row[3].trim());
+			    ordoneeF3[compteur]=target.getFormantAt(2).getFrequency()-Double.parseDouble(row[4].trim());
 				compteur++; // attention a celui la
 			}
 			reader.close();
@@ -78,8 +84,10 @@ public class Curve{
 			// add a line plot to the PlotPanel
 			plotDifferenceToTarget.addLinePlot("F1 of candidate", absis, ordoneeF1);
 			plotDifferenceToTarget.addLinePlot("F2 of candidate",absis,ordoneeF2);
+			plotDifferenceToTarget.addLinePlot("F3 of candidate",absis,ordoneeF3);
 			plotDifferenceToTarget.addLinePlot("F1 margin",absis,F1Value);
 			plotDifferenceToTarget.addLinePlot("F2 margin",absis,F2Value);
+			plotDifferenceToTarget.addLinePlot("F2 margin",absis,F3Value);
 			plotDifferenceToTarget.addLinePlot("0",absis,absisBarre);
 			plotFitness.addLinePlot("Fitness Curve", absis,ordoneeFitness);
 			

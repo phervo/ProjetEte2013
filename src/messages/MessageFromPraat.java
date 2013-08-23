@@ -30,7 +30,7 @@ public class MessageFromPraat {
 	/**
 	 * define the number of values that we are waiting from praat
 	 */
-	private static final int nbCharFromPraat=2;
+	private static final int nbCharFromPraat=3;
 	/**
 	* constructor without parameters, just create to override the default java constructor.
 	* No need to use it so we define it as private
@@ -91,9 +91,10 @@ public class MessageFromPraat {
 				//list.add(new Formant(arrondir(Double.parseDouble(tab[1]),1),arrondir(Double.parseDouble(tab[3]),1),0.0));
 				list.add(new Formant(arrondir(Double.parseDouble(tab[0]),1),0.0,0.0));
 				list.add(new Formant(arrondir(Double.parseDouble(tab[1]),1),0.0,0.0));
+				list.add(new Formant(arrondir(Double.parseDouble(tab[2]),1),0.0,0.0));
 				
 				try {
-					fms=new FormantSequence("candidat", 2,list,0.0); //the last param, isnt important here, it is just for the target where it matter
+					fms=new FormantSequence("candidat", 3,list,0.0); //the last param, isnt important here, it is just for the target where it matter
 				} catch (FormantNumberexception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -104,7 +105,8 @@ public class MessageFromPraat {
 					so we create a empty formant and switch to the next*/
 					list.add(new Formant());
 					list.add(new Formant());
-					fms = new FormantSequence("candidat", 2,list,0.0);
+					list.add(new Formant());
+					fms = new FormantSequence("candidat", 3,list,0.0);
 				} catch (FormantNumberexception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

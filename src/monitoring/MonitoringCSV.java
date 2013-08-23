@@ -36,10 +36,10 @@ public class MonitoringCSV {
 		if(!notErasePreviousFile){
 			entries= ("TARGET,"+target.getSoundName()).split(",");
 			mCsvWriter.writeNext(entries);
-			entries= "TIME,SCORE,F1,F2,FORMANT_FOUND,Sequence".split(",");
+			entries= "TIME,SCORE,F1,F2,F3,FORMANT_FOUND,Sequence".split(",");
 			mCsvWriter.writeNext(entries);
 		}
-	    entries = (exectutionTime+","+score+","+sequence.getF1().getFrequency()+","+sequence.getF2().getFrequency()+","+sequence.getFormantFound()+","+sequence.getValuesInString()).split(",");
+	    entries = (exectutionTime+","+score+","+sequence.getF1().getFrequency()+","+sequence.getF2().getFrequency()+","+sequence.getF3().getFrequency()+","+sequence.getFormantFound()+","+sequence.getValuesInString()).split(",");
 	    mCsvWriter.writeNext(entries);
 	    mCsvWriter.close();
 	}

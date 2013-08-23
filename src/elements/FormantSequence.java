@@ -123,7 +123,7 @@ public class FormantSequence {
 		if(soundName.compareTo("i")==0){
 			list.add(new Formant(280.0, 28.0, 0.0));
 			list.add(new Formant(2250.0, 450.0, 0.0));
-			list.add(new Formant(0.0,0.0,0));
+			list.add(new Formant(3088.0,0.0,0));
 			this.setAutorisedMargin(0.1);
 		}else if(soundName.compareTo("a")==0){
 			list.add(new Formant(710.0,71,0));
@@ -133,7 +133,7 @@ public class FormantSequence {
 		}else if(soundName.compareTo("e")==0){
 			list.add(new Formant(405.0,40.5,0));
 			list.add(new Formant(2080.0,416.0,0));
-			list.add(new Formant(0.0,0.0,0));
+			list.add(new Formant(2636.0,0.0,0));
 			this.setAutorisedMargin(0.1);
 		}else{
 			list.add(new Formant());

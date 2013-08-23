@@ -26,7 +26,7 @@ public class MonitoringCSV {
 	 * @throws IOException 
 	 * 	if the file doesn't exist
 	 */
-	public static void writeCSVFile(String fileName,boolean notErasePreviousFile,double exectutionTime, double score, Sequence sequence) throws IOException{
+	public static void writeCSVFile(String fileName,boolean notErasePreviousFile,double exectutionTime, double score, Sequence sequence,FormantSequence target) throws IOException{
 		// need to use that trick to use the append at the end of the file
 		FileWriter mFileWriter = new FileWriter(fileName, notErasePreviousFile); 
 		CSVWriter mCsvWriter = new CSVWriter(mFileWriter,',',' ');// i put a white space so i can use the trim function during the readind and avoid a regular expression or
@@ -34,6 +34,8 @@ public class MonitoringCSV {
 		String[] entries;
 		//if new file, we put headers
 		if(!notErasePreviousFile){
+			entries= ("TARGET,"+target.getSoundName()).split(",");
+			mCsvWriter.writeNext(entries);
 			entries= "TIME,SCORE,F1,F2,FORMANT_FOUND,Sequence".split(",");
 			mCsvWriter.writeNext(entries);
 		}

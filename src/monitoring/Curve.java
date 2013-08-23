@@ -36,7 +36,7 @@ public class Curve{
 			 * 1st we read the csv file to extract the information and get tzo array representing the absis and the ordonees
 			 * For that purpose we use the opencsv api 
 			 */
-			reader = new CSVReader(new FileReader(System.getProperty("user.dir") + "/results/algoritmProgression.csv"),',',' ' , 1); //cf opencsv api
+			reader = new CSVReader(new FileReader(System.getProperty("user.dir") + "/results/algoritmProgression.csv"),',',' ' , 2); //cf opencsv api
 			List content = reader.readAll();
 			//init of the lists
 			absis= new double[content.size()];			

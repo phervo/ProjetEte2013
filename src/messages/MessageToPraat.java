@@ -101,7 +101,9 @@ public class MessageToPraat {
 	* see the architecture documentation.
 	* You must have initialize the praat environment with writePraatScriptHeader() before.
 	*
-	* @return String containing the script for creating and querying a sound
+	*@param candidat
+	*		the sequence we want to use in this fitness evaluation
+	*
 	* @throws PraatScriptException If you gave an incorrect sequence
 	*
 	* @since 0.1
@@ -333,31 +335,5 @@ public class MessageToPraat {
 		}else{
 			throw new PraatScriptException(candidat.getLength(),nbVarToSendToPraat);
 		}
-	}
-
-	/**
-	* script use to clear the memory of praat by removing all the objects in he object list.
-	* We use it because praat had a maximal capacity of object in memory and so using a GA could reach this capacity.
-	* So we clean the object window from time to time at each end of generation.
-	* this function recreate the two speakers. 
-	*
-	* @return String containing the script to execute
-	*
-	* @since 0.1
-	* @deprecated Use {@link OrderToPraat#reLaunchPraat()} instead
-	*/
-	public static String clearPraatObjectWindow(){
-		StringBuilder stb= new StringBuilder();
-		stb.append("#-----------------------------------------------\n");
-		stb.append("# Project : Software synthesis using GA\n");
-		stb.append("# Hervo Pierre-Yves, automatic Script generated in java\n");
-		stb.append("#-----------------------------------------------\n");
-		stb.append("select all\n");
-		stb.append("Remove\n");
-		stb.append("#-----------------------------------------------\n");
-		stb.append("Create Speaker... Robovox Female 2\n"); //nom genre typeDeGlottis
-		stb.append("Create Artword... phon "+Speachtime+"\n");//creation of actions list(init)
-		stb.append("#-----------------------------------------------\n");
-		return stb.toString();
 	}
 }

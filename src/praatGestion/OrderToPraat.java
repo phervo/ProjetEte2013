@@ -42,8 +42,6 @@ public class OrderToPraat implements Observer {
 	/**
 	 * A mutex to protect the separate execution of each instruction
 	 * 
-	 * @see launchPraat()
-	 * @see endMessageToPrat(String string)
 	 * 
 	 */
 	private static final Semaphore token = new Semaphore(1, true);

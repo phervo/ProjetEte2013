@@ -4,6 +4,7 @@ elements
 exceptions
 geneticAlogrithm
 messages
+monitoring
 praatGestion
 tests
 tests.integration

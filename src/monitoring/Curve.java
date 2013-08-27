@@ -16,8 +16,8 @@ public class Curve{
 	 * function which read the csv file and draw the curve.
 	 * Use the read functions of the opencsv api and the mathPlot 2.0 api to draw the curve
 	 * 
-	 * @param ga
-	 * 		the ga used. We need it to get the target and do the comparison
+	 * @param target
+	 * 		the forant Sequence used as target. It it use to calculate the difference between the candidate and the target.
 	 * @throws FormantNumberexception 
 	 */
 	public Curve(FormantSequence target) throws FormantNumberexception{

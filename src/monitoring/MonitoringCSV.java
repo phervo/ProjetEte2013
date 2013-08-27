@@ -14,7 +14,7 @@ public class MonitoringCSV {
 	 * 
 	 * @param fileName
 	 * 		the path of the file
-	 * @param erasePreviousFile
+	 * @param notErasePreviousFile
 	 * 		indicate if you want to erase the previous file or simply write at the end. True if you want the file to stay or false if
 	 * 		you want a new file
 	 * @param exectutionTime
@@ -34,7 +34,7 @@ public class MonitoringCSV {
 		String[] entries;
 		//if new file, we put headers
 		if(!notErasePreviousFile){
-			entries= ("TARGET,"+target.getSoundName()).split(",");
+			entries= ("TARGET,"+target.getSoundName()+"NBFORMANTUSEDINSIMULATION,"+target.getNbFormant()).split(",");
 			mCsvWriter.writeNext(entries);
 			entries= "TIME,SCORE,F1,F2,F3,FORMANT_FOUND,Sequence".split(",");
 			mCsvWriter.writeNext(entries);
@@ -46,8 +46,8 @@ public class MonitoringCSV {
 
 	/**
 	 * function which display the curve of values stored in the csv
-	 * @param ga
-	 * 		the ga used. We need it to get the target and do the comparison
+	 * @param target
+	 * 		the FormantSequence used as target by the GA.
 	 */
 	public static void displayCSV(FormantSequence target){
 		try {

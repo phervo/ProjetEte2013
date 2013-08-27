@@ -191,7 +191,7 @@ public class GeneticAlgorithmCall{
 	*/
 	public void buildTarget(){
 		/*its here that we define the target*/
-		this.target=new FormantSequence("a");
+		this.target=new FormantSequence("i");
 		//this.target.displayFormantSequence();
 	}
 	

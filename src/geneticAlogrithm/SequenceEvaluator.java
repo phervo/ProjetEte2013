@@ -114,9 +114,10 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 		//0) put a mutex
 		try {
 			ga.getMutexFitnessFunction().acquire();
-		
-		//1) j'envoie le candidat courant (var candidate au script)
-		/*write value in the script send to praat and send it*/
+			
+			/*
+			 * 1) we try to see if the sequence is equal to one of the previous one. If is is the case, we reaffect the previous fitness value.
+			 */
 			System.out.println("candidat :"+candidate.getValuesInString());
 			//a ce moment precis j ai une nouvelle sequence, c est maintenant que je peux regarder s il correpsond a l un des precendents
 			if(ga.getPreviousGeneration()!=null && candidate.getFitnessScore()==0.0){ //avoid to reaffect those which already got a score(elites)
@@ -127,14 +128,18 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 					}
 				}
 			}
+			/*2) analyse of the candidate. If it corresponds to a previous sentence (already calculated) then avoid the recalculation and
+			*    directly affect the values.
+			*    Else send the script to praat.
+			*/
 			if(candidate.getFitnessScore()!=0.0){
+				//case previously existing in a former run
 				System.out.println("EEEHHH JE SUIS DIFFERENT !!!");
 				matches = (int) candidate.getFitnessScore();
 			}else{
+				/*write value in the script send to praat and send it*/
 				MessageToPraat.writePraatScriptWithCandidates(candidate);
 				OrderToPraat.sendCandidiateScriptToPrat(System.getProperty("user.dir") + "/results/fichierEncours.praat");
-				//2) recuperer le resultat dans messageFromPraat (attente serveur et socket si besoin) et le comparer a la cible
-				
 				
 				answerFromPraat.acquire();	
 				//store the formants from praat in the sequence :
@@ -142,34 +147,36 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 				candidate.setF2(ga.getMessageFromPraat().getFormantAt(1));
 				candidate.setF3(ga.getMessageFromPraat().getFormantAt(2));
 				candidate.setFormantFound("none");
+				
+				//for each formant of the sequence
 		    	for(int i=0;i<this.targetSequence.getNbFormant();i++){
-		    		//there is an interval of +/-10% around the value so we caluclate this value
+		    		//this part is just for prints in the cvs, not used for the fitness score itself
 		    		double lowerBornfreq = this.targetSequence.getFormantAt(i).getFrequency()+(this.targetSequence.getAutorisedMargin()*this.targetSequence.getFormantAt(i).getFrequency());
-		    		double upperBornfreq = this.targetSequence.getFormantAt(i).getFrequency()+(this.targetSequence.getAutorisedMargin()*this.targetSequence.getFormantAt(i).getFrequency());
-		    		//double lowerBornBW = this.targetSequence.getFormantAt(i).getBandwith()*0.9;
-		    		//double upperBornBW = this.targetSequence.getFormantAt(i).getBandwith()*1.1;
-		    		//double lowerBornA = this.targetSequence.getFormantAt(i).getAmplitude()*0.9;
-		    		//double upperBornA = this.targetSequence.getFormantAt(i).getAmplitude()*1.1;
+		    		double upperBornfreq = this.targetSequence.getFormantAt(i).getFrequency()-(this.targetSequence.getAutorisedMargin()*this.targetSequence.getFormantAt(i).getFrequency());
 		    		
-		    		//just for print in the cvs, not use for the fitness itself
 		    		if((ga.getMessageFromPraat().getFormantAt(i).getFrequency()>=lowerBornfreq && ga.getMessageFromPraat().getFormantAt(i).getFrequency()<=upperBornfreq)){
 						formantFound++;
 						candidate.setFormantFound("F"+(i+1)); //difference beetween the index and the real formant number
 					}
 		    		
+		    	}	
+		    		/* this part is for fitness score.
+		    		 * I calculate the difference beetween the candidate formants and the target formants.
+		    		 * then i add all this values to get a value of the difference to the target.
+		    		 * This is what i return as "matches"
+		    		 * 
+		    		 */
 		    		diffF1=Math.abs((int) (candidate.getF1().getFrequency()-ga.getTarget().getFormantAt(0).getFrequency()));
+		    		System.out.println(diffF1);
 		    		diffF2=Math.abs((int) (candidate.getF2().getFrequency()-ga.getTarget().getFormantAt(1).getFrequency()));
-		    		diffF3=Math.abs((int) (candidate.getF2().getFrequency()-ga.getTarget().getFormantAt(1).getFrequency()));
+		    		System.out.println(diffF2);
+		    		diffF3=Math.abs((int) (candidate.getF3().getFrequency()-ga.getTarget().getFormantAt(2).getFrequency()));
+		    		System.out.println(diffF3);
 		    		matches=diffF1+diffF2+diffF3;
-					//if(ga.getMessageFromPraat().getFormantAt(i).getBandwith()>=lowerBornBW && ga.getMessageFromPraat().getFormantAt(i).getBandwith()<=upperBornBW ){
-					//	matches++;
-					//}
-					//if(ga.getMessageFromPraat().getFormantAt(i).getAmplitude()>=lowerBornA && ga.getMessageFromPraat().getFormantAt(i).getAmplitude()<=upperBornA){
-					//	matches++;
-					//}
-				}
+		    		System.out.println(matches);
+				
 		    	
-		    	if(formantFound==3){
+		    	if(formantFound==2){
 		    		candidate.setFormantFound("two");
 		    	}else if(formantFound==3){
 		    		candidate.setFormantFound("all");

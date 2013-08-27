@@ -34,7 +34,7 @@ public class MonitoringCSV {
 		String[] entries;
 		//if new file, we put headers
 		if(!notErasePreviousFile){
-			entries= ("TARGET,"+target.getSoundName()+"NBFORMANTUSEDINSIMULATION,"+target.getNbFormant()).split(",");
+			entries= ("TARGET,"+target.getSoundName()+","+"NBFORMANTUSEDINSIMULATION,"+target.getNbFormant()).split(",");
 			mCsvWriter.writeNext(entries);
 			entries= "TIME,SCORE,F1,F2,F3,FORMANT_FOUND,Sequence".split(",");
 			mCsvWriter.writeNext(entries);

@@ -484,7 +484,7 @@ public class UnitaryTestsGA {
 			 //praatLaunchHeaderClose();
 			 //testStatePattern();
 			 testGraph(new FormantSequence("a"));
-			 loadAllSounds();
+			 //loadAllSounds();
 		 }
 		 
 	 }

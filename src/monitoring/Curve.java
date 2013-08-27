@@ -55,15 +55,15 @@ public class Curve{
 			    row = (String[]) object;
 			    //constantes lines
 			    absis[compteur]=Double.parseDouble(row[0].trim());
-			    F1Value[compteur]=0.1*target.getFormantAt(0).getFrequency();
-				F2Value[compteur]=0.1*target.getFormantAt(1).getFrequency();
-				F3Value[compteur]=0.1*target.getFormantAt(2).getFrequency();
+			    F1Value[compteur]=target.getAutorisedMargin()*target.getFormantAt(0).getFrequency();
+				F2Value[compteur]=target.getAutorisedMargin()*target.getFormantAt(1).getFrequency();
+				//F3Value[compteur]=target.getAutorisedMargin()*target.getFormantAt(2).getFrequency();
 				absisBarre[compteur]=0;
 				//calculation of the variables ordonness
 				ordoneeFitness[compteur]=Double.parseDouble(row[1].trim());
 				ordoneeF1[compteur]=target.getFormantAt(0).getFrequency()-Double.parseDouble(row[2].trim());
 			    ordoneeF2[compteur]=target.getFormantAt(1).getFrequency()-Double.parseDouble(row[3].trim());
-			    ordoneeF3[compteur]=target.getFormantAt(2).getFrequency()-Double.parseDouble(row[4].trim());
+			    //ordoneeF3[compteur]=target.getFormantAt(2).getFrequency()-Double.parseDouble(row[4].trim());
 				compteur++; // attention a celui la
 			}
 			reader.close();
@@ -84,10 +84,10 @@ public class Curve{
 			// add a line plot to the PlotPanel
 			plotDifferenceToTarget.addLinePlot("F1 of candidate", absis, ordoneeF1);
 			plotDifferenceToTarget.addLinePlot("F2 of candidate",absis,ordoneeF2);
-			plotDifferenceToTarget.addLinePlot("F3 of candidate",absis,ordoneeF3);
+			//plotDifferenceToTarget.addLinePlot("F3 of candidate",absis,ordoneeF3);
 			plotDifferenceToTarget.addLinePlot("F1 margin",absis,F1Value);
 			plotDifferenceToTarget.addLinePlot("F2 margin",absis,F2Value);
-			plotDifferenceToTarget.addLinePlot("F2 margin",absis,F3Value);
+			//plotDifferenceToTarget.addLinePlot("F3 margin",absis,F3Value);
 			plotDifferenceToTarget.addLinePlot("0",absis,absisBarre);
 			plotFitness.addLinePlot("Fitness Curve", absis,ordoneeFitness);
 			

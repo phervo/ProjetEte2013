@@ -167,13 +167,10 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 		    		 * 
 		    		 */
 		    		diffF1=Math.abs((int) (candidate.getF1().getFrequency()-ga.getTarget().getFormantAt(0).getFrequency()));
-		    		System.out.println(diffF1);
 		    		diffF2=Math.abs((int) (candidate.getF2().getFrequency()-ga.getTarget().getFormantAt(1).getFrequency()));
-		    		System.out.println(diffF2);
 		    		diffF3=Math.abs((int) (candidate.getF3().getFrequency()-ga.getTarget().getFormantAt(2).getFrequency()));
-		    		System.out.println(diffF3);
 		    		matches=diffF1+diffF2+diffF3;
-		    		System.out.println(matches);
+		 
 				
 		    	
 		    	if(formantFound==2){

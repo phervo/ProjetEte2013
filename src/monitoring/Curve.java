@@ -36,7 +36,6 @@ public class Curve{
 		double[] F1Value; //constante ligne to show the margin we accept from the absis to F1
 		double[] F2Value; //constante ligne to show the margin we accept from the absis to F1
 		double[] F3Value; //constante ligne to show the margin we accept from the absis to F1
-		double[] absisBarre; // constante ligne the 0 axe
 		try {
 			/*
 			 * 1st we read the csv file to extract the information and get tzo array representing the absis and the ordonees
@@ -52,7 +51,6 @@ public class Curve{
 			F1Value = new double[content.size()];	
 			F2Value = new double[content.size()];
 			F3Value = new double[content.size()];
-			absisBarre = new double[content.size()];
 			ordoneeFitness = new double[content.size()];
 			//decomposition in two array, one for the values of the absis and one for the values of the ordonee
 			
@@ -65,7 +63,6 @@ public class Curve{
 			    F1Value[compteur]=target.getAutorisedMargin()*target.getFormantAt(0).getFrequency();
 				F2Value[compteur]=target.getAutorisedMargin()*target.getFormantAt(1).getFrequency();
 				F3Value[compteur]=target.getAutorisedMargin()*target.getFormantAt(2).getFrequency();
-				absisBarre[compteur]=0;
 				//calculation of the variables ordonness
 				ordoneeFitness[compteur]=Double.parseDouble(row[2].trim());
 				ordoneeF1[compteur]=Math.abs(Double.parseDouble(row[3].trim())-target.getFormantAt(0).getFrequency());
@@ -76,7 +73,7 @@ public class Curve{
 			reader.close();
 			
 			for(int i=0;i<ordoneeF1.length;i++){
-				System.out.println(i+" "+ordoneeF1[i]);
+				System.out.println(i+" "+ordoneeF3[i]);
 			}
 						
 			
@@ -85,29 +82,44 @@ public class Curve{
 			 */
 			
 			// create your PlotPanel (you can use it as a JPanel)
-			Plot2DPanel plotDifferenceToTarget = new Plot2DPanel();
+			Plot2DPanel plotDifferenceToTargetF1 = new Plot2DPanel();
+			Plot2DPanel plotDifferenceToTargetF2 = new Plot2DPanel();
+			Plot2DPanel plotDifferenceToTargetF3 = new Plot2DPanel();
 			Plot2DPanel plotFitness = new Plot2DPanel();
 			
 			// define the legend position
-			plotDifferenceToTarget.addLegend("SOUTH");
+			plotDifferenceToTargetF1.addLegend("SOUTH");
+			plotDifferenceToTargetF2.addLegend("SOUTH");
+			plotDifferenceToTargetF3.addLegend("SOUTH");
 			plotFitness.addLegend("SOUTH");
 			
 			// add a line plot to the PlotPanel
-			plotDifferenceToTarget.addLinePlot("F1 of candidate", absis, ordoneeF1);
-			plotDifferenceToTarget.addLinePlot("F2 of candidate",absis,ordoneeF2);
-			plotDifferenceToTarget.addLinePlot("F3 of candidate",absis,ordoneeF3);
-			plotDifferenceToTarget.addLinePlot("F1 margin",absis,F1Value);
-			plotDifferenceToTarget.addLinePlot("F2 margin",absis,F2Value);
-			plotDifferenceToTarget.addLinePlot("F3 margin",absis,F3Value);
-			plotDifferenceToTarget.addLinePlot("0",absis,absisBarre);
+			plotDifferenceToTargetF1.addLinePlot("F1 of candidate", absis, ordoneeF1);
+			plotDifferenceToTargetF2.addLinePlot("F2 of candidate",absis,ordoneeF2);
+			plotDifferenceToTargetF3.addLinePlot("F3 of candidate",absis,ordoneeF3);
+			plotDifferenceToTargetF1.addLinePlot("F1 margin",absis,F1Value);
+			plotDifferenceToTargetF2.addLinePlot("F2 margin",absis,F2Value);
+			plotDifferenceToTargetF3.addLinePlot("F3 margin",absis,F3Value);
 			plotFitness.addLinePlot("Fitness Curve", absis,ordoneeFitness);
 			
 			// put the PlotPanel in a JFrame like a JPanel
-			JFrame frameDifferenceToTarget = new JFrame("a plot of the difference to the target");
-			frameDifferenceToTarget.setSize(600, 600);
-			frameDifferenceToTarget.setContentPane(plotDifferenceToTarget);
-			frameDifferenceToTarget.setVisible(true);
-			frameDifferenceToTarget.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			JFrame frameDifferenceToTargetF1 = new JFrame("a plot of the difference to the target for F1");
+			frameDifferenceToTargetF1.setSize(600, 600);
+			frameDifferenceToTargetF1.setContentPane(plotDifferenceToTargetF1);
+			frameDifferenceToTargetF1.setVisible(true);
+			frameDifferenceToTargetF1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			
+			JFrame frameDifferenceToTargetF2 = new JFrame("a plot of the difference to the target for F2");
+			frameDifferenceToTargetF2.setSize(600, 600);
+			frameDifferenceToTargetF2.setContentPane(plotDifferenceToTargetF2);
+			frameDifferenceToTargetF2.setVisible(true);
+			frameDifferenceToTargetF2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			
+			JFrame frameDifferenceToTargetF3 = new JFrame("a plot of the difference to the target for F3");
+			frameDifferenceToTargetF3.setSize(600, 600);
+			frameDifferenceToTargetF3.setContentPane(plotDifferenceToTargetF3);
+			frameDifferenceToTargetF3.setVisible(true);
+			frameDifferenceToTargetF3.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			
 			JFrame frameFitness = new JFrame("a plot to show the fitness evolution");
 			frameFitness.setSize(600, 600);

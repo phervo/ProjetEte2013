@@ -170,17 +170,12 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 		    	for(int i=0;i<this.targetSequence.getNbFormant();i++){
 		    		double lowerBornfreq = this.targetSequence.getFormantAt(i).getFrequency()-(this.targetSequence.getAutorisedMargin()*this.targetSequence.getFormantAt(i).getFrequency());
 		    		double upperBornfreq = this.targetSequence.getFormantAt(i).getFrequency()+(this.targetSequence.getAutorisedMargin()*this.targetSequence.getFormantAt(i).getFrequency());
-		    		System.out.println("lowerBornfreq :"+lowerBornfreq);
-		    		System.out.println("upperBornfreq :"+upperBornfreq);
-		    		System.out.println("valure formant :"+ga.getMessageFromPraat().getFormantAt(i).getFrequency());
 		    		
 		    		if((ga.getMessageFromPraat().getFormantAt(i).getFrequency()>=lowerBornfreq && ga.getMessageFromPraat().getFormantAt(i).getFrequency()<=upperBornfreq)){
 						formantFound++;
 						candidate.setFormantFound("F"+(i+1)); //difference beetween the index and the real formant number
 					}
-		    		System.out.println("valure formantfound :"+candidate.getFormantFound());
 		    	}	
-		    		
 		    	if(formantFound==2){
 		    		candidate.setFormantFound("two");
 		    	}else if(formantFound==3){

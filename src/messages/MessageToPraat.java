@@ -167,6 +167,12 @@ public class MessageToPraat {
 					stb.append("plus Speaker Robovox\n");
 					stb.append("To Sound... 22050 25   0 0 0    0 0 0    0 0 0\n");
 					stb.append("#-----------------------------------------------\n");
+					stb.append("#----------Part to rename the sound created-------\n");
+					stb.append("form Param\n"); // i use a form for the param, see praat api
+					stb.append("sentence value \"default\"\n");
+					stb.append("endform\n");
+					stb.append("Rename... 'value$'\n"); // dont forget the quote or the result wont print
+					stb.append("#-----------------------------------------------\n");
 					stb.append("#-----------------------------------------------\n");
 					stb.append("# Automatic data extraction part\n");
 					stb.append("To Formant (burg)... 0 5 5500 0.025 50\n");

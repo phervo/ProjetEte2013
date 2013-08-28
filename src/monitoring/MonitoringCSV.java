@@ -26,7 +26,7 @@ public class MonitoringCSV {
 	 * @throws IOException 
 	 * 	if the file doesn't exist
 	 */
-	public static void writeCSVFile(String fileName,boolean notErasePreviousFile,double exectutionTime, double score, Sequence sequence,FormantSequence target) throws IOException{
+	public static void writeCSVFile(String fileName,boolean notErasePreviousFile,double exectutionTime,int generationCount, double score, Sequence sequence,FormantSequence target) throws IOException{
 		// need to use that trick to use the append at the end of the file
 		FileWriter mFileWriter = new FileWriter(fileName, notErasePreviousFile); 
 		CSVWriter mCsvWriter = new CSVWriter(mFileWriter,',',' ');// i put a white space so i can use the trim function during the readind and avoid a regular expression or
@@ -36,10 +36,10 @@ public class MonitoringCSV {
 		if(!notErasePreviousFile){
 			entries= ("TARGET,"+target.getSoundName()+","+"NBFORMANTUSEDINSIMULATION,"+target.getNbFormant()).split(",");
 			mCsvWriter.writeNext(entries);
-			entries= "TIME,SCORE,F1,F2,F3,FORMANT_FOUND,Sequence".split(",");
+			entries= "TIME,GENERATION,SCORE,F1,F2,F3,FORMANT_FOUND,Sequence".split(",");
 			mCsvWriter.writeNext(entries);
 		}
-	    entries = (exectutionTime+","+score+","+sequence.getF1().getFrequency()+","+sequence.getF2().getFrequency()+","+sequence.getF3().getFrequency()+","+sequence.getFormantFound()+","+sequence.getValuesInString()).split(",");
+	    entries = (exectutionTime+","+generationCount+","+score+","+sequence.getF1().getFrequency()+","+sequence.getF2().getFrequency()+","+sequence.getF3().getFrequency()+","+sequence.getFormantFound()+","+sequence.getValuesInString()).split(",");
 	    mCsvWriter.writeNext(entries);
 	    mCsvWriter.close();
 	}

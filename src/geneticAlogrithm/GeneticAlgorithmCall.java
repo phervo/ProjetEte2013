@@ -140,6 +140,11 @@ public class GeneticAlgorithmCall{
 	private List<Sequence> previousGeneration;
 	
 	/**
+	 * indicate the number of generations that the complete run last
+	 */
+	private int nbGeneration;
+	
+	/**
 	* Constructor where we specified the length of the sequence we will use. Initialize the other attribute to null.
 	* 
 	*
@@ -170,6 +175,7 @@ public class GeneticAlgorithmCall{
 		//deleting the files in the folder containing the previous results to avoid keeping result that doesnt suit the current run
 		emptyDirectory(new File(System.getProperty("user.dir") + "/results/"));
 		this.previousGeneration=null;
+		this.setNbGeneration(0);
 	}
 	
 	
@@ -191,7 +197,7 @@ public class GeneticAlgorithmCall{
 	*/
 	public void buildTarget(){
 		/*its here that we define the target*/
-		this.target=new FormantSequence("a");
+		this.target=new FormantSequence("e");
 		//this.target.displayFormantSequence();
 	}
 	
@@ -297,7 +303,7 @@ public class GeneticAlgorithmCall{
 		//save the result in a final file,idem for the csv
 		try {
 			MessageToPraat.writePraatScriptInFile(this.finalsequence,"praatScriptWithCorrectValues.praat");
-			MonitoringCSV.writeCSVFile(System.getProperty("user.dir") + "/results/algoritmProgression.csv",true,getFinalExecTime(),this.finalsequence.getFitnessScore(),this.finalsequence,this.getTarget());
+			MonitoringCSV.writeCSVFile(System.getProperty("user.dir") + "/results/algoritmProgression.csv",true,getFinalExecTime(),this.getNbGeneration(),this.finalsequence.getFitnessScore(),this.finalsequence,this.getTarget());
 		} catch (PraatScriptException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -462,6 +468,16 @@ public class GeneticAlgorithmCall{
 		}
 		public List<Sequence> getPreviousGeneration(){
 			return previousGeneration;
+		}
+
+
+		public int getNbGeneration() {
+			return nbGeneration;
+		}
+
+
+		public void setNbGeneration(int nbGeneration) {
+			this.nbGeneration = nbGeneration;
 		}
 	
 }

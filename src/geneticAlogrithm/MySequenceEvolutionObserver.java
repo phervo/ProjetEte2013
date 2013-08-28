@@ -53,13 +53,14 @@ public class MySequenceEvolutionObserver implements EvolutionObserver<Sequence>{
 		this.myGa.setSequence(data.getBestCandidate());
 		System.out.println("marge acceptee : "+myGa.fitnessMargin());
 		System.out.println();
+		myGa.setNbGeneration(data.getGenerationNumber());
 
 		//store the sound produce all the 100 objects
 
 
 		if(data.getGenerationNumber()==0){
 			try {
-				MonitoringCSV.writeCSVFile(System.getProperty("user.dir") + "/results/algoritmProgression.csv",false,getExecTime(),data.getBestCandidateFitness(),data.getBestCandidate(),myGa.getTarget());
+				MonitoringCSV.writeCSVFile(System.getProperty("user.dir") + "/results/algoritmProgression.csv",false,getExecTime(),data.getGenerationNumber(),data.getBestCandidateFitness(),data.getBestCandidate(),myGa.getTarget());
 				MessageToPraat.writePraatScriptInFile(data.getBestCandidate(),"SoundNumber"+data.getGenerationNumber()+".praat");
 			} catch (IOException | PraatScriptException e) {
 				// TODO Auto-generated catch block
@@ -74,7 +75,7 @@ public class MySequenceEvolutionObserver implements EvolutionObserver<Sequence>{
 			 */
 		}else{
 			try{
-				MonitoringCSV.writeCSVFile(System.getProperty("user.dir") + "/results/algoritmProgression.csv",true,getExecTime(),data.getBestCandidateFitness(),data.getBestCandidate(),myGa.getTarget());
+				MonitoringCSV.writeCSVFile(System.getProperty("user.dir") + "/results/algoritmProgression.csv",true,getExecTime(),data.getGenerationNumber(),data.getBestCandidateFitness(),data.getBestCandidate(),myGa.getTarget());
 				MessageToPraat.writePraatScriptInFile(data.getBestCandidate(),"SoundNumber"+data.getGenerationNumber()+".praat");
 			}catch (IOException | PraatScriptException e) {
 				e.printStackTrace();

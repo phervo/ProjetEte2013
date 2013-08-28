@@ -124,6 +124,11 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 				System.out.println("je passe dans la reaffectation de score");
 				for(int i=0;i<ga.getPreviousGeneration().size();i++){
 					if(candidate.equals(ga.getPreviousGeneration().get(i))){
+						//then copy all the informations
+						candidate.setF1(ga.getPreviousGeneration().get(i).getF1());
+						candidate.setF2(ga.getPreviousGeneration().get(i).getF2());
+						candidate.setF3(ga.getPreviousGeneration().get(i).getF3());
+						candidate.setFormantFound(ga.getPreviousGeneration().get(i).getFormantFound());
 						candidate.setFitnessScore(ga.getPreviousGeneration().get(i).getFitnessScore());
 					}
 				}
@@ -148,31 +153,34 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 				candidate.setF3(ga.getMessageFromPraat().getFormantAt(2));
 				candidate.setFormantFound("none");
 				
-				//for each formant of the sequence
+	    		/* this part is for fitness score.
+	    		 * I calculate the difference beetween the candidate formants and the target formants.
+	    		 * then i add all this values to get a value of the difference to the target.
+	    		 * This is what i return as "matches"
+	    		 * 
+	    		 */
+	    		diffF1=Math.abs((int) (candidate.getF1().getFrequency()-ga.getTarget().getFormantAt(0).getFrequency()));
+	    		diffF2=Math.abs((int) (candidate.getF2().getFrequency()-ga.getTarget().getFormantAt(1).getFrequency()));
+	    		diffF3=Math.abs((int) (candidate.getF3().getFrequency()-ga.getTarget().getFormantAt(2).getFrequency()));
+	    		matches=diffF1+diffF2+diffF3;
+			
+	    		/*
+	    		 * this part is just for logs in the cvs, not used for the fitness score itself
+	    		 */
 		    	for(int i=0;i<this.targetSequence.getNbFormant();i++){
-		    		//this part is just for prints in the cvs, not used for the fitness score itself
-		    		double lowerBornfreq = this.targetSequence.getFormantAt(i).getFrequency()+(this.targetSequence.getAutorisedMargin()*this.targetSequence.getFormantAt(i).getFrequency());
-		    		double upperBornfreq = this.targetSequence.getFormantAt(i).getFrequency()-(this.targetSequence.getAutorisedMargin()*this.targetSequence.getFormantAt(i).getFrequency());
+		    		double lowerBornfreq = this.targetSequence.getFormantAt(i).getFrequency()-(this.targetSequence.getAutorisedMargin()*this.targetSequence.getFormantAt(i).getFrequency());
+		    		double upperBornfreq = this.targetSequence.getFormantAt(i).getFrequency()+(this.targetSequence.getAutorisedMargin()*this.targetSequence.getFormantAt(i).getFrequency());
+		    		System.out.println("lowerBornfreq :"+lowerBornfreq);
+		    		System.out.println("upperBornfreq :"+upperBornfreq);
+		    		System.out.println("valure formant :"+ga.getMessageFromPraat().getFormantAt(i).getFrequency());
 		    		
 		    		if((ga.getMessageFromPraat().getFormantAt(i).getFrequency()>=lowerBornfreq && ga.getMessageFromPraat().getFormantAt(i).getFrequency()<=upperBornfreq)){
 						formantFound++;
 						candidate.setFormantFound("F"+(i+1)); //difference beetween the index and the real formant number
 					}
-		    		
+		    		System.out.println("valure formantfound :"+candidate.getFormantFound());
 		    	}	
-		    		/* this part is for fitness score.
-		    		 * I calculate the difference beetween the candidate formants and the target formants.
-		    		 * then i add all this values to get a value of the difference to the target.
-		    		 * This is what i return as "matches"
-		    		 * 
-		    		 */
-		    		diffF1=Math.abs((int) (candidate.getF1().getFrequency()-ga.getTarget().getFormantAt(0).getFrequency()));
-		    		diffF2=Math.abs((int) (candidate.getF2().getFrequency()-ga.getTarget().getFormantAt(1).getFrequency()));
-		    		diffF3=Math.abs((int) (candidate.getF3().getFrequency()-ga.getTarget().getFormantAt(2).getFrequency()));
-		    		matches=diffF1+diffF2+diffF3;
-		 
-				
-		    	
+		    		
 		    	if(formantFound==2){
 		    		candidate.setFormantFound("two");
 		    	}else if(formantFound==3){

@@ -57,6 +57,12 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 	private final Semaphore answerFromPraat = new Semaphore(1, true);
 	
 	/**
+	 * class variable which allow to know hoh many times that method was called.
+	 * I used it to rename the files.
+	 */
+	private static int nbAppels=1;
+	
+	/**
 	* Constructor with given parameters.
 	* 
 	*
@@ -111,6 +117,7 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 		int diffF2=0;
 		int diffF3=0;
 		int formantFound=0;
+		
 		//0) put a mutex
 		try {
 			ga.getMutexFitnessFunction().acquire();
@@ -130,6 +137,7 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 						candidate.setF3(ga.getPreviousGeneration().get(i).getF3());
 						candidate.setFormantFound(ga.getPreviousGeneration().get(i).getFormantFound());
 						candidate.setFitnessScore(ga.getPreviousGeneration().get(i).getFitnessScore());
+						candidate.setGeneratedSoundNumber(ga.getPreviousGeneration().get(i).getGeneratedSoundNumber());
 					}
 				}
 			}
@@ -144,14 +152,15 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 			}else{
 				/*write value in the script send to praat and send it*/
 				MessageToPraat.writePraatScriptWithCandidates(candidate);
-				OrderToPraat.sendCandidiateScriptToPrat(System.getProperty("user.dir") + "/results/fichierEncours.praat");
-				
+				OrderToPraat.sendCandidiateScriptToPrat(System.getProperty("user.dir") + "/results/fichierEncours.praat",String.valueOf(nbAppels));
+
 				answerFromPraat.acquire();	
 				//store the formants from praat in the sequence :
 				candidate.setF1(ga.getMessageFromPraat().getFormantAt(0));
 				candidate.setF2(ga.getMessageFromPraat().getFormantAt(1));
 				candidate.setF3(ga.getMessageFromPraat().getFormantAt(2));
 				candidate.setFormantFound("none");
+				candidate.setGeneratedSoundNumber(nbAppels);
 				
 	    		/* this part is for fitness score.
 	    		 * I calculate the difference beetween the candidate formants and the target formants.
@@ -195,6 +204,9 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 		}
 		System.out.println("matchScore : "+matches);
 		ga.getMutexFitnessFunction().release();
+		
+		//once call to this method, update the nbAppels number to know how many times it was called
+		nbAppels++;
 		return matches;
 	}
 

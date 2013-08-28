@@ -71,6 +71,11 @@ public class Sequence {
 	 * We init it to 0 here, the final score will be set in the fitness function in fitnessEvqluator
 	 */
 	private double fitnessScore;
+	
+	/**
+	 * var which will allow me to know which sequence correspond to which sound generated in praat.
+	 */
+	private int generatedSoundNumber;
 	/**
 	* Constructor without parameters. Create a array of 0 of the length put in param. 
 	* 
@@ -94,6 +99,7 @@ public class Sequence {
 			f3=new Formant();
 			formantFound="none";
 			fitnessScore=0;
+			setGeneratedSoundNumber(0);
 		}else{
 			throw new SequenceArrayException(length,length,length);
 		}
@@ -124,6 +130,7 @@ public class Sequence {
 			f3=new Formant();
 			formantFound="none";
 			fitnessScore=0;
+			setGeneratedSoundNumber(0);
 		}else{
 			throw new SequenceArrayException(length,0,values.length);
 		}
@@ -283,6 +290,14 @@ public class Sequence {
 
 	public void setF3(Formant f3) {
 		this.f3 = f3;
+	}
+
+	public int getGeneratedSoundNumber() {
+		return generatedSoundNumber;
+	}
+
+	public void setGeneratedSoundNumber(int generatedSoundNumber) {
+		this.generatedSoundNumber = generatedSoundNumber;
 	}
 	
 }

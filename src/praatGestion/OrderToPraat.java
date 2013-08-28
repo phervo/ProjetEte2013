@@ -137,13 +137,15 @@ public class OrderToPraat implements Observer {
 	* Use the function in the messages package.
 	*
 	*@param fileName
-	*	A String containing a script
+	*	A String containing the path to the location of the praat scipt
 	* @see MessageFromPraat
+	* @param finalName
+	* 	the name you want the recorded sound to have.
 	* @since 0.1
 	*
 	*/
-	public static void sendCandidiateScriptToPrat(String fileName){
-		OrderToPraat.sendMessageToPrat("execute "+fileName);
+	public static void sendCandidiateScriptToPrat(String fileName,String finalName){
+		OrderToPraat.sendMessageToPrat("execute "+fileName+" "+finalName);
 	}
 	
 	

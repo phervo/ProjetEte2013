@@ -1,10 +1,14 @@
 package geneticAlogrithm;
 
 import java.io.IOException;
+
 import messages.MessageToPraat;
 import monitoring.MonitoringCSV;
+
 import org.uncommons.watchmaker.framework.EvolutionObserver;
 import org.uncommons.watchmaker.framework.PopulationData;
+
+import praatGestion.OrderToPraat;
 import elements.Sequence;
 import exceptions.PraatScriptException;
 
@@ -55,6 +59,8 @@ public class MySequenceEvolutionObserver implements EvolutionObserver<Sequence>{
 		System.out.println();
 		myGa.setNbGeneration(data.getGenerationNumber());
 
+		System.out.println("sound number best candidate :"+data.getBestCandidate().getGeneratedSoundNumber());
+		OrderToPraat.sendMessageToPrat(MessageToPraat.saveAsWave(String.valueOf(data.getBestCandidate().getGeneratedSoundNumber())));
 		//store the sound produce all the 100 objects
 
 

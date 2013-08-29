@@ -18,7 +18,7 @@ public class Curve{
 
 	/**
 	 * function which read the csv file and draw the curve.
-	 * Use the read functions of the opencsv api and the mathPlot 2.0 api to draw the curve
+	 * Use the read functions of the opencsv api and the JmathPlot 2.0 api to draw the curve
 	 * 
 	 * @param target
 	 * 		the forant Sequence used as target. It it use to calculate the difference between the candidate and the target.
@@ -41,7 +41,7 @@ public class Curve{
 			 * 1st we read the csv file to extract the information and get tzo array representing the absis and the ordonees
 			 * For that purpose we use the opencsv api 
 			 */
-			reader = new CSVReader(new FileReader(System.getProperty("user.dir") + "/results/algoritmProgression.csv"),',',' ' , 2); //cf opencsv api
+			reader = new CSVReader(new FileReader(System.getProperty("user.dir") + "/results/curve/algoritmProgression.csv"),',',' ' , 2); //cf opencsv api
 			List content = reader.readAll();
 			//init of the lists
 			absis = new double[content.size()];		

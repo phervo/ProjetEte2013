@@ -224,7 +224,7 @@ public class MessageToPraat {
 					stb.append("label break\n");
 					stb.append("sendsocket localhost:2009 'varMeans[1]' 'varMeans[2]' 'varMeans[3]'\n");
 					String texte = stb.toString();
-					FileWriter fw = new FileWriter(System.getProperty("user.dir") + "/results/fichierEncours.praat", false);
+					FileWriter fw = new FileWriter(System.getProperty("user.dir") + "/results/scripts/fichierEncours.praat", false);
 					BufferedWriter output = new BufferedWriter(fw);
 					output.write(texte);
 					output.flush();
@@ -257,7 +257,7 @@ public class MessageToPraat {
 	*/
 	public static void writePraatScriptInFile(Sequence candidat, String filename) throws PraatScriptException{
 		if(candidat.getLength()==nbVarToSendToPraat){
-			String adressedufichier = System.getProperty("user.dir") + "/results/"+filename;
+			String adressedufichier = System.getProperty("user.dir") + "/results/scripts/"+filename;
 			StringBuilder stb= new StringBuilder(); 
 			stb.append("#-----------------------------------------------\n");
 			stb.append("# Project : Software synthesis using GA\n");
@@ -341,15 +341,5 @@ public class MessageToPraat {
 		}else{
 			throw new PraatScriptException(candidat.getLength(),nbVarToSendToPraat);
 		}
-	}
-	
-	public static String saveAsWave(String iterationNumber){
-		//1st select the good sound
-		//String adressedufichier = System.getProperty("user.dir") + "/results/"+filename;
-		StringBuilder stb= new StringBuilder();
-		stb.append("selectObject \"Sound "+iterationNumber+"\n");
-		stb.append("Play\n");
-		String texte = stb.toString();
-		return texte;
 	}
 }

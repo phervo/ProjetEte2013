@@ -148,6 +148,22 @@ public class OrderToPraat implements Observer {
 		OrderToPraat.sendMessageToPrat("execute "+fileName+" "+finalName);
 	}
 	
+	/**
+	* send a script to praat. The script must be in a String.
+	* Use the function in the messages package.
+	*
+	*@param fileName
+	*	A String containing the path to the location of the praat scipt to use
+	*@param soundNumber
+	* 	the number of the loaded sound to save
+	* @param finalName
+	* 	the name you want the recorded sound to have. Indicate the complete path.
+	* @since 0.1
+	*
+	*/
+	public static void sendSaveWavOrder(String fileName,int soundNumber,String finalName){
+		OrderToPraat.sendMessageToPrat("execute "+fileName+" "+soundNumber+" "+finalName);
+	}
 	
 	/**
 	* close praat. Use it as the last command or the sendpraat routine will continue to be send but nothing will happen.
@@ -217,13 +233,11 @@ public class OrderToPraat implements Observer {
 	//lauchall
 	public static void launchAllScripts(){
 		//comnpter le nombre de fichiers
-		File di   = new File(System.getProperty("user.dir") + "/results/");
+		File di   = new File(System.getProperty("user.dir") + "/results/scripts/");
 		File fl[] = di.listFiles();
 		//then for each launch praat commande to load
 		for(int i=0;i<fl.length;i++){
-			if(!fl[i].getName().equals("algoritmProgression.csv")){//the csv genrated cant be read by praat
 			OrderToPraat.sendMessageToPrat("execute "+fl[i].toString()+" "+fl[i].getName());//i put it twice one for the name of the script to execute and one for the param to rename
-			}
 		}
 	}
 	

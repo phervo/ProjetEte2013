@@ -152,7 +152,7 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 			}else{
 				/*write value in the script send to praat and send it*/
 				MessageToPraat.writePraatScriptWithCandidates(candidate);
-				OrderToPraat.sendCandidiateScriptToPrat(System.getProperty("user.dir") + "/results/fichierEncours.praat",String.valueOf(nbAppels));
+				OrderToPraat.sendCandidiateScriptToPrat(System.getProperty("user.dir") + "/results/scripts/fichierEncours.praat",String.valueOf(nbAppels));
 
 				answerFromPraat.acquire();	
 				//store the formants from praat in the sequence :

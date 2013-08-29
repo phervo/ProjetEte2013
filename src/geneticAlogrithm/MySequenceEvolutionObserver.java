@@ -67,7 +67,7 @@ public class MySequenceEvolutionObserver implements EvolutionObserver<Sequence>{
 
 		if(data.getGenerationNumber()==0){
 			try {
-				MonitoringCSV.writeCSVFile(System.getProperty("user.dir") + "/results/curve//algoritmProgression.csv",false,getExecTime(),data.getGenerationNumber(),data.getBestCandidateFitness(),data.getBestCandidate(),myGa.getTarget());
+				MonitoringCSV.writeCSVFile(System.getProperty("user.dir") + "/results/curve/algoritmProgression.csv",false,getExecTime(),data.getGenerationNumber(),data.getBestCandidateFitness(),data.getBestCandidate(),myGa.getTarget());
 				MessageToPraat.writePraatScriptInFile(data.getBestCandidate(),"SoundNumber"+data.getGenerationNumber()+".praat");
 			} catch (IOException | PraatScriptException e) {
 				// TODO Auto-generated catch block
@@ -82,7 +82,7 @@ public class MySequenceEvolutionObserver implements EvolutionObserver<Sequence>{
 			 */
 		}else{
 			try{
-				MonitoringCSV.writeCSVFile(System.getProperty("user.dir") + "/results/curve//algoritmProgression.csv",true,getExecTime(),data.getGenerationNumber(),data.getBestCandidateFitness(),data.getBestCandidate(),myGa.getTarget());
+				MonitoringCSV.writeCSVFile(System.getProperty("user.dir") + "/results/curve/algoritmProgression.csv",true,getExecTime(),data.getGenerationNumber(),data.getBestCandidateFitness(),data.getBestCandidate(),myGa.getTarget());
 				MessageToPraat.writePraatScriptInFile(data.getBestCandidate(),"SoundNumber"+data.getGenerationNumber()+".praat");
 			}catch (IOException | PraatScriptException e) {
 				e.printStackTrace();
@@ -96,9 +96,10 @@ public class MySequenceEvolutionObserver implements EvolutionObserver<Sequence>{
 		 * So some time we need to remove those objects to avoid a calculation crash
 		 * We cant use the praat's remove function cause it only remove the objects from the list, the only way is to close and relaunch praat
 		 * Thats why i didi it here at the generation eval point. I do the operation all the 1000 objects to be sure to be large*/
-		if(data.getGenerationNumber()!=0 && data.getGenerationNumber()%40 == 0.0){
+		//if(data.getGenerationNumber()!=0 && data.getGenerationNumber()%40 == 0.0){
 			myGa.getPraatObject().reLaunch();
-		}
+			OrderToPraat.sendSingleLoadOrder(System.getProperty("user.dir") + "/UtilScripts/ReloadASpecificFile.praat",System.getProperty("user.dir")+"\\results\\sounds\\"+data.getGenerationNumber()+".wav","Sound "+data.getGenerationNumber()+".wav",data.getBestCandidate().getGeneratedSoundNumber()); //take care not +1 here, we want the previous one
+		//}
 	}
 
 	/**

@@ -6,7 +6,6 @@ endform
 #-----------------------------------------------
 #1st select the good sound
 temp$="Sound "+valueOfTheSoundToSave$
-writeInfoLine(temp$)
-appendInfoLine(newNameOfTheSound$)
 selectObject(temp$)
+#2nd save it as wav
 Save as WAV file... 'newNameOfTheSound$'

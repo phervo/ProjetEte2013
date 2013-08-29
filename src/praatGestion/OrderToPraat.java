@@ -165,6 +165,12 @@ public class OrderToPraat implements Observer {
 		OrderToPraat.sendMessageToPrat("execute "+fileName+" "+soundNumber+" "+finalName);
 	}
 	
+	
+	public static void sendSingleLoadOrder(String scriptFileName,String fileFUllpath,String fileName,int nomADonne){
+		OrderToPraat.sendMessageToPrat("execute "+scriptFileName+" "+fileFUllpath+" "+fileName+" "+nomADonne);
+	}
+	
+	
 	/**
 	* close praat. Use it as the last command or the sendpraat routine will continue to be send but nothing will happen.
 	* The Sendpraat command use in the other function need a RUNNING praat.

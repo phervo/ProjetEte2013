@@ -61,7 +61,7 @@ public class MySequenceEvolutionObserver implements EvolutionObserver<Sequence>{
 
 		//take care of the \ in the last param they are important
 		System.out.println("sound number best candidate :"+data.getBestCandidate().getGeneratedSoundNumber());
-		OrderToPraat.sendSaveWavOrder(System.getProperty("user.dir") + "/UtilScripts/SaveAsFile.praat",data.getBestCandidate().getGeneratedSoundNumber(),System.getProperty("user.dir")+"\\results\\sounds\\"+(data.getGenerationNumber()+1));
+		OrderToPraat.sendSaveWavOrder(System.getProperty("user.dir") + "/UtilScripts/SaveAsFile.praat",data.getBestCandidate().getGeneratedSoundNumber(),System.getProperty("user.dir")+"\\results\\sounds\\"+(data.getGenerationNumber()+1)+".wav");
 		//store the sound produce all the 100 objects
 
 

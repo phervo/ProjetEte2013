@@ -162,7 +162,9 @@ public class OrderToPraat implements Observer {
 	*
 	*/
 	public static void sendSaveWavOrder(String fileName,int soundNumber,String finalName){
-		OrderToPraat.sendMessageToPrat("execute "+fileName+" "+soundNumber+" "+finalName);
+		if(soundNumber!=0){//praat sounds start at 1
+			OrderToPraat.sendMessageToPrat("execute "+fileName+" "+soundNumber+" "+finalName);
+		}
 	}
 	
 	

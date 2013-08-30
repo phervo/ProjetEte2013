@@ -127,8 +127,7 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 			 */
 			System.out.println("candidat :"+candidate.getValuesInString());
 			//a ce moment precis j ai une nouvelle sequence, c est maintenant que je peux regarder s il correpsond a l un des precendents
-			if(ga.getPreviousGeneration()!=null && candidate.getFitnessScore()==0.0){ //avoid to reaffect those which already got a score(elites)
-				System.out.println("je passe dans la reaffectation de score");
+			if(ga.getPreviousGeneration()!=null && candidate.getFitnessScore()==0.0){ //avoid to reaffect those which already got a score in the previous generation(I keep only one)
 				for(int i=0;i<ga.getPreviousGeneration().size();i++){
 					if(candidate.equals(ga.getPreviousGeneration().get(i))){
 						//then copy all the informations

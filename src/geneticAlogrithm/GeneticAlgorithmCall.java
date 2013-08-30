@@ -481,5 +481,15 @@ public class GeneticAlgorithmCall{
 		public void setNbGeneration(int nbGeneration) {
 			this.nbGeneration = nbGeneration;
 		}
+
+
+		public MyGenerationalEvolutionEngine<Sequence> getEngine() {
+			return engine;
+		}
+
+
+		public void setEngine(MyGenerationalEvolutionEngine<Sequence> engine) {
+			this.engine = engine;
+		}
 	
 }

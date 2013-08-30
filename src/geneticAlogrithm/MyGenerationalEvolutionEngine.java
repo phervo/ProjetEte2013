@@ -28,6 +28,7 @@ public class MyGenerationalEvolutionEngine<T> extends GenerationalEvolutionEngin
 	    private final FitnessEvaluator<? super T> fitnessEvaluator;
 	    private final SelectionStrategy<? super T> selectionStrategy;
 	    private final GeneticAlgorithmCall myGa;
+	    private boolean relaunch;
 	    
 		public MyGenerationalEvolutionEngine(CandidateFactory<T> candidateFactory,
 			EvolutionaryOperator<T> evolutionScheme,
@@ -40,6 +41,7 @@ public class MyGenerationalEvolutionEngine<T> extends GenerationalEvolutionEngin
         this.fitnessEvaluator = fitnessEvaluator;
         this.selectionStrategy = selectionStrategy;
         this.myGa=myGa;
+        this.relaunch=false;
 		// TODO Auto-generated constructor stub
 	}
 		
@@ -54,6 +56,7 @@ public class MyGenerationalEvolutionEngine<T> extends GenerationalEvolutionEngin
 		        this.fitnessEvaluator = null;
 		        this.selectionStrategy = selectionStrategy;
 		        this.myGa=myGa;
+		        this.relaunch=false;
 				}
 		
 		protected List<EvaluatedCandidate<T>> nextEvolutionStep(List<EvaluatedCandidate<T>> evaluatedPopulation,
@@ -62,8 +65,16 @@ public class MyGenerationalEvolutionEngine<T> extends GenerationalEvolutionEngin
          {
 			//I save the previous generation to keep a record and use it in the Evlautor to find the sequence trhat have already been calculated
 			List<Sequence> maListe=new ArrayList<Sequence>(evaluatedPopulation.size());
-			for(int i=0;i<evaluatedPopulation.size();i++){
-				maListe.add((Sequence)evaluatedPopulation.get(i).getCandidate());//an evaluated candidate
+			/*
+			 * boolean to know if praat have been relaunch. It avoid to look for a sound that dont exist anymore.
+			 * If it is a nullPointeur, the values will be recalculated in the evaluator
+			 */
+			if(this.relaunch){
+				maListe=null; 
+			}else{
+				for(int i=0;i<evaluatedPopulation.size();i++){
+					maListe.add((Sequence)evaluatedPopulation.get(i).getCandidate());//an evaluated candidate
+				}
 			}
 	        this.myGa.setPreviouGeneration(maListe);
 	        
@@ -86,8 +97,17 @@ public class MyGenerationalEvolutionEngine<T> extends GenerationalEvolutionEngin
 	        population = evolutionScheme.apply(population, rng);
 	        // When the evolution is finished, add the elite to the population.
 	        population.addAll(elite);
+	        this.relaunch=false;
 	        return evaluatePopulation(population);
 			
          }
+
+		public boolean isRelaunch() {
+			return relaunch;
+		}
+
+		public void setRelaunch(boolean relaunch) {
+			this.relaunch = relaunch;
+		}
 
 }

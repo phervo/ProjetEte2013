@@ -138,6 +138,8 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 						candidate.setFormantFound(ga.getPreviousGeneration().get(i).getFormantFound());
 						candidate.setFitnessScore(ga.getPreviousGeneration().get(i).getFitnessScore());
 						candidate.setGeneratedSoundNumber(ga.getPreviousGeneration().get(i).getGeneratedSoundNumber());
+						System.out.println("Je SUIS REAFFECTE !!! "+candidate.getFitnessScore());
+						System.out.println("Je correspond au "+i +"eme candidat de l ancienne pop");
 					}
 				}
 			}
@@ -147,7 +149,6 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 			*/
 			if(candidate.getFitnessScore()!=0.0){
 				//case previously existing in a former run
-				System.out.println("EEEHHH JE SUIS DIFFERENT !!!");
 				matches = (int) candidate.getFitnessScore();
 			}else{
 				/*write value in the script send to praat and send it*/

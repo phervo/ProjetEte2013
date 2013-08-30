@@ -60,6 +60,13 @@ public class MyGenerationalEvolutionEngine<T> extends GenerationalEvolutionEngin
                 int eliteCount,
                 Random rng)
          {
+			//I save the previous generation to keep a record and use it in the Evlautor to find the sequence trhat have already been calculated
+			List<Sequence> maListe=new ArrayList<Sequence>(evaluatedPopulation.size());
+			for(int i=0;i<evaluatedPopulation.size();i++){
+				maListe.add((Sequence)evaluatedPopulation.get(i).getCandidate());//an evaluated candidate
+			}
+	        this.myGa.setPreviouGeneration(maListe);
+	        
 			List<T> population = new ArrayList<T>(evaluatedPopulation.size());
 
 	        // First perform any elitist selection.
@@ -79,9 +86,6 @@ public class MyGenerationalEvolutionEngine<T> extends GenerationalEvolutionEngin
 	        population = evolutionScheme.apply(population, rng);
 	        // When the evolution is finished, add the elite to the population.
 	        population.addAll(elite);
-	        
-	      	//I change the population after creating the new individuals above so I can still compare the new individual to the "old","parent" population
-	        this.myGa.setPreviouGeneration((List<Sequence>) population);// no need to be sort
 	        return evaluatePopulation(population);
 			
          }

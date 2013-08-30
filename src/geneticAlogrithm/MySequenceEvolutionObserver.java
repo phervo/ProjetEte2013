@@ -89,6 +89,7 @@ public class MySequenceEvolutionObserver implements EvolutionObserver<Sequence>{
 				e.printStackTrace();
 			}
 		}
+		myGa.getEngine().setRelaunch(false);
 
 		/*IMPORTANT : praat got a internal memory and can afford only a certain number of object (1800 in my case)
 		 * When reached, praat stop working (error message)

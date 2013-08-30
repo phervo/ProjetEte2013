@@ -69,14 +69,25 @@ public class MyGenerationalEvolutionEngine<T> extends GenerationalEvolutionEngin
 			 * boolean to know if praat have been relaunch. It avoid to look for a sound that dont exist anymore.
 			 * If it is a nullPointeur, the values will be recalculated in the evaluator
 			 */
+			System.out.println("etat de this.relaunch dans GEE: "+this.relaunch);
 			if(this.relaunch){
-				maListe=null; 
+				maListe=null;
 			}else{
 				for(int i=0;i<evaluatedPopulation.size();i++){
 					maListe.add((Sequence)evaluatedPopulation.get(i).getCandidate());//an evaluated candidate
 				}
 			}
 	        this.myGa.setPreviouGeneration(maListe);
+	        if(maListe!=null){
+	        	System.out.println("pointeur gene precente pose");
+		        for(int i=0;i<evaluatedPopulation.size();i++){
+		        	System.out.println(maListe.get(i).getValuesInString());
+		        	System.out.println("score:"+maListe.get(i).getFitnessScore());
+		        	System.out.println("sound:"+maListe.get(i).getGeneratedSoundNumber());
+		        }
+	        }else{
+	        	System.out.println("pointeur gene precente a null");
+	        }
 	        
 			List<T> population = new ArrayList<T>(evaluatedPopulation.size());
 
@@ -97,7 +108,7 @@ public class MyGenerationalEvolutionEngine<T> extends GenerationalEvolutionEngin
 	        population = evolutionScheme.apply(population, rng);
 	        // When the evolution is finished, add the elite to the population.
 	        population.addAll(elite);
-	        this.relaunch=false;
+	        
 	        return evaluatePopulation(population);
 			
          }

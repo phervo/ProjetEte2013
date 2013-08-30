@@ -127,7 +127,8 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 			 */
 			System.out.println("candidat :"+candidate.getValuesInString());
 			//a ce moment precis j ai une nouvelle sequence, c est maintenant que je peux regarder s il correpsond a l un des precendents
-			if(ga.getPreviousGeneration()!=null && candidate.getFitnessScore()==0.0){ //avoid to reaffect those which already got a score in the previous generation(I keep only one)
+			if(ga.getPreviousGeneration()!=null && candidate.getFitnessScore()==0.0){ //the second condition avoid to reaffect those which already got a score (elites)
+				System.out.println("passage par reaffectation");
 				for(int i=0;i<ga.getPreviousGeneration().size();i++){
 					if(candidate.equals(ga.getPreviousGeneration().get(i))){
 						//then copy all the informations
@@ -146,8 +147,10 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 			*    directly affect the values.
 			*    Else send the script to praat.
 			*/
-			if(candidate.getFitnessScore()!=0.0){
+			if(candidate.getFitnessScore()!=0.0 && !ga.getEngine().isRelaunch()){//2nd condition allow to overwrite when necessary the elites which keeps there pointer on soundnumber from a genereation to another
 				//case previously existing in a former run
+				System.out.println(ga.getEngine().isRelaunch());
+				System.out.println("je passe dans cette reaffectation de score");
 				matches = (int) candidate.getFitnessScore();
 			}else{
 				/*write value in the script send to praat and send it*/
@@ -203,10 +206,11 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 			e.printStackTrace();
 		}
 		System.out.println("matchScore : "+matches);
-		ga.getMutexFitnessFunction().release();
-		
-		//once call to this method, update the nbAppels number to know how many times it was called
+		System.out.println("sound affecte : "+candidate.getGeneratedSoundNumber());
 		nbAppels++;
+		ga.getMutexFitnessFunction().release();
+		//once call to this method, update the nbAppels number to know how many times it was called
+		
 		return matches;
 	}
 

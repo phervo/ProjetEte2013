@@ -242,5 +242,11 @@ public class FormantSequence {
 	public void setAutorisedMargin(double autorisedMargin) {
 		this.autorisedMargin = autorisedMargin;
 	}
-	
+
+	/**
+	 * I overwrite this method for the combobox display
+	 */
+	public String toString(){
+		return this.getSoundName();
+	}
 }

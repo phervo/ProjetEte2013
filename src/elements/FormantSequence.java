@@ -2,6 +2,8 @@ package elements;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 import exceptions.FormantNumberexception;
 
@@ -14,7 +16,7 @@ import exceptions.FormantNumberexception;
  * @author Pierre-Yves Hervo
  * @version 0.1
  */
-public class FormantSequence {
+public class FormantSequence extends Observable{
 	
 	/**
 	 * The name of the sound>
@@ -248,5 +250,10 @@ public class FormantSequence {
 	 */
 	public String toString(){
 		return this.getSoundName();
+	}
+
+	public void synchronise(){
+		this.setChanged();
+		this.notifyObservers();
 	}
 }

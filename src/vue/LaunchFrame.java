@@ -13,7 +13,7 @@ import javax.swing.JTextField;
 import elements.FormantSequence;
 
 public class LaunchFrame extends JFrame{
-	private JComboBox liste;
+	private JComboBox selectionCombobox;
 	private JPanel centerPanel;
 	private JPanel bottomPanel;
 	private JLabel explanationLabel;
@@ -36,10 +36,10 @@ public class LaunchFrame extends JFrame{
 				+ " click on the \"new target...\" button,<br> else click on the \"run\" button.</html>");
 		this.add(explanationLabel);
 		//2 set the combobox
-		FormantSequence[] elements = new FormantSequence[]{new FormantSequence("a"),new FormantSequence("e"),new FormantSequence("u")};
-		liste = new JComboBox(elements);
-		liste.setSelectedItem(null);
-		this.add(liste);
+		String[] elements = new String[]{"a","e","u"};
+		selectionCombobox = new JComboBox(elements);
+		selectionCombobox.setSelectedItem(null);
+		this.add(selectionCombobox);
 		//creation of the center Panel
 		labelF1 = new JLabel("F1: ");
 		labelF2 = new JLabel("F2: ");
@@ -69,4 +69,102 @@ public class LaunchFrame extends JFrame{
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// a changer
 		this.setResizable(false);
 	}
+
+	public JComboBox getSelectionCombobox() {
+		return selectionCombobox;
+	}
+
+	public void setSelectionCombobox(JComboBox liste) {
+		this.selectionCombobox = liste;
+	}
+
+	public JPanel getCenterPanel() {
+		return centerPanel;
+	}
+
+	public void setCenterPanel(JPanel centerPanel) {
+		this.centerPanel = centerPanel;
+	}
+
+	public JPanel getBottomPanel() {
+		return bottomPanel;
+	}
+
+	public void setBottomPanel(JPanel bottomPanel) {
+		this.bottomPanel = bottomPanel;
+	}
+
+	public JLabel getExplanationLabel() {
+		return explanationLabel;
+	}
+
+	public void setExplanationLabel(JLabel explanationLabel) {
+		this.explanationLabel = explanationLabel;
+	}
+
+	public JButton getNewTarget() {
+		return newTarget;
+	}
+
+	public void setNewTarget(JButton newTarget) {
+		this.newTarget = newTarget;
+	}
+
+	public JButton getRunButton() {
+		return runButton;
+	}
+
+	public void setRunButton(JButton runButton) {
+		this.runButton = runButton;
+	}
+
+	public JTextField getTextF1() {
+		return textF1;
+	}
+
+	public void setTextF1(JTextField textF1) {
+		this.textF1 = textF1;
+	}
+
+	public JTextField getTextF2() {
+		return textF2;
+	}
+
+	public void setTextF2(JTextField textF2) {
+		this.textF2 = textF2;
+	}
+
+	public JTextField getTextF3() {
+		return textF3;
+	}
+
+	public void setTextF3(JTextField textF3) {
+		this.textF3 = textF3;
+	}
+
+	public JLabel getLabelF1() {
+		return labelF1;
+	}
+
+	public void setLabelF1(JLabel labelF1) {
+		this.labelF1 = labelF1;
+	}
+
+	public JLabel getLabelF2() {
+		return labelF2;
+	}
+
+	public void setLabelF2(JLabel labelF2) {
+		this.labelF2 = labelF2;
+	}
+
+	public JLabel getLabelF3() {
+		return labelF3;
+	}
+
+	public void setLabelF3(JLabel labelF3) {
+		this.labelF3 = labelF3;
+	}
+	
+	
 }

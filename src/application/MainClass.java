@@ -1,7 +1,10 @@
 package application;
 
+import vue.LaunchFrame;
 import communication.CloseServer;
 import communication.ServerThread;
+import controler.ActionSelectionCombobox;
+import elements.FormantSequence;
 import exceptions.FormantNumberexception;
 import geneticAlogrithm.GeneticAlgorithmCall;
 
@@ -16,10 +19,14 @@ public class MainClass {
 	
 	public static void main(String[] args) throws FormantNumberexception {
 		// TODO Auto-generated method stub
-		GeneticAlgorithmCall ga = new GeneticAlgorithmCall(16); //init
+		LaunchFrame vue= new LaunchFrame();
+		FormantSequence target = null;
+		ActionSelectionCombobox asc = new ActionSelectionCombobox(vue);
+		vue.getSelectionCombobox().setAction(asc);
+		/*GeneticAlgorithmCall ga = new GeneticAlgorithmCall(16); //init
 		ServerThread.getInstance(ga);
 		ga.startAlgorithm();
-		CloseServer.envoyerMessageFermeture();
+		CloseServer.envoyerMessageFermeture();*/
 	}
 }
 

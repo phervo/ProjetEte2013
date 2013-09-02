@@ -1,6 +1,7 @@
 package vue;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.util.Vector;
 
@@ -64,8 +65,9 @@ public class LaunchFrame extends JFrame{
 		centerPanel.add(textF3);
 		this.add(centerPanel);
 		//creation of the button's panel
-		runButton= new JButton("run");
-		newTarget= new JButton("new target...");
+		runButton= new JButton("Run");
+		runButton.setEnabled(false);
+		newTarget= new JButton();
 		bottomPanel = new JPanel();
 		bottomPanel.add(runButton);
 		bottomPanel.add(newTarget);

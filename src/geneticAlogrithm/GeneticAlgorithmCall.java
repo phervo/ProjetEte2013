@@ -197,9 +197,9 @@ public class GeneticAlgorithmCall{
 	* @since 0.1
 	*
 	*/
-	public void buildTarget(){
+	public void buildTarget(FormantSequence fseq){
 		/*its here that we define the target*/
-		this.target=new FormantSequence("u");
+		this.target=fseq;
 		//this.target.displayFormantSequence();
 	}
 	
@@ -290,7 +290,6 @@ public class GeneticAlgorithmCall{
 		//load the different elements
 		buildPraatState();
 		this.generateAlphabet();
-		this.buildTarget();
 		this.createCandidateFactory();
 		this.createEvolutionaryOperator();
 		this.createFitnessEvalutator();

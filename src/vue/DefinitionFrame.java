@@ -72,8 +72,8 @@ public class DefinitionFrame extends JFrame{
 		panelMargin.add(fieldMargin);
 		this.add(panelMargin);
 		//then the buttons
-		okButton= new JButton("Ok");
-		cancelButton= new JButton("Cancel");
+		okButton= new JButton();
+		cancelButton= new JButton();
 		buttonPanel= new JPanel();
 		buttonPanel.add(okButton);
 		buttonPanel.add(cancelButton);

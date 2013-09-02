@@ -274,7 +274,7 @@ public class UnitaryTestsGA {
 		try {
 			ga = new GeneticAlgorithmCall(10);
 			ga.generateAlphabet();
-			ga.buildTarget();
+			//ga.buildTarget();
 			ga.createCandidateFactory();
 			ga.createEvolutionaryOperator();
 			//ga.createFitnessEvalutator();

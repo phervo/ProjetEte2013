@@ -1,6 +1,8 @@
 package tests.integration;
 
 import tests.UnitaryTestsGA;
+import vue.DefinitionFrame;
+import vue.LaunchFrame;
 
 /** <p>Class where i put my integration test to be sure that if i made modifications on the source code of a class, it will continue
  * to work properly. I will make small functions for each.</p>
@@ -46,6 +48,8 @@ public class IntegrationTest {
 	
 	private static class ClasseInterne{ // internal class for a main
 		 public static void main(String[] args){
+			// DefinitionFrame f= new DefinitionFrame();
+			 LaunchFrame f2= new LaunchFrame();
 		 }
 	}
 }

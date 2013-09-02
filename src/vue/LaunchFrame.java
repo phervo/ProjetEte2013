@@ -2,6 +2,7 @@ package vue;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.util.Vector;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -25,6 +26,7 @@ public class LaunchFrame extends JFrame{
 	private JLabel labelF1;
 	private JLabel labelF2;
 	private JLabel labelF3;
+	private Vector<FormantSequence> elements;
 	
 	public LaunchFrame(){
 		this.setTitle("Choose your target");
@@ -36,7 +38,10 @@ public class LaunchFrame extends JFrame{
 				+ " click on the \"new target...\" button,<br> else click on the \"run\" button.</html>");
 		this.add(explanationLabel);
 		//2 set the combobox
-		String[] elements = new String[]{"a","e","u"};
+		elements = new Vector<FormantSequence>();
+		elements.add(new FormantSequence("a"));
+		elements.add(new FormantSequence("e"));
+		elements.add(new FormantSequence("u"));
 		selectionCombobox = new JComboBox(elements);
 		selectionCombobox.setSelectedItem(null);
 		this.add(selectionCombobox);
@@ -165,6 +170,13 @@ public class LaunchFrame extends JFrame{
 	public void setLabelF3(JLabel labelF3) {
 		this.labelF3 = labelF3;
 	}
-	
+
+	public Vector<FormantSequence> getElements() {
+		return elements;
+	}
+
+	public void setElements(Vector<FormantSequence> elements) {
+		this.elements = elements;
+	}
 	
 }

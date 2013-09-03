@@ -3,13 +3,13 @@ package praatGestion;
 public class ReLaunch extends PraatState{
 
 	public ReLaunch(){
-		System.out.println("etat relance");
+		//System.out.println("etat relance");
 	}	
 	
 	@Override
 	public void launch(Praat praatObject) {
 		// TODO Auto-generated method stub
-		System.out.println("on relance et pour ca on ferme praat et on retourne a l ete launch");
+		//System.out.println("on relance et pour ca on ferme praat et on retourne a l ete launch");
 		praatObject.setState(new Launch());
 	}
 
@@ -22,7 +22,7 @@ public class ReLaunch extends PraatState{
 	@Override
 	public void close(Praat praatObject) {
 		// TODO Auto-generated method stub
-		System.out.println("etat relance, on ferme");
+		//System.out.println("etat relance, on ferme");
 		praatObject.setState(new Close());
 	}
 

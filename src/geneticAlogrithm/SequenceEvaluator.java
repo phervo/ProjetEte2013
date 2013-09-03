@@ -206,6 +206,7 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		ga.getModele().setMyString("matchScore : "+matches);
 		//System.out.println("matchScore : "+matches);
 		//System.out.println("sound affecte : "+candidate.getGeneratedSoundNumber());
 		nbAppels++;

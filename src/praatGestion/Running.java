@@ -3,7 +3,7 @@ package praatGestion;
 public class Running extends PraatState{
 
 	public Running(){
-		System.out.println("etat running");
+		//System.out.println("etat running");
 	}
 		
 	@Override
@@ -27,14 +27,14 @@ public class Running extends PraatState{
 	@Override
 	public void reLaunch(Praat praatObject) {
 		// TODO Auto-generated method stub
-		System.out.println("etat running, on relance");
+		//System.out.println("etat running, on relance");
 		praatObject.setState(new ReLaunch());
 	}
 
 	@Override
 	public void close(Praat praatObject) {
 		// TODO Auto-generated method stub
-		System.out.println("etat running, on ferme");
+		//System.out.println("etat running, on ferme");
 		praatObject.setState(new Close());
 	}
 

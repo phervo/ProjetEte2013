@@ -5,6 +5,8 @@ import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket;
 
+import elements.ModeleString;
+
 /** <p>Class which contains the method to close the server.<br/>
  *  As the server is a thread which is only listening, it can't close itself.<br/>
  *  so this class is designed to send it the termination string while the server is still listening <br/>
@@ -36,8 +38,9 @@ public class CloseServer {
      * @since 0.1
      *
      */
-	public static void envoyerMessageFermeture(){
-		System.out.println("Envoi demande de fermeture");
+	public static void envoyerMessageFermeture(ModeleString ms){
+		ms.setMyString("send request to quit");
+		//System.out.println("Envoi demande de fermeture");
 		try {
 			Socket socket = new Socket(InetAddress.getLocalHost(),2009);
 			PrintWriter out = new PrintWriter(socket.getOutputStream());

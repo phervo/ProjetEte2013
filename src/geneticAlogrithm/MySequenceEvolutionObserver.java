@@ -49,15 +49,19 @@ public class MySequenceEvolutionObserver implements EvolutionObserver<Sequence>{
 	@Override
 	public void populationUpdate(PopulationData<? extends Sequence> data) {
 		// TODO Auto-generated method stub
-		System.out.println();
-		System.out.printf("Generation %d: %s Fitness: %f\n",
+		myGa.getModele().setMyString("");
+		//System.out.println();
+		myGa.getModele().setMyString("Generation: "+ data.getGenerationNumber()+"Best candidate: "+data.getBestCandidate().getValuesInString()+" Fitness: "+data.getBestCandidateFitness()+"\n");
+		/*System.out.printf("Generation %d: %s Fitness: %f\n",
                 data.getGenerationNumber(),
                 data.getBestCandidate().getValuesInString(),
-                data.getBestCandidateFitness());
+                data.getBestCandidateFitness());*/
 		this.myGa.setSequence(data.getBestCandidate());
-		System.out.println("marge acceptee : "+myGa.fitnessMargin());
-		System.out.println("sound number best candidate :"+data.getBestCandidate().getGeneratedSoundNumber());
-		System.out.println();
+		myGa.getModele().setMyString("marge acceptee : "+myGa.fitnessMargin());
+		//System.out.println("marge acceptee : "+myGa.fitnessMargin());
+		//System.out.println("sound number best candidate :"+data.getBestCandidate().getGeneratedSoundNumber());
+		//System.out.println();
+		myGa.getModele().setMyString("");
 		myGa.setNbGeneration(data.getGenerationNumber());
 
 		//store the sound produce all the 100 objects

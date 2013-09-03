@@ -6,9 +6,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Semaphore;
+
 import messages.MessageFromPraat;
 import messages.MessageToPraat;
 import monitoring.MonitoringCSV;
+
 import org.uncommons.maths.random.MersenneTwisterRNG;
 import org.uncommons.maths.random.Probability;
 import org.uncommons.watchmaker.framework.EvolutionEngine;
@@ -18,10 +20,12 @@ import org.uncommons.watchmaker.framework.SelectionStrategy;
 import org.uncommons.watchmaker.framework.operators.EvolutionPipeline;
 import org.uncommons.watchmaker.framework.selection.StochasticUniversalSampling;
 import org.uncommons.watchmaker.framework.termination.TargetFitness;
+
 import praatGestion.OrderToPraat;
 import praatGestion.Praat;
 import elements.FormantSequence;
 import elements.GlobalAlphabet;
+import elements.ModeleString;
 import elements.Sequence;
 import exceptions.FormantNumberexception;
 import exceptions.PraatScriptException;
@@ -139,6 +143,8 @@ public class GeneticAlgorithmCall{
 	
 	private List<Sequence> previousGeneration;
 	
+	private ModeleString modele;
+	
 	/**
 	 * indicate the number of generations that the complete run last
 	 */
@@ -157,9 +163,10 @@ public class GeneticAlgorithmCall{
 	* @since 0.1
 	*
 	*/
-	public GeneticAlgorithmCall(int length) throws FormantNumberexception {
+	public GeneticAlgorithmCall(int length, ModeleString modele) throws FormantNumberexception {
 		super();
 		this.length=length;
+		this.modele=modele;
 		this.alphabet=null;
 		this.target=null;
 		this.mySequenceFactory= null;
@@ -319,6 +326,7 @@ public class GeneticAlgorithmCall{
 		//praatObject.close();
 		//at the end, we launch the monitoring function to display the results
 		MonitoringCSV.displayCSV(this.getTarget());
+		this.getModele().setFinRun(true);//display the info and quit button of the frame
 	}
 
 	/**
@@ -489,6 +497,16 @@ public class GeneticAlgorithmCall{
 
 		public void setEngine(MyGenerationalEvolutionEngine<Sequence> engine) {
 			this.engine = engine;
+		}
+
+
+		public ModeleString getModele() {
+			return modele;
+		}
+
+
+		public void setModele(ModeleString modele) {
+			this.modele = modele;
 		}
 	
 }

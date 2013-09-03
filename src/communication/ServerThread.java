@@ -117,7 +117,8 @@ public final class ServerThread extends Thread{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	System.out.println("server ferme");
+    	ga.getModele().setMyString("server closed");
+    	//System.out.println("server ferme");
     }
 	
     /**
@@ -154,7 +155,8 @@ public final class ServerThread extends Thread{
 	public void run() {
 	// TODO Auto-generated method stub
     	try {
-    		System.out.println("lancement server");
+    		ga.getModele().setMyString("server launched");
+    		//System.out.println("lancement server");
 			String message_distant="";
     		while(message_distant.compareTo(finChaine)!=0){
 				socketduserveur = socketserver.accept();
@@ -168,8 +170,8 @@ public final class ServerThread extends Thread{
 					storeMessageReceivedFromPraat(message_distant);
 					ga.getMySeqEval().getAnswerFromPraat().release(); // we realease the sem here
 				}
-				
-				System.out.println("J'ai recu le message suivant : "+message_distant);
+				ga.getModele().setMyString("I received the message :"+message_distant);
+				//System.out.println("J'ai recu le message suivant : "+message_distant);
 				socketduserveur.close();
 			}
     		this.closeServer(); //important

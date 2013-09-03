@@ -57,11 +57,11 @@ public class UnitaryTestsGA {
 	public static void servertest(){
 		GeneticAlgorithmCall ga;
 		try {
-			ga = new GeneticAlgorithmCall(13);
+			ga = new GeneticAlgorithmCall(13,null);
 			ServerThread serverJavaGa= ServerThread.getInstance(ga);
 			Thread t = new Thread(serverJavaGa,"ThreadServer");
 			t.start();
-			CloseServer.envoyerMessageFermeture();
+			CloseServer.envoyerMessageFermeture(null);
 		} catch (FormantNumberexception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -272,7 +272,7 @@ public class UnitaryTestsGA {
 	public static void testGA(){
 		GeneticAlgorithmCall ga;
 		try {
-			ga = new GeneticAlgorithmCall(10);
+			ga = new GeneticAlgorithmCall(10,null);
 			ga.generateAlphabet();
 			//ga.buildTarget();
 			ga.createCandidateFactory();

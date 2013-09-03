@@ -125,10 +125,11 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 			/*
 			 * 1) we try to see if the sequence is equal to one of the previous one. If is is the case, we reaffect the previous fitness value.
 			 */
-			System.out.println("candidat :"+candidate.getValuesInString());
+			ga.getModele().setMyString("candidat :"+candidate.getValuesInString());
+			//System.out.println("candidat :"+candidate.getValuesInString());
 			//a ce moment precis j ai une nouvelle sequence, c est maintenant que je peux regarder s il correpsond a l un des precendents
 			if(ga.getPreviousGeneration()!=null && candidate.getFitnessScore()==0.0){ //the second condition avoid to reaffect those which already got a score (elites)
-				System.out.println("passage par reaffectation");
+				//System.out.println("passage par reaffectation");
 				for(int i=0;i<ga.getPreviousGeneration().size();i++){
 					if(candidate.equals(ga.getPreviousGeneration().get(i))){
 						//then copy all the informations
@@ -138,8 +139,8 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 						candidate.setFormantFound(ga.getPreviousGeneration().get(i).getFormantFound());
 						candidate.setFitnessScore(ga.getPreviousGeneration().get(i).getFitnessScore());
 						candidate.setGeneratedSoundNumber(ga.getPreviousGeneration().get(i).getGeneratedSoundNumber());
-						System.out.println("Je SUIS REAFFECTE !!! "+candidate.getFitnessScore());
-						System.out.println("Je correspond au "+i +"eme candidat de l ancienne pop");
+						//System.out.println("Je SUIS REAFFECTE !!! "+candidate.getFitnessScore());
+						//System.out.println("Je correspond au "+i +"eme candidat de l ancienne pop");
 					}
 				}
 			}
@@ -149,8 +150,8 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 			*/
 			if(candidate.getFitnessScore()!=0.0 && !ga.getEngine().isRelaunch()){//2nd condition allow to overwrite when necessary the elites which keeps there pointer on soundnumber from a genereation to another
 				//case previously existing in a former run
-				System.out.println(ga.getEngine().isRelaunch());
-				System.out.println("je passe dans cette reaffectation de score");
+				//System.out.println(ga.getEngine().isRelaunch());
+				//System.out.println("je passe dans cette reaffectation de score");
 				matches = (int) candidate.getFitnessScore();
 			}else{
 				/*write value in the script send to praat and send it*/
@@ -205,8 +206,8 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("matchScore : "+matches);
-		System.out.println("sound affecte : "+candidate.getGeneratedSoundNumber());
+		//System.out.println("matchScore : "+matches);
+		//System.out.println("sound affecte : "+candidate.getGeneratedSoundNumber());
 		nbAppels++;
 		ga.getMutexFitnessFunction().release();
 		//once call to this method, update the nbAppels number to know how many times it was called

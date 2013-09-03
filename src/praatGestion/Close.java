@@ -3,7 +3,7 @@ package praatGestion;
 public class Close extends PraatState{
 
 	public Close(){
-		System.out.println("etat ferme");
+		//System.out.println("etat ferme");
 	}
 	
 	@Override

@@ -71,10 +71,6 @@ public class Curve{
 				compteur++; // attention a celui la
 			}
 			reader.close();
-			
-			for(int i=0;i<ordoneeF1.length;i++){
-				System.out.println(i+" "+ordoneeF3[i]);
-			}
 						
 			
 			/*

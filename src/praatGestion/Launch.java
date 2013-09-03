@@ -3,7 +3,7 @@ package praatGestion;
 public class Launch extends PraatState{
 
 	public Launch(){
-		System.out.println("etat lance");
+		//System.out.println("etat lance");
 	}
 	
 	@Override
@@ -15,21 +15,21 @@ public class Launch extends PraatState{
 	@Override
 	public void reLaunch(Praat praatObject) {
 		// TODO Auto-generated method stub
-		System.out.println("etat lance, on relance");
+		//System.out.println("etat lance, on relance");
 		praatObject.setState(new ReLaunch());
 	}
 
 	@Override
 	public void close(Praat praatObject) {
 		// TODO Auto-generated method stub
-		System.out.println("etat lance, on ferme");
+		//System.out.println("etat lance, on ferme");
 		praatObject.setState(new Close());
 	}
 
 	@Override
 	public void headerSet(Praat praatObject) {
 		// TODO Auto-generated method stub
-		System.out.println("etat lance, on head");
+		//System.out.println("etat lance, on head");
 		praatObject.setState(new HeaderSet());
 	}
 

@@ -35,6 +35,8 @@ public class ActionRunButton extends AbstractAction{
 		ModeleString modeleNewFrame=new ModeleString();
 		ActionInfoTextArea aia = new ActionInfoTextArea(vrga, modeleNewFrame);
 		modeleNewFrame.addObserver(aia);
+		ActionQuitButton acq = new ActionQuitButton(vrga);
+		vrga.getQuitButton().setAction(acq);
 		vue.dispose();
 		//modeleNewFrame.setMyString("blabla");
 		//modeleNewFrame.setMyString("reblabla");

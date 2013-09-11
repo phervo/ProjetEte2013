@@ -65,7 +65,7 @@ public class DefinitionFrame extends JFrame{
 		panelF3.add(fieldF3);
 		this.add(panelF3);
 		//creation of the panel for margin
-		labelMargin=new JLabel("Autorised margin(): ");
+		labelMargin=new JLabel("Autorised margin(in decimal, example: 0.1 for 10%): ");
 		fieldMargin=new JTextField(4);
 		panelMargin=new JPanel();
 		panelMargin.add(labelMargin);

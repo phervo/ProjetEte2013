@@ -50,17 +50,17 @@ public class MySequenceEvolutionObserver implements EvolutionObserver<Sequence>{
 	public void populationUpdate(PopulationData<? extends Sequence> data) {
 		// TODO Auto-generated method stub
 		myGa.getModele().setMyString("");
-		//System.out.println();
+		System.out.println();
 		myGa.getModele().setMyString("Generation: "+ data.getGenerationNumber()+"Best candidate: "+data.getBestCandidate().getValuesInString()+" Fitness: "+data.getBestCandidateFitness()+"\n");
-		/*System.out.printf("Generation %d: %s Fitness: %f\n",
+		System.out.printf("Generation %d: %s Fitness: %f\n",
                 data.getGenerationNumber(),
                 data.getBestCandidate().getValuesInString(),
-                data.getBestCandidateFitness());*/
+                data.getBestCandidateFitness());
 		this.myGa.setSequence(data.getBestCandidate());
 		myGa.getModele().setMyString("marge acceptee : "+myGa.fitnessMargin());
-		//System.out.println("marge acceptee : "+myGa.fitnessMargin());
-		//System.out.println("sound number best candidate :"+data.getBestCandidate().getGeneratedSoundNumber());
-		//System.out.println();
+		System.out.println("marge acceptee : "+myGa.fitnessMargin());
+		System.out.println("sound number best candidate :"+data.getBestCandidate().getGeneratedSoundNumber());
+		System.out.println();
 		myGa.getModele().setMyString("");
 		myGa.setNbGeneration(data.getGenerationNumber());
 

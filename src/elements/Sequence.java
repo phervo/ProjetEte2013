@@ -61,7 +61,7 @@ public class Sequence {
 	
 	/**
 	 * field which indicate which formant the algo has found
-	 * 5 possible values "none","F1","F2","F3","both".
+	 * 6 possible values "none","F1","F2","F3","two","all".
 	 * here is just the init, the value will be set during the evaluation
 	 */
 	private String formantFound;

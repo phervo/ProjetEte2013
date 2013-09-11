@@ -4,11 +4,19 @@ import elements.FormantSequence;
 import exceptions.FormantNumberexception;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 import org.math.plot.Plot2DPanel;
 
 import au.com.bytecode.opencsv.CSVReader;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import java.awt.image.TileObserver;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -36,6 +44,13 @@ public class Curve{
 		double[] F1Value; //constante ligne to show the margin we accept from the absis to F1
 		double[] F2Value; //constante ligne to show the margin we accept from the absis to F1
 		double[] F3Value; //constante ligne to show the margin we accept from the absis to F1
+		JLabel titleFrame1;
+		JLabel titleFrame2;
+		JLabel titleFrame3;
+		JLabel titleFrame4;
+		GridBagLayout gbl;
+		GridBagConstraints c;
+		
 		try {
 			/*
 			 * 1st we read the csv file to extract the information and get tzo array representing the absis and the ordonees
@@ -79,9 +94,35 @@ public class Curve{
 			
 			// create your PlotPanel (you can use it as a JPanel)
 			Plot2DPanel plotDifferenceToTargetF1 = new Plot2DPanel();
+			plotDifferenceToTargetF1.setPreferredSize(new Dimension(400,400));
+			plotDifferenceToTargetF1.setMinimumSize(new Dimension(400,400));
 			Plot2DPanel plotDifferenceToTargetF2 = new Plot2DPanel();
+			plotDifferenceToTargetF2.setPreferredSize(new Dimension(400,400));
+			plotDifferenceToTargetF2.setMinimumSize(new Dimension(400,400));
 			Plot2DPanel plotDifferenceToTargetF3 = new Plot2DPanel();
+			plotDifferenceToTargetF3.setPreferredSize(new Dimension(400,400));
+			plotDifferenceToTargetF3.setMinimumSize(new Dimension(400,400));
 			Plot2DPanel plotFitness = new Plot2DPanel();
+			plotFitness.setPreferredSize(new Dimension(400,400));
+			plotFitness.setMinimumSize(new Dimension(400,400));
+			
+			//initialise the labels and other componants
+			titleFrame1 = new JLabel("difference to the target for F1",SwingConstants.CENTER);
+			titleFrame2 = new JLabel("difference to the target for F2",SwingConstants.CENTER);
+			titleFrame3 = new JLabel("difference to the target for F3",SwingConstants.CENTER);
+			titleFrame4 = new JLabel("global fitness evolution",SwingConstants.CENTER);
+			gbl = new GridBagLayout();
+			c = new GridBagConstraints();
+			
+			//set minsize et prefered size for labels necessary for the gridbaglayout
+			titleFrame1.setMinimumSize(new Dimension(200,100));
+			titleFrame1.setPreferredSize(new Dimension(200,100));
+			titleFrame2.setMinimumSize(new Dimension(200,100));
+			titleFrame2.setPreferredSize(new Dimension(200,100));
+			titleFrame3.setMinimumSize(new Dimension(200,100));
+			titleFrame3.setPreferredSize(new Dimension(200,100));
+			titleFrame4.setMinimumSize(new Dimension(200,100));
+			titleFrame4.setPreferredSize(new Dimension(200,100));
 			
 			// define the legend position
 			plotDifferenceToTargetF1.addLegend("SOUTH");
@@ -98,30 +139,34 @@ public class Curve{
 			plotDifferenceToTargetF3.addLinePlot("F3 margin",absis,F3Value);
 			plotFitness.addLinePlot("Fitness Curve", absis,ordoneeFitness);
 			
-			// put the PlotPanel in a JFrame like a JPanel
-			JFrame frameDifferenceToTargetF1 = new JFrame("a plot of the difference to the target for F1");
-			frameDifferenceToTargetF1.setSize(600, 600);
-			frameDifferenceToTargetF1.setContentPane(plotDifferenceToTargetF1);
+			//now the frame
+			JFrame frameDifferenceToTargetF1 = new JFrame("monitoring information");
+			frameDifferenceToTargetF1.setSize(1000, 1000);
+			frameDifferenceToTargetF1.setLayout(gbl);
+			//part were i deal with the gridbacklayout, complicated part, see the doc
+			//c.fill = GridBagConstraints.BOTH;
+	        //c.weightx = 1.0;
+			
+			c.gridwidth = GridBagConstraints.RELATIVE; //next-to-last in row
+			addLabel(titleFrame1,gbl,c,frameDifferenceToTargetF1);
+	        c.gridwidth = GridBagConstraints.REMAINDER; //end row
+	        addLabel(titleFrame2,gbl,c,frameDifferenceToTargetF1);
+	        
+	        c.gridwidth = GridBagConstraints.RELATIVE; //next-to-last in row
+	        addPlot(plotDifferenceToTargetF1,gbl,c,frameDifferenceToTargetF1);
+	        c.gridwidth = GridBagConstraints.REMAINDER; //end row
+	        addPlot(plotDifferenceToTargetF2,gbl,c,frameDifferenceToTargetF1);
+	        
+	        c.gridwidth = GridBagConstraints.RELATIVE; //next-to-last in row
+	        addLabel(titleFrame3,gbl,c,frameDifferenceToTargetF1);
+	        c.gridwidth = GridBagConstraints.REMAINDER; //end row
+	        addLabel(titleFrame4,gbl,c,frameDifferenceToTargetF1);
+	        c.gridwidth = GridBagConstraints.RELATIVE; //next-to-last in row
+	        addPlot(plotDifferenceToTargetF3,gbl,c,frameDifferenceToTargetF1);
+	        c.gridwidth = GridBagConstraints.REMAINDER; //end row
+	        addPlot(plotFitness,gbl,c,frameDifferenceToTargetF1);
 			frameDifferenceToTargetF1.setVisible(true);
 			frameDifferenceToTargetF1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			
-			JFrame frameDifferenceToTargetF2 = new JFrame("a plot of the difference to the target for F2");
-			frameDifferenceToTargetF2.setSize(600, 600);
-			frameDifferenceToTargetF2.setContentPane(plotDifferenceToTargetF2);
-			frameDifferenceToTargetF2.setVisible(true);
-			frameDifferenceToTargetF2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			
-			JFrame frameDifferenceToTargetF3 = new JFrame("a plot of the difference to the target for F3");
-			frameDifferenceToTargetF3.setSize(600, 600);
-			frameDifferenceToTargetF3.setContentPane(plotDifferenceToTargetF3);
-			frameDifferenceToTargetF3.setVisible(true);
-			frameDifferenceToTargetF3.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			
-			JFrame frameFitness = new JFrame("a plot to show the fitness evolution");
-			frameFitness.setSize(600, 600);
-			frameFitness.setContentPane(plotFitness);
-			frameFitness.setVisible(true);
-			frameFitness.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			 
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -134,6 +179,15 @@ public class Curve{
 			e.printStackTrace();
 		}
 
+	}
+	
+	protected void addLabel(JLabel j,GridBagLayout gridbag,GridBagConstraints c,JFrame f) {
+		gridbag.setConstraints(j, c);
+		f.add(j);
+	}
+	protected void addPlot(Plot2DPanel p,GridBagLayout gridbag,GridBagConstraints c,JFrame f) {
+		gridbag.setConstraints(p, c);
+		f.add(p);
 	}
 
 }

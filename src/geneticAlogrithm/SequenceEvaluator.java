@@ -126,7 +126,7 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 			 * 1) we try to see if the sequence is equal to one of the previous one. If is is the case, we reaffect the previous fitness value.
 			 */
 			ga.getModele().setMyString("candidat :"+candidate.getValuesInString());
-			//System.out.println("candidat :"+candidate.getValuesInString());
+			System.out.println("candidat :"+candidate.getValuesInString());
 			//a ce moment precis j ai une nouvelle sequence, c est maintenant que je peux regarder s il correpsond a l un des precendents
 			if(ga.getPreviousGeneration()!=null && candidate.getFitnessScore()==0.0){ //the second condition avoid to reaffect those which already got a score (elites)
 				//System.out.println("passage par reaffectation");
@@ -207,7 +207,8 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 			e.printStackTrace();
 		}
 		ga.getModele().setMyString("matchScore : "+matches);
-		//System.out.println("matchScore : "+matches);
+		System.out.println("matchScore : "+matches);
+		System.out.println("nbFormantTrouves : "+candidate.getFormantFound());
 		//System.out.println("sound affecte : "+candidate.getGeneratedSoundNumber());
 		nbAppels++;
 		ga.getMutexFitnessFunction().release();

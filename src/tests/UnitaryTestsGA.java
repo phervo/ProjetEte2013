@@ -1,18 +1,12 @@
 package tests;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
 import messages.MessageFromPraat;
-import messages.MessageToPraat;
-import monitoring.Curve;
 import monitoring.MonitoringCSV;
-
 import org.uncommons.maths.random.MersenneTwisterRNG;
 import org.uncommons.maths.random.Probability;
-
 import praatGestion.OrderToPraat;
 import praatGestion.Praat;
 import communication.CloseServer;
@@ -23,11 +17,9 @@ import elements.GlobalAlphabet;
 import elements.Sequence;
 import exceptions.CastFormantException;
 import exceptions.FormantNumberexception;
-import exceptions.PraatScriptException;
 import exceptions.SequenceArrayException;
 import geneticAlogrithm.GeneticAlgorithmCall;
 import geneticAlogrithm.SequenceCrossOver;
-import geneticAlogrithm.SequenceEvaluator;
 import geneticAlogrithm.SequenceFactory;
 import geneticAlogrithm.SequenceMutation;
 

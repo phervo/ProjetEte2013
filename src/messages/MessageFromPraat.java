@@ -1,13 +1,6 @@
 package messages;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
-
-import au.com.bytecode.opencsv.CSVReader;
-import au.com.bytecode.opencsv.CSVWriter;
 import communication.ServerThread;
 import elements.Formant;
 import elements.FormantSequence;

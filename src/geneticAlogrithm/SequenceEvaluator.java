@@ -2,12 +2,8 @@ package geneticAlogrithm;
 
 import java.util.List;
 import java.util.concurrent.Semaphore;
-
 import messages.MessageToPraat;
-
-import org.uncommons.watchmaker.framework.EvaluatedCandidate;
 import org.uncommons.watchmaker.framework.FitnessEvaluator;
-
 import praatGestion.OrderToPraat;
 import elements.FormantSequence;
 import elements.Sequence;
@@ -112,11 +108,14 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 	public double getFitness(Sequence candidate, List<? extends Sequence> population) {
 		// TODO Auto-generated method stub
 		//max 9 in fitness
+		int basicScore=0;
 		int matches=0;
 		int diffF1=0;
 		int diffF2=0;
 		int diffF3=0;
 		int formantFound=0;
+		// the new version of the fitnes function include a penalty see explanation in the technical report
+		int penalty=0;
 		
 		//0) put a mutex
 		try {
@@ -175,25 +174,42 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 	    		diffF1=Math.abs((int) (candidate.getF1().getFrequency()-ga.getTarget().getFormantAt(0).getFrequency()));
 	    		diffF2=Math.abs((int) (candidate.getF2().getFrequency()-ga.getTarget().getFormantAt(1).getFrequency()));
 	    		diffF3=Math.abs((int) (candidate.getF3().getFrequency()-ga.getTarget().getFormantAt(2).getFrequency()));
-	    		matches=diffF1+diffF2+diffF3;
+	    		basicScore=diffF1+diffF2+diffF3;
 			
 	    		/*
-	    		 * this part is just for logs in the cvs, not used for the fitness score itself
+	    		 * we have define the basic score, wich is store in fitness, now it is time to add the penalty
+	    		 *in this llop I do two things :
+	    		 * 1 st: I write on the CSV the formants founds
+	    		 * 2nd : I calculate if necessary the penalty for the formant
 	    		 */
-		    	for(int i=0;i<this.targetSequence.getNbFormant();i++){
+	    		for(int i=0;i<this.targetSequence.getNbFormant();i++){
 		    		double lowerBornfreq = this.targetSequence.getFormantAt(i).getFrequency()-(this.targetSequence.getAutorisedMargin()*this.targetSequence.getFormantAt(i).getFrequency());
 		    		double upperBornfreq = this.targetSequence.getFormantAt(i).getFrequency()+(this.targetSequence.getAutorisedMargin()*this.targetSequence.getFormantAt(i).getFrequency());
 		    		
 		    		if((ga.getMessageFromPraat().getFormantAt(i).getFrequency()>=lowerBornfreq && ga.getMessageFromPraat().getFormantAt(i).getFrequency()<=upperBornfreq)){
-						formantFound++;
-						candidate.setFormantFound("F"+(i+1)); //difference beetween the index and the real formant number
-					}
-		    	}	
-		    	if(formantFound==2){
-		    		candidate.setFormantFound("two");
-		    	}else if(formantFound==3){
-		    		candidate.setFormantFound("all");
+						//in that case we are in the interval autorise by the margin, no penalty add.
+		    			formantFound++;
+						if(!candidate.getFormantFound().equals("none")){
+							candidate.setFormantFound(candidate.getFormantFound()+" F"+(i+1)); //difference beetween the index and the real formant number
+						}else{
+							candidate.setFormantFound("F"+(i+1));
+						}
+		    		}else{
+		    			// here we are out of the interval, add the penalty
+		    			switch(i){
+		    			case 0:
+		    				penalty=penalty+diffF1;
+		    				break;
+		    			case 1:
+		    				penalty=penalty+diffF2;
+		    				break;
+		    			case 2:
+		    				penalty=penalty+diffF3;
+		    				break;
+		    			}
+		    		}
 		    	}
+		    	matches=basicScore+penalty;
 		    	candidate.setFitnessScore(matches);
 			}
 		} catch (InterruptedException e) {
@@ -209,6 +225,7 @@ public class SequenceEvaluator implements FitnessEvaluator<Sequence>{
 		ga.getModele().setMyString("matchScore : "+matches);
 		System.out.println("matchScore : "+matches);
 		System.out.println("nbFormantTrouves : "+candidate.getFormantFound());
+		//System.out.println("penalty : "+penalty);
 		//System.out.println("sound affecte : "+candidate.getGeneratedSoundNumber());
 		nbAppels++;
 		ga.getMutexFitnessFunction().release();

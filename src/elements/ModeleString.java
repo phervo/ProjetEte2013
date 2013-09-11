@@ -2,8 +2,6 @@ package elements;
 
 import java.util.Observable;
 
-import controler.ActionInfoTextArea;
-
 /**
  * A StringBuffer that will contain all the informations from the Ga 's run.
  * It is use in the MVC modele to actualise the textarea field of the frame during the run.

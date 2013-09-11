@@ -2,21 +2,14 @@ package monitoring;
 
 import elements.FormantSequence;
 import exceptions.FormantNumberexception;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
-
 import org.math.plot.Plot2DPanel;
-
 import au.com.bytecode.opencsv.CSVReader;
-
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-import java.awt.image.TileObserver;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -140,33 +133,33 @@ public class Curve{
 			plotFitness.addLinePlot("Fitness Curve", absis,ordoneeFitness);
 			
 			//now the frame
-			JFrame frameDifferenceToTargetF1 = new JFrame("monitoring information");
-			frameDifferenceToTargetF1.setSize(1000, 1000);
-			frameDifferenceToTargetF1.setLayout(gbl);
+			JFrame frame = new JFrame("monitoring information");
+			frame.setSize(1000, 1000);
+			frame.setLayout(gbl);
 			//part were i deal with the gridbacklayout, complicated part, see the doc
 			//c.fill = GridBagConstraints.BOTH;
 	        //c.weightx = 1.0;
 			
 			c.gridwidth = GridBagConstraints.RELATIVE; //next-to-last in row
-			addLabel(titleFrame1,gbl,c,frameDifferenceToTargetF1);
+			addLabel(titleFrame1,gbl,c,frame);
 	        c.gridwidth = GridBagConstraints.REMAINDER; //end row
-	        addLabel(titleFrame2,gbl,c,frameDifferenceToTargetF1);
+	        addLabel(titleFrame2,gbl,c,frame);
 	        
 	        c.gridwidth = GridBagConstraints.RELATIVE; //next-to-last in row
-	        addPlot(plotDifferenceToTargetF1,gbl,c,frameDifferenceToTargetF1);
+	        addPlot(plotDifferenceToTargetF1,gbl,c,frame);
 	        c.gridwidth = GridBagConstraints.REMAINDER; //end row
-	        addPlot(plotDifferenceToTargetF2,gbl,c,frameDifferenceToTargetF1);
+	        addPlot(plotDifferenceToTargetF2,gbl,c,frame);
 	        
 	        c.gridwidth = GridBagConstraints.RELATIVE; //next-to-last in row
-	        addLabel(titleFrame3,gbl,c,frameDifferenceToTargetF1);
+	        addLabel(titleFrame3,gbl,c,frame);
 	        c.gridwidth = GridBagConstraints.REMAINDER; //end row
-	        addLabel(titleFrame4,gbl,c,frameDifferenceToTargetF1);
+	        addLabel(titleFrame4,gbl,c,frame);
 	        c.gridwidth = GridBagConstraints.RELATIVE; //next-to-last in row
-	        addPlot(plotDifferenceToTargetF3,gbl,c,frameDifferenceToTargetF1);
+	        addPlot(plotDifferenceToTargetF3,gbl,c,frame);
 	        c.gridwidth = GridBagConstraints.REMAINDER; //end row
-	        addPlot(plotFitness,gbl,c,frameDifferenceToTargetF1);
-			frameDifferenceToTargetF1.setVisible(true);
-			frameDifferenceToTargetF1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	        addPlot(plotFitness,gbl,c,frame);
+	        frame.setVisible(true);
+	        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			 
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -178,13 +171,13 @@ public class Curve{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
 	
 	protected void addLabel(JLabel j,GridBagLayout gridbag,GridBagConstraints c,JFrame f) {
 		gridbag.setConstraints(j, c);
 		f.add(j);
 	}
+	
 	protected void addPlot(Plot2DPanel p,GridBagLayout gridbag,GridBagConstraints c,JFrame f) {
 		gridbag.setConstraints(p, c);
 		f.add(p);

@@ -3,12 +3,9 @@ package messages;
 import elements.Sequence;
 import exceptions.PraatScriptException;
 import exceptions.SequenceArrayException;
-
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-
 import praatGestion.OrderToPraat;
 
 

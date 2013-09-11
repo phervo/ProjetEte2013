@@ -1,16 +1,12 @@
 package vue;
 
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
 
+import java.awt.GridLayout;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
-import elements.FormantSequence;
 
 public class DefinitionFrame extends JFrame{
 	private JTextField fieldName;

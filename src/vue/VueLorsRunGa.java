@@ -2,7 +2,6 @@ package vue;
 
 import java.awt.GridLayout;
 import java.util.concurrent.Semaphore;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -19,7 +18,6 @@ public class VueLorsRunGa extends JFrame{
 	private JLabel mylabel;
 	private JButton quitButton;
 	private JScrollPane scroll;
-	private JPanel middlePanel;
 	/**
 	 * A mutex to avoid that the display of the window was cancelled by the GA 's run
 	 */

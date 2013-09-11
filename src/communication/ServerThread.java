@@ -171,7 +171,7 @@ public final class ServerThread extends Thread{
 					ga.getMySeqEval().getAnswerFromPraat().release(); // we realease the sem here
 				}
 				ga.getModele().setMyString("I received the message :"+message_distant);
-				//System.out.println("J'ai recu le message suivant : "+message_distant);
+				System.out.println("J'ai recu le message suivant : "+message_distant);
 				socketduserveur.close();
 			}
     		this.closeServer(); //important

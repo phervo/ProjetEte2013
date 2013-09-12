@@ -6,15 +6,19 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Semaphore;
+
 import messages.MessageFromPraat;
 import messages.MessageToPraat;
 import monitoring.MonitoringCSV;
+
 import org.uncommons.maths.random.MersenneTwisterRNG;
 import org.uncommons.maths.random.Probability;
 import org.uncommons.watchmaker.framework.EvolutionaryOperator;
 import org.uncommons.watchmaker.framework.SelectionStrategy;
 import org.uncommons.watchmaker.framework.operators.EvolutionPipeline;
 import org.uncommons.watchmaker.framework.selection.StochasticUniversalSampling;
+import org.uncommons.watchmaker.framework.termination.ElapsedTime;
+
 import praatGestion.Praat;
 import elements.FormantSequence;
 import elements.GlobalAlphabet;
@@ -144,6 +148,22 @@ public class GeneticAlgorithmCall{
 	private int nbGeneration;
 	
 	/**
+	 * probability of the mutation to append
+	 */
+	private Probability mutationProb;
+	
+	/**
+	 * var wich indicate the number of time I got the same result as the best candidate of the generation.
+	 * I use it to dfetect whenever the algorithm cant evolve further, it stay in the same local optimum.
+	 * I will then increase the mutation probability.
+	 * 
+	 * @see GeneticAlgorithmCall#increaseMutationProbability
+	 */
+	private int nbSameResultCount;
+
+	private SequenceMutation seqMuta;
+	
+	/**
 	* Constructor where we specified the length of the sequence we will use. Initialize the other attribute to null.
 	* 
 	*
@@ -178,6 +198,8 @@ public class GeneticAlgorithmCall{
 		emptyDirectory(new File(System.getProperty("user.dir") + "/results/curve"));
 		this.previousGeneration=null;
 		this.setNbGeneration(0);
+		this.nbSameResultCount=0;
+		this.seqMuta=null;
 	}
 	
 	
@@ -237,9 +259,11 @@ public class GeneticAlgorithmCall{
 	*
 	*/
 	public void createEvolutionaryOperator(){
+		this.mutationProb= new Probability(0.05);
+		this.seqMuta=new SequenceMutation(this.alphabet,this.mutationProb);
 		List<EvolutionaryOperator<Sequence>> operators
 	    = new LinkedList<EvolutionaryOperator<Sequence>>();
-		operators.add(new SequenceMutation(this.alphabet,new Probability(0.05)));
+		operators.add(this.seqMuta);
 		operators.add(new SequenceCrossOver(2));
 		pipeline = new EvolutionPipeline<Sequence>(operators);
 	}
@@ -300,7 +324,7 @@ public class GeneticAlgorithmCall{
 		engine = new MyGenerationalEvolutionEngine<Sequence>(mySequenceFactory, pipeline,mySeqEval , selection, rng,this);
 		//engine = new MyGenerationalBidule<Sequence>(mySequenceFactory, pipeline, mySeqEval, selection, rng);
 		engine.addEvolutionObserver(new MySequenceEvolutionObserver(this));
-		engine.evolve(10, 1, new MyTargetFitness(fitnessMargin(),mySeqEval.isNatural()));
+		engine.evolve(10, 1, new MyTargetFitness(fitnessMargin(),mySeqEval.isNatural()),new ElapsedTime(10800000));//3 hours
 		//save the result in a final file,idem for the csv
 		try {
 			MessageToPraat.writePraatScriptInFile(this.finalsequence,"praatScriptWithCorrectValues.praat");
@@ -386,6 +410,7 @@ public class GeneticAlgorithmCall{
 	*
 	*/
 	public void setSequence(Sequence c){
+		this.increaseNbSameResultCount(c);
 		this.finalsequence = c;
 	}
 	
@@ -500,6 +525,34 @@ public class GeneticAlgorithmCall{
 
 		public void setModele(ModeleString modele) {
 			this.modele = modele;
+		}
+		
+		/**
+		 * method which increase the existing value of 0.01 if the GA is stagnant
+		 * For this, i used the nbSameResultCount var to know if I reach 5 time the same value.
+		 */
+		public void increaseMutationProbability(){
+			if(this.nbSameResultCount==5){
+				double previousValue=this.mutationProb.doubleValue();
+				double newValue=previousValue+0.01;
+				this.mutationProb=new Probability(newValue);
+				this.seqMuta= new SequenceMutation(this.alphabet,this.mutationProb);
+				this.nbSameResultCount=0;
+				System.out.println("AUGMENTATION DE LA PROBABILITE DE MUTATION"+previousValue+" "+newValue);
+			}
+		}
+		
+		/**
+		 * method where I increase the var NbSameResultCount if the result of the current generation is the same than the previous one.
+		 * 
+		 */
+		public void increaseNbSameResultCount(Sequence newBestCandidate){
+			if(this.finalsequence!=null && this.finalsequence.equals(newBestCandidate)){
+				this.nbSameResultCount+=1;
+				this.increaseMutationProbability();
+			}else{
+				this.nbSameResultCount=0;
+			}
 		}
 	
 }

@@ -56,6 +56,7 @@ public class SequenceMutation implements EvolutionaryOperator<Sequence>{
     	this.globalAlphabet = globalAlphabet;
     	this.mutationProbability = new ConstantGenerator<Probability>(mutationProbability);
     	this.selectedCandidates=null;
+    	System.out.println("CREATION DU SEQUENCE MUTATION");
     }
     
     /**
@@ -143,5 +144,5 @@ public class SequenceMutation implements EvolutionaryOperator<Sequence>{
 		
         return retour;
     }
-
+	
 }

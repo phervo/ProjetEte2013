@@ -287,9 +287,8 @@ public class GeneticAlgorithmCall{
 	*
 	*/
 	public void createSelection(){
-		//selection=new TournamentSelection(new Probability(0.6));
-		//selection=new RouletteWheelSelection();
-		selection= new StochasticUniversalSampling();
+		//selection= new StochasticUniversalSampling();
+		selection = new MySelectionOperator();
 	}
 	
 	/**

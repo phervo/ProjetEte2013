@@ -410,7 +410,7 @@ public class GeneticAlgorithmCall{
 	*
 	*/
 	public void setSequence(Sequence c){
-		this.increaseNbSameResultCount(c);
+		//this.increaseNbSameResultCount(c);
 		this.finalsequence = c;
 	}
 	
@@ -554,5 +554,4 @@ public class GeneticAlgorithmCall{
 				this.nbSameResultCount=0;
 			}
 		}
-	
 }

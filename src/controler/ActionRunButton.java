@@ -4,7 +4,9 @@ import elements.FormantSequence;
 import elements.ModeleString;
 import exceptions.FormantNumberexception;
 import geneticAlogrithm.GeneticAlgorithmCall;
+import geneticAlogrithm.ThreadRun;
 
+import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.util.Observable;
 import java.util.Observer;
@@ -31,26 +33,8 @@ public class ActionRunButton extends AbstractAction{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		VueLorsRunGa vrga = new VueLorsRunGa();
-		ModeleString modeleNewFrame=new ModeleString();
-		ActionInfoTextArea aia = new ActionInfoTextArea(vrga, modeleNewFrame);
-		modeleNewFrame.addObserver(aia);
-		ActionQuitButton acq = new ActionQuitButton(vrga);
-		vrga.getQuitButton().setAction(acq);
 		vue.dispose();
-		//modeleNewFrame.setMyString("blabla");
-		//modeleNewFrame.setMyString("reblabla");
-		
-		GeneticAlgorithmCall ga;
-		try {
-			ga = new GeneticAlgorithmCall(8,modeleNewFrame);
-			ServerThread.getInstance(ga);
-			ga.buildTarget(modele);
-			ga.startAlgorithm();
-			CloseServer.envoyerMessageFermeture(modeleNewFrame);
-		} catch (FormantNumberexception e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		VueLorsRunGa vrga = new VueLorsRunGa();
+		EventQueue.invokeLater(new ThreadRun(modele,vrga));
 	}
 }

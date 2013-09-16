@@ -47,6 +47,12 @@ public class MySelectionOperator implements SelectionStrategy<Object>{
 		ScoreMap smLvlTemp=null;
 		Sequence temp=null;
 		
+		System.out.println("ordered initial population");
+		for(int i=0;i<population.size();i++){
+			Sequence s1= (Sequence) population.get(i).getCandidate();
+			System.out.println(s1.getValuesInString()+"fitness"+s1.getFitnessScore());
+		}
+		
 		for(int i=0;i<population.size();i++){
 			s = (Sequence)population.get(i).getCandidate();
 			if(s.getFormantFound().equals("none")){
@@ -73,13 +79,13 @@ public class MySelectionOperator implements SelectionStrategy<Object>{
 			}//no more case
 			
 		}
-		System.out.println(smNone.toString());
-		System.out.println(smF1.toString());
-		System.out.println(smF2.toString());
-		System.out.println(smF3.toString());
-		System.out.println(smF1F2.toString());
-		System.out.println(smF2F3.toString());
-		System.out.println(smF1F3.toString());
+		//System.out.println(smNone.toString());
+		//System.out.println(smF1.toString());
+		//System.out.println(smF2.toString());
+		//System.out.println(smF3.toString());
+		//System.out.println(smF1F2.toString());
+		//System.out.println(smF2F3.toString());
+		//System.out.println(smF1F3.toString());
 		
 		/*
 		 * construction of the list by levels
@@ -132,32 +138,87 @@ public class MySelectionOperator implements SelectionStrategy<Object>{
 		for(int i=0;i<(selectionSize/2);i++){
 			//1st the worst case, all the formants are none
 			if(lvl1.size()==0 && lvl2.size()==0){
-				 mySelection.add(smNone.getAt(rng.nextInt(3)));
-				 mySelection.add(smNone.getAt(rng.nextInt(3)));
+				 mySelection.add(smNone.getAt(adjustResult(rng.nextInt(4))));
+				 mySelection.add(smNone.getAt(adjustResult(rng.nextInt(4))));
 			}else if(lvl2.size()==0){
 				if(lvl1.size()==1){
+					//then i have only one type of formant
 					if(lvl1.get(0).getNumberOfElement()==1){
+						//then in addition i have only 1 formant of this type
 						mySelection.add(lvl1.get(0).getAt(0));
-						mySelection.add(smNone.getAt(rng.nextInt(1)));//i choose amoung the two bests lvl0
+						mySelection.add(smNone.getAt(adjustResult(rng.nextInt(2))));//i choose amoung the two bests lvl0
 					}else{
 						//cross over beetween twice the same formant. be carefull it doesnt mean twice the same sequence.
-						smLvlTemp = lvl1.get(0);
-						temp= smLvlTemp.getAt(rng.nextInt(smLvlTemp.getNumberOfElement()-1));
+						smLvlTemp = lvl1.get(0);//because lvl1.size()==1
+						temp= smLvlTemp.getAt(adjustResult(rng.nextInt(smLvlTemp.getNumberOfElement())));
 						mySelection.add(temp);
 						//do it a second time to choose the second individual
 						smLvlTemp = lvl1.get(0);
-						temp= smLvlTemp.getAt(rng.nextInt(smLvlTemp.getNumberOfElement()-1));
+						temp= smLvlTemp.getAt(adjustResult(rng.nextInt(smLvlTemp.getNumberOfElement())));
 						mySelection.add(temp);
 					}
 				}else{
 					//cross over beetween two different formants
-					smLvlTemp = lvl1.get(rng.nextInt(lvl1.size()-1));//choose the FX
-					temp= smLvlTemp.getAt(rng.nextInt(smLvlTemp.getNumberOfElement()-1));//choose the sequence
+					smLvlTemp = lvl1.get(adjustResult(rng.nextInt(lvl1.size())));//choose the FX
+					temp= smLvlTemp.getAt(adjustResult(rng.nextInt(smLvlTemp.getNumberOfElement())));//choose the sequence
 					mySelection.add(temp);
 					//do it a second time to choose the second individual
-					smLvlTemp = lvl1.get(rng.nextInt(lvl1.size()-1));//choose the FX
-					temp= smLvlTemp.getAt(rng.nextInt(smLvlTemp.getNumberOfElement()-1));//choose the sequence
+					smLvlTemp = lvl1.get(adjustResult(rng.nextInt(lvl1.size())));//choose the FX
+					temp= smLvlTemp.getAt(adjustResult(rng.nextInt(smLvlTemp.getNumberOfElement())));//choose the sequence
 					mySelection.add(temp);
+				}
+			}else{
+				//lvl2!=0
+				if(lvl2.size()==2 || lvl2.size()==3){
+					//cross over beetween two different formants
+					smLvlTemp = lvl2.get(adjustResult(rng.nextInt(lvl2.size())));//choose the FX
+					temp= smLvlTemp.getAt(adjustResult(rng.nextInt(smLvlTemp.getNumberOfElement())));//choose the sequence
+					mySelection.add(temp);
+					//cross over beetween two different formants
+					smLvlTemp = lvl2.get(adjustResult(rng.nextInt(lvl2.size())));//choose the FX
+					temp= smLvlTemp.getAt(adjustResult(rng.nextInt(smLvlTemp.getNumberOfElement())));//choose the sequence
+					mySelection.add(temp);
+				}else if(lvl2.size()==1){
+					smLvlTemp = lvl2.get(0);//because lvl1.size()==1
+					temp= smLvlTemp.getAt(adjustResult(rng.nextInt(smLvlTemp.getNumberOfElement())));
+					mySelection.add(temp);
+					// now we took a FX, we choose the correct one to we hope find the three formants
+					if(lvl1.size()!=0){
+						if(smLvlTemp==smF1F2){
+							if(smF3.getNumberOfElement()!=0){
+								temp= smF3.getAt(adjustResult(rng.nextInt(smF3.getNumberOfElement())));
+								mySelection.add(temp);
+							}else{
+								smLvlTemp = lvl1.get(adjustResult(rng.nextInt(lvl1.size())));//choose the FX
+								temp= smLvlTemp.getAt(adjustResult(rng.nextInt(smLvlTemp.getNumberOfElement())));
+								mySelection.add(temp);
+							}
+							
+						}else if(smLvlTemp==smF2F3){
+							
+							if(smF1.getNumberOfElement()!=0){
+								temp= smF1.getAt(adjustResult(rng.nextInt(smF1.getNumberOfElement())));
+								mySelection.add(temp);
+							}else{
+								smLvlTemp = lvl1.get(adjustResult(rng.nextInt(lvl1.size())));//choose the FX
+								temp= smLvlTemp.getAt(adjustResult(rng.nextInt(smLvlTemp.getNumberOfElement())));
+								mySelection.add(temp);
+							}
+						}else if(smLvlTemp==smF1F3){
+							if(smF2.getNumberOfElement()!=0){
+								temp= smF2.getAt(adjustResult(rng.nextInt(smF2.getNumberOfElement())));
+								mySelection.add(temp);
+							}else{
+								smLvlTemp = lvl1.get(adjustResult(rng.nextInt(lvl1.size())));//choose the FX
+								temp= smLvlTemp.getAt(adjustResult(rng.nextInt(smLvlTemp.getNumberOfElement())));
+								mySelection.add(temp);
+							}
+						}
+					}else{
+						smLvlTemp = lvl0.get(0);
+						temp=smLvlTemp.getAt(adjustResult(rng.nextInt(smLvlTemp.getNumberOfElement())));
+						mySelection.add(temp);//add the best of 0
+					}
 				}
 			}
 		}
@@ -210,6 +271,19 @@ public class MySelectionOperator implements SelectionStrategy<Object>{
 		}*/
 		// TODO Auto-generated method stub
 		return (List<S>) mySelection;
+	}
+	
+	/**
+	 * function wich adjust the result returned by the random generator to correspond to the list index.
+	 */
+	public int adjustResult(int intBeforeAdjust){
+		int res;
+		if(intBeforeAdjust!=0){
+			res=intBeforeAdjust-1;
+		}else{
+			res=0;
+		}
+		return res;
 	}
 	
 	/**

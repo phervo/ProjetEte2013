@@ -263,8 +263,8 @@ public class GeneticAlgorithmCall{
 		this.seqMuta=new SequenceMutation(this.alphabet,this.mutationProb);
 		List<EvolutionaryOperator<Sequence>> operators
 	    = new LinkedList<EvolutionaryOperator<Sequence>>();
-		operators.add(this.seqMuta);
 		operators.add(new SequenceCrossOver(2));
+		operators.add(this.seqMuta);
 		pipeline = new EvolutionPipeline<Sequence>(operators);
 	}
 	

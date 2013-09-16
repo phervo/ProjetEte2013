@@ -90,6 +90,10 @@ public class SequenceCrossOver extends AbstractCrossover<Sequence>{
 	@Override
 	public List<Sequence> mate(Sequence parent1, Sequence parent2, int numberOfCrossoverPoints,
 			Random rng) {
+		
+		System.out.println("parent1"+parent1.getValuesInString());
+		System.out.println("parent2"+parent2.getValuesInString());
+		
 		// TODO Auto-generated method stub
 		if (parent1.getLength() != parent2.getLength())
         {

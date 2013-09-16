@@ -323,7 +323,7 @@ public class GeneticAlgorithmCall{
 		engine = new MyGenerationalEvolutionEngine<Sequence>(mySequenceFactory, pipeline,mySeqEval , selection, rng,this);
 		//engine = new MyGenerationalBidule<Sequence>(mySequenceFactory, pipeline, mySeqEval, selection, rng);
 		engine.addEvolutionObserver(new MySequenceEvolutionObserver(this));
-		engine.evolve(10, 1, new MyTargetFitness(fitnessMargin(),mySeqEval.isNatural()),new ElapsedTime(10800000));//3 hours
+		engine.evolve(11, 1, new MyTargetFitness(fitnessMargin(),mySeqEval.isNatural()),new ElapsedTime(10800000));//3 hours
 		//save the result in a final file,idem for the csv
 		try {
 			MessageToPraat.writePraatScriptInFile(this.finalsequence,"praatScriptWithCorrectValues.praat");

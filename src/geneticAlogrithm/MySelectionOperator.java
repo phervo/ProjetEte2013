@@ -44,6 +44,8 @@ public class MySelectionOperator implements SelectionStrategy<Object>{
 		ScoreMap smF1F2= new ScoreMap("F1F2");
 		ScoreMap smF2F3= new ScoreMap("F2F3");
 		ScoreMap smF1F3= new ScoreMap("F1F3");
+		ScoreMap smLvlTemp=null;
+		Sequence temp=null;
 		
 		for(int i=0;i<population.size();i++){
 			s = (Sequence)population.get(i).getCandidate();
@@ -126,13 +128,40 @@ public class MySelectionOperator implements SelectionStrategy<Object>{
 		 * For this, i return selectionSize individuals.
 		 * I retrun individuals that have better chance to match together with a cross over knowing their formants.
 		 */
-		List<Sequence> Myselection = new ArrayList<Sequence>(selectionSize);
-		for(int i=0;i<selectionSize;i++){
+		List<Sequence> mySelection = new ArrayList<Sequence>(selectionSize);
+		for(int i=0;i<(selectionSize/2);i++){
 			//1st the worst case, all the formants are none
 			if(lvl1.size()==0 && lvl2.size()==0){
-				
+				 mySelection.add(smNone.getAt(rng.nextInt(3)));
+				 mySelection.add(smNone.getAt(rng.nextInt(3)));
+			}else if(lvl2.size()==0){
+				if(lvl1.size()==1){
+					if(lvl1.get(0).getNumberOfElement()==1){
+						mySelection.add(lvl1.get(0).getAt(0));
+						mySelection.add(smNone.getAt(rng.nextInt(1)));//i choose amoung the two bests lvl0
+					}else{
+						//cross over beetween twice the same formant. be carefull it doesnt mean twice the same sequence.
+						smLvlTemp = lvl1.get(0);
+						temp= smLvlTemp.getAt(rng.nextInt(smLvlTemp.getNumberOfElement()-1));
+						mySelection.add(temp);
+						//do it a second time to choose the second individual
+						smLvlTemp = lvl1.get(0);
+						temp= smLvlTemp.getAt(rng.nextInt(smLvlTemp.getNumberOfElement()-1));
+						mySelection.add(temp);
+					}
+				}else{
+					//cross over beetween two different formants
+					smLvlTemp = lvl1.get(rng.nextInt(lvl1.size()-1));//choose the FX
+					temp= smLvlTemp.getAt(rng.nextInt(smLvlTemp.getNumberOfElement()-1));//choose the sequence
+					mySelection.add(temp);
+					//do it a second time to choose the second individual
+					smLvlTemp = lvl1.get(rng.nextInt(lvl1.size()-1));//choose the FX
+					temp= smLvlTemp.getAt(rng.nextInt(smLvlTemp.getNumberOfElement()-1));//choose the sequence
+					mySelection.add(temp);
+				}
 			}
 		}
+		System.out.println("taille de myselection"+mySelection.size());
 			
 			
 			//we start with the biggers ones
@@ -180,23 +209,7 @@ public class MySelectionOperator implements SelectionStrategy<Object>{
 			System.out.println("sequence"+Myselection.get(i).getValuesInString());
 		}*/
 		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	private void appendToList(List<Sequence> mySelection,Random rng,ScoreMap biggerOne,ScoreMap smallerOne){
-		mySelection.add(biggerOne.getAt(rng.nextInt(biggerOne.getNumberOfElement()-1)));
-		mySelection.add(smallerOne.getAt(rng.nextInt(smallerOne.getNumberOfElement()-1)));
-	}
-	
-	private double getAdjustedFitness(double rawFitness,boolean naturalFitness)	{
-		if (naturalFitness){
-			return rawFitness;
-		}else{
-		// If standardised fitness is zero we have found the best possible
-		// solution.  The evolutionary algorithm should not be continuing
-		// after finding it.
-			return rawFitness == 0 ? Double.POSITIVE_INFINITY : 1 / rawFitness;
-		}
+		return (List<S>) mySelection;
 	}
 	
 	/**

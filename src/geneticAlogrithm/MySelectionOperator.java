@@ -56,26 +56,19 @@ public class MySelectionOperator implements SelectionStrategy<Object>{
 		for(int i=0;i<population.size();i++){
 			s = (Sequence)population.get(i).getCandidate();
 			if(s.getFormantFound().equals("none")){
-				smNone.setNumberOfElement(smNone.getNumberOfElement()+1);
-				smNone.getListe().add(s);
+				smNone.addSequence(s);
 			}else if(s.getFormantFound().equals("F1")){
-				smF1.setNumberOfElement(smF1.getNumberOfElement()+1);
-				smF1.getListe().add(s);
+				smF1.addSequence(s);
 			}else if(s.getFormantFound().equals("F2")){
-				smF2.setNumberOfElement(smF2.getNumberOfElement()+1);
-				smF2.getListe().add(s);
+				smF2.addSequence(s);
 			}else if(s.getFormantFound().equals("F3")){
-				smF3.setNumberOfElement(smF3.getNumberOfElement()+1);
-				smF3.getListe().add(s);
+				smF3.addSequence(s);
 			}else if(s.getFormantFound().equals("F1 F2")){
-				smF1F2.setNumberOfElement(smF1F2.getNumberOfElement()+1);
-				smF1F2.getListe().add(s);
+				smF1F2.addSequence(s);
 			}else if(s.getFormantFound().equals("F2 F3")){
-				smF2F3.setNumberOfElement(smF2F3.getNumberOfElement()+1);
-				smF2F3.getListe().add(s);
+				smF2F3.addSequence(s);
 			}else if(s.getFormantFound().equals("F1 F3")){
-				smF1F3.setNumberOfElement(smF1F3.getNumberOfElement()+1);
-				smF1F3.getListe().add(s);
+				smF1F3.addSequence(s);
 			}//no more case
 			
 		}
@@ -143,10 +136,10 @@ public class MySelectionOperator implements SelectionStrategy<Object>{
 			}else if(lvl2.size()==0){
 				if(lvl1.size()==1){
 					//then i have only one type of formant
-					if(lvl1.get(0).getNumberOfElement()==1){
+					if(lvl1.get(0).getNumberOfElement()==1){ //pas bon ca, peut marcher qd meme
 						//then in addition i have only 1 formant of this type
 						mySelection.add(lvl1.get(0).getAt(0));
-						mySelection.add(smNone.getAt(adjustResult(rng.nextInt(2))));//i choose amoung the two bests lvl0
+						mySelection.add(smNone.getAt(adjustResult(rng.nextInt(4))));//i choose amoung the two bests lvl0
 					}else{
 						//cross over beetween twice the same formant. be carefull it doesnt mean twice the same sequence.
 						smLvlTemp = lvl1.get(0);//because lvl1.size()==1
@@ -216,7 +209,7 @@ public class MySelectionOperator implements SelectionStrategy<Object>{
 						}
 					}else{
 						smLvlTemp = lvl0.get(0);
-						temp=smLvlTemp.getAt(adjustResult(rng.nextInt(smLvlTemp.getNumberOfElement())));
+						temp=smLvlTemp.getAt(0);
 						mySelection.add(temp);//add the best of 0
 					}
 				}
@@ -224,51 +217,6 @@ public class MySelectionOperator implements SelectionStrategy<Object>{
 		}
 		System.out.println("taille de myselection"+mySelection.size());
 			
-			
-			//we start with the biggers ones
-			/*if(smF1F2.getNumberOfElement()!=0){ 
-				if(smF3.getNumberOfElement()!=0){
-					Myselection.add(smF1F2.getAt(rng.nextInt(smF1F2.getNumberOfElement()-1)));
-					Myselection.add(smF3.getAt(rng.nextInt(smF3.getNumberOfElement()-1)));
-				}
-				
-			}else if(smF2F3.getNumberOfElement()!=0){
-				if(smF1.getNumberOfElement()!=0){
-					Myselection.add(smF2F3.getAt(rng.nextInt(smF2F3.getNumberOfElement()-1)));
-					Myselection.add(smF1.getAt(rng.nextInt(smF1.getNumberOfElement()-1)));
-				}
-				
-			}else if(smF1F3.getNumberOfElement()!=0){
-				if(smF2.getNumberOfElement()!=0){
-					Myselection.add(smF1F3.getAt(rng.nextInt(smF1F3.getNumberOfElement()-1)));
-					Myselection.add(smF2.getAt(rng.nextInt(smF2.getNumberOfElement()-1)));
-				}
-			
-			//then if there is no bigger one, we use the little one
-			}else if(smF1.getNumberOfElement()!=0){
-				if(smF2.getNumberOfElement()!=0){
-					Myselection.add(smF1.getAt(rng.nextInt(smF1.getNumberOfElement()-1)));
-					Myselection.add(smF2.getAt(rng.nextInt(smF2.getNumberOfElement()-1)));
-				}else if(smF3.getNumberOfElement()!=0){
-					Myselection.add(smF1.getAt(rng.nextInt(smF1.getNumberOfElement()-1)));
-					Myselection.add(smF3.getAt(rng.nextInt(smF3.getNumberOfElement()-1)));
-				}//no need to verify the SMFXFX , it is reversible so they would have already been used
-				
-			}else if(smF2.getNumberOfElement()!=0){
-				//no f1 or i wouldnt have come that down in the if
-				if(smF3.getNumberOfElement()!=0){
-					Myselection.add(smF2.getAt(rng.nextInt(smF2.getNumberOfElement()-1)));
-					Myselection.add(smF3.getAt(rng.nextInt(smF3.getNumberOfElement()-1)));
-				}//no need to verify the SMFXFX , it is reversible so they would have already been used
-				
-				//no f1 nor f2 or i wouldnt have come that down in the if
-			}else{ //there is only "none" cases so i used the roulette wheel algorithme
-			}
-		}
-		
-		for(int i=0;i<Myselection.size();i++){
-			System.out.println("sequence"+Myselection.get(i).getValuesInString());
-		}*/
 		// TODO Auto-generated method stub
 		return (List<S>) mySelection;
 	}

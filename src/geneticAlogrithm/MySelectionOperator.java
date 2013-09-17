@@ -44,8 +44,11 @@ public class MySelectionOperator implements SelectionStrategy<Object>{
 		ScoreMap smF1F2= new ScoreMap("F1F2");
 		ScoreMap smF2F3= new ScoreMap("F2F3");
 		ScoreMap smF1F3= new ScoreMap("F1F3");
-		ScoreMap smLvlTemp=null;
-		Sequence temp=null;
+		ScoreMap smLvlTempSequence1=null;
+		Sequence tempSequence1=null;
+		ScoreMap smLvlTempSequence2=null;
+		Sequence tempSequence2=null;
+		
 		
 		System.out.println("ordered initial population");
 		for(int i=0;i<population.size();i++){
@@ -129,36 +132,59 @@ public class MySelectionOperator implements SelectionStrategy<Object>{
 		 */
 		List<Sequence> mySelection = new ArrayList<Sequence>(selectionSize);
 		for(int i=0;i<(selectionSize/2);i++){
-			//1st the worst case, all the formants are none
+			/*1st the worst case, all the formants are none
+			 * so I make a selection beetween the 4 best result of lvl0.
+			 * I assume the rest isnt good enought and go directly ot the trash.
+			 */
 			if(lvl1.size()==0 && lvl2.size()==0){
 				 mySelection.add(smNone.getAt(adjustResult(rng.nextInt(4))));
 				 mySelection.add(smNone.getAt(adjustResult(rng.nextInt(4))));
 			}else if(lvl2.size()==0){
+				/*
+				 * then there is at least an individual in lvl1 or it would have enter above.
+				 * I pick one
+				 */
+					smLvlTempSequence1 = lvl1.get(adjustResult(rng.nextInt(lvl1.size())));
+					tempSequence1= smLvlTempSequence1.getAt(adjustResult(rng.nextInt(smLvlTempSequence1.getNumberOfElement())));
+					mySelection.add(tempSequence1);
+					
 				if(lvl1.size()==1){
-					//then i have only one type of formant
-					if(lvl1.get(0).getNumberOfElement()==1){ //pas bon ca, peut marcher qd meme
+					/*
+					 * 	then there is only one type of formant.
+					 * 	Two cases. If there is more than one exemplary of this formant, i picked one above, i just picked another.
+					 * 	The expectation is to get a fitter formant of this type.
+					 * 	If there is only one individual, i picked it above, then i picked one of the 4 best "none" individuals 
+					 */
+					
+					if(lvl1.get(0).getNumberOfElement()==1){
 						//then in addition i have only 1 formant of this type
-						mySelection.add(lvl1.get(0).getAt(0));
 						mySelection.add(smNone.getAt(adjustResult(rng.nextInt(4))));//i choose amoung the two bests lvl0
 					}else{
-						//cross over beetween twice the same formant. be carefull it doesnt mean twice the same sequence.
-						smLvlTemp = lvl1.get(0);//because lvl1.size()==1
-						temp= smLvlTemp.getAt(adjustResult(rng.nextInt(smLvlTemp.getNumberOfElement())));
-						mySelection.add(temp);
-						//do it a second time to choose the second individual
-						smLvlTemp = lvl1.get(0);
-						temp= smLvlTemp.getAt(adjustResult(rng.nextInt(smLvlTemp.getNumberOfElement())));
-						mySelection.add(temp);
+						//be carreful not to pick twice the same individuals, it doesnt matter to pick twice in the same formant list but nit twice the same sequence.
+						smLvlTempSequence2 = lvl1.get(0);
+						tempSequence2= smLvlTempSequence2.getAt(adjustResult(rng.nextInt(smLvlTempSequence2.getNumberOfElement())));
+						while(tempSequence2.equals(tempSequence1)){
+							/*
+							 * we cant predict the number of elements of the list here, it is form 2 to n. So we need to use that way.
+							 * We dont change the  smLvlTempSequence2 var cause it is the only one we can pick in.
+							 */
+							tempSequence2= smLvlTempSequence2.getAt(adjustResult(rng.nextInt(smLvlTempSequence2.getNumberOfElement())));
+						}
+						mySelection.add(tempSequence2);
 					}
 				}else{
 					//cross over beetween two different formants
-					smLvlTemp = lvl1.get(adjustResult(rng.nextInt(lvl1.size())));//choose the FX
-					temp= smLvlTemp.getAt(adjustResult(rng.nextInt(smLvlTemp.getNumberOfElement())));//choose the sequence
-					mySelection.add(temp);
-					//do it a second time to choose the second individual
-					smLvlTemp = lvl1.get(adjustResult(rng.nextInt(lvl1.size())));//choose the FX
-					temp= smLvlTemp.getAt(adjustResult(rng.nextInt(smLvlTemp.getNumberOfElement())));//choose the sequence
-					mySelection.add(temp);
+					smLvlTempSequence2 = lvl1.get(adjustResult(rng.nextInt(lvl1.size())));//choose the FX
+					tempSequence2= smLvlTempSequence2.getAt(adjustResult(rng.nextInt(smLvlTempSequence2.getNumberOfElement())));//choose the sequence
+					while(tempSequence2.equals(tempSequence1)){
+						/*
+						 * we cant predict the number of elements of the list here, it is form 2 to n. So we need to use that way.
+						 * We change the  smLvlTempSequence2 var here or we could get an error and make an infinite loop
+						 */
+						smLvlTempSequence2 = lvl1.get(adjustResult(rng.nextInt(lvl1.size())));//choose the FX
+						tempSequence2= smLvlTempSequence2.getAt(adjustResult(rng.nextInt(smLvlTempSequence2.getNumberOfElement())));
+					}
+					mySelection.add(tempSequence2);
 				}
 			}else{
 				//lvl2!=0

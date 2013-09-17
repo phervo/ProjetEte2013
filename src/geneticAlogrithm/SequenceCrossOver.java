@@ -17,7 +17,7 @@ import exceptions.SequenceArrayException;
  * @author Pierre-Yves Hervo
  * @version 0.1
  */
-public class SequenceCrossOver extends AbstractCrossover<Sequence>{
+public class SequenceCrossOver extends MyAbstractCrossover<Sequence>{
 	/**
 	* Constructor without parameters. Define a 1 point crossOver 
 	*

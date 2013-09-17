@@ -210,58 +210,126 @@ public class MySelectionOperator implements SelectionStrategy<Object>{
 				 * By default, worst case, i match it with the lvl0 best candidate
 				 */
 				
-				
-				/*if(lvl2.size()==2 || lvl2.size()==3){
-					//cross over beetween two different formants
-					smLvlTemp = lvl2.get(adjustResult(rng.nextInt(lvl2.size())));//choose the FX
-					temp= smLvlTemp.getAt(adjustResult(rng.nextInt(smLvlTemp.getNumberOfElement())));//choose the sequence
-					mySelection.add(temp);
-					//cross over beetween two different formants
-					smLvlTemp = lvl2.get(adjustResult(rng.nextInt(lvl2.size())));//choose the FX
-					temp= smLvlTemp.getAt(adjustResult(rng.nextInt(smLvlTemp.getNumberOfElement())));//choose the sequence
-					mySelection.add(temp);
-				}else if(lvl2.size()==1){
-					smLvlTemp = lvl2.get(0);//because lvl1.size()==1
-					temp= smLvlTemp.getAt(adjustResult(rng.nextInt(smLvlTemp.getNumberOfElement())));
-					mySelection.add(temp);
-					// now we took a FX, we choose the correct one to we hope find the three formants
-					if(lvl1.size()!=0){
-						if(smLvlTemp==smF1F2){
-							if(smF3.getNumberOfElement()!=0){
-								temp= smF3.getAt(adjustResult(rng.nextInt(smF3.getNumberOfElement())));
-								mySelection.add(temp);
-							}else{
-								smLvlTemp = lvl1.get(adjustResult(rng.nextInt(lvl1.size())));//choose the FX
-								temp= smLvlTemp.getAt(adjustResult(rng.nextInt(smLvlTemp.getNumberOfElement())));
-								mySelection.add(temp);
+				if(lvl1.size()!=0){
+					if(smLvlTempSequence1==smF1F2){
+						if(smF3.getNumberOfElement()!=0){
+							tempSequence2= smF3.getAt(rng.nextInt(smF3.getNumberOfElement()));
+							mySelection.add(tempSequence2);
+						}else if(lvl2.size()>1){
+							smLvlTempSequence2 = lvl2.get(rng.nextInt(lvl2.size()));//choose the FX
+							tempSequence2= smLvlTempSequence2.getAt(rng.nextInt(smLvlTempSequence2.getNumberOfElement()));
+							while(tempSequence2.equals(tempSequence1)){
+								/*
+								 * we cant predict the number of elements of the list here, it is form 2 to n. So we need to use that way.
+								 * 
+								 */
+								smLvlTempSequence2 = lvl2.get(rng.nextInt(lvl2.size()));//choose the FX
+								tempSequence2= smLvlTempSequence2.getAt(rng.nextInt(smLvlTempSequence2.getNumberOfElement()));
 							}
-							
-						}else if(smLvlTemp==smF2F3){
-							
-							if(smF1.getNumberOfElement()!=0){
-								temp= smF1.getAt(adjustResult(rng.nextInt(smF1.getNumberOfElement())));
-								mySelection.add(temp);
+							mySelection.add(tempSequence2);
+						}else{
+							/* take care that there is no only one individual in one formant FXFY
+							 * 
+							 */
+							if(lvl2.get(0).getNumberOfElement()>1){
+								smLvlTempSequence2 = lvl2.get(0);//choose the FX
+								tempSequence2= smLvlTempSequence2.getAt(rng.nextInt(smLvlTempSequence2.getNumberOfElement()));
+								while(tempSequence2.equals(tempSequence1)){
+									/*
+									 * we cant predict the number of elements of the list here, it is form 2 to n. So we need to use that way.
+									 * 
+									 */
+									tempSequence2= smLvlTempSequence2.getAt(rng.nextInt(smLvlTempSequence2.getNumberOfElement()));
+								}
+								mySelection.add(tempSequence2);
 							}else{
-								smLvlTemp = lvl1.get(adjustResult(rng.nextInt(lvl1.size())));//choose the FX
-								temp= smLvlTemp.getAt(adjustResult(rng.nextInt(smLvlTemp.getNumberOfElement())));
-								mySelection.add(temp);
-							}
-						}else if(smLvlTemp==smF1F3){
-							if(smF2.getNumberOfElement()!=0){
-								temp= smF2.getAt(adjustResult(rng.nextInt(smF2.getNumberOfElement())));
-								mySelection.add(temp);
-							}else{
-								smLvlTemp = lvl1.get(adjustResult(rng.nextInt(lvl1.size())));//choose the FX
-								temp= smLvlTemp.getAt(adjustResult(rng.nextInt(smLvlTemp.getNumberOfElement())));
-								mySelection.add(temp);
+								smLvlTempSequence2 = lvl1.get(rng.nextInt(lvl1.size()));//choose the FX
+								tempSequence2= smLvlTempSequence2.getAt(rng.nextInt(smLvlTempSequence2.getNumberOfElement()));
+								mySelection.add(tempSequence2);
 							}
 						}
-					}else{
-						smLvlTemp = lvl0.get(0);
-						temp=smLvlTemp.getAt(0);
-						mySelection.add(temp);//add the best of 0
+						
+					}else if(smLvlTempSequence1==smF2F3){
+						if(smF1.getNumberOfElement()!=0){
+							tempSequence2= smF1.getAt(rng.nextInt(smF1.getNumberOfElement()));
+							mySelection.add(tempSequence2);
+						}else if(lvl2.size()>1){
+							smLvlTempSequence2 = lvl2.get(rng.nextInt(lvl2.size()));//choose the FX
+							tempSequence2= smLvlTempSequence2.getAt(rng.nextInt(smLvlTempSequence2.getNumberOfElement()));
+							while(tempSequence2.equals(tempSequence1)){
+								/*
+								 * we cant predict the number of elements of the list here, it is form 2 to n. So we need to use that way.
+								 * 
+								 */
+								smLvlTempSequence2 = lvl2.get(rng.nextInt(lvl2.size()));//choose the FX
+								tempSequence2= smLvlTempSequence2.getAt(rng.nextInt(smLvlTempSequence2.getNumberOfElement()));
+							}
+							mySelection.add(tempSequence2);
+						}else{
+							/* take care that there is no only one individual in one formant FXFY
+							 * 
+							 */
+							if(lvl2.get(0).getNumberOfElement()>1){
+								smLvlTempSequence2 = lvl2.get(0);//choose the FX
+								tempSequence2= smLvlTempSequence2.getAt(rng.nextInt(smLvlTempSequence2.getNumberOfElement()));
+								while(tempSequence2.equals(tempSequence1)){
+									/*
+									 * we cant predict the number of elements of the list here, it is form 2 to n. So we need to use that way.
+									 * 
+									 */
+									tempSequence2= smLvlTempSequence2.getAt(rng.nextInt(smLvlTempSequence2.getNumberOfElement()));
+								}
+								mySelection.add(tempSequence2);
+							}else{
+								smLvlTempSequence2 = lvl1.get(rng.nextInt(lvl1.size()));//choose the FX
+								tempSequence2= smLvlTempSequence2.getAt(rng.nextInt(smLvlTempSequence2.getNumberOfElement()));
+								mySelection.add(tempSequence2);
+							}
+						}
+					}else if(smLvlTempSequence1==smF1F3){
+						if(smF2.getNumberOfElement()!=0){
+							tempSequence2= smF2.getAt(rng.nextInt(smF2.getNumberOfElement()));
+							mySelection.add(tempSequence2);
+						}else if(lvl2.size()>1){
+							smLvlTempSequence2 = lvl2.get(rng.nextInt(lvl2.size()));//choose the FX
+							tempSequence2= smLvlTempSequence2.getAt(rng.nextInt(smLvlTempSequence2.getNumberOfElement()));
+							while(tempSequence2.equals(tempSequence1)){
+								/*
+								 * we cant predict the number of elements of the list here, it is form 2 to n. So we need to use that way.
+								 * 
+								 */
+								smLvlTempSequence2 = lvl2.get(rng.nextInt(lvl2.size()));//choose the FX
+								tempSequence2= smLvlTempSequence2.getAt(rng.nextInt(smLvlTempSequence2.getNumberOfElement()));
+							}
+							mySelection.add(tempSequence2);
+						}else{
+							/* take care that there is no only one individual in one formant FXFY
+							 * 
+							 */
+							if(lvl2.get(0).getNumberOfElement()>1){
+								smLvlTempSequence2 = lvl2.get(0);//choose the FX
+								tempSequence2= smLvlTempSequence2.getAt(rng.nextInt(smLvlTempSequence2.getNumberOfElement()));
+								while(tempSequence2.equals(tempSequence1)){
+									/*
+									 * we cant predict the number of elements of the list here, it is form 2 to n. So we need to use that way.
+									 * 
+									 */
+									tempSequence2= smLvlTempSequence2.getAt(rng.nextInt(smLvlTempSequence2.getNumberOfElement()));
+								}
+								mySelection.add(tempSequence2);
+							}else{
+								smLvlTempSequence2 = lvl1.get(rng.nextInt(lvl1.size()));//choose the FX
+								tempSequence2= smLvlTempSequence2.getAt(rng.nextInt(smLvlTempSequence2.getNumberOfElement()));
+								mySelection.add(tempSequence2);
+							}
+						}
 					}
-				}*/
+				}else{
+					smLvlTempSequence2 = lvl0.get(0);
+					tempSequence2=smLvlTempSequence2.getAt(0);//add the best of 0
+					mySelection.add(tempSequence2);
+				}
+				
 			}
 		}
 		System.out.println("taille de myselection"+mySelection.size());

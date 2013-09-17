@@ -12,7 +12,7 @@ import exceptions.FormantNumberexception;
 public class ThreadRun implements Runnable{
 
 	private FormantSequence modele;
-	private VueLorsRunGa vrga = new VueLorsRunGa();
+	private VueLorsRunGa vrga;
 	public ThreadRun(FormantSequence modele,VueLorsRunGa vrga){
 		this.modele=modele;
 		this.vrga=vrga;

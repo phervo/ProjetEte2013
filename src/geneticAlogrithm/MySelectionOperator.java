@@ -136,12 +136,12 @@ public class MySelectionOperator implements SelectionStrategy<Object>{
 			 * so I make a selection beetween the 4 best result of lvl0.
 			 * I assume the rest isnt good enought and go directly to the trash.
 			 */
-			if(lvl1.size()==0 && lvl2.size()==0 && lvl0.size()!=0){
+			if(lvl1.size()==0 && lvl2.size()==0){
 				 mySelection.add(smNone.getAt(rng.nextInt(5))); //5 because the parameter is exclusive
 				 System.out.println("ajout de sequence ds cas none"+mySelection.get(mySelection.size()-1).getValuesInString());
 				 mySelection.add(smNone.getAt(rng.nextInt(5))); //5 because the parameter is exclusive
 				 System.out.println("ajout de sequence ds cas none"+mySelection.get(mySelection.size()-1).getValuesInString());
-			}else if(lvl2.size()==0 && lvl0.size()!=0){
+			}else if(lvl2.size()==0){
 				/*
 				 * then there is at least an individual in lvl1 or it would have enter above.
 				 * I pick one then there is different cases.

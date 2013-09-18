@@ -136,12 +136,12 @@ public class MySelectionOperator implements SelectionStrategy<Object>{
 			 * so I make a selection beetween the 4 best result of lvl0.
 			 * I assume the rest isnt good enought and go directly to the trash.
 			 */
-			if(lvl1.size()==0 && lvl2.size()==0){
+			if(lvl1.size()==0 && lvl2.size()==0 && lvl0.size()!=0){
 				 mySelection.add(smNone.getAt(rng.nextInt(5))); //5 because the parameter is exclusive
 				 System.out.println("ajout de sequence ds cas none"+mySelection.get(mySelection.size()-1).getValuesInString());
 				 mySelection.add(smNone.getAt(rng.nextInt(5))); //5 because the parameter is exclusive
 				 System.out.println("ajout de sequence ds cas none"+mySelection.get(mySelection.size()-1).getValuesInString());
-			}else if(lvl2.size()==0){
+			}else if(lvl2.size()==0 && lvl0.size()!=0){
 				/*
 				 * then there is at least an individual in lvl1 or it would have enter above.
 				 * I pick one then there is different cases.
@@ -195,7 +195,7 @@ public class MySelectionOperator implements SelectionStrategy<Object>{
 					mySelection.add(tempSequence2);
 					System.out.println("ajout de sequence ds cas lvl1 pls elem ds 1 seul FX"+mySelection.get(mySelection.size()-1).getValuesInString());
 				}
-			}else{
+			}else if(lvl2.size()!=0){
 				/*
 				 * There is at least an individual of lvl2. I pick one and then there is different cases.
 				 */
@@ -210,12 +210,37 @@ public class MySelectionOperator implements SelectionStrategy<Object>{
 				 * By default, worst case, i match it with the lvl0 best candidate
 				 */
 				
-				if(lvl1.size()!=0){
+				if(lvl1.size()==0 && lvl0.size()==0){
+					/*
+					 * In that case i have only lvl2. I pick another one
+					 * 
+					 */
+					smLvlTempSequence2 = lvl2.get(rng.nextInt(lvl2.size()));//choose the FX
+					tempSequence2= smLvlTempSequence1.getAt(rng.nextInt(smLvlTempSequence2.getNumberOfElement()));//choose the sequence
+					while(tempSequence2.equals(tempSequence1)){
+						/*
+						 * we cant predict the number of elements of the list here, it is form 2 to n. So we need to use that way.
+						 * 
+						 */
+						smLvlTempSequence2 = lvl2.get(rng.nextInt(lvl2.size()));//choose the FX
+						tempSequence2= smLvlTempSequence2.getAt(rng.nextInt(smLvlTempSequence2.getNumberOfElement()));
+					}
+					mySelection.add(tempSequence2);
+				}else if(lvl1.size()!=0){
+					/*
+					 * if i enter here, i have some lvl2, a least a lvl1 and no lvl0.
+					 * i try to get the better match in lvl 1. Or if not possible, i try to cross with another lvl2.
+					 * If there is only one lvl2, then i wont cross it with itself, i will cross it with a lvl1 at random.
+					 */
+					
 					if(smLvlTempSequence1==smF1F2){
 						if(smF3.getNumberOfElement()!=0){
 							tempSequence2= smF3.getAt(rng.nextInt(smF3.getNumberOfElement()));
 							mySelection.add(tempSequence2);
 						}else if(lvl2.size()>1){
+							/*
+							 * there is more than one type of formant, I know i could pick another individual lvl2 at least
+							 */
 							smLvlTempSequence2 = lvl2.get(rng.nextInt(lvl2.size()));//choose the FX
 							tempSequence2= smLvlTempSequence2.getAt(rng.nextInt(smLvlTempSequence2.getNumberOfElement()));
 							while(tempSequence2.equals(tempSequence1)){
@@ -228,7 +253,10 @@ public class MySelectionOperator implements SelectionStrategy<Object>{
 							}
 							mySelection.add(tempSequence2);
 						}else{
-							/* take care that there is no only one individual in one formant FXFY
+							
+							/* There is only one type of formant in lvl2.
+							 * I look if there is some individuals or only 1 individuals.
+							 * If one, i pick a lvl1 else, i pick another lvl2 with the seame formant.
 							 * 
 							 */
 							if(lvl2.get(0).getNumberOfElement()>1){
@@ -324,12 +352,41 @@ public class MySelectionOperator implements SelectionStrategy<Object>{
 							}
 						}
 					}
-				}else{
-					smLvlTempSequence2 = lvl0.get(0);
-					tempSequence2=smLvlTempSequence2.getAt(0);//add the best of 0
-					mySelection.add(tempSequence2);
+				 }else{
+					/*
+					 * then i have a lvl0 at least
+					 * If there is more than an individual in lvl2, i select another one
+					 * If not i took the best of lvl0
+					 */
+					 if(lvl2.size()>1){
+						 smLvlTempSequence2 = lvl2.get(rng.nextInt(lvl2.size()));//choose the FX
+						tempSequence2= smLvlTempSequence2.getAt(rng.nextInt(smLvlTempSequence2.getNumberOfElement()));
+						while(tempSequence2.equals(tempSequence1)){
+							/*
+							 * we cant predict the number of elements of the list here, it is form 2 to n. So we need to use that way.
+							 * 
+							 */
+							smLvlTempSequence2 = lvl2.get(rng.nextInt(lvl2.size()));//choose the FX
+							tempSequence2= smLvlTempSequence2.getAt(rng.nextInt(smLvlTempSequence2.getNumberOfElement()));
+					 }
+						 
+					 }else if(lvl2.get(0).getNumberOfElement()>1){
+						 smLvlTempSequence2 = lvl2.get(0);//choose the FX
+							tempSequence2= smLvlTempSequence2.getAt(rng.nextInt(smLvlTempSequence2.getNumberOfElement()));
+							while(tempSequence2.equals(tempSequence1)){
+								/*
+								 * we cant predict the number of elements of the list here, it is form 2 to n. So we need to use that way.
+								 * 
+								 */
+								tempSequence2= smLvlTempSequence2.getAt(rng.nextInt(smLvlTempSequence2.getNumberOfElement()));
+							}
+							mySelection.add(tempSequence2);
+					 }else{
+						 smLvlTempSequence2 = lvl0.get(0);
+							tempSequence2=smLvlTempSequence2.getAt(0);//add the best of 0
+							mySelection.add(tempSequence2);	
+					 }
 				}
-				
 			}
 		}
 		System.out.println("taille de myselection"+mySelection.size());

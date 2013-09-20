@@ -234,8 +234,11 @@ public class MySelectionOperator implements SelectionStrategy<Object>{
 					 */
 					
 					if(smLvlTempSequence1==smF1F2){
-						if(smF3.getNumberOfElement()!=0){
-							tempSequence2= smF3.getAt(rng.nextInt(smF3.getNumberOfElement()));
+						if(smF2F3.getNumberOfElement()!=0){
+							tempSequence2= smF2F3.getAt(rng.nextInt(smF2F3.getNumberOfElement()));
+							mySelection.add(tempSequence2);
+						}else if(smF1F3.getNumberOfElement()!=0){
+							tempSequence2= smF1F3.getAt(rng.nextInt(smF1F3.getNumberOfElement()));
 							mySelection.add(tempSequence2);
 						}else if(lvl2.size()>1){
 							/*
@@ -278,8 +281,11 @@ public class MySelectionOperator implements SelectionStrategy<Object>{
 						}
 						
 					}else if(smLvlTempSequence1==smF2F3){
-						if(smF1.getNumberOfElement()!=0){
-							tempSequence2= smF1.getAt(rng.nextInt(smF1.getNumberOfElement()));
+						if(smF1F2.getNumberOfElement()!=0){
+							tempSequence2= smF1F2.getAt(rng.nextInt(smF1F2.getNumberOfElement()));
+							mySelection.add(tempSequence2);
+						}else if(smF1F3.getNumberOfElement()!=0){
+							tempSequence2= smF1F3.getAt(rng.nextInt(smF1F3.getNumberOfElement()));
 							mySelection.add(tempSequence2);
 						}else if(lvl2.size()>1){
 							smLvlTempSequence2 = lvl2.get(rng.nextInt(lvl2.size()));//choose the FX
@@ -315,8 +321,11 @@ public class MySelectionOperator implements SelectionStrategy<Object>{
 							}
 						}
 					}else if(smLvlTempSequence1==smF1F3){
-						if(smF2.getNumberOfElement()!=0){
-							tempSequence2= smF2.getAt(rng.nextInt(smF2.getNumberOfElement()));
+						if(smF1F2.getNumberOfElement()!=0){
+							tempSequence2= smF1F2.getAt(rng.nextInt(smF1F2.getNumberOfElement()));
+							mySelection.add(tempSequence2);
+						}else if(smF2F3.getNumberOfElement()!=0){
+							tempSequence2= smF2F3.getAt(rng.nextInt(smF2F3.getNumberOfElement()));
 							mySelection.add(tempSequence2);
 						}else if(lvl2.size()>1){
 							smLvlTempSequence2 = lvl2.get(rng.nextInt(lvl2.size()));//choose the FX
